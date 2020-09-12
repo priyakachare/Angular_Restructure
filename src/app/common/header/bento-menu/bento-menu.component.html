@@ -1,0 +1,248 @@
+<div class="dropdown bento-dropdown">
+    <button class="btn bentobttn dropdown-toggle" type="button" id="bentoDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="bentoDropdownMenu">
+      <div class="dropdown-menu-container">
+        <div class="row">
+          <div class="col-9 px-0 cust-col-9">
+            
+            <div class="bento-dropdown-lt">
+
+              <ngx-simplebar [options]="menuScrollOptions" class="bento-dropdown-lt-scroll">
+                
+                <div class="row">
+
+                  <div class="col-sm-4">
+                    <div class="media bento-menu-blk"  id="smart360-side-nav-snm-a" (mouseover)="snmHovered()" (mouseout)="snmNotHovered()" (click)="getSideNavData('smart360-side-nav-snm-a')">
+                      <div class="img-blk align-self-center">
+                        <img src="../../../assets/images/bento-menu-1.png" alt="img">
+                      </div>                        
+                      <div class="media-body align-self-center">
+                        <h6 class="h6">Sales &amp; Marketing</h6>
+                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="media bento-menu-blk" id="smart360-side-nav-conscare-a" (mouseover)="concareHovered()" (mouseout)="concareNotHovered()" (click)="getSideNavData('smart360-side-nav-conscare-a')">
+                      <div class="img-blk align-self-center">
+                        <img src="../../../assets/images/bento-menu-2.png" alt="img">
+                      </div>                        
+                      <div class="media-body align-self-center">
+                        <h6 class="h6">Consumer Care</h6>
+                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="media bento-menu-blk" [routerLink]="['/consumerops']" id="smart360-side-nav-consops-a" (mouseover)="conopsHovered()" (mouseout)="conopsNotHovered()" (click)="getSideNavData('smart360-side-nav-consops-a')">
+                      <div class="img-blk align-self-center">
+                        <img src="../../../assets/images/bento-menu-3.png" alt="img">
+                      </div>                        
+                      <div class="media-body align-self-center">
+                        <h6 class="h6">Consumer Ops</h6>
+                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="media bento-menu-blk" [routerLink]="['/gas-management']" id="smart360-side-nav-sourcing-a" (mouseover)="gasMgtHovered()" (mouseout)="gasMgtNotHovered()">
+                      <div class="img-blk align-self-center">
+                        <img src="../../../assets/images/bento-menu-4.png" alt="img">
+                      </div>                        
+                      <div class="media-body align-self-center">
+                        <h6 class="h6">Gas Management</h6>
+                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="media bento-menu-blk" [routerLink]="['/work-order']" id="smart360-side-nav-onm-a" (mouseover)="workOrderHovered()" (mouseout)="workOrderNotHovered()">
+                      <div class="img-blk align-self-center">
+                        <img src="../../../assets/images/bento-menu-5.png" alt="img">
+                      </div>                        
+                      <div class="media-body align-self-center">
+                        <h6 class="h6">Work Order</h6>
+                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="media bento-menu-blk" [routerLink]="['/network']" id="smart360-side-nav-assets-a" (mouseover)="netWorkHovered()" (mouseout)="netWorkNotHovered()">
+                      <div class="img-blk align-self-center">
+                        <img src="../../../assets/images/bento-menu-6.png" alt="img">
+                      </div>                        
+                      <div class="media-body align-self-center">
+                        <h6 class="h6">Network</h6>
+                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="media bento-menu-blk" [routerLink]="['/spend']" id="smart360-side-nav-purchase-a" (mouseover)="spendHovered()" (mouseout)="spendNotHovered()">
+                      <div class="img-blk align-self-center">
+                        <img src="../../../assets/images/bento-menu-7.png" alt="img">
+                      </div>                        
+                      <div class="media-body align-self-center">
+                        <h6 class="h6">spend</h6>
+                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="media bento-menu-blk" [routerLink]="['/hcm']" id="smart360-side-nav-hcm-a" (mouseover)="humanCapitalHovered()" (mouseout)="humanCapitalNotHovered()">
+                      <div class="img-blk align-self-center">
+                        <img src="../../../assets/images/bento-menu-1.png" alt="img">
+                      </div>                        
+                      <div class="media-body align-self-center">
+                        <h6 class="h6">Human Capital</h6>
+                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="media bento-menu-blk" [routerLink]="['/finance']" id="smart360-side-nav-finance-a" (mouseover)="financeHovered()" (mouseout)="financeNotHovered()">
+                      <div class="img-blk align-self-center">
+                        <img src="../../../assets/images/bento-menu-9.png" alt="img">
+                      </div>                        
+                      <div class="media-body align-self-center">
+                        <h6 class="h6">Finance</h6>
+                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="media bento-menu-blk" [routerLink]="['/admin']" id="smart360-side-nav-admin-a" (mouseover)="adminHovered()" (mouseout)="adminNotHovered()">
+                      <div class="img-blk align-self-center">
+                        <img src="../../../assets/images/bento-menu-1.png" alt="img">
+                      </div>                        
+                      <div class="media-body align-self-center">
+                        <h6 class="h6">Admin</h6>
+                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </ngx-simplebar>
+              
+            </div>
+          </div>
+          <div class="col-3 px-0 cust-col-3">
+            <div class="bento-dropdown-rt">
+              <div class="row" *ngIf="(!snmshown && !concareshown && !conopsshown && !gasmgtshown && !workOredrshown && !networkshown && !spendshown && !humanCapitalshown && !financeshown && !adminshown)">
+                <div class="col-12">
+                  <h3 class="h3">Sales & Marketing</h3>
+                  <p class="p">Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                </div>
+              </div>
+              <div class="row" *ngIf="snmshown">
+                <div class="col-12">
+                  <h3 class="h3">Sales & Marketing</h3>
+                  <p class="p">Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                </div>
+              </div>
+              <div class="row" *ngIf="concareshown">
+                <div class="col-12">
+                  <h3 class="h3">Consumer Care</h3>
+                  <p class="p">Consumer Care Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                </div>
+              </div>
+              <div class="row" *ngIf="conopsshown">
+                <div class="col-12">
+                  <h3 class="h3">Consumer Ops</h3>
+                  <p class="p">Consumer Ops Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                </div>
+              </div> 
+              <div class="row" *ngIf="gasmgtshown">
+                <div class="col-12">
+                  <h3 class="h3">Gas Management</h3>
+                  <p class="p">Gas Management Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                </div>
+              </div>     
+              <div class="row" *ngIf="workOredrshown">
+                <div class="col-12">
+                  <h3 class="h3">Work Order</h3>
+                  <p class="p">Work Order Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                </div>
+              </div>    
+              <div class="row" *ngIf="networkshown">
+                <div class="col-12">
+                  <h3 class="h3">Network</h3>
+                  <p class="p">Network Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                </div>
+              </div>    
+              <div class="row" *ngIf="spendshown">
+                <div class="col-12">
+                  <h3 class="h3">Spend</h3>
+                  <p class="p">Spend Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                </div>
+              </div>     
+              <div class="row" *ngIf="humanCapitalshown">
+                <div class="col-12">
+                  <h3 class="h3">Human Capital</h3>
+                  <p class="p">Human Capital Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                </div>
+              </div>      
+              <div class="row" *ngIf="financeshown">
+                <div class="col-12">
+                  <h3 class="h3">Finance</h3>
+                  <p class="p">Finance Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                </div>
+              </div>    
+              <div class="row" *ngIf="adminshown">
+                <div class="col-12">
+                  <h3 class="h3">Admin</h3>
+                  <p class="p">Admin Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                </div>
+              </div>          
+            </div>
+            <div class="img-blk" *ngIf="(!snmshown && !concareshown && !conopsshown && !gasmgtshown && !workOredrshown && !networkshown && !spendshown && !humanCapitalshown && !financeshown && !adminshown)">
+              <img src="../../../assets/images/bento-menu-bg-1.png" alt="img">                
+            </div>
+            <!-- <div class="img-blk" *ngIf="snmshown">
+              <img src="../../../assets/images/bento-menu-bg-1.png" alt="img">                
+            </div> -->
+            <div class="img-blk" *ngIf="concareshown">
+              <img src="../../../assets/images/bento-menu-bg-2.png" alt="img">
+            </div>
+            <div class="img-blk" *ngIf="conopsshown">
+              <img src="../../../assets/images/bento-menu-bg-1.png" alt="img">
+            </div>
+            <div class="img-blk" *ngIf="gasmgtshown">
+              <img src="../../../assets/images/bento-menu-bg-3.png" alt="img">
+            </div>
+            <div class="img-blk" *ngIf="workOredrshown">
+              <img src="../../../assets/images/bento-menu-bg-4.png" alt="img">
+            </div>
+            <div class="img-blk" *ngIf="networkshown">
+              <img src="../../../assets/images/bento-menu-bg-5.png" alt="img">
+            </div>
+            <div class="img-blk" *ngIf="spendshown">
+              <img src="../../../assets/images/bento-menu-bg-6.png" alt="img">
+            </div>
+            <div class="img-blk" *ngIf="humanCapitalshown">
+              <img src="../../../assets/images/bento-menu-bg-1.png" alt="img">
+            </div>
+            <div class="img-blk" *ngIf="financeshown">
+              <img src="../../../assets/images/bento-menu-bg-7.png" alt="img">
+            </div>
+            <div class="img-blk" *ngIf="adminshown">
+              <img src="../../../assets/images/bento-menu-bg-1.png" alt="img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>

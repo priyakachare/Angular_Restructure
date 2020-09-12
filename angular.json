@@ -28,9 +28,19 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "src/assets/icons8/css/styles.min.css",
+              "src/styles.scss",
+              "src/media.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/gmaps/gmaps.js",
+              "src/assets/js/custom.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -123,6 +133,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "smart360-angular"
+    }
+  },
+  "defaultProject": "smart360-angular",
+  "cli": {
+    "analytics": "ac9e1057-736b-440d-9667-5cbbefc8768d"
+  }
 }

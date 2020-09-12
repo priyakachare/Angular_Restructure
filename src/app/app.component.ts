@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonService } from './common/common.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'smart360-angular';
+  selectedVal:string;
+  constructor(private getData:CommonService) {
+    this.getData.newItemEvent.subscribe(data =>{
+      this.selectedVal = data
+    })
+   }
 }

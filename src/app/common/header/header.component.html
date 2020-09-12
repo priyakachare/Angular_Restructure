@@ -1,0 +1,108 @@
+<header class="pr-header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top pt-0 pb-0 header">
+        <smart360-bento-menu [selectedVal]="selectedVal"></smart360-bento-menu>
+        <div class="navbar-brand d-flex align-items-center">
+            <a class="logo-txt" href="/home">Smart<span class="text-primary">360</span></a>
+          </div>
+          <!-- As per skype discussion with nilesh sir on 25th of June we are making breadcrumbs static in individual pages for time being for demo purpose -->
+          <div class="collapse navbar-collapse mr-auto">
+            <div class="navbar-nav">
+              <div aria-label="breadcrumb" style="visibility: hidden;">
+                <ol class="breadcrumb">            
+                  <li class="breadcrumb-item"><a routerLink="S&M">S&M</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Registration</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="nav-rt">
+      
+            <form class="pr-search-form d-inline-block">
+              <span class="s-icon"></span>
+              <input class="form-control pr-header-search" type="search" placeholder="Search" aria-label="Search">        
+            </form>
+            <!-- As per skype discussion with nilesh sir on 25th of June we are making this dropdown static in individual pages for time being for demo purpose -->
+            <div class="d-inline-block" >
+              <div class="dropdown plus-dropdown" dropdown dropdown-append-to-body>
+                <a class="btn dropdown-toggle btn-primary bttn-icon rounded" role="button" id="headerDropdown1" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false"><fa-icon [icon]="faPlus"></fa-icon>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="headerDropdown1">
+                  <a class="dropdown-item active" href="/registration">Registration</a>
+                  <a class="dropdown-item" href="#">Survey</a>
+                  <a class="dropdown-item" href="#">Campgain</a>
+                </div>
+              </div>
+            </div>
+      
+            <div class="d-inline-block">
+              <div class="dropdown notifications-dropdown" dropdown dropdown-append-to-body>
+                <a class="btn bttn-transparent bttn-icon bttn-notify" role="button" id="notifyDropdown" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="icons8 icons8-doorbell"></i><span>3</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifyDropdown">
+                  <ngx-simplebar [options]="notificationScrollOptions" class="notifications-dropdown-wrap">
+                    <div class="row">
+                      <div class="col-12">
+                        <h3 class="ttl">Notifications</h3>
+                      </div>
+                      <div class="col-12">
+                        <div class="notify-blk">
+                          <p><span class="badge badge-new">New</span></p>
+                          <h6 class="ttl">Complaint Resolved!</h6>
+                          <p class="p p-12 inf">Lorem ipsum dolor sit amet, consectetur adipisciel Videmusne ut </p>
+                          <p class="p p-12 dt">01 Jan 2020</p>
+                        </div>
+                        <div class="notify-blk">
+                          <h6 class="ttl">Payment Due</h6>
+                          <p class="p p-12 inf">Lorem ipsum dolor sit amet, consectetur adipisciel Videmusne ut </p>
+                          <p class="p p-12 dt">Yesterday</p>
+                          <div class="row">
+                            <div class="col pr-2">
+                              <button class="btn btn-outline-light3 btn-block st">View Bill</button>
+                            </div>
+                            <div class="col pl-2">
+                              <button class="btn btn-secondary btn-block st">Pay Bill</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="notify-blk">
+                          <p><span class="badge badge-new">New</span></p>
+                          <h6 class="ttl">Complaint Resolved!</h6>
+                          <p class="p p-12 inf">Lorem ipsum dolor sit amet, consectetur adipisciel Videmusne ut </p>
+                          <p class="p p-12 dt">01 Jan 2020</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ngx-simplebar>            
+                </div>
+              </div>
+            </div>
+      
+            <div class="d-inline-block">
+              <p class="location"><fa-icon [icon]="faMapMarkerAlt"></fa-icon>Pune</p>        
+            </div>
+      
+            <div class="d-inline-block">
+              <div class="dropdown profile-dropdown" dropdown dropdown-append-to-body>
+                <a class="btn bttn-transparent dropdown-toggle" role="button" id="headerDropdown2" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <span><img class="st img-abs" src="../../../assets/images/profile-pic.png"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="headerDropdown2">
+                  <h6 class="dropdown-header">Dejan Shelby</h6>
+                  <span class="dropdown-item-text p p-13">dejan128@gmail.com</span>
+                  <button class="btn btn-sm btn-primary text-uppercase" type="button">View Profile</button>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">ESS</a>
+                  <a class="dropdown-item" href="#">Helpdesk</a>
+                  <a class="dropdown-item" href="#">Help</a>
+                  <a class="dropdown-item" href="#">Logout</a>
+                </div>
+              </div>
+            </div>
+      
+          </div>
+    </nav>
+</header>
