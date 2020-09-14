@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   faBell = faBell;
   faPlus = faPlus;
 
+  selectedVal:any;
   
   constructor(private getData:CommonService) {
     this.getData.newItemEvent.subscribe(data =>{
@@ -25,7 +26,6 @@ export class HeaderComponent implements OnInit {
    }
 
   
-  selectedVal:any;
 
   ngOnInit(): void {
     
