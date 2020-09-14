@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   constructor(private getData:CommonService) {
     this.getData.newItemEvent.subscribe(data =>{
       this.selectedVal = data
+      console.log(data)
     })
    }
 
