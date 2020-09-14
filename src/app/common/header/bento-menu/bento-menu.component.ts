@@ -9,9 +9,7 @@ import { CommonService } from '../../common.service';
   templateUrl: './bento-menu.component.html',
   styleUrls: ['./bento-menu.component.scss']
 })
-export class BentoMenuComponent implements OnInit {
-
-  
+export class BentoMenuComponent implements OnInit {  
   faSearch = faSearch;
   faChevronDown = faChevronDown;
   faMapMarkerAlt = faMapMarkerAlt;
@@ -85,9 +83,10 @@ export class BentoMenuComponent implements OnInit {
     },
   ] };
 
-
   constructor(private getData:CommonService) { }
+
   imgpath ="../../../assets/images/";
+  
   Detail = [ 
     {
       module : 'Sales & Marketing',
@@ -95,7 +94,6 @@ export class BentoMenuComponent implements OnInit {
       desc : 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
     }
   ]
-
   mouseHovered(val) {
     if(val == "Sales & Marketing"){
       this.Detail = [ 
@@ -188,9 +186,11 @@ export class BentoMenuComponent implements OnInit {
       ]
     }
   }
+  
+  getSideNavData(val){
+    this.getData.newItemEvent.emit(val);
+  }
 
-  
-  
   // public tab: any;
 
   ngOnInit(): void {
@@ -198,7 +198,8 @@ export class BentoMenuComponent implements OnInit {
       $('.bentobttn').on('click touchstart', function () {
         $(this).toggleClass('open');
       });
-      $('#smart360-side-nav-snm-a').on('click', function(){        
+      $('#smart360-side-nav-snm-a').on('click', function(){
+        
         // alert(1);
         $('.sidebar-wrapper').addClass('d-none-adj');
         $('#smart360-side-nav-snm-div').removeClass('d-none-adj');

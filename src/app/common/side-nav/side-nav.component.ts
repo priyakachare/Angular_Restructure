@@ -11,13 +11,9 @@ export class SideNavComponent implements OnInit {
 
   faPlus = faPlus;
 
-  @Input() item: string
-  
-  
+  @Input() item: string;
 
-  constructor() {
-
-    
+  constructor() {    
   }
 
   status: boolean = false;
