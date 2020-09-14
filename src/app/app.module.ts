@@ -31,6 +31,11 @@ import { RegistrationDashboardComponent } from './registration/registration-dash
 import { RegistrationFiltersComponent } from './registration/registration-filters/registration-filters.component';
 import { DashboardComponent } from './common/dashboard/dashboard.component';
 import { FilterComponent } from './common/filter/filter.component';
+import { SearchComponent } from './common/header/search/search.component';
+import { AddComponent } from './common/header/add/add.component';
+import { NotificationComponent } from './common/header/notification/notification.component';
+import { LocationComponent } from './common/header/location/location.component';
+import { ProfileComponent } from './common/header/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,12 @@ import { FilterComponent } from './common/filter/filter.component';
     RegistrationDashboardComponent,
     RegistrationFiltersComponent,
     DashboardComponent,
-    FilterComponent
+    FilterComponent,
+    SearchComponent,
+    AddComponent,
+    NotificationComponent,
+    LocationComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

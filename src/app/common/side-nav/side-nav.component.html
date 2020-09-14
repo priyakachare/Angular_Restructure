@@ -37,6 +37,7 @@
     </li>
   </ul>
 </div>
+
   
 <!-- Survey Modal -->
 <div class="pr-sidebar-modal">
@@ -187,7 +188,7 @@
 </div>
 
 <!--S&M Side Nav-->>
-<div *ngIf="item ==='smart360-side-nav-snm-a'">
+<div *ngIf="item ==='Sales & Marketing'">
 <div class="pr-side-navbar z-99 pos-rel" >
     <div class="" data-toggle="buttons">
       <button class="btn btn-primary bttn-transparent menubttn2" (click)="bClickEvent()"
@@ -377,10 +378,71 @@
   </div>
 </div>
 
+<!-- Consumer Care SideNav-->
+<div *ngIf="item ==='Consumer Care'">
+  <div class="pr-side-navbar z-99 pos-rel">
+    <div class="" data-toggle="buttons">
+      <button class="btn btn-primary bttn-transparent menubttn" (click)="bClickEvent()" [ngClass]="status ? 'open-subm' : 'close-subm'"><span></span></button>
+    </div>
+    <ul class="nav flex-column">
+      <li class="nav-item" placement="right" ngbPopover="Dashboard" triggers="mouseenter:mouseleave" container="body">
+        <a class="nav-link active" [routerLink]="['/consumer-care']"><span><i class="icons8 icons8-speed"></i>Dashboard</span></a>
+      </li>
+      <li class="nav-item" placement="right" ngbPopover="Consumers" triggers="mouseenter:mouseleave" container="body">
+        <a class="nav-link" [routerLink]="['/consumer-care/consumer']"><span><i class="icons8 icons8-cv"></i></span>Consumers</a>
+      </li>
+      <li class="nav-item" placement="right" ngbPopover="Registration" triggers="mouseenter:mouseleave" container="body">
+        <a class="nav-link" [routerLink]="['/registration']"><span><i class="icons8 icons8-shared-document"></i></span>Registration</a>
+      </li>
+      <li class="nav-item" placement="right" ngbPopover="Reports" triggers="mouseenter:mouseleave" container="body">
+        <a class="nav-link" [routerLink]="['/reports']"><span><i class="icons8 icons8-todo-list"></i></span>Reports</a>
+      </li>
+      <li class="nav-item" placement="right" ngbPopover="User" triggers="mouseenter:mouseleave" container="body">
+        <a class="nav-link" [routerLink]="['/user']"><span><i class="icons8 icons8-user"></i></span>User</a>
+      </li>
+      <li class="nav-item" placement="right" ngbPopover="Settings" triggers="mouseenter:mouseleave" container="body">
+        <a class="nav-link" type="button" data-toggle="modal" data-target="#consumercareSettingsModal"><span><i class="icons8 icons8-settings"></i></span>Settings</a>
+      </li>
+    </ul>
+  
+  </div>
+  
+  
+  
+  <!-- Settings Modal -->
+  <div class="pr-sidebar-modal">
+    <div class="modal left fade" id="consumercareSettingsModal" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="consumercareSettingsModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
     
+          <div class="modal-header">
+            <h4 class="modal-title" id="sidebarModalLabel">Settings</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+    
+          <div class="modal-body" style="background-image: url('../../../assets/images/sidenav-illustration.png');">
+            <div class="pr-side-inner-navbar">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">User Privilage</a>
+                  <a class="nav-link" href="#">Terretory</a>
+                  <a class="nav-link" href="#">Document</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+    
+        </div><!-- modal-content -->
+      </div><!-- modal-dialog -->
+    </div><!-- modal -->
+  </div>
+</div>
+
 <!-- Consumer Ops Component-->>
 
-  <div *ngIf="item ==='smart360-side-nav-consops-a'">
+  <div *ngIf="item ==='Consumer Ops'">
     <div class="pr-side-navbar z-99 pos-rel">
       <div class="" data-toggle="buttons">
         <button class="btn btn-primary bttn-transparent menubttn" (click)="bClickEvent()" [ngClass]="status ? 'open-subm' : 'close-subm'"><span></span></button>
@@ -545,64 +607,4 @@
     </div>
   </div>
 
-  <!-- Consumer Care SideNav-->
-  <div *ngIf="item ==='smart360-side-nav-conscare-a'">
-    <div class="pr-side-navbar z-99 pos-rel">
-      <div class="" data-toggle="buttons">
-        <button class="btn btn-primary bttn-transparent menubttn" (click)="bClickEvent()" [ngClass]="status ? 'open-subm' : 'close-subm'"><span></span></button>
-      </div>
-      <ul class="nav flex-column">
-        <li class="nav-item" placement="right" ngbPopover="Dashboard" triggers="mouseenter:mouseleave" container="body">
-          <a class="nav-link active" [routerLink]="['/consumer-care']"><span><i class="icons8 icons8-speed"></i></span>Dashboard</a>
-        </li>
-        <li class="nav-item" placement="right" ngbPopover="Consumers" triggers="mouseenter:mouseleave" container="body">
-          <a class="nav-link" [routerLink]="['/consumer-care/consumer']"><span><i class="icons8 icons8-cv"></i></span>Consumers</a>
-        </li>
-        <li class="nav-item" placement="right" ngbPopover="Registration" triggers="mouseenter:mouseleave" container="body">
-          <a class="nav-link" [routerLink]="['/registration']"><span><i class="icons8 icons8-shared-document"></i></span>Registration</a>
-        </li>
-        <li class="nav-item" placement="right" ngbPopover="Reports" triggers="mouseenter:mouseleave" container="body">
-          <a class="nav-link" [routerLink]="['/reports']"><span><i class="icons8 icons8-todo-list"></i></span>Reports</a>
-        </li>
-        <li class="nav-item" placement="right" ngbPopover="User" triggers="mouseenter:mouseleave" container="body">
-          <a class="nav-link" [routerLink]="['/user']"><span><i class="icons8 icons8-user"></i></span>User</a>
-        </li>
-        <li class="nav-item" placement="right" ngbPopover="Settings" triggers="mouseenter:mouseleave" container="body">
-          <a class="nav-link" type="button" data-toggle="modal" data-target="#consumercareSettingsModal"><span><i class="icons8 icons8-settings"></i></span>Settings</a>
-        </li>
-      </ul>
-    
-    </div>
-    
-    
-    
-    <!-- Settings Modal -->
-    <div class="pr-sidebar-modal">
-      <div class="modal left fade" id="consumercareSettingsModal" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="consumercareSettingsModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-      
-            <div class="modal-header">
-              <h4 class="modal-title" id="sidebarModalLabel">Settings</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-      
-            <div class="modal-body" style="background-image: url('../../../assets/images/sidenav-illustration.png');">
-              <div class="pr-side-inner-navbar">
-                <ul class="nav flex-column">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#">User Privilage</a>
-                    <a class="nav-link" href="#">Terretory</a>
-                    <a class="nav-link" href="#">Document</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-      
-          </div><!-- modal-content -->
-        </div><!-- modal-dialog -->
-      </div><!-- modal -->
-    </div>
-  </div>
+  

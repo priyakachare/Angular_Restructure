@@ -7,7 +7,6 @@ import { CommonService } from './common/common.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'smart360-angular';
   selectedVal:string;
   constructor(private getData:CommonService) {
     this.getData.newItemEvent.subscribe(data =>{
