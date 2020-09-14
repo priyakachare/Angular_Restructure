@@ -10,7 +10,7 @@
               <ngx-simplebar [options]="menuScrollOptions" class="bento-dropdown-lt-scroll">                
                 <div class="row" >
                   <div class="col-sm-4" *ngFor="let module of modulesList.data">
-                    <div class="media bento-menu-blk"  id="smart360-side-nav-snm-a" (mouseover)="snmHovered()" (mouseout)="snmNotHovered()" (click)="getSideNavData(module.module)">
+                    <div class="media bento-menu-blk"  id="smart360-side-nav-snm-a" (mouseover)="mouseHovered(module.module)" (click)="getSideNavData(module.module)">
                       <div class="img-blk align-self-center">
                         <img src="{{module.img}}" alt="img">
                       </div>                        
@@ -26,105 +26,15 @@
           </div>
           <div class="col-3 px-0 cust-col-3">
             <div class="bento-dropdown-rt">
-              <div class="row" *ngIf="(!snmshown && !concareshown && !conopsshown && !gasmgtshown && !workOredrshown && !networkshown && !spendshown && !humanCapitalshown && !financeshown && !adminshown)">
+              <div class="row" *ngFor="let Detail of Detail">
                 <div class="col-12">
-                  <h3 class="h3">Sales & Marketing</h3>
-                  <p class="p">Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
+                  <h3 class="h3">{{Detail.module}}</h3>
+                  <p class="p">{{Detail.desc}}</p>
                 </div>
               </div>
-              <div class="row" *ngIf="snmshown">
-                <div class="col-12">
-                  <h3 class="h3">Sales & Marketing</h3>
-                  <p class="p">Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
-                </div>
-              </div>
-              <div class="row" *ngIf="concareshown">
-                <div class="col-12">
-                  <h3 class="h3">Consumer Care</h3>
-                  <p class="p">Consumer Care Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
-                </div>
-              </div>
-              <div class="row" *ngIf="conopsshown">
-                <div class="col-12">
-                  <h3 class="h3">Consumer Ops</h3>
-                  <p class="p">Consumer Ops Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
-                </div>
-              </div> 
-              <div class="row" *ngIf="gasmgtshown">
-                <div class="col-12">
-                  <h3 class="h3">Gas Management</h3>
-                  <p class="p">Gas Management Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
-                </div>
-              </div>     
-              <div class="row" *ngIf="workOredrshown">
-                <div class="col-12">
-                  <h3 class="h3">Work Order</h3>
-                  <p class="p">Work Order Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
-                </div>
-              </div>    
-              <div class="row" *ngIf="networkshown">
-                <div class="col-12">
-                  <h3 class="h3">Network</h3>
-                  <p class="p">Network Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
-                </div>
-              </div>    
-              <div class="row" *ngIf="spendshown">
-                <div class="col-12">
-                  <h3 class="h3">Spend</h3>
-                  <p class="p">Spend Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
-                </div>
-              </div>     
-              <div class="row" *ngIf="humanCapitalshown">
-                <div class="col-12">
-                  <h3 class="h3">Human Capital</h3>
-                  <p class="p">Human Capital Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
-                </div>
-              </div>      
-              <div class="row" *ngIf="financeshown">
-                <div class="col-12">
-                  <h3 class="h3">Finance</h3>
-                  <p class="p">Finance Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
-                </div>
-              </div>    
-              <div class="row" *ngIf="adminshown">
-                <div class="col-12">
-                  <h3 class="h3">Admin</h3>
-                  <p class="p">Admin Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant </p>
-                </div>
-              </div>          
             </div>
-            <div class="img-blk" *ngIf="(!snmshown && !concareshown && !conopsshown && !gasmgtshown && !workOredrshown && !networkshown && !spendshown && !humanCapitalshown && !financeshown && !adminshown)">
-              <img src="../../../assets/images/bento-menu-bg-1.png" alt="img">                
-            </div>
-            <!-- <div class="img-blk" *ngIf="snmshown">
-              <img src="../../../assets/images/bento-menu-bg-1.png" alt="img">                
-            </div> -->
-            <div class="img-blk" *ngIf="concareshown">
-              <img src="../../../assets/images/bento-menu-bg-2.png" alt="img">
-            </div>
-            <div class="img-blk" *ngIf="conopsshown">
-              <img src="../../../assets/images/bento-menu-bg-1.png" alt="img">
-            </div>
-            <div class="img-blk" *ngIf="gasmgtshown">
-              <img src="../../../assets/images/bento-menu-bg-3.png" alt="img">
-            </div>
-            <div class="img-blk" *ngIf="workOredrshown">
-              <img src="../../../assets/images/bento-menu-bg-4.png" alt="img">
-            </div>
-            <div class="img-blk" *ngIf="networkshown">
-              <img src="../../../assets/images/bento-menu-bg-5.png" alt="img">
-            </div>
-            <div class="img-blk" *ngIf="spendshown">
-              <img src="../../../assets/images/bento-menu-bg-6.png" alt="img">
-            </div>
-            <div class="img-blk" *ngIf="humanCapitalshown">
-              <img src="../../../assets/images/bento-menu-bg-1.png" alt="img">
-            </div>
-            <div class="img-blk" *ngIf="financeshown">
-              <img src="../../../assets/images/bento-menu-bg-7.png" alt="img">
-            </div>
-            <div class="img-blk" *ngIf="adminshown">
-              <img src="../../../assets/images/bento-menu-bg-1.png" alt="img">
+            <div class="img-blk" *ngFor="let data of Detail">
+              <img src="{{data.img}}" alt="img">                
             </div>
           </div>
         </div>

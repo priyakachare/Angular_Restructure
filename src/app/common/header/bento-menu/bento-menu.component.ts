@@ -64,7 +64,7 @@ export class BentoMenuComponent implements OnInit {
       desc : 'Lorem ipsum dolor sit amet'
     },
     {
-      module : 'spend',
+      module : 'Spend',
       img : this.path +'bento-menu-7.png',
       desc : 'Lorem ipsum dolor sit amet'
     },
@@ -87,65 +87,118 @@ export class BentoMenuComponent implements OnInit {
 
 
   constructor(private getData:CommonService) { }
+  imgpath ="../../../assets/images/";
+  Detail = [ 
+    {
+      module : 'Sales & Marketing',
+      img: this.imgpath +'bento-menu-bg-1.png',
+      desc : 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
+    }
+  ]
 
-  collapsed = true;
-
-  public snmshown:boolean = false;
-  snmHovered() {this.snmshown = true;}
-  snmNotHovered() {this.snmshown = false;}
-
-  public concareshown:boolean = false;
-  concareHovered() {this.concareshown = true;}
-  concareNotHovered() {this.concareshown = false;}
-
-  public conopsshown:boolean = false;
-  conopsHovered() {this.conopsshown = true;}
-  conopsNotHovered() {this.conopsshown = false;}
-
-  public gasmgtshown:boolean = false;
-  gasMgtHovered(){this.gasmgtshown = true;}
-  gasMgtNotHovered(){this.gasmgtshown = false;}
-
-  public workOredrshown:boolean = false;
-  workOrderHovered(){this.workOredrshown = true;}
-  workOrderNotHovered(){this.workOredrshown = false;}
-
-
-  public networkshown:boolean = false;
-  netWorkHovered(){this.networkshown = true;}
-  netWorkNotHovered(){this.networkshown = false;}
-
-
-  public spendshown:boolean = false;
-  spendHovered(){this.spendshown = true;}
-  spendNotHovered(){this.spendshown = false;}
-
-  public humanCapitalshown:boolean = false;
-  humanCapitalHovered(){this.humanCapitalshown = true;}
-  humanCapitalNotHovered(){this.humanCapitalshown = false;}
-
-  public financeshown:boolean = false;
-  financeHovered(){this.financeshown = true;}
-  financeNotHovered(){this.financeshown = false;}
-
-  public adminshown:boolean = false;
-  adminHovered(){this.adminshown = true;}
-  adminNotHovered(){this.adminshown = false;}
-
-  getSideNavData(val){
-    this.getData.newItemEvent.emit(val);
+  mouseHovered(val) {
+    if(val == "Sales & Marketing"){
+      this.Detail = [ 
+        {
+          module : 'Sales & Marketing',
+          img: this.imgpath +'bento-menu-bg-1.png',
+          desc : 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
+        }
+      ]
+    }
+    else if(val == "Consumer Care"){
+      this.Detail = [ 
+        {
+          module : 'Consumer Care',
+          img: this.imgpath +'bento-menu-bg-2.png',
+          desc : 'Consumer Care Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
+        }
+      ]
+    }
+    else if(val == "Consumer Ops"){
+      this.Detail = [ 
+        {
+          module : 'Consumer Ops',
+          img: this.imgpath +'bento-menu-bg-1.png',
+          desc : 'Consumer Ops Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
+        }
+      ]
+    }
+    else if(val == "Gas Management"){
+      this.Detail = [ 
+        {
+          module : 'Gas Management',
+          img: this.imgpath +'bento-menu-bg-3.png',
+          desc : 'Gas Management Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
+        }
+      ]
+    }
+    else if(val == "Work Order"){
+      this.Detail = [ 
+        {
+          module : 'Work Order',
+          img: this.imgpath +'bento-menu-bg-4.png',
+          desc : 'Work Order Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
+        }
+      ]
+    }
+    else if(val == "Network"){
+      this.Detail = [ 
+        {
+          module : 'Network',
+          img: this.imgpath +'bento-menu-bg-5.png',
+          desc : 'Network Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
+        }
+      ]
+    }
+    else if(val == "Spend"){
+      this.Detail = [ 
+        {
+          module : 'Spend',
+          img: this.imgpath +'bento-menu-bg-6.png',
+          desc : 'Spend Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
+        }
+      ]
+    }
+    else if(val == "Human Capital"){
+      this.Detail = [ 
+        {
+          module : 'Human Capital',
+          img: this.imgpath +'bento-menu-bg-1.png',
+          desc : 'Human Capital Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
+        }
+      ]
+    }
+    else if(val == "Finance"){
+      this.Detail = [ 
+        {
+          module : 'Finance',
+          img: this.imgpath +'bento-menu-bg-7.png',
+          desc : 'Finance Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
+        }
+      ]
+    }
+    else if(val == "Admin"){
+      this.Detail = [ 
+        {
+          module : 'Admin',
+          img: this.imgpath +'bento-menu-bg-1.png',
+          desc : 'Admin Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
+        }
+      ]
+    }
   }
 
-  public tab: any;
+  
+  
+  // public tab: any;
 
   ngOnInit(): void {
     $(document).ready(function(){
       $('.bentobttn').on('click touchstart', function () {
         $(this).toggleClass('open');
       });
-      $('#smart360-side-nav-snm-a').on('click', function(){
-
-        
+      $('#smart360-side-nav-snm-a').on('click', function(){        
         // alert(1);
         $('.sidebar-wrapper').addClass('d-none-adj');
         $('#smart360-side-nav-snm-div').removeClass('d-none-adj');
