@@ -5,138 +5,23 @@
     <div class="dropdown-menu" aria-labelledby="bentoDropdownMenu">
       <div class="dropdown-menu-container">
         <div class="row">
-          <div class="col-9 px-0 cust-col-9">
-            
+          <div class="col-9 px-0 cust-col-9">            
             <div class="bento-dropdown-lt">
-
-              <ngx-simplebar [options]="menuScrollOptions" class="bento-dropdown-lt-scroll">
-                
-                <div class="row">
-
-                  <div class="col-sm-4">
-                    <div class="media bento-menu-blk"  id="smart360-side-nav-snm-a" (mouseover)="snmHovered()" (mouseout)="snmNotHovered()" (click)="getSideNavData('smart360-side-nav-snm-a')">
+              <ngx-simplebar [options]="menuScrollOptions" class="bento-dropdown-lt-scroll">                
+                <div class="row" >
+                  <div class="col-sm-4" *ngFor="let module of modulesList.data">
+                    <div class="media bento-menu-blk"  id="smart360-side-nav-snm-a" (mouseover)="snmHovered()" (mouseout)="snmNotHovered()" (click)="getSideNavData(module.module)">
                       <div class="img-blk align-self-center">
-                        <img src="../../../assets/images/bento-menu-1.png" alt="img">
+                        <img src="{{module.img}}" alt="img">
                       </div>                        
                       <div class="media-body align-self-center">
-                        <h6 class="h6">Sales &amp; Marketing</h6>
-                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
+                        <h6 class="h6">{{module.module}}</h6>
+                        <p class="p p-12">{{module.desc}}</p>
                       </div>
                     </div>
                   </div>
-
-                  <div class="col-sm-4">
-                    <div class="media bento-menu-blk" id="smart360-side-nav-conscare-a" (mouseover)="concareHovered()" (mouseout)="concareNotHovered()" (click)="getSideNavData('smart360-side-nav-conscare-a')">
-                      <div class="img-blk align-self-center">
-                        <img src="../../../assets/images/bento-menu-2.png" alt="img">
-                      </div>                        
-                      <div class="media-body align-self-center">
-                        <h6 class="h6">Consumer Care</h6>
-                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="media bento-menu-blk" [routerLink]="['/consumerops']" id="smart360-side-nav-consops-a" (mouseover)="conopsHovered()" (mouseout)="conopsNotHovered()" (click)="getSideNavData('smart360-side-nav-consops-a')">
-                      <div class="img-blk align-self-center">
-                        <img src="../../../assets/images/bento-menu-3.png" alt="img">
-                      </div>                        
-                      <div class="media-body align-self-center">
-                        <h6 class="h6">Consumer Ops</h6>
-                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="media bento-menu-blk" [routerLink]="['/gas-management']" id="smart360-side-nav-sourcing-a" (mouseover)="gasMgtHovered()" (mouseout)="gasMgtNotHovered()">
-                      <div class="img-blk align-self-center">
-                        <img src="../../../assets/images/bento-menu-4.png" alt="img">
-                      </div>                        
-                      <div class="media-body align-self-center">
-                        <h6 class="h6">Gas Management</h6>
-                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="media bento-menu-blk" [routerLink]="['/work-order']" id="smart360-side-nav-onm-a" (mouseover)="workOrderHovered()" (mouseout)="workOrderNotHovered()">
-                      <div class="img-blk align-self-center">
-                        <img src="../../../assets/images/bento-menu-5.png" alt="img">
-                      </div>                        
-                      <div class="media-body align-self-center">
-                        <h6 class="h6">Work Order</h6>
-                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="media bento-menu-blk" [routerLink]="['/network']" id="smart360-side-nav-assets-a" (mouseover)="netWorkHovered()" (mouseout)="netWorkNotHovered()">
-                      <div class="img-blk align-self-center">
-                        <img src="../../../assets/images/bento-menu-6.png" alt="img">
-                      </div>                        
-                      <div class="media-body align-self-center">
-                        <h6 class="h6">Network</h6>
-                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="media bento-menu-blk" [routerLink]="['/spend']" id="smart360-side-nav-purchase-a" (mouseover)="spendHovered()" (mouseout)="spendNotHovered()">
-                      <div class="img-blk align-self-center">
-                        <img src="../../../assets/images/bento-menu-7.png" alt="img">
-                      </div>                        
-                      <div class="media-body align-self-center">
-                        <h6 class="h6">spend</h6>
-                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="media bento-menu-blk" [routerLink]="['/hcm']" id="smart360-side-nav-hcm-a" (mouseover)="humanCapitalHovered()" (mouseout)="humanCapitalNotHovered()">
-                      <div class="img-blk align-self-center">
-                        <img src="../../../assets/images/bento-menu-1.png" alt="img">
-                      </div>                        
-                      <div class="media-body align-self-center">
-                        <h6 class="h6">Human Capital</h6>
-                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="media bento-menu-blk" [routerLink]="['/finance']" id="smart360-side-nav-finance-a" (mouseover)="financeHovered()" (mouseout)="financeNotHovered()">
-                      <div class="img-blk align-self-center">
-                        <img src="../../../assets/images/bento-menu-9.png" alt="img">
-                      </div>                        
-                      <div class="media-body align-self-center">
-                        <h6 class="h6">Finance</h6>
-                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="media bento-menu-blk" [routerLink]="['/admin']" id="smart360-side-nav-admin-a" (mouseover)="adminHovered()" (mouseout)="adminNotHovered()">
-                      <div class="img-blk align-self-center">
-                        <img src="../../../assets/images/bento-menu-1.png" alt="img">
-                      </div>                        
-                      <div class="media-body align-self-center">
-                        <h6 class="h6">Admin</h6>
-                        <p class="p p-12">Lorem ipsum dolor sit amet,</p>
-                      </div>
-                    </div>
-                  </div>
-
                 </div>
-
-              </ngx-simplebar>
-              
+              </ngx-simplebar>              
             </div>
           </div>
           <div class="col-3 px-0 cust-col-3">

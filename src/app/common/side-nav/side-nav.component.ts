@@ -13,10 +13,20 @@ export class SideNavComponent implements OnInit {
 
   @Input() item: string
   
+  snmNav = [
+    {val : 'Sales & Marketing'},
+    {val : 'Sales & Marketing'},
+    {val : 'Sales & Marketing'},
+    {val : 'Sales & Marketing'},
+    {val : 'Sales & Marketing'},
+  ]
 
   constructor() {
+
     
   }
+
+  val = ""
 
   status: boolean = false;
   bClickEvent(){
@@ -28,6 +38,14 @@ export class SideNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.item == 'Consumer Care' ){
+
+      this.snmNav.push({
+        val:this.val
+      })
+      console.log('++++++++++++'+this.snmNav)
+
+    }
     $(document).ready(function(){
 
       $(".menubttn2").parents(".pr-side-navbar").removeClass("open-slide");

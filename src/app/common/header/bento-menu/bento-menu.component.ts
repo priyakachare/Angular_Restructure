@@ -30,6 +30,62 @@ export class BentoMenuComponent implements OnInit {
     scrollbarMaxSize: 99,
   };
   
+  path = '../../../assets/images/'
+
+  modulesList = { count: 12, data: [
+    {
+      module : 'Sales & Marketing',
+      img : this.path +'bento-menu-1.png',
+      desc : 'Lorem ipsum dolor sit amet'
+    },
+    {
+      module : 'Consumer Care',
+      img : this.path +'bento-menu-2.png',
+      desc : 'Lorem ipsum dolor sit amet'
+    },
+    {
+      module : 'Consumer Ops',
+      img : this.path +'bento-menu-3.png',
+      desc : 'Lorem ipsum dolor sit amet'
+    },
+    {
+      module : 'Gas Management',
+      img : this.path +'bento-menu-4.png',
+      desc : 'Lorem ipsum dolor sit amet'
+    },
+    {
+      module : 'Work Order',
+      img : this.path +'bento-menu-5.png',
+      desc : 'Lorem ipsum dolor sit amet'
+    },
+    {
+      module : 'Network',
+      img : this.path +'bento-menu-6.png',
+      desc : 'Lorem ipsum dolor sit amet'
+    },
+    {
+      module : 'spend',
+      img : this.path +'bento-menu-7.png',
+      desc : 'Lorem ipsum dolor sit amet'
+    },
+    {
+      module : 'Human Capital',
+      img : this.path +'bento-menu-1.png',
+      desc : 'Lorem ipsum dolor sit amet'
+    },
+    {
+      module : 'Finance',
+      img : this.path +'bento-menu-9.png',
+      desc : 'Lorem ipsum dolor sit amet'
+    },
+    {
+      module : 'Admin',
+      img : this.path +'bento-menu-1.png',
+      desc : 'Lorem ipsum dolor sit amet'
+    },
+  ] };
+
+
   constructor(private getData:CommonService) { }
 
   collapsed = true;

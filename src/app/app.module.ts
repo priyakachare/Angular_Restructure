@@ -15,6 +15,11 @@ import { FooterComponent } from './common/footer/footer.component';
 import { HeaderComponent } from './common/header/header.component';
 import { SideNavComponent } from './common/side-nav/side-nav.component';
 import { BentoMenuComponent } from './common/header/bento-menu/bento-menu.component';
+import { SearchComponent } from './common/header/search/search.component';
+import { AddComponent } from './common/header/add/add.component';
+import { NotificationComponent } from './common/header/notification/notification.component';
+import { LocationComponent } from './common/header/location/location.component';
+import { ProfileComponent } from './common/header/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,12 @@ import { BentoMenuComponent } from './common/header/bento-menu/bento-menu.compon
     FooterComponent,
     HeaderComponent,
     SideNavComponent,
-    BentoMenuComponent
+    BentoMenuComponent,
+    SearchComponent,
+    AddComponent,
+    NotificationComponent,
+    LocationComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
