@@ -7,8 +7,9 @@ import { faChevronDown, faSearch, faMapMarkerAlt, faPlus, faBell } from '@fortaw
   styleUrls: ['./location.component.scss']
 })
 export class LocationComponent implements OnInit {
-
   faMapMarkerAlt = faMapMarkerAlt;
+
+  location = 'Pune'
 
   constructor() { }
 

@@ -36,6 +36,7 @@ import { AddComponent } from './common/header/add/add.component';
 import { NotificationComponent } from './common/header/notification/notification.component';
 import { LocationComponent } from './common/header/location/location.component';
 import { ProfileComponent } from './common/header/profile/profile.component';
+import { LoginLogoutComponent } from './login-logout/login-logout.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ProfileComponent } from './common/header/profile/profile.component';
     AddComponent,
     NotificationComponent,
     LocationComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoginLogoutComponent
   ],
   imports: [
     BrowserModule,
