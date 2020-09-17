@@ -37,6 +37,7 @@ import { NotificationComponent } from './common/header/notification/notification
 import { LocationComponent } from './common/header/location/location.component';
 import { ProfileComponent } from './common/header/profile/profile.component';
 import { LoginLogoutComponent } from './login-logout/login-logout.component';
+import { BreadcrumbComponent } from './common/header/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { LoginLogoutComponent } from './login-logout/login-logout.component';
     NotificationComponent,
     LocationComponent,
     ProfileComponent,
-    LoginLogoutComponent
+    LoginLogoutComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,10 @@ export class CommonService {
 
   @Output() newItemEvent = new EventEmitter<string>();
 
+  @Output() sideNavId = new EventEmitter<string>();
+
+
+
   constructor() {
    }
 }

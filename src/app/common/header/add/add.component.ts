@@ -14,9 +14,9 @@ export class AddComponent implements OnInit {
   faPlus = faPlus;
 
   addMenus = { data: [
-    {module : 'Registration',link:'#'},
-    {module : 'Survey',link:'#'},
-    {module : 'Campaign',link:'#'}] 
+    {id:1, module : 'Registration',link:'#'},
+    {id:2, module : 'Survey',link:'#'},
+    {id:3, module : 'Campaign',link:'#'}] 
   };
 
   constructor() { }
