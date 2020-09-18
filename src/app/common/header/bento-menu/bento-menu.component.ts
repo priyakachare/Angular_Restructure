@@ -44,81 +44,23 @@ export class BentoMenuComponent implements OnInit {
     {id: 10,module : 'Admin',img : this.path +'bento-menu-1.png',img1: this.imgpath +'bento-menu-bg-1.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
   ] };
 
-  constructor(private getData:CommonService) { }
-
   selectedVal ={id: 1, module : 'Sales & Marketing',img : this.path +'bento-menu-1.png',img1: this.imgpath +'bento-menu-bg-1.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '}
   
   mouseHovered(val) {
     this.selectedVal = this.modulesList.data.find(data => data.id === +val)    
   }
   
+  constructor(private getData:CommonService) { }
+
   getSideNavData(val){
     this.getData.newItemEvent.emit(val);
   }
 
-  // public tab: any;
-
   ngOnInit(): void {
     $(document).ready(function(){
-      $('.bentobttn').on('click touchstart', function () {
-        $(this).toggleClass('open');
-      });
-      $('#smart360-side-nav-snm-a').on('click', function(){
-        
-        // alert(1);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-snm-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-conscare-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-conscare-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-consops-a').on('click', function(){
-        // alert(1);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-consops-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-sourcing-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-sourcing-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-onm-a').on('click', function(){
-        // alert(1);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-onm-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-assets-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-assets-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-purchase-a').on('click', function(){
-        // alert(1);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-purchase-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-hcm-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-hcm-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-finance-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-finance-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-admin-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-admin-div').removeClass('d-none-adj');
-      });
-
       $(document).on('click', '.bento-dropdown .dropdown-menu', function(e){ 
         e.stopPropagation(); 
       });
-
     });
   }
 

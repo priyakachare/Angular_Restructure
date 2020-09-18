@@ -7,18 +7,43 @@ import { CommonService } from './common/common.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  selectedVal:string;
+  selectedVal;
   navList;
+  openSideNav;
+  showPopUp;
+  meterData;
+  settingSnm;
+
 
   constructor(private getData:CommonService) {
-    this.getData.newItemEvent.subscribe(data =>{
-      this.selectedVal = data
-    })
+    //for open slider on click 
+    this.meterData ={title:'Meter Data' ,data :[
+      {id:1,navData:'Schedule',link:'#'},{id:2,navData:'Dispatch',link:'#'},{navData:'Validation',link:'#'},
+      {navData:'Upload',link:'#'},{navData:'Smart Meter Data',link:'#'}
+    ]};
 
+    this.settingSnm ={title:'Settings' ,data :[
+      {id:1,navData:'Survey Type',link:'#'},{id:2,navData:'Campaign Type',link:'#'},{navData:'Campaign Frequency Type',link:'#'},
+    ]};
+    
+    this.getData.sideNavId.subscribe(data =>{
+      this.openSideNav = data
+      if(this.selectedVal==3 && this.openSideNav==4){
+        console.log('--------------'+this.selectedVal + this.openSideNav)
+        this.showPopUp = !this.showPopUp
+        this.meterData = this.meterData
+      }
+      else if(this.selectedVal==1 && this.openSideNav==8||this.selectedVal==undefined && this.openSideNav==8){
+        this.showPopUp = !this.showPopUp
+        this.meterData = this.settingSnm
+      }
+    })  
+
+    // Show side nav data/Module list
     this.navList = [
       {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},
       {id:2, module : 'Campaign',icon:'icons8 icons8-megaphone',link:'#',ngbPopover:"Campaign"},
-      {id:3, module : 'Survey',icon:'icons8 icons8-flow-chart',link:'#',ngbPopover:"Survey"},
+      {id:3, module : 'Survey',icon:'icons8 icons8-flow-chart',link:"#",ngbPopover:"Survey"},
       {id:4, module : 'Registration',icon:'icons8 icons8-shared-document',link:'consumerops/registration',ngbPopover:"Registration"},
       {id:5, module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers"},
       {id:6, module : 'Reports',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"Reports"},
@@ -27,6 +52,7 @@ export class AppComponent {
     ];
 
     this.getData.newItemEvent.subscribe(data =>{
+      this.selectedVal = data
       if(data == 1){
         this.navList = [
           {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},
@@ -54,7 +80,7 @@ export class AppComponent {
           {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},          
           {id:2, module : 'Registration',icon:'icons8 icons8-shared-document',link:'#',ngbPopover:"Registration"},
           {id:3, module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers"},   
-          {id:4, module : 'Meter Data',icon:'icons8 icons8-conflict',link:'#',ngbPopover:"Meter Data"},
+          {id:4, module : 'Meter Data',icon:'icons8 icons8-conflict',ngbPopover:"Meter Data"},
           {id:5, module : 'Billing',icon:'icons8 icons8-paycheque',link:'#',ngbPopover:"Billing"},
           {id:6, module : 'Payment',icon:'icons8 icons8-document',link:'#',ngbPopover:"Payment"},  
           {id:7, module : 'Service',icon:'icons8 icons8-paycheque',link:'#',ngbPopover:"Service"},

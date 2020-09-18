@@ -4,109 +4,32 @@
   </div>
   <ul class="nav flex-column" *ngFor="let navData of obj">
     <li class="nav-item"  placement="right" ngbPopover="{{navData.ngbPopover}}" triggers="mouseenter:mouseleave" container="body">
-      <a class="nav-link"  [ngClass]="{'active': navData.id == 1}"  (click)="showPopup(navData.id)"><span><i class="{{navData.icon}}"></i></span>{{navData.module}}</a>
+      <a class="nav-link"  [ngClass]="{'active': navData.id == 1}" [routerLink]="[navData.link]" (click)="showPopup(navData.id)"><span><i class="{{navData.icon}}"></i></span>{{navData.module}}</a>
     </li>    
   </ul>
 </div>
 
 
 
-<!-- Survey Modal -->
-<div class="pr-sidebar-modal" [ngStyle]="{'display':display}">
-  <div class="modal left fade" id="sidebarSurveyModal" data-backdrop="true" tabindex="-1" [ngStyle]="{'display':display}">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-  
-        <div class="modal-header">
-          <h4 class="modal-title" id="sidebarSurveyModalLabel">Survey</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" style="background-image: url('../../../assets/images/sidenav-illustration.png');">
-          <div class="pr-side-inner-navbar">
-            <ngb-accordion [closeOthers]="true" activeIds="consrvy">
-              <ngb-panel id="consrvy">
-                  <ng-template ngbPanelHeader let-opened="opened">
-                      <button ngbPanelToggle class="btn btn-link stretched-link st">Consumer Survey</button>
-                  </ng-template>
-                  <ng-template ngbPanelContent>
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link active st">active link</a>
-                        <a class="nav-link st">normal link</a>
-                        <a class="nav-link st">Region</a>
-                        <a class="nav-link st">City</a>
-                        <a class="nav-link st">Saluation</a>
-                        <a class="nav-link st">Gender</a>
-                      </li>
-                    </ul>
-                  </ng-template>
-              </ngb-panel>          
-              <ngb-panel id="locnsrvy">
-                  <ng-template ngbPanelHeader>
-                      <button ngbPanelToggle class="btn btn-link stretched-link st">Location Survey</button>
-                  </ng-template>
-                  <ng-template ngbPanelContent>
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link st">Country</a>
-                        <a class="nav-link st">State</a>
-                        <a class="nav-link st">Region</a>
-                        <a class="nav-link st">City</a>
-                        <a class="nav-link st">Saluation</a>
-                        <a class="nav-link st">Gender</a>
-                      </li>
-                    </ul>
-                  </ng-template>
-              </ngb-panel>          
-              <ngb-panel id="conscare">
-                  <ng-template ngbPanelHeader>
-                      <button ngbPanelToggle class="btn btn-link stretched-link st">Consumer Care</button>
-                  </ng-template>
-                  <ng-template ngbPanelContent>
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link st">Country</a>
-                        <a class="nav-link st">State</a>
-                        <a class="nav-link st">Region</a>
-                        <a class="nav-link st">City</a>
-                        <a class="nav-link st">Saluation</a>
-                        <a class="nav-link st">Gender</a>
-                      </li>
-                    </ul>
-                  </ng-template>
-              </ngb-panel>
-            </ngb-accordion>          
-          </div>
-        </div>
-        <!-- ***    For usecase please do not comment/alter this   *** -->
-  
-      </div><!-- modal-content -->
-    </div><!-- modal-dialog -->
-  </div><!-- modal -->
-</div>  
 
-<!-- Settings Modal -->
-<div class="pr-sidebar-modal">
-  <div class="modal left fade" id="sidebarSettingsModal" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="sidebarModalLabel">
+  
+<div class="pr-sidebar-modal" [class]="{show : showPopUpVal}">
+  <div class="modal left fade" id="consopsMeterDataModal" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="consopsMeterDataModalLabel" [class]="{show : showPopUpVal}">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
   
         <div class="modal-header">
-          <h4 class="modal-title" id="sidebarModalLabel">Settings</h4>
+          <h4 class="modal-title" id="consopsMeterDataModalLabel">{{navData.title}}</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
   
         <div class="modal-body" style="background-image: url('../../../assets/images/sidenav-illustration.png');">
-          <div class="pr-side-inner-navbar">
+          <div class="pr-side-inner-navbar" *ngFor="let nav of navData.data" >
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="/settings/survey-type/">Survey Type</a>
-                <a class="nav-link" href="/settings/campaign-type/">Campaign Type</a>
-                <a class="nav-link" href="/settings/campaign-freq-type/">Campaign Frequency Type</a>
+                <a class="nav-link active" [ngClass]="{'active': nav.id == 1}" [routerLink]="['nav.link']">{{nav.navData}}</a>                
               </li>
             </ul>
           </div>
@@ -116,38 +39,6 @@
     </div><!-- modal-dialog -->
   </div><!-- modal -->
 </div>
-
-<!-- Users Modal -->
-<div class="pr-sidebar-modal">
-  <div class="modal left fade" id="sidebarUsersModal" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="sidebarUsersModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-  
-        <div class="modal-header">
-          <h4 class="modal-title" id="sidebarUsersModalLabel">Users</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-  
-        <div class="modal-body" style="background-image: url('../../../assets/images/sidenav-illustration.png');">
-          <div class="pr-side-inner-navbar">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="/user">List view</a>
-                <a class="nav-link" href="/user/add-user-details">User Form</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-  
-      </div><!-- modal-content -->
-    </div><!-- modal-dialog -->
-  </div><!-- modal -->
-</div>
-  
-  
-  
 
   
 

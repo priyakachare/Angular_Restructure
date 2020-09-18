@@ -9,8 +9,6 @@ export class CommonService {
 
   @Output() sideNavId = new EventEmitter<string>();
 
-
-
   constructor() {
    }
 }

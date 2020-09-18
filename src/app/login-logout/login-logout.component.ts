@@ -53,26 +53,13 @@ export class LoginLogoutComponent implements OnInit {
   showhidepwd4() {
     this.showpwd4 = !this.showpwd4;
   }
-
-  id = "smart360@bynry.com"
-  password = "bynry2020"
-  email = "";
-  pass = "";
-
-  signUp(){
-    if (this.email == this.id && this.pass == this.password) {
-        this.router.navigateByUrl('/home');
-    }
-  }
-
+  
   constructor(private router: Router) { }
-
   ngOnInit(): void {
     $(document).ready(function(){
       $('smart360-header, smart360-side-nav, smart360-footer').css('display', 'none');
       $('.main-container').css('margin', '0');
       $('#resetsidebar').click(function(){
-          // alert();
       });
     });
   }

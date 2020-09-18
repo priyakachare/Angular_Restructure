@@ -12,27 +12,18 @@ export class SideNavComponent implements OnInit {
 
   faPlus = faPlus;
 
-  @Input() item: string;
   @Input() obj:any;
+  @Input() showPopUpVal:boolean;
+  @Input() navData;
 
-  value = [];
-  constructor(private getData:CommonService) {
-    
-   }
+  constructor(private getData:CommonService) { }   
    showModal:boolean=false;
    snmUser:boolean=false;
    snmSetting:boolean=false;
    id_val:number;
 
-   display='none';
-
    showPopup(id){
     this.getData.sideNavId.emit(id)
-     this.id_val=id;
-     if(id == 3){
-      this.display='block';
-      this.showModal = true
-     }
    }
 
   status: boolean = false;
@@ -44,10 +35,8 @@ export class SideNavComponent implements OnInit {
       $("body").toggleClass("hide-popover");
   }
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {    
     $(document).ready(function(){
-
       $(".menubttn2").parents(".pr-side-navbar").removeClass("open-slide");
       $(".menubttn").parents(".pr-side-navbar").removeClass("open-slide");    
       $('.menubttn2').click(function(){
