@@ -2,42 +2,35 @@
   <div class="" data-toggle="buttons">
     <button class="btn btn-primary bttn-transparent menubttn" (click)="bClickEvent()" [ngClass]="status ? 'open-subm' : 'close-subm'"><span></span></button>
   </div>
-  <ul class="nav flex-column" *ngFor="let navData of obj">
+  <ul class="nav flex-column" *ngFor="let navData of navList">
     <li class="nav-item"  placement="right" ngbPopover="{{navData.ngbPopover}}" triggers="mouseenter:mouseleave" container="body">
       <a class="nav-link"  [ngClass]="{'active': navData.id == 1}" [routerLink]="[navData.link]" (click)="showPopup(navData.id)"><span><i class="{{navData.icon}}"></i></span>{{navData.module}}</a>
     </li>    
   </ul>
 </div>
-
-
-
-
   
-<div class="pr-sidebar-modal" [class]="{show : showPopUpVal}">
-  <div class="modal left fade" id="consopsMeterDataModal" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="consopsMeterDataModalLabel" [class]="{show : showPopUpVal}">
+<div class="pr-sidebar-modal" [class]="{show : showPopUpFlag}">
+  <div class="modal left fade" id="consopsMeterDataModal" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="consopsMeterDataModalLabel" [class]="{show : showPopUpFlag}">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-  
+      <div class="modal-content">  
         <div class="modal-header">
-          <h4 class="modal-title" id="consopsMeterDataModalLabel">{{navData.title}}</h4>
+          <h4 class="modal-title" id="consopsMeterDataModalLabel">{{meterData.title}}</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>
-  
+        </div>  
         <div class="modal-body" style="background-image: url('../../../assets/images/sidenav-illustration.png');">
-          <div class="pr-side-inner-navbar" *ngFor="let nav of navData.data" >
+          <div class="pr-side-inner-navbar" *ngFor="let nav of meterData.data" >
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link active" [ngClass]="{'active': nav.id == 1}" [routerLink]="['nav.link']">{{nav.navData}}</a>                
               </li>
             </ul>
           </div>
-        </div>
-  
-      </div><!-- modal-content -->
-    </div><!-- modal-dialog -->
-  </div><!-- modal -->
+        </div>  
+      </div>
+    </div>
+  </div>
 </div>
 
   
