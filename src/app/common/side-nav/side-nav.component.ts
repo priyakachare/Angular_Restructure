@@ -9,13 +9,13 @@ import { CommonService} from '../common.service';
   styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent implements OnInit {
-
   faPlus = faPlus;
   navList;
   moduleId;
+  settingSnm;
+  showPopUpFlag:boolean=false;
 
   constructor(private getData:CommonService) { 
-
     this.navList = [
       {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},
       {id:2, module : 'Campaign',icon:'icons8 icons8-megaphone',link:'#',ngbPopover:"Campaign"},
@@ -135,15 +135,16 @@ export class SideNavComponent implements OnInit {
     }) 
     
   }   
-   settingSnm;
-   showPopUpFlag:boolean=false;
+  
 
    meterData = {title:'Meter Data' ,data :[
     {id:1,navData:'Schedule',link:'#'},{id:2,navData:'Dispatch',link:'#'},{navData:'Validation',link:'#'},
     {navData:'Upload',link:'#'},{navData:'Smart Meter Data',link:'#'}
   ]};
-   showPopup(id){
-     
+
+   showPopup(id){   
+    this.getData.sideNavId.emit(id)  
+    
     this.meterData ={title:'Meter Data' ,data :[
       {id:1,navData:'Schedule',link:'#'},{id:2,navData:'Dispatch',link:'#'},{navData:'Validation',link:'#'},
       {navData:'Upload',link:'#'},{navData:'Smart Meter Data',link:'#'}
@@ -160,8 +161,7 @@ export class SideNavComponent implements OnInit {
     else if(this.moduleId==1 && id==8||this.moduleId==undefined && id==8){
       this.showPopUpFlag = !this.showPopUpFlag
       this.meterData = this.settingSnm
-    }
-    this.getData.sideNavId.emit(id)
+    }    
    }
 
    

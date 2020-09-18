@@ -8,8 +8,8 @@ import { CommonService} from '../../common.service';
 })
 export class BreadcrumbComponent implements OnInit {
 
-  selectedVal:any;
-  sideNavId:any;
+  moduleId:any;
+  subModuleId:any;
   breadCrumb:any;
 
   sideNavList = { data: [
@@ -44,17 +44,17 @@ export class BreadcrumbComponent implements OnInit {
 
   constructor(private getData:CommonService) {
     this.getData.newItemEvent.subscribe(data =>{
-      this.selectedVal = data
+      this.moduleId = data
     })
     this.breadCrumb = this.sideNavList
     this.getData.sideNavId.subscribe(data =>{
-      this.sideNavId = data
+      this.subModuleId = data
 
-      if(this.selectedVal == 2 || this.selectedVal == 3){
-      this.breadCrumb = this.sideNavList.data.find(data => data.module_id == this.selectedVal && data.sub_module_id == this.sideNavId)
+      if(this.moduleId == 2 || this.moduleId == 3){
+      this.breadCrumb = this.sideNavList.data.find(data => data.module_id == this.moduleId && data.sub_module_id == this.subModuleId)
       }
       else{
-        this.breadCrumb = this.sideNavList.data.find(data => data.module_id == undefined && data.sub_module_id == this.sideNavId)
+        this.breadCrumb = this.sideNavList.data.find(data => data.module_id == undefined && data.sub_module_id == this.subModuleId)
       }
     })
    } 
