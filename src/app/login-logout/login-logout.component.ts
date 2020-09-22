@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { Router } from "@angular/router";
+import { CommonService } from '../common/common.service';
 
 @Component({
   selector: 'app-login-logout',
@@ -7,6 +9,10 @@ import { Router } from "@angular/router";
   styleUrls: ['./login-logout.component.scss']
 })
 export class LoginLogoutComponent implements OnInit {
+
+  loginForm: FormGroup;
+  submitted = false;
+
 
   public logindiv:boolean = true;
   login() {
@@ -54,8 +60,38 @@ export class LoginLogoutComponent implements OnInit {
     this.showpwd4 = !this.showpwd4;
   }
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private commonService:CommonService,private formBuilder: FormBuilder) { 
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+    });
+
+  }
+
+  get f() { return this.loginForm.controls; }
+
+  loginProcess(){
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+        return;
+    }
+    if(this.loginForm.valid){
+      this.commonService.login(this.loginForm.value).subscribe(result =>{
+        if(result.state === 'success'){
+          this.router.navigate(['/consumerops/registration']);
+        }
+      },
+      err =>{
+        alert('Provided credentials are wrong.')
+      })
+    }else{
+      alert('please enter the details')
+    }
+  }
   ngOnInit(): void {
+
     $(document).ready(function(){
       $('smart360-header, smart360-side-nav, smart360-footer').css('display', 'none');
       $('.main-container').css('margin', '0');

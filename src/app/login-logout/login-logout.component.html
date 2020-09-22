@@ -3,88 +3,97 @@
         <div class="row justify-content-center singin-wrap-main singin-wrap">
             <div class="col-auto cust-col-lt">
                 <div class="singin-wrap-lt">
-					
+				<form name="form" [formGroup]="loginForm" (ngSubmit)="loginProcess()">
 					<h3 class="logo">Smart<span>360</span></h3>
 					<div class="singin-form-wrap">                        
-						<div class="inner-form">
-                            <form name="form">
-                                
-                                <!-- Signup Form -->
-                                <div class="form-row" *ngIf="signupdiv">
-                                    <div class="col-12">
-                                        <label for="">Email ID</label>
-                                        <input type="text" class="form-control" placeholder="Email ID" />
-                                    </div>
+						<div class="inner-form">                         
+                            <!-- Signup Form -->
+                            <!-- <div class="form-row" *ngIf="signupdiv">
+                                <div class="col-12">
+                                    <label for="">Email ID</label>
+                                    <input type="text" class="form-control" placeholder="Email ID" formControlName="email"/>
                                 </div>
-                                <div class="form-row" *ngIf="signupdiv">
-                                    <div class="col-12">
-                                        <label for="">Chose a Password</label>
-                                        <input [type]="showpwd1 ? 'text' : 'password'" class="form-control form-pwd" placeholder="Password" id="login_pwd1"/>
-                                        <label for="login_pwd1" (click)="showhidepwd1()"><span><i ngClass='{{showpwd1 ? "icons8-eye" : "icons8-eye-2"}}' class="icons8"></i></span></label>
-                                        <span class="p p-13 min-char-pwd">Minimum 8 characters</span>
-                                    </div>
+                            </div> -->
+                            <!-- <div class="form-row" *ngIf="signupdiv">
+                                <div class="col-12">
+                                    <label for="">Chose a Password</label>
+                                    <input [type]="showpwd1 ? 'text' : 'password'" class="form-control form-pwd" placeholder="Password" id="login_pwd1" formControlName="password"/>
+                                    <label for="login_pwd1" (click)="showhidepwd1()"><span><i ngClass='{{showpwd1 ? "icons8-eye" : "icons8-eye-2"}}' class="icons8"></i></span></label>
+                                    <span class="p p-13 min-char-pwd">Minimum 8 characters</span>
                                 </div>
-                                <div class="form-row" *ngIf="signupdiv">
-                                    <div class="col-12 mt-4">
-                                        <button class="btn btn-secondary st text-center sign-in-btn btn-block" *ngIf="signupdiv" (click)="login()">Sign Up</button>
-                                    </div>
+                            </div>
+                            <div class="form-row" *ngIf="signupdiv">
+                                <div class="col-12 mt-4">
+                                    <button class="btn btn-secondary st text-center sign-in-btn btn-block" *ngIf="signupdiv" (click)="login()">Sign Up</button>
                                 </div>
-                                <div class="form-row" *ngIf="signupdiv">
-                                    <div class="col-12">
-                                        <div class="terms-codn-blk">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="termschk">
-                                                <label class="custom-control-label" for="termschk">
-                                                    You agree to the  <span class="txt-o-link">Terms and Conditions</span> and <span class="txt-o-link">Privacy Policy</span> of smart360
-                                                </label>
-                                            </div>
+                            </div>
+                            <div class="form-row" *ngIf="signupdiv">
+                                <div class="col-12">
+                                    <div class="terms-codn-blk">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="termschk">
+                                            <label class="custom-control-label" for="termschk">
+                                                You agree to the  <span class="txt-o-link">Terms and Conditions</span> and <span class="txt-o-link">Privacy Policy</span> of smart360
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Login Form -->
-                                <div class="form-row" *ngIf="logindiv">
-                                    <div class="col-12">
-                                        <label for="">Email ID</label>
-                                        <input type="text" class="form-control" placeholder="Julie@test.com" [(ngModel)]="email" name="email"/>
+                            </div> -->
+                        
+                            <!-- Login Form -->
+                            <div class="form-row" *ngIf="logindiv">
+                                <div class="col-12">
+                                    <label for="">Email ID</label>
+                                    <input type="text" class="form-control" formControlName="email" placeholder="Juile@test.com"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required">Email is required</div>
+                                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                    </div>                            
+                                </div>
+                            </div>
+                            <div class="form-row" *ngIf="logindiv">
+                                <div class="col-12">
+                                    <label for="">Password</label>
+                                    <input type="password" [(ngModel)]="pass" [type]="showpwd3 ? 'text' : 'password'" class="form-control form-pwd" placeholder="Password" id="login_pwd3" name="pass"
+                                        formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                                    <label for="login_pwd3" (click)="showhidepwd3()"><span><i ngClass='{{showpwd3 ? "icons8-eye" : "icons8-hide"}}' class="icons8"></i></span></label>
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">Password is required</div>
+                                        <div *ngIf="f.password.errors.minlength">Password must be at least 4 characters</div>
                                     </div>
                                 </div>
-                                <div class="form-row" *ngIf="logindiv">
-                                    <div class="col-12">
-                                        <label for="">Password</label>
-                                        <!-- <span class="p p-13 forgot-pwd text-dark" (click)="forgotpwd()">Forgot Password</span> -->
-                                        <input [(ngModel)]="pass" [type]="showpwd3 ? 'text' : 'password'" class="form-control form-pwd" placeholder="Password" id="login_pwd3" name="pass"/>
-                                        <label for="login_pwd3" (click)="showhidepwd3()"><span><i ngClass='{{showpwd3 ? "icons8-eye" : "icons8-hide"}}' class="icons8"></i></span></label>
-                                    </div>
+                            </div>
+                            <div class="form-row" *ngIf="logindiv">
+                                <div class="col-12">
+                                    <button class="btn btn-secondary st text-center sign-in-btn btn-block" id="resetsidebar">Sign In</button>
                                 </div>
-                                <div class="form-row" *ngIf="logindiv">
-                                    <div class="col-12">
-                                        <button class="btn btn-secondary st text-center sign-in-btn btn-block" id="resetsidebar" *ngIf="logindiv" (click)="signUp()">Sign In</button>
-                                    </div>
-                                </div>
-                                <div class="form-row" *ngIf="logindiv">
-                                    <div class="col">
-                                        <div class="terms-codn-blk">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="termschk">
-                                                <label class="custom-control-label text-dark mb-0 pt-1 fw-400" for="termschk">Remember me</label>
-                                            </div>
+                            </div>
+                            <div class="form-row" *ngIf="logindiv">
+                                <div class="col">
+                                    <div class="terms-codn-blk">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="termschk">
+                                            <label class="custom-control-label text-dark mb-0 pt-1 fw-400" for="termschk">Remember me</label>
                                         </div>
                                     </div>
-                                    <div class="col-auto">
-                                        <span class="txt-o-link">Forgot Password</span>
-                                    </div>
                                 </div>
-
-                            </form>
+                                <div class="col-auto">
+                                    <span class="txt-o-link">Forgot Password</span>
+                                </div>
+                            </div>
+                            <div class="singin-wrap-lt-bottom">
+                                <p class="p p-13 d-inline-block" *ngIf="logindiv">Don’t have an account?</p>
+                                <button class="btn btn-sm btn-outline-light3 st">Sign In</button>
+                            </div>                            
                         </div>
-                        <div class="singin-wrap-lt-bottom">
+                        <!-- <div class="singin-wrap-lt-bottom">
                             <p class="p p-13 d-inline-block" *ngIf="logindiv">Don’t have an account?</p>
                             <p class="p p-13 d-inline-block" *ngIf="signupdiv">Already have an account?</p>
                             <button class="btn btn-sm btn-outline-light3 st" (click)="signup()" *ngIf="logindiv">Sign Up</button>
                             <button class="btn btn-sm btn-outline-light3 st" (click)="login()" *ngIf="signupdiv">Sign In</button>
-                        </div>
+                        </div> -->
                     </div> 
+                </form>
                 </div>
 			</div>
 			<div class="col cust-col-rt">
