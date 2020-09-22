@@ -142,9 +142,9 @@ export class SideNavComponent implements OnInit {
     {navData:'Upload',link:'#'},{navData:'Smart Meter Data',link:'#'}
   ]};
 
-   showPopup(id){   
+  showPopup(id){   
     this.getData.sideNavId.emit(id)  
-    
+
     this.meterData ={title:'Meter Data' ,data :[
       {id:1,navData:'Schedule',link:'#'},{id:2,navData:'Dispatch',link:'#'},{navData:'Validation',link:'#'},
       {navData:'Upload',link:'#'},{navData:'Smart Meter Data',link:'#'}

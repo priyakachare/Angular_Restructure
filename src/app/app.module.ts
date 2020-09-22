@@ -41,6 +41,7 @@ import { StepperFormComponent } from './common/stepper-form/stepper-form.compone
 import { RegistrationListComponent } from './registration/registration-list/registration-list.component';
 import { LoginLogoutComponent } from './login-logout/login-logout.component';
 import { BreadcrumbComponent } from './common/header/breadcrumb/breadcrumb.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -71,12 +72,14 @@ import { BreadcrumbComponent } from './common/header/breadcrumb/breadcrumb.compo
     BrowserModule,
     AppRoutingModule,
     NgSelectModule,
-    FormsModule,
     DataTablesModule,
     NgxDropzoneModule,
     NgxDaterangepickerMd.forRoot(),
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers: [
   ],
