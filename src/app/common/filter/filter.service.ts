@@ -7,22 +7,23 @@ import { Observable, Subject } from 'rxjs';
 export class FilterService {
 
   @Output() filterEvent = new EventEmitter<any>();
-  private subject = new Subject<any>();
+  private subject1 = new Subject<any>();
+  private subject2 = new Subject<any>();
 
   sendSearchText(message: string) {
-        this.subject.next({ text: message });
+        this.subject1.next({ text: message });
     }
 
   getSearchText(): Observable<any> {
-        return this.subject.asObservable();
+        return this.subject1.asObservable();
     }
 
   sendPagination(message: string) {
-        this.subject.next({ number: message });
+        this.subject2.next({ number: message });
     }
 
   getPagination(): Observable<any> {
-        return this.subject.asObservable();
+        return this.subject2.asObservable();
     }
 
   constructor() { }
