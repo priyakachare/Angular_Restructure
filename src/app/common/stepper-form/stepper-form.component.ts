@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'; 
+import { StepperFormService } from './stepper-form.service';
 
 @Component({
   selector: 'app-stepper-form',
@@ -7,41 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StepperFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private stepperFormService:StepperFormService) {
+    this.stepperFormService.stepperFormEvent.subscribe(data =>{
+      this.blocks = data
+    })
+  }
 
   ngOnInit(): void {
   }
 
-  blocks = [
-    {
-      name : 'Applicant Details',
-      class: 'nav-link active',
-      id: 'applicant-dtls-tab',
-      href: '#applicant-dtls'
-    },
-    {
-      name : 'Payments',
-      class: 'nav-link',
-      id: 'applicnt-pay-tab',
-      href: '#applicant-pay'
-    },
-    {
-      name : 'Address Details',
-      class: 'nav-link',
-      id: 'applicant-addr-tab',
-      href: '#applicant-addr'
-    },
-    {
-      name : 'KYC Documents',
-      class: 'nav-link',
-      id: 'applicant-dtls-tab',
-      href: '#applicnt-dtls'
-    },
-    {
-      name : 'Review &amp; Submit',
-      class: 'nav-link',
-      id: 'applicant-dtls-tab',
-    }
-  ]
+  blocks = []
 
 }

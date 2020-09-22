@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faTrash, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { StepperFormService } from '../../common/stepper-form/stepper-form.service';
 
 @Component({
   selector: 'app-add-registration',
@@ -7,6 +8,29 @@ import { faTrash, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icon
   styleUrls: ['./add-registration.component.scss']
 })
 export class AddRegistrationComponent implements OnInit {
+
+  blocks = [
+    {
+      name : 'Applicant details',
+      id : 'applicant-dtls-tab',
+      href : '#applicant-dtls',
+      class : 'nav-link active',
+      areaControl : 'applicant-dtls'
+    },
+    {
+      name : 'Payment details',
+      id : 'applicant-pay-tab',
+      href : '#applicant-pay',
+      class : 'nav-link',
+      areaControl : 'applicant-pay'
+    },{
+      name : 'KYC documents',
+      id : 'kyc-doc-tab',
+      href : '#kyc-doc',
+      class : 'nav-link',
+      areaControl : 'kyc-doc'
+    }
+  ]
 
   faCalendarAlt = faCalendarAlt;
   faTrash = faTrash;
@@ -61,9 +85,14 @@ export class AddRegistrationComponent implements OnInit {
   selectedStateProvince : any;
   stateProvince : any;
 
-  constructor() { }
+  constructor(private stepperFormService:StepperFormService) { }
 
   ngOnInit(): void {
+    this.sendStepperFormData()
+  }
+
+  sendStepperFormData(){
+    this.stepperFormService.stepperFormEvent.emit(this.blocks);
   }
 
 }
