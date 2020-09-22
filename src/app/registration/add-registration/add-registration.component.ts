@@ -23,12 +23,20 @@ export class AddRegistrationComponent implements OnInit {
       href : '#applicant-pay',
       class : 'nav-link',
       areaControl : 'applicant-pay'
-    },{
+    },
+    {
       name : 'KYC documents',
       id : 'kyc-doc-tab',
       href : '#kyc-doc',
       class : 'nav-link',
       areaControl : 'kyc-doc'
+    },
+    {
+      name : 'Review & Submit',
+      id : 'review-submit-tab',
+      href : '#review-submit',
+      class : 'nav-link',
+      areaControl : 'review-submit'
     }
   ]
 
