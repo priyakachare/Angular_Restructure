@@ -36,6 +36,9 @@ import { AddComponent } from './common/header/add/add.component';
 import { NotificationComponent } from './common/header/notification/notification.component';
 import { LocationComponent } from './common/header/location/location.component';
 import { ProfileComponent } from './common/header/profile/profile.component';
+import { AddRegistrationComponent } from './registration/add-registration/add-registration.component';
+import { StepperFormComponent } from './common/stepper-form/stepper-form.component';
+import { RegistrationListComponent } from './registration/registration-list/registration-list.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { ProfileComponent } from './common/header/profile/profile.component';
     AddComponent,
     NotificationComponent,
     LocationComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddRegistrationComponent,
+    StepperFormComponent,
+    RegistrationListComponent
   ],
   imports: [
     BrowserModule,
