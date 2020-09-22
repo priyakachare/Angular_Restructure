@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { FilterService } from '../../common/filter/filter.service';
 
 @Component({
   selector: 'app-registration-list',
@@ -141,14 +142,21 @@ export class RegistrationListComponent implements OnInit {
         },
         {
             name:       "Action"
-        }
-        
+        }   
     ]
 
     
 
 
-    constructor() { }
+    constructor(private filterService : FilterService) {
+      this.filterService.getPagination().subscribe(data=>{
+        $('#table1').DataTable().page.len(data.number).draw()
+      })
+
+      this.filterService.getSearchText().subscribe(data=>{
+        $('#table1').DataTable().search(data.text).draw()
+      })
+    }
 
     ngOnInit(): void {
 

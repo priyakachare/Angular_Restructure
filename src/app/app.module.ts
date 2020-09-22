@@ -73,6 +73,7 @@ import { BreadcrumbComponent } from './common/header/breadcrumb/breadcrumb.compo
     NgSelectModule,
     FormsModule,
     DataTablesModule,
+    NgxDropzoneModule,
     NgxDaterangepickerMd.forRoot(),
     NgbModule,
     FontAwesomeModule

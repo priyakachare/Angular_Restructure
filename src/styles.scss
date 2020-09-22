@@ -3421,7 +3421,7 @@ a.text-primary:focus {
 // Datatable
 
 .listview-table-wrap .dataTables_wrapper .dataTables_length {
-  display: block;
+  display: none;
   font-family: "Poppins", "arial", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -3433,7 +3433,7 @@ a.text-primary:focus {
 }
 
 .listview-table-wrap .dataTables_wrapper .dataTables_filter {
-  display: block;
+  display: none;
   font-family: "Poppins", "arial", sans-serif;
   font-style: normal;
   font-weight: normal;

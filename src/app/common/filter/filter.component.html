@@ -1,18 +1,15 @@
 <div class="row justify-content-end">
-  <div class="col" style="margin-top: 6px;">
-    <label class="p p-12">Showing Last 6 month records</label>
-    <!-- <form class="pr-search-form d-inline-block">
+  <div class="col" style="margin-top: -6px;">
+    <form class="pr-search-form d-inline-block">
       <span class="s-icon"></span>
-      <input class="form-control pr-table-search" type="search" placeholder="Search by Id, Name, Mobile No,Email" aria-label="Search">
-    </form> -->
+      <input (keyup)="keypress()" [(ngModel)]="searchText" class="form-control pr-table-search" type="text" placeholder="Search by Id, Name, Mobile No,Email" aria-label="Search" name="text">
+    </form>
   </div>
-  <!-- <div class="col-auto pr-0" style="margin-top: -2px;">
+  <div class="col-auto pr-0" style="margin-top: -2px;">
     <label class="p p-13 mr-3">Records</label>
-    <ng-select  class="filter-select record-select" [searchable]="false" [clearable]="false"
-                              appendTo="body" [items]="pagination" bindLabel="name"
-                              placeholder="50" [(ngModel)]="selectedPagination" name="name">
+    <ng-select  class="filter-select record-select" (change)="recordsChange()" [searchable]="false" [clearable]="false" appendTo="body" [items]="[10,20,50,100,200,500]" bindLabel="name" placeholder="10" [(ngModel)]="selectedPagination" name="name">
     </ng-select>
-  </div> -->
+  </div>
   <div class="col-auto pr-0">
     <button class="btn btn-outline-light3 st bttn-filter" type="button" data-toggle="collapse"
       data-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse"><span>2</span>Filter</button>
@@ -40,7 +37,7 @@
     </div>
   </div>
   <div class="col-auto pl-0">
-    <button class="btn btn-secondary st" [routerLink]="'/registration/add-applicant'">Register</button>
+    <button class="btn btn-secondary st" [routerLink]="'/registration/add-registration'">Register</button>
   </div>
 </div>
 

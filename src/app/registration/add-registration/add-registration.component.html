@@ -4,6 +4,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="registration-inner inner-wrap tab-content" id="registerTabContent">
+                        
                         <!-- Tab panel for Applicant details start -->
                         <div class="tab-pane fade show active" id="applicant-dtls" role="tabpanel" aria-labelledby="applicant-dtls-tab">
                             <div class="row br-btm">
@@ -44,7 +45,7 @@
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <label>Last Name</label>
-                                                            <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="lastName"/>
+                                                            <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="lastName" name="lastName"/>
                                                         </div>
                                                         <div class="col">
                                                             <label>Utility</label>
@@ -56,18 +57,18 @@
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <label>Mobile Number</label>
-                                                            <input type="text" class="form-control" placeholder="Mobile Number" [(ngModel)]="mobileNo" name="name"/>
+                                                            <input type="text" class="form-control" placeholder="Mobile Number" [(ngModel)]="mobileNo" name="mobileNo"/>
                                                         </div>
                                                         <div class="col">
                                                             <label>Email</label>
-                                                            <input type="email" class="form-control" placeholder="Email ID" [(ngModel)]="email" name="">
+                                                            <input type="email" class="form-control" placeholder="Email ID" [(ngModel)]="email" name="email">
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <label>ID Document</label>
                                                             <ng-select [items]="document" bindLabel="name" placeholder="Select ID Document"
-                                                                [(ngModel)]="selectedDocument" name="name">
+                                                                [(ngModel)]="selectedDocument" name="document">
                                                             </ng-select>
                                                         </div>
                                                         <div class="col">
@@ -394,6 +395,111 @@
                             </div>
                         </div>
                         <!-- Tab panel for Address details end -->
+
+                        <!-- Tab panel for KYC documents start-->
+                        <div class="tab-pane fade" id="kyc-doc" role="tabpanel" aria-labelledby="kyc-doc-tab">
+                            <div class="row br-btm">
+                                <div class="col-auto align-self-center">
+                                    <h4 class="h4 ttl">KYC documents</h4>                                    
+                                </div>
+                                <div class="col align-self-center">
+                                    <div class="details-list">
+                                        <ul class="list-group list-group-horizontal justify-content-end">
+                                            <li class="list-group-item"></li>
+                                        </ul>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="registration-form inner-form">
+                                        <div class="row inner-form-wrap">
+                                            <div class="col-12">
+                                                    <form name="form">
+                                                    <div class="form-row">
+                                                        <div class="col-4">
+                                                            <label>Select Type</label>
+                                                            <ng-select [items]="documentType" bindLabel="name2" appendTo="body" placeholder="" [(ngModel)]="selectedDocumentType" name="name2" bindValue="name2">
+                                                            </ng-select>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label>Select Documents</label>
+                                                            <ng-select [items]="kycDocument" bindLabel="name" appendTo="body" placeholder=""
+                                                                [(ngModel)]="selectedKycDocuments" name="name">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row"> 
+                                                        <div class="col-12">
+                                                            <div class="upload-wrapper custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+                                                                <div class="upload-inner">
+                                                                    <div class="media">
+                                                                        <div class="media-body">
+                                                                            <ngx-dropzone-label>
+                                                                                <div class="drag-drop">
+                                                                                    <img class="st img-fluid" src="../../assets/images/icons/upload-icon.png" alt="upload">
+                                                                                    <p class="p p-13">Drag & Drop files here</p>
+                                                                                    <p class="p p-13 font-weight-normal">Or</p>
+                                                                                    <button class="btn bttn-uplaod bttn-txt st">Browse Files</button>
+                                                                                </div>
+                                                                            </ngx-dropzone-label>
+                                                                        </div>
+                                                                        <div class="media-body">
+                                                                            <p class="p p-13 progress-txt inline-block">Electricity Bill</p>
+                                                                            <span class="p p-13 progress-status inline-block">50%</span>
+                                                                            <p><ngb-progressbar [showValue]="true" type="primary" [value]="50" height="5px"></ngb-progressbar></p>
+                                                                            <span class="btn bttn-remove">x</span>
+                                                                        </div>
+                                                                    </div>                                           
+                                                                </div>
+                                                            </div>
+                                                            <div class="uploaded-items">
+                                                                <ul class="list-group list-group-horizontal-sm">
+                                                                    <ngx-dropzone-image-preview class="list-group-item" ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                                                        <ngx-dropzone-label class="p p-12 file-name">{{ f.name }}</ngx-dropzone-label>
+                                                                    </ngx-dropzone-image-preview>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="applicant-data">
+                                                        <div class="upload-wrapper">
+                                                            <div class="uploaded-items">
+                                                                <ul class="list-group list-group-horizontal-sm">
+                                                                    <li class="list-group-item">
+                                                                        <div class="thumbnail">
+                                                                            <img class="st img-abs" src="../../assets/images/upload1.jpg" alt="img">
+                                                                        </div>
+                                                                        <!-- <span class="btn bttn-remove">x</span> -->
+                                                                        <p class="p p-12 file-name">Personal Details</p>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <div class="thumbnail">
+                                                                            <img class="st img-abs" src="../../assets/images/upload2.jpg" alt="img">
+                                                                        </div>
+                                                                        <!-- <span class="btn bttn-remove">x</span> -->
+                                                                        <p class="p p-12 file-name">Personal Details</p>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center form-bttn-row">
+                                            <div class="col-auto">
+                                                <button class="btn btn-outline-light3 st">Cancel</button>
+                                            </div>
+                                            <div class="col-auto">
+                                                <button class="btn btn-secondary st" id="proceed_4">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tab panel for KYC documents end -->
                     </div>
                 </div>
             </div>
