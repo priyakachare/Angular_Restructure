@@ -28,232 +28,40 @@ export class BentoMenuComponent implements OnInit {
     scrollbarMaxSize: 99,
   };
   
-  path = '../../../assets/images/'
+  path = '../../../assets/images/';
+  imgpath ="../../../assets/images/";
 
-  modulesList = { count: 12, data: [
-    {
-      module : 'Sales & Marketing',
-      img : this.path +'bento-menu-1.png',
-      desc : 'Lorem ipsum dolor sit amet'
-    },
-    {
-      module : 'Consumer Care',
-      img : this.path +'bento-menu-2.png',
-      desc : 'Lorem ipsum dolor sit amet'
-    },
-    {
-      module : 'Consumer Ops',
-      img : this.path +'bento-menu-3.png',
-      desc : 'Lorem ipsum dolor sit amet'
-    },
-    {
-      module : 'Gas Management',
-      img : this.path +'bento-menu-4.png',
-      desc : 'Lorem ipsum dolor sit amet'
-    },
-    {
-      module : 'Work Order',
-      img : this.path +'bento-menu-5.png',
-      desc : 'Lorem ipsum dolor sit amet'
-    },
-    {
-      module : 'Network',
-      img : this.path +'bento-menu-6.png',
-      desc : 'Lorem ipsum dolor sit amet'
-    },
-    {
-      module : 'Spend',
-      img : this.path +'bento-menu-7.png',
-      desc : 'Lorem ipsum dolor sit amet'
-    },
-    {
-      module : 'Human Capital',
-      img : this.path +'bento-menu-1.png',
-      desc : 'Lorem ipsum dolor sit amet'
-    },
-    {
-      module : 'Finance',
-      img : this.path +'bento-menu-9.png',
-      desc : 'Lorem ipsum dolor sit amet'
-    },
-    {
-      module : 'Admin',
-      img : this.path +'bento-menu-1.png',
-      desc : 'Lorem ipsum dolor sit amet'
-    },
+  modulesList = { data: [
+    {id: 1, module : 'Sales & Marketing',img : this.path +'bento-menu-1.png',img1: this.imgpath +'bento-menu-bg-1.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
+    {id: 2 ,module : 'Consumer Care',img : this.path +'bento-menu-2.png',img1: this.imgpath +'bento-menu-bg-2.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Consumer Care Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
+    {id: 3, module : 'Consumer Ops',img : this.path +'bento-menu-3.png',img1: this.imgpath +'bento-menu-bg-1.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Consumer Ops Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
+    {id: 4, module : 'Gas Management',img : this.path +'bento-menu-4.png',img1: this.imgpath +'bento-menu-bg-3.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Gas Management Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
+    {id: 5, module : 'Work Order',img : this.path +'bento-menu-5.png',img1: this.imgpath +'bento-menu-bg-4.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
+    {id: 6, module : 'Network',img : this.path +'bento-menu-6.png',img1: this.imgpath +'bento-menu-bg-5.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
+    {id: 7, module : 'Spend',img : this.path +'bento-menu-7.png',img1: this.imgpath +'bento-menu-bg-6.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
+    {id: 8, module : 'Human Capital',img : this.path +'bento-menu-1.png',img1: this.imgpath +'bento-menu-bg-1.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
+    {id: 9, module : 'Finance',img : this.path +'bento-menu-9.png',img1: this.imgpath +'bento-menu-bg-7.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
+    {id: 10,module : 'Admin',img : this.path +'bento-menu-1.png',img1: this.imgpath +'bento-menu-bg-1.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Admin Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
   ] };
 
-  constructor(private getData:CommonService) { }
-
-  imgpath ="../../../assets/images/";
+  selectedVal ={id: 1, module : 'Sales & Marketing',img : this.path +'bento-menu-1.png',img1: this.imgpath +'bento-menu-bg-1.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '}
   
-  Detail = [ 
-    {
-      module : 'Sales & Marketing',
-      img: this.imgpath +'bento-menu-bg-1.png',
-      desc : 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
-    }
-  ]
   mouseHovered(val) {
-    if(val == "Sales & Marketing"){
-      this.Detail = [ 
-        {
-          module : 'Sales & Marketing',
-          img: this.imgpath +'bento-menu-bg-1.png',
-          desc : 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
-        }
-      ]
-    }
-    else if(val == "Consumer Care"){
-      this.Detail = [ 
-        {
-          module : 'Consumer Care',
-          img: this.imgpath +'bento-menu-bg-2.png',
-          desc : 'Consumer Care Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
-        }
-      ]
-    }
-    else if(val == "Consumer Ops"){
-      this.Detail = [ 
-        {
-          module : 'Consumer Ops',
-          img: this.imgpath +'bento-menu-bg-1.png',
-          desc : 'Consumer Ops Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
-        }
-      ]
-    }
-    else if(val == "Gas Management"){
-      this.Detail = [ 
-        {
-          module : 'Gas Management',
-          img: this.imgpath +'bento-menu-bg-3.png',
-          desc : 'Gas Management Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
-        }
-      ]
-    }
-    else if(val == "Work Order"){
-      this.Detail = [ 
-        {
-          module : 'Work Order',
-          img: this.imgpath +'bento-menu-bg-4.png',
-          desc : 'Work Order Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
-        }
-      ]
-    }
-    else if(val == "Network"){
-      this.Detail = [ 
-        {
-          module : 'Network',
-          img: this.imgpath +'bento-menu-bg-5.png',
-          desc : 'Network Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
-        }
-      ]
-    }
-    else if(val == "Spend"){
-      this.Detail = [ 
-        {
-          module : 'Spend',
-          img: this.imgpath +'bento-menu-bg-6.png',
-          desc : 'Spend Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
-        }
-      ]
-    }
-    else if(val == "Human Capital"){
-      this.Detail = [ 
-        {
-          module : 'Human Capital',
-          img: this.imgpath +'bento-menu-bg-1.png',
-          desc : 'Human Capital Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
-        }
-      ]
-    }
-    else if(val == "Finance"){
-      this.Detail = [ 
-        {
-          module : 'Finance',
-          img: this.imgpath +'bento-menu-bg-7.png',
-          desc : 'Finance Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
-        }
-      ]
-    }
-    else if(val == "Admin"){
-      this.Detail = [ 
-        {
-          module : 'Admin',
-          img: this.imgpath +'bento-menu-bg-1.png',
-          desc : 'Admin Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '
-        }
-      ]
-    }
+    this.selectedVal = this.modulesList.data.find(data => data.id === +val)    
   }
   
-  getSideNavData(val){
+  constructor(private getData:CommonService) { }
+
+  //Set Module Id in Common Service EventEmitter
+  selectModuleId(val){
     this.getData.newItemEvent.emit(val);
   }
 
-  // public tab: any;
-
   ngOnInit(): void {
     $(document).ready(function(){
-      $('.bentobttn').on('click touchstart', function () {
-        $(this).toggleClass('open');
-      });
-      $('#smart360-side-nav-snm-a').on('click', function(){
-        
-        // alert(1);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-snm-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-conscare-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-conscare-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-consops-a').on('click', function(){
-        // alert(1);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-consops-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-sourcing-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-sourcing-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-onm-a').on('click', function(){
-        // alert(1);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-onm-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-assets-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-assets-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-purchase-a').on('click', function(){
-        // alert(1);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-purchase-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-hcm-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-hcm-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-finance-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-finance-div').removeClass('d-none-adj');
-      });
-      $('#smart360-side-nav-admin-a').on('click', function(){
-        // alert(2);
-        $('.sidebar-wrapper').addClass('d-none-adj');
-        $('#smart360-side-nav-admin-div').removeClass('d-none-adj');
-      });
-
       $(document).on('click', '.bento-dropdown .dropdown-menu', function(e){ 
         e.stopPropagation(); 
       });
-
     });
   }
 

@@ -14,6 +14,19 @@ export class ProfileComponent implements OnInit {
   faBell = faBell;
   faPlus = faPlus;
 
+  profile = { data: [
+    {name : 'Dejan Shelby',
+    email: 'dejan128@gmail.com',
+    img : '../../../assets/images/profile-pic.png'   
+    }] ,
+  links : [
+    { options : 'ESS', link:"#"},
+    { options : 'Helpdesk', link:"#"},
+    { options : 'Help', link:"#"},
+    { options : 'Logout', link:"#"}
+  ] 
+  };
+
   constructor() { }
 
   ngOnInit(): void {

@@ -13,6 +13,12 @@ export class AddComponent implements OnInit {
   faBell = faBell;
   faPlus = faPlus;
 
+  addMenus = { data: [
+    {id:1, module : 'Registration',link:'#'},
+    {id:2, module : 'Survey',link:'#'},
+    {id:3, module : 'Campaign',link:'#'}] 
+  };
+
   constructor() { }
 
   ngOnInit(): void {

@@ -39,6 +39,8 @@ import { ProfileComponent } from './common/header/profile/profile.component';
 import { AddRegistrationComponent } from './registration/add-registration/add-registration.component';
 import { StepperFormComponent } from './common/stepper-form/stepper-form.component';
 import { RegistrationListComponent } from './registration/registration-list/registration-list.component';
+import { LoginLogoutComponent } from './login-logout/login-logout.component';
+import { BreadcrumbComponent } from './common/header/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { RegistrationListComponent } from './registration/registration-list/regi
     ProfileComponent,
     AddRegistrationComponent,
     StepperFormComponent,
-    RegistrationListComponent
+    RegistrationListComponent,
+    LoginLogoutComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,

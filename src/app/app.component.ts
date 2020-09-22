@@ -7,10 +7,6 @@ import { CommonService } from './common/common.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  selectedVal:string;
-  constructor(private getData:CommonService) {
-    this.getData.newItemEvent.subscribe(data =>{
-      this.selectedVal = data
-    })
-   }
+  
+  constructor() { }
 }

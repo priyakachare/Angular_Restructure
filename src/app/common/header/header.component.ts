@@ -17,19 +17,10 @@ export class HeaderComponent implements OnInit {
   faBell = faBell;
   faPlus = faPlus;
 
-  
   constructor(private getData:CommonService) {
-    this.getData.newItemEvent.subscribe(data =>{
-      this.selectedVal = data
-      console.log(data)
-    })
-   }
-
-  
-  selectedVal:any;
-
-  ngOnInit(): void {
     
-    
+   } 
+
+  ngOnInit(): void {   
 }
 }
