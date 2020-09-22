@@ -1,0 +1,402 @@
+<app-stepper-form>
+	<div class="col pl-0">
+        <div class="cust-form-col-rt">
+            <div class="row">
+                <div class="col-12">
+                    <div class="registration-inner inner-wrap tab-content" id="registerTabContent">
+                        <!-- Tab panel for Applicant details start -->
+                        <div class="tab-pane fade show active" id="applicant-dtls" role="tabpanel" aria-labelledby="applicant-dtls-tab">
+                            <div class="row br-btm">
+                                <div class="col-auto align-self-center">
+                                    <h4 class="h4 ttl">Applicant Details</h4>        
+                                </div>
+                                <div class="col align-self-center">
+                                    <div class="details-list">
+                                        <ul class="list-group list-group-horizontal justify-content-end">
+                                            <li class="list-group-item">
+                                                <span>Source</span>
+                                                <p>Branch</p>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span>Raised On</span>
+                                                <p>09 Jan 20</p>
+                                            </li>
+                                        </ul>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="registration-form inner-form">
+                                        <div class="row inner-form-wrap">
+                                            <div class="col-12">
+                                                <form name="form">
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>First Name</label>
+                                                            <input type="text" #textbox class="form-control" placeholder="First Name" [(ngModel)]="firstName" value="Thomas Shelby" name="textValue" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Middle Name</label>
+                                                            <input type="text" #textbox class="form-control" placeholder="Middle Name" [(ngModel)]="middleName" value="Thomas Shelby" name="textValue" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Last Name</label>
+                                                            <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="lastName"/>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Utility</label>
+                                                            <ng-select [items]="utility" bindLabel="utilityName" placeholder="Select Utility"
+                                                                [(ngModel)]="selectedUtility" name="utilityName">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Mobile Number</label>
+                                                            <input type="text" class="form-control" placeholder="Mobile Number" [(ngModel)]="mobileNo" name="name"/>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Email</label>
+                                                            <input type="email" class="form-control" placeholder="Email ID" [(ngModel)]="email" name="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>ID Document</label>
+                                                            <ng-select [items]="document" bindLabel="name" placeholder="Select ID Document"
+                                                                [(ngModel)]="selectedDocument" name="name">
+                                                            </ng-select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>ID Number</label>
+                                                            <input type="text" class="form-control" placeholder="ID Number" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Consumer category</label>
+                                                            <ng-select [items]="consumerCategory" bindLabel="name" placeholder="Select Consumer category"
+                                                                [(ngModel)]="selectedConsumerCategory" name="name">
+                                                            </ng-select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Consumer sub category</label>
+                                                            <ng-select [items]="consumerSubCategory" bindLabel="name" placeholder="Select Consumer sub category"
+                                                                [(ngModel)]="selectedConsumerSubCategory" name="name">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Ownership</label>
+                                                            <ng-select [items]="Ownership" bindLabel="name" placeholder="Select Ownership"
+                                                                [(ngModel)]="selectedOwnership" name="name">
+                                                            </ng-select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>VIP</label>
+                                                            <ng-select [items]="vip" type="text" bindLabel="name" placeholder="Select Yes/No" [(ngModel)]="selectedVip" bindValue="name"
+                                                                name = "name">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        
+                                                        <div class="col-6">
+                                                            <label>Pipeline</label>
+                                                            <ng-select [items]="pipeline" type="text" bindLabel="name"  placeholder="Select Pipeline"
+                                                                [(ngModel)]="selectedPipeline" bindValue="name" name="pipelineName">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center form-bttn-row">
+                                            <div class="col-auto">
+                                                <button class="btn btn-outline-light3 st">Cancel</button>
+                                            </div>
+                                            <div class="col-auto">
+                                                <button class="btn btn-secondary st" id="proceed_1">Proceed</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                               
+                        </div>
+                        <!-- Tab panel for Applicant details end -->
+
+                        <!-- Tab panel for Payment details start -->
+                        <div class="tab-pane fade" id="applicant-pay" role="tabpanel" aria-labelledby="applicant-pay-tab">
+                            <div class="row br-btm">
+                                <div class="col-auto align-self-center">
+                                    <h4 class="h4 ttl">Payment</h4>                                    
+                                </div>
+                                <div class="col align-self-center">
+                                    <div class="details-list">
+                                        <ul class="list-group list-group-horizontal justify-content-end">
+                                            <li class="list-group-item">
+                                                <!-- <span>Reg. Number</span> -->
+                                                <p>$ 3000.00</p>
+                                            </li>
+                                        </ul>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="registration-form inner-form">
+                                        <div class="row inner-form-wrap">
+                                            <div class="col-12">
+                                                <form name="form">
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Payment Type</label>
+                                                            <ng-select [items]="paymentType" bindLabel="name" appendTo="body" placeholder="Select Payment Type"
+                                                                [(ngModel)]="selectedPaymentType" name="name">
+                                                            </ng-select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Scheme</label>
+                                                            <ng-select [items]="scheme" bindLabel="name" appendTo="body" placeholder="Select Scheme"
+                                                                [(ngModel)]="selectedScheme" name="name">
+                                                            </ng-select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Amount</label>
+                                                            <input type="text" class="form-control" placeholder="" value="$ 501" />
+                                                        </div>
+                                                        <div class="col-auto align-self-center action-col">
+                                                            <button class="btn bttn-transparent bttn-icon" tooltipClass="pr-tooltip" placement="top" ngbTooltip="Remove" [openDelay]="300" [closeDelay]="500"><fa-icon [icon]="faTrash"></fa-icon></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Payment Type</label>
+                                                            <ng-select [items]="paymentType2" bindLabel="name" appendTo="body" placeholder="Select Payment Type"
+                                                                [(ngModel)]="selectedPaymentType2" name="name">
+                                                            </ng-select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Scheme</label>
+                                                            <ng-select [items]="scheme2" bindLabel="name" appendTo="body" placeholder="Select Scheme"
+                                                                [(ngModel)]="selectedScheme2" name="name">
+                                                            </ng-select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Amount</label>
+                                                            <input type="text" class="form-control" placeholder="" value="$ 501" />
+                                                        </div>
+                                                        <div class="col-auto align-self-center action-col">
+                                                            <button class="btn bttn-transparent bttn-icon" tooltipClass="pr-tooltip" placement="top" ngbTooltip="Remove" [openDelay]="300" [closeDelay]="500"><fa-icon [icon]="faTrash"></fa-icon></button>
+                                                        </div>
+                                                    </div>                                                    
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <button class="btn bttn-transparent bttn-add" type="button">Add</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Payment Mode</label>
+                                                            <ng-select [items]="paymentMode" bindLabel="name" appendTo="body" placeholder="Select Payment Mode"
+                                                                [(ngModel)]="selectedPaymentMode" name="name">
+                                                            </ng-select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Channel</label>
+                                                            <input type="text" class="form-control" placeholder="" value="UPI" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Transaction Number</label>
+                                                            <input type="text" class="form-control" placeholder="" value="001259952400" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col-4">
+                                                            <label>Transaction Date</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" placeholder="yyyy--mm--dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" container="body">
+                                                                <div class="input-group-append">
+                                                                    <button class="btn bttn-transparent bttn-icon" type="button" (click)="d.toggle()"><fa-icon [icon]="faCalendarAlt"></fa-icon></button>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center form-bttn-row">
+                                            <div class="col-auto">
+                                                <button class="btn btn-outline-light3 st">Cancel</button>
+                                            </div>
+                                            <div class="col-auto">
+                                                <button class="btn btn-secondary st" id="proceed_2">Proceed</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                        <!-- Tab panel for Payment details end -->
+
+                        <!-- Tab panel for Address details start -->
+                        <div class="tab-pane fade" id="applicant-addr" role="tabpanel" aria-labelledby="applicant-addr-tab">
+                            <div class="row br-btm">
+                                <div class="col-auto align-self-center">
+                                    <h4 class="h4 ttl">Address Details</h4>                                    
+                                </div>
+                                <div class="col align-self-center">
+                                    <div class="details-list">
+                                        <ul class="list-group list-group-horizontal justify-content-end">
+                                            <li class="list-group-item">
+                                                <div class="pr-checkbox">
+                                                    <input type="checkbox" name="optionsRadios" id="checkOther" value="other" ng-model="formData.other" ng-true-value="'other'" ng-init="formData.other='other'">
+                                                    <label for="checkOther"></label>
+                                                </div>
+                                                <label class="checkbox-label" for="checkOther">Click here if billing Address same as Meter Address</label>
+                                            </li>
+                                        </ul>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="registration-form inner-form">
+                                        <div class="row inner-form-wrap">
+                                            <div class="col-12">                                                
+                                                <nav class="inner-form-tabs">
+                                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                        <a class="nav-item nav-link st active" id="nav-service-tab" data-toggle="tab" href="#nav-service"
+                                                            role="tab" aria-controls="nav-service" aria-selected="true">Service</a>
+                                                        <a class="nav-item nav-link st" id="nav-billing-tab" data-toggle="tab" href="#nav-billing" role="tab"
+                                                            aria-controls="nav-billing" aria-selected="false">Billing</a>
+                                                    </div>
+                                                </nav>
+                                                <div class="tab-content" id="nav-tabContent">
+                                                    <div class="tab-pane fade show active" id="nav-service" role="tabpanel" aria-labelledby="nav-service-tab">
+                                                        <form name="form">
+                                                            <div class="form-row">
+                                                                <div class="col-12">
+                                                                    <label>Address Line 1</label>
+                                                                    <textarea class="form-control text-uppercase" placeholder="" rows="2"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="col-6">
+                                                                    <label>Street Address</label>
+                                                                    <textarea class="form-control" placeholder="" rows="1"></textarea>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label>State / Province / Region</label>
+                                                                    <ng-select [items]="stateProvince" bindLabel="name" appendTo="body" placeholder=""
+                                                                        [(ngModel)]="selectedStateProvince" name="name">
+                                                                    </ng-select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="col">
+                                                                    <label>City</label>
+                                                                    <ng-select [items]="city" bindLabel="name" appendTo="body" placeholder=""
+                                                                        [(ngModel)]="selectedCity" name="name">
+                                                                    </ng-select>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label>Postal / Zip Code </label>
+                                                                    <ng-select [items]="zipCode" bindLabel="name" appendTo="body" placeholder="Select Scheme"
+                                                                        [(ngModel)]="selectedZipCode" name="name">
+                                                                    </ng-select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="col">
+                                                                    <label>Area</label>
+                                                                    <ng-select [items]="area" bindLabel="name" appendTo="body" placeholder="Select Payment Type"
+                                                                         [(ngModel)]="selectedArea" name="name">
+                                                                    </ng-select>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label>Sub Area</label>
+                                                                    <ng-select [items]="subArea" bindLabel="name" appendTo="body" placeholder="Select Scheme"
+                                                                        [(ngModel)]="selectedSubArea" name="name">
+                                                                    </ng-select>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                        
+                                                    </div>
+                                                    <div class="tab-pane fade" id="nav-billing" role="tabpanel" aria-labelledby="nav-billing-tab">
+                                                        <form name="form">
+                                                            <div class="form-row">
+                                                                <div class="col-12">
+                                                                    <label>Home / Appartment</label>
+                                                                    <textarea class="form-control text-uppercase" placeholder="3964  Small Street" rows="2" value="3964  Small Street"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="col-6">
+                                                                    <label>Street</label>
+                                                                    <textarea class="form-control" placeholder="1235 New street" rows="1" value="1235 New street"></textarea>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label>State / Province / Region</label>
+                                                                    <ng-select [items]="billingAddress" bindLabel="name" appendTo="body" placeholder=""
+                                                                        [(ngModel)]="selectedBillingAddress" name="name">
+                                                                    </ng-select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="col">
+                                                                    <label>City</label>
+                                                                    <ng-select [items]="billingCity" bindLabel="name" appendTo="body" placeholder=""
+                                                                        [(ngModel)]="selectedBillingCity" name="name">
+                                                                    </ng-select>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label>Postal / Zip Code </label>
+                                                                    <ng-select [items]="billingZipCode" bindLabel="name" appendTo="body" placeholder="Select Scheme"
+                                                                        [(ngModel)]="selectedBillingZipCode" name="name">
+                                                                    </ng-select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="col">
+                                                                    <label>Area</label>
+                                                                    <ng-select [items]="billingArea" bindLabel="name" appendTo="body" placeholder="Select Payment Type"
+                                                                        [(ngModel)]="selectedBillingArea" name="name">
+                                                                    </ng-select>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label>Sub Area</label>
+                                                                    <ng-select [items]="billingSubArea" bindLabel="name" appendTo="body" placeholder="Select Scheme"
+                                                                        [(ngModel)]="selectedBillingSubArea" name="name"> 
+                                                                    </ng-select>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-end form-bttn-row br-top">
+                                            <div class="col-auto">
+                                                <button class="btn btn-outline-light3 st">Cancel</button>
+                                            </div>
+                                            <div class="col-auto pl-1 pr-4">
+                                                <button class="btn btn-secondary st" id="proceed_3">Proceed</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tab panel for Address details end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-stepper-form>

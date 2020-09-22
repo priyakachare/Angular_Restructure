@@ -1,45 +1,8 @@
 <div class="row">
     <div class="col">
         <div class="listview-table-wrap">
-        	<label class="p p-12">Showing Last 6 month records</label>
-        	<table datatable class="pr-datatable table table-hover" [dtOptions]="dtOptions2">
-        		<thead>
-                    <tr>
-                    	<th scope="col" class="chbx-col">
-			                <div class="custom-control custom-checkbox">
-			                  <input type="checkbox" class="custom-control-input" id="checkAll">
-			                  <label class="custom-control-label" for="checkAll"></label>
-			                </div>
-			            </th>
-			            <th *ngFor="let item of columns" scope="col"><span>{{item.name}}</span></th>
-                        <th scope="col" class="action-col"><span>Action</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                	<tr *ngFor="let item of data">
-		                <th scope="row" class="chbx-col">
-		                	<div class="custom-control custom-checkbox">
-			                    <input type="checkbox" class="custom-control-input" [attr.id]="item.id">
-			                    <label class="custom-control-label" [attr.for]="item.id"></label>
-		                    </div>
-		                </th>
-		                <td>{{item.data1}}</td>
-		                <td>{{item.data2}}</td>
-		                <td>{{item.data3}}</td>
-		                <td>{{item.data4}}</td>
-		                <td>{{item.data5}}</td>
-		                <td>{{item.data6}}</td>
-		                <td>{{item.data7}}</td>
-		                <td>{{item.data8 | date : 'dd MMM yy'}}</td>
-		                <td>
-		                    <ul class="list-group list-group-horizontal action-list">
-			                    <li class="list-group-item st">
-			                        <i class="icons8 icons8-eye"></i>
-			                    </li>
-			                </ul>
-		                </td>
-                </tbody>
-        	</table>
+        	<table id="table1" class="pr-datatable table table-hover">
+		    </table>
     	</div>
     </div>
 </div>

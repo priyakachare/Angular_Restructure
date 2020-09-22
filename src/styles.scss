@@ -3420,9 +3420,37 @@ a.text-primary:focus {
 
 // Datatable
 
-.listview-table-wrap .dataTables_wrapper .dataTables_length,
+.listview-table-wrap .dataTables_wrapper .dataTables_length {
+  display: block;
+  font-family: "Poppins", "arial", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 23px;
+  color: #8b8d9b;
+  font-size: 12px;
+  line-height: 18px;
+}
+
 .listview-table-wrap .dataTables_wrapper .dataTables_filter {
-  display: none;
+  display: block;
+  font-family: "Poppins", "arial", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 23px;
+  color: #8b8d9b;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.listview-table-wrap .dataTables_wrapper .dataTables_filter input {
+  visibility: visible;
+  padding-left: 10px;
+  width: 340px;
+  height: 38px;
+  background: #ffffff;
+  border-color: #d7d8dd;
 }
 
 .dataTables_wrapper .dataTables_info {

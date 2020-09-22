@@ -36,6 +36,9 @@ import { AddComponent } from './common/header/add/add.component';
 import { NotificationComponent } from './common/header/notification/notification.component';
 import { LocationComponent } from './common/header/location/location.component';
 import { ProfileComponent } from './common/header/profile/profile.component';
+import { AddRegistrationComponent } from './registration/add-registration/add-registration.component';
+import { StepperFormComponent } from './common/stepper-form/stepper-form.component';
+import { RegistrationListComponent } from './registration/registration-list/registration-list.component';
 import { LoginLogoutComponent } from './login-logout/login-logout.component';
 import { BreadcrumbComponent } from './common/header/breadcrumb/breadcrumb.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -59,6 +62,9 @@ import {HttpClientModule} from '@angular/common/http';
     NotificationComponent,
     LocationComponent,
     ProfileComponent,
+    AddRegistrationComponent,
+    StepperFormComponent,
+    RegistrationListComponent,
     LoginLogoutComponent,
     BreadcrumbComponent
   ],
