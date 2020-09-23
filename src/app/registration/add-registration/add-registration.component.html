@@ -664,4 +664,11 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <ngb-toast class="success" *ngIf="showtoast" header="dwd" [delay]="4000" [autohide]="autohide" (mouseenter)="autohide = false" (mouseleave)="autohide = true" (hide)="showtoast = false; autohide = true">
+                <div>New Registration Successfully Created!!</div>
+            </ngb-toast>
+        </div>
+    </div>
 </app-stepper-form>
