@@ -1614,8 +1614,8 @@ h6,
     -webkit-box-shadow: 4px 1px 5px rgba(0, 0, 0, 0.12);
     box-shadow: 4px 1px 5px rgba(0, 0, 0, 0.12);
     .inner-form-wrap {
-      padding-left: 70px;
-      padding-right: 70px;
+      padding-left: 50px;
+      padding-right: 50px;
     }
     .form-bttn-row {
       margin-top: 15px;
@@ -1752,7 +1752,7 @@ h6,
       object-fit: cover;
     }
     ngx-dropzone-label {
-      bottom: -30px;
+      bottom: -40px;
     }
     ngx-dropzone-remove-badge {
       top: -12px;
@@ -11326,8 +11326,8 @@ body.hide-popover .popover {
 
 .review-submit-wrap {
   margin: 20px auto;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
   .review-submit-card {
     margin-bottom: 15px;
   }

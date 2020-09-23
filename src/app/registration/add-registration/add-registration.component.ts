@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; 
 import { faTrash, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { StepperFormService } from '../../common/stepper-form/stepper-form.service';
 
@@ -27,6 +27,14 @@ export class AddRegistrationComponent implements OnInit {
       listClass : 'nav-item list-group-item'
     },
     {
+      name : 'Address details',
+      id : 'applicant-addr-tab',
+      href : '#applicant-addr',
+      class : 'nav-link',
+      areaControl : 'applicant-addr',
+      listClass : 'nav-item list-group-item'
+    },
+    {
       name : 'KYC documents',
       id : 'kyc-doc-tab',
       href : '#kyc-doc',
@@ -36,14 +44,17 @@ export class AddRegistrationComponent implements OnInit {
     },
     {
       name : 'Review & Submit',
-      id : 'review-submit-tab',
-      href : '#review-submit',
+      id : 'rvw-sbmt-tab',
+      href : '#rvw-sbmt',
       class : 'nav-link',
-      areaControl : 'review-submit',
+      areaControl : 'rvw-sbmt',
       listClass : 'nav-item list-group-item'
     }
   ]
 
+  showtoast = false; 
+  autohide = true;
+  textValue = 'Thomas Shelby';
   model: any;
   date: {day: number, year: number, month: string};
   faCalendarAlt = faCalendarAlt;
@@ -74,7 +85,7 @@ export class AddRegistrationComponent implements OnInit {
   selectedOwnership: any;
   selectedDocumentType = 'Personal details';
   selectedKycDocuments = 'Pancard';
-  firstName = ''; 
+  firstName = 'Rohan'; 
   middleName = ''; 
   lastName = ''; 
   mobileNo = ''; 
@@ -212,6 +223,12 @@ export class AddRegistrationComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
+  close() {
+    this.autohide = false;
+    // setTimeout(() => this.autohide = true, 5000);
+  }
+  addCustomUser = (term) => ({id: term, name: term});
+
   constructor(private stepperFormService:StepperFormService) { }
 
   ngOnInit(): void {
@@ -223,7 +240,61 @@ export class AddRegistrationComponent implements OnInit {
   }
 
   testing(){
-    alert('e')
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        e.target // newly activated tab
+        $('a[data-toggle="tab"]').parent(".list-group-item").removeClass("active").removeClass("finished");
+      })
+      $('#applicant-dtls-tab').on('shown.bs.tab', function(e) {
+        e.target // newly activated tab               
+        $(this).parent(".list-group-item").addClass("active");
+      });
+      $('#applicant-pay-tab').on('shown.bs.tab', function(e) {
+        e.target // newly activated tab
+        // alert('working2'); 
+        $('#applicant-dtls-tab').parent(".list-group-item").removeClass("active").addClass("finished");        
+        $(this).parent(".list-group-item").addClass("active");
+      });
+      $('#applicant-addr-tab').on('shown.bs.tab', function(e) {
+        e.target // newly activated tab
+        // alert('working3');
+        $('#applicant-dtls-tab').parent(".list-group-item").removeClass("active").addClass("finished");   
+        $('#applicant-pay-tab').parent(".list-group-item").removeClass("active").addClass("finished"); 
+        $(this).parent(".list-group-item").addClass("active");
+      });
+      $('#kyc-doc-tab').on('shown.bs.tab', function(e) {
+        e.target // newly activated tab
+        // alert('working4');
+        $('#applicant-dtls-tab').parent(".list-group-item").removeClass("active").addClass("finished");   
+        $('#applicant-pay-tab').parent(".list-group-item").removeClass("active").addClass("finished");  
+        $('#applicant-addr-tab').parent(".list-group-item").removeClass("active").addClass("finished");  
+        $(this).parent(".list-group-item").addClass("active");
+      });
+      $('#rvw-sbmt-tab').on('shown.bs.tab', function(e) {
+        e.target // newly activated tab
+        // alert('working4');
+        $('#applicant-dtls-tab').parent(".list-group-item").removeClass("active").addClass("finished");   
+        $('#applicant-pay-tab').parent(".list-group-item").removeClass("active").addClass("finished");  
+        $('#applicant-addr-tab').parent(".list-group-item").removeClass("active").addClass("finished");  
+        $('#kyc-doc-tab').parent(".list-group-item").removeClass("active").addClass("finished");  
+        $(this).parent(".list-group-item").addClass("active");
+      });
+      $("#proceed_1").on('click', function(){
+        $('#applicant-pay-tab').trigger( "click" );
+      });
+      $("#proceed_2").on('click', function(){
+        $('#applicant-addr-tab').trigger( "click" );
+      });
+      $("#proceed_3").on('click', function(){
+        $('#kyc-doc-tab').trigger( "click" );
+      });
+      $("#proceed_4").on('click', function(){
+        $('#rvw-sbmt-tab').trigger( "click" );
+      });
+      $("#proceed_5").on('click', function(){
+        console.log("end-of-form");
+      });
   }
+
+
 
 }

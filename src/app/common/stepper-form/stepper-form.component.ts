@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, OnInit, Input } from '@angular/core'; 
 import { StepperFormService } from './stepper-form.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { StepperFormService } from './stepper-form.service';
 })
 export class StepperFormComponent implements OnInit {
 
+  @Input() operator
+
   constructor(private stepperFormService:StepperFormService) {
     this.stepperFormService.stepperFormEvent.subscribe(data =>{
       this.blocks = data
@@ -15,6 +17,7 @@ export class StepperFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.operator()
   }
 
   blocks = []
