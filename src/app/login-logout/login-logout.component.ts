@@ -9,10 +9,8 @@ import { CommonService } from '../common/common.service';
   styleUrls: ['./login-logout.component.scss']
 })
 export class LoginLogoutComponent implements OnInit {
-
   loginForm: FormGroup;
   submitted = false;
-
 
   public logindiv:boolean = true;
   login() {
@@ -77,6 +75,8 @@ export class LoginLogoutComponent implements OnInit {
     if (this.loginForm.invalid) {
         return;
     }
+    
+    // if form is valid then call the login API
     if(this.loginForm.valid){
       this.commonService.login(this.loginForm.value).subscribe(result =>{
         if(result.state === 'success'){
@@ -86,8 +86,6 @@ export class LoginLogoutComponent implements OnInit {
       err =>{
         alert('Provided credentials are wrong.')
       })
-    }else{
-      alert('please enter the details')
     }
   }
   ngOnInit(): void {
