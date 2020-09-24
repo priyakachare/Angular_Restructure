@@ -22,14 +22,18 @@ export class FilterComponent implements OnInit {
   filters = []
 
   selected:any;
+  searchText:string;
+  selectedPagination:any;
   date: {year: number, month: number};
   faCalendarAlt = faCalendarAlt;
 
-  selectedPagination:any;
-  pagination = [
-    {id: 1, name: '50'},
-    {id: 2, name: '100'},
-    {id: 3, name: '200'},
-  ];
+
+  keypress(){
+      this.filterService.sendSearchText(this.searchText)
+  }
+
+  recordsChange(){
+    this.filterService.sendPagination(this.selectedPagination)
+  }
 
 } 

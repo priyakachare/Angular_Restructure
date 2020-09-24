@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { FilterService } from '../../common/filter/filter.service';
 
 @Component({
   selector: 'app-registration-list',
@@ -18,7 +19,7 @@ export class RegistrationListComponent implements OnInit {
           registrationNo: "NSC1992425",
           status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
           mobileNo: "201-285-6456",
-          area: "Area 1",
+          area: "Kothrud",
           source: "Branch",
           createdOn: "19-Sep-2020",
           category:"PNG",
@@ -30,7 +31,7 @@ export class RegistrationListComponent implements OnInit {
           registrationNo: "NSC1992430",
           status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
           mobileNo: "596-285-3781",
-          area: "Area 9",
+          area: "Warje",
           source: "Branch",
           createdOn: "21-Sep-2020",
           category:"PNG",
@@ -42,7 +43,7 @@ export class RegistrationListComponent implements OnInit {
           registrationNo: "NSC1992431",
           status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
           mobileNo: "89-255-9846",
-          area: "Area 5",
+          area: "Pashan",
           source: "Mobile app",
           createdOn: "21-Sep-2020",
           category:"PNG",
@@ -54,7 +55,7 @@ export class RegistrationListComponent implements OnInit {
           registrationNo: "NSC1992432",
           status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
           mobileNo: "82-255-9846",
-          area: "Area 2",
+          area: "Shivajinagar",
           source: "Mobile app",
           createdOn: "22-Sep-2020",
           category:"PNG",
@@ -66,7 +67,7 @@ export class RegistrationListComponent implements OnInit {
           registrationNo: "NSC1992419",
           status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
           mobileNo: "88-285-7666",
-          area: "Area 1",
+          area: "Katraj",
           source: "Branch",
           createdOn: "19-Sep-2020",
           category:"PNG",
@@ -78,7 +79,7 @@ export class RegistrationListComponent implements OnInit {
           registrationNo: "NSC1992488",
           status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
           mobileNo: "87-853-2555",
-          area: "Area 9",
+          area: "Kothrud",
           source: "Branch",
           createdOn: "21-Sep-2020",
           category:"PNG",
@@ -90,7 +91,7 @@ export class RegistrationListComponent implements OnInit {
           registrationNo: "NSC1992487",
           status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
           mobileNo: "892-255-4545",
-          area: "Area 5",
+          area: "Warje",
           source: "Mobile app",
           createdOn: "21-Sep-2020",
           category:"PNG",
@@ -102,12 +103,13 @@ export class RegistrationListComponent implements OnInit {
           registrationNo: "NSC1992433",
           status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
           mobileNo: "77-255-3431",
-          area: "Area 2",
+          area: "Baner",
           source: "Mobile app",
           createdOn: "22-Sep-2020",
           category:"PNG",
           subCategory:"Individual", 
         },
+        
         
     ]
 
@@ -141,14 +143,21 @@ export class RegistrationListComponent implements OnInit {
         },
         {
             name:       "Action"
-        }
-        
+        }   
     ]
 
     
 
 
-    constructor() { }
+    constructor(private filterService : FilterService) {
+      this.filterService.getPagination().subscribe(data=>{
+        $('#table1').DataTable().page.len(data.number).draw()
+      })
+
+      this.filterService.getSearchText().subscribe(data=>{
+        $('#table1').DataTable().search(data.text).draw()
+      })
+    }
 
     ngOnInit(): void {
 

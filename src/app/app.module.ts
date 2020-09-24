@@ -42,6 +42,10 @@ import { RegistrationListComponent } from './registration/registration-list/regi
 import { LoginLogoutComponent } from './login-logout/login-logout.component';
 import { BreadcrumbComponent } from './common/header/breadcrumb/breadcrumb.component';
 import {HttpClientModule} from '@angular/common/http';
+import { TenantComponent } from './tenant/tenant.component';
+import { TenantSummaryComponent } from './tenant/tenant-summary/tenant-summary.component';
+import { TenantFilterComponent } from './tenant/tenant-filter/tenant-filter.component';
+import { TenantDatatableComponent } from './tenant/tenant-datatable/tenant-datatable.component';
 
 @NgModule({
   declarations: [
@@ -66,13 +70,18 @@ import {HttpClientModule} from '@angular/common/http';
     StepperFormComponent,
     RegistrationListComponent,
     LoginLogoutComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    TenantComponent,
+    TenantSummaryComponent,
+    TenantFilterComponent,
+    TenantDatatableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgSelectModule,
     DataTablesModule,
+    NgxDropzoneModule,
     NgxDaterangepickerMd.forRoot(),
     NgbModule,
     FontAwesomeModule,
