@@ -51,9 +51,12 @@ import { ScheduleComponent } from './meter-data/schedule/schedule.component';
 import { DispatchComponent } from './meter-data/dispatch/dispatch.component';
 import { ValidationComponent } from './meter-data/validation/validation.component';
 import { UploadComponent } from './meter-data/upload/upload.component';
-import { ScheduleDatatableComponent } from './meter-data/schedule/schedule-datatable/schedule-datatable.component';
-import { ScheduleFilterComponent } from './meter-data/schedule/schedule-filter/schedule-filter.component';
-import { ScheduleSummaryComponent } from './meter-data/schedule/schedule-summary/schedule-summary.component';
+import { ReadingComponent } from './meter-data/schedule/reading/reading.component';
+import { BillDistributionComponent } from './meter-data/schedule/bill-distribution/bill-distribution.component';
+import { NoticeComponent } from './meter-data/schedule/notice/notice.component';
+import { ReadingDatatableComponent } from './meter-data/schedule/reading/reading-datatable/reading-datatable.component';
+import { ReadingFilterComponent } from './meter-data/schedule/reading/reading-filter/reading-filter.component';
+import { ReadingSummaryComponent } from './meter-data/schedule/reading/reading-summary/reading-summary.component';
 
 @NgModule({
   declarations: [
@@ -88,9 +91,12 @@ import { ScheduleSummaryComponent } from './meter-data/schedule/schedule-summary
     DispatchComponent,
     ValidationComponent,
     UploadComponent,
-    ScheduleDatatableComponent,
-    ScheduleFilterComponent,
-    ScheduleSummaryComponent
+    ReadingComponent,
+    BillDistributionComponent,
+    NoticeComponent,
+    ReadingDatatableComponent,
+    ReadingFilterComponent,
+    ReadingSummaryComponent
   ],
   imports: [
     BrowserModule,
