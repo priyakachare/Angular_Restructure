@@ -56,7 +56,7 @@
                                     <label for="">Password</label>
                                     <input type="password" [(ngModel)]="pass" [type]="showpwd3 ? 'text' : 'password'" class="form-control form-pwd" placeholder="Password" id="login_pwd3" name="pass"
                                         formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
-                                    <label for="login_pwd3" (click)="showhidepwd3()"><span><i ngClass='{{showpwd3 ? "icons8-eye" : "icons8-hide"}}' class="icons8"></i></span></label>
+                                    <label class="pwd_ico" for="login_pwd3" (click)="showhidepwd3()"><span><i ngClass='{{showpwd3 ? "icons8-eye" : "icons8-hide"}}' class="icons8"></i></span></label>
                                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                         <div *ngIf="f.password.errors.required">Password is required</div>
                                         <div *ngIf="f.password.errors.minlength">Password must be at least 4 characters</div>
