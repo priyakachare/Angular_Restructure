@@ -42,6 +42,8 @@ import { RegistrationListComponent } from './registration/registration-list/regi
 import { LoginLogoutComponent } from './login-logout/login-logout.component';
 import { BreadcrumbComponent } from './common/header/breadcrumb/breadcrumb.component';
 import {HttpClientModule} from '@angular/common/http';
+import { RegistrationDetailViewComponent } from './registration/registration-detail-view/registration-detail-view.component';
+import { ToolsComponent } from './common/tools/tools.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import {HttpClientModule} from '@angular/common/http';
     StepperFormComponent,
     RegistrationListComponent,
     LoginLogoutComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    RegistrationDetailViewComponent,
+    ToolsComponent
   ],
   imports: [
     BrowserModule,
