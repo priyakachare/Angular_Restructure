@@ -6,6 +6,8 @@ import { HeaderComponent } from './common/header/header.component';
 import { AddRegistrationComponent } from './registration/add-registration/add-registration.component';
 import { LoginLogoutComponent } from './login-logout/login-logout.component';
 import { RegistrationDetailViewComponent } from './registration/registration-detail-view/registration-detail-view.component';
+import { TenantComponent } from './tenant/tenant.component';
+import { ScheduleComponent } from './meter-data/schedule/schedule.component';
 
 const routes: Routes = [
 	{ path: 'home', component: HeaderComponent },
@@ -13,7 +15,9 @@ const routes: Routes = [
 	{ path: 'registration/add-registration', component: AddRegistrationComponent },
 	{ path: 'registration/view', component: RegistrationDetailViewComponent },
 	{ path: 'consumerops/registration', component: RegistrationComponent },
-    { path: 'login', component: LoginLogoutComponent },
+	{ path: 'login', component: LoginLogoutComponent },
+	{ path: 'tenant', component: TenantComponent },
+	{ path: 'meter-data/schedule', component: ScheduleComponent },
 ]
 
 @NgModule({

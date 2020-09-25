@@ -44,6 +44,18 @@ import { BreadcrumbComponent } from './common/header/breadcrumb/breadcrumb.compo
 import {HttpClientModule} from '@angular/common/http';
 import { RegistrationDetailViewComponent } from './registration/registration-detail-view/registration-detail-view.component';
 import { ToolsComponent } from './common/tools/tools.component';
+import { TenantComponent } from './tenant/tenant.component';
+import { TenantSummaryComponent } from './tenant/tenant-summary/tenant-summary.component';
+import { TenantFilterComponent } from './tenant/tenant-filter/tenant-filter.component';
+import { TenantDatatableComponent } from './tenant/tenant-datatable/tenant-datatable.component';
+import { MeterDataComponent } from './meter-data/meter-data.component';
+import { ScheduleComponent } from './meter-data/schedule/schedule.component';
+import { DispatchComponent } from './meter-data/dispatch/dispatch.component';
+import { ValidationComponent } from './meter-data/validation/validation.component';
+import { UploadComponent } from './meter-data/upload/upload.component';
+import { ScheduleDatatableComponent } from './meter-data/schedule/schedule-datatable/schedule-datatable.component';
+import { ScheduleFilterComponent } from './meter-data/schedule/schedule-filter/schedule-filter.component';
+import { ScheduleSummaryComponent } from './meter-data/schedule/schedule-summary/schedule-summary.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +82,19 @@ import { ToolsComponent } from './common/tools/tools.component';
     LoginLogoutComponent,
     BreadcrumbComponent,
     RegistrationDetailViewComponent,
-    ToolsComponent
+    ToolsComponent,
+    TenantComponent,
+    TenantSummaryComponent,
+    TenantFilterComponent,
+    TenantDatatableComponent,
+    MeterDataComponent,
+    ScheduleComponent,
+    DispatchComponent,
+    ValidationComponent,
+    UploadComponent,
+    ScheduleDatatableComponent,
+    ScheduleFilterComponent,
+    ScheduleSummaryComponent
   ],
   imports: [
     BrowserModule,
