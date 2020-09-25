@@ -9973,6 +9973,22 @@ hr.dashed-br {
     }
   }
 }
+.singin-wrap .singin-form-wrap .inner-form .form-control.form-pwd + label.pwd_ico {
+  position: absolute;
+  top: 16px;
+  bottom: 0;
+  left: auto;
+  right: 36px;
+  z-index: 2;
+  span {
+    .icons8 {
+      font-size: 22px;
+    }
+  }
+}
+.singin-wrap .singin-form-wrap .inner-form label ~ label.pwd_ico {
+  top: 44px !important;
+}
 .singin-wrap .singin-form-wrap .sign-in-btn {
   display: block;
   min-width: 150px;
