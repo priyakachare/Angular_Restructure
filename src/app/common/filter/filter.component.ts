@@ -14,12 +14,16 @@ export class FilterComponent implements OnInit {
     this.filterService.filterEvent.subscribe(data=>{
       this.filters = data
     })
+    this.filterService.buttonEvent.subscribe(data=>{
+      this.button = data
+    })
   }
 
   ngOnInit(): void {
   }
 
   filters = []
+  button : any;
 
   selected:any;
   searchText:string;

@@ -42,6 +42,8 @@ import { RegistrationListComponent } from './registration/registration-list/regi
 import { LoginLogoutComponent } from './login-logout/login-logout.component';
 import { BreadcrumbComponent } from './common/header/breadcrumb/breadcrumb.component';
 import {HttpClientModule} from '@angular/common/http';
+import { RegistrationDetailViewComponent } from './registration/registration-detail-view/registration-detail-view.component';
+import { ToolsComponent } from './common/tools/tools.component';
 import { TenantComponent } from './tenant/tenant.component';
 import { TenantSummaryComponent } from './tenant/tenant-summary/tenant-summary.component';
 import { TenantFilterComponent } from './tenant/tenant-filter/tenant-filter.component';
@@ -82,6 +84,8 @@ import { ReadingSummaryComponent } from './meter-data/schedule/reading/reading-s
     RegistrationListComponent,
     LoginLogoutComponent,
     BreadcrumbComponent,
+    RegistrationDetailViewComponent,
+    ToolsComponent,
     TenantComponent,
     TenantSummaryComponent,
     TenantFilterComponent,
