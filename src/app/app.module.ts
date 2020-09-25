@@ -51,7 +51,7 @@ import { TenantDatatableComponent } from './tenant/tenant-datatable/tenant-datat
 import { MeterDataComponent } from './meter-data/meter-data.component';
 import { ScheduleComponent } from './meter-data/schedule/schedule.component';
 import { DispatchComponent } from './meter-data/dispatch/dispatch.component';
-import { ValidationComponent } from './meter-data/validation/validation.component';
+// import { ValidationComponent } from './meter-data/validation/validation.component';
 import { UploadComponent } from './meter-data/upload/upload.component';
 import { ReadingComponent } from './meter-data/schedule/reading/reading.component';
 import { BillDistributionComponent } from './meter-data/schedule/bill-distribution/bill-distribution.component';
@@ -93,7 +93,7 @@ import { ReadingSummaryComponent } from './meter-data/schedule/reading/reading-s
     MeterDataComponent,
     ScheduleComponent,
     DispatchComponent,
-    ValidationComponent,
+    // ValidationComponent,
     UploadComponent,
     ReadingComponent,
     BillDistributionComponent,
