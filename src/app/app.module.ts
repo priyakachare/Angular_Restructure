@@ -42,10 +42,23 @@ import { RegistrationListComponent } from './registration/registration-list/regi
 import { LoginLogoutComponent } from './login-logout/login-logout.component';
 import { BreadcrumbComponent } from './common/header/breadcrumb/breadcrumb.component';
 import {HttpClientModule} from '@angular/common/http';
+import { RegistrationDetailViewComponent } from './registration/registration-detail-view/registration-detail-view.component';
+import { ToolsComponent } from './common/tools/tools.component';
 import { TenantComponent } from './tenant/tenant.component';
 import { TenantSummaryComponent } from './tenant/tenant-summary/tenant-summary.component';
 import { TenantFilterComponent } from './tenant/tenant-filter/tenant-filter.component';
 import { TenantDatatableComponent } from './tenant/tenant-datatable/tenant-datatable.component';
+import { MeterDataComponent } from './meter-data/meter-data.component';
+import { ScheduleComponent } from './meter-data/schedule/schedule.component';
+import { DispatchComponent } from './meter-data/dispatch/dispatch.component';
+import { ValidationComponent } from './meter-data/validation/validation.component';
+import { UploadComponent } from './meter-data/upload/upload.component';
+import { ReadingComponent } from './meter-data/schedule/reading/reading.component';
+import { BillDistributionComponent } from './meter-data/schedule/bill-distribution/bill-distribution.component';
+import { NoticeComponent } from './meter-data/schedule/notice/notice.component';
+import { ReadingDatatableComponent } from './meter-data/schedule/reading/reading-datatable/reading-datatable.component';
+import { ReadingFilterComponent } from './meter-data/schedule/reading/reading-filter/reading-filter.component';
+import { ReadingSummaryComponent } from './meter-data/schedule/reading/reading-summary/reading-summary.component';
 
 @NgModule({
   declarations: [
@@ -71,10 +84,23 @@ import { TenantDatatableComponent } from './tenant/tenant-datatable/tenant-datat
     RegistrationListComponent,
     LoginLogoutComponent,
     BreadcrumbComponent,
+    RegistrationDetailViewComponent,
+    ToolsComponent,
     TenantComponent,
     TenantSummaryComponent,
     TenantFilterComponent,
-    TenantDatatableComponent
+    TenantDatatableComponent,
+    MeterDataComponent,
+    ScheduleComponent,
+    DispatchComponent,
+    ValidationComponent,
+    UploadComponent,
+    ReadingComponent,
+    BillDistributionComponent,
+    NoticeComponent,
+    ReadingDatatableComponent,
+    ReadingFilterComponent,
+    ReadingSummaryComponent
   ],
   imports: [
     BrowserModule,

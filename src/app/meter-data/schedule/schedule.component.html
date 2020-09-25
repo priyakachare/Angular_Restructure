@@ -1,0 +1,36 @@
+<section class="pr-section list-view-section">
+    <!-- For Showing Tabs -->
+    <div class="row">
+        <div class="col">
+            <div class="nav-block">
+                <nav class="inner-form-tabs main-page">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link st active" id="reading-tab" data-toggle="tab" href="#reading"
+                            role="tab" aria-controls="reading" aria-selected="true">Reading</a>
+                        <a class="nav-item nav-link st" id="bill-distribution-tab" data-toggle="tab" href="#bill-distribution" role="tab"
+                            aria-controls="bill-distribution" aria-selected="false">Bill Distribution</a>
+                        <a class="nav-item nav-link st" id="notice-tab" data-toggle="tab" href="#notice"
+                            role="tab" aria-controls="notice" aria-selected="true">Notice</a>                        
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- For Reading Detals -->
+    <div class="tab-pane fade show active" id="reading" role="tabpanel" aria-labelledby="reading-tab">
+        <app-reading-summary></app-reading-summary>
+        <app-reading-filter></app-reading-filter>
+        <app-reading-datatable></app-reading-datatable>
+    </div>
+
+    <!-- For Bill Distribution Details -->
+    <div class="tab-pane fade" id="bill-distribution" role="tabpanel" aria-labelledby="bill-distribution-tab">
+
+    </div>
+
+    <!-- For Notice Details -->
+    <div class="tab-pane fade" id="notice" role="tabpanel" aria-labelledby="notice-tab">
+
+    </div>
+</section>

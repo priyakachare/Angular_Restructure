@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col">
+        <div class="listview-table-wrap">
+          <label class="p p-12">Showing Last 6 month records</label>
+          <br>
+          <table datatable id="table1" [dtOptions]="dtOptions" class="pr-datatable table table-hover">
+            <thead>
+              <tr>
+                  <th scope="col" *ngFor="let item of blocks">
+                    <span>{{item.name}}</span>
+                  </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of dataSet">
+                <td class="showOnHover">{{item.month}}
+                  <span class="show">
+                    <span class="enqry-no-blk">{{item.month}}</span>
+                    <span class="enqry-name-blk">{{item.name}}</span>
+                      <div class="enqry-sts-blk" [ngSwitch]="item.status">
+                          <div *ngSwitchCase="'confirmed'">
+                            <div class="badge badge-label-success">Confirmed</div>
+                          </div>
+                          <div *ngSwitchDefault="'warning'">
+                            <div class="badge badge-label-pending">Pending</div>
+                          </div>
+                          <div *ngSwitchCase="'rejected'">
+                            <div class="badge badge-label-rejected">Not Dispatch</div>
+                          </div>
+                          <div *ngSwitchCase="'unfinished'">
+                            <div class="badge badge-label-unfinished">In Progress</div>
+                          </div>
+                      </div>
+                      <div class="list-blk">
+                        <p><span>Old Alwal</span><span>Sub Area</span></p>
+                        <p><span>Venkatesh</span><span>Vendor</span></p>
+                        <p><span>Venkatesh.co</span><span>Agency</span></p>
+                      </div>
+                  </span>
+                </td>
+                <td>{{item.cycle}}</td>
+                <td>{{item.area}}</td>
+                <td>{{item.subarea}}</td>
+                <td>
+                  <div [ngSwitch]="item.status">
+                    <div *ngSwitchCase="'success'">
+                        <div class="badge badge-label-finished">Contract</div>
+                    </div>
+                    <div *ngSwitchDefault="'warning'">
+                        <div class="badge badge-label-pending">New</div>
+                    </div>
+                    <div *ngSwitchCase="'rejected'">
+                        <div class="badge badge-label-rejected">Expire</div>
+                    </div>
+                    <div *ngSwitchCase="'unfinished'">
+                        <div class="badge badge-label-unfinished">Discontineud</div>
+                    </div>
+                  </div>
+                </td>
+                <td>{{item.type}}</td>
+                <td>{{item.consumers}}</td>
+                <td>{{item.start_date| date : 'dd MMM yy'}}</td>
+                <td>{{item.end_date| date : 'dd MMM yy'}}</td>
+                <td class="action">
+                  <ul class="list-group list-group-horizontal action-list">
+                    <li class="list-group-item st" (click)="view_schedule(item.id)" ngbTooltip="View" [openDelay]="200" [closeDelay]="200">
+                        <i class="icons8 icons8-eye"></i>
+                    </li>
+                    <li class="list-group-item st" data-toggle="modal" data-target="#addSchedule" tooltipClass="pr-tooltip" placement="top" ngbTooltip="Edit" [openDelay]="300" [closeDelay]="500">
+                        <fa-icon [icon]="faPen" ></fa-icon>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>

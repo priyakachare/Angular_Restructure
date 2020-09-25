@@ -14,10 +14,20 @@ export class RegistrationFiltersComponent implements OnInit {
 
   ngOnInit(): void {
   	this.sendFiltersData()
+    this.sendButtonData()
   }
 
   sendFiltersData(){
     this.filterService.filterEvent.emit(this.filters);
+  }
+
+  sendButtonData(){
+    this.filterService.buttonEvent.emit(this.button);
+  }
+
+  button = {
+    name : 'Register',
+    routerLink : '/registration/add-registration'
   }
 
   filters = [
