@@ -10,7 +10,7 @@ export class PaymentDetailsComponent implements OnInit {
   @Input() data1;
   @Input() data2;
 
-  static = {}
+  static : any;
 
   paymentData = []
 
