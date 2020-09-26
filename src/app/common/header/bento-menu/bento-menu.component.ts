@@ -57,7 +57,20 @@ export class BentoMenuComponent implements OnInit {
     this.getData.newItemEvent.emit(val);
   }
 
+  modules = [];
+  sub_modules = [];
   ngOnInit(): void {
+    this.getData.checkRolePrivilege().subscribe(result=>{
+      for(let role of result.data.roles ){              
+        console.log('Role => '+role.role)
+        for(let module of role.modules.module){
+        this.modules.push(module.name)
+          for(let sub_module of module.sub_module){
+            this.sub_modules.push(sub_module.name)            
+          }                
+        }
+      }   
+    })
     $(document).ready(function(){
       $(document).on('click', '.bento-dropdown .dropdown-menu', function(e){ 
         e.stopPropagation(); 
