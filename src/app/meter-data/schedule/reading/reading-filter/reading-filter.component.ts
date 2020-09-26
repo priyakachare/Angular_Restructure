@@ -11,11 +11,21 @@ export class ReadingFilterComponent implements OnInit {
   constructor(private filterService : FilterService) { }
 
   ngOnInit(): void {
-  	this.sendFiltersData()
+    this.sendFiltersData()
+    this.sendButtonData()
   }
 
   sendFiltersData(){
     this.filterService.filterEvent.emit(this.filters);
+  }
+
+  sendButtonData(){
+    this.filterService.buttonEvent.emit(this.button);
+  }
+
+  button = {
+    name : 'SCHEDULE',
+    routerLink : '/registration/add-registration'
   }
 
   filters = [

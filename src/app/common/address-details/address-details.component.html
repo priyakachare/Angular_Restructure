@@ -1,0 +1,22 @@
+<div class="block-body">
+    <div class="row">
+        <div class="col-4 pr-1">
+            <div class="applicant-data">
+                <div class="address-blk" *ngFor="let item of address">
+                    <button class="btn bttn-sm bttn-white rounded bttn-billing st">{{item.heading}}</button>
+                    <ul class="list-unstyled address-list">
+                        <li>{{item.address}}</li>
+                    </ul>
+                    <a class="btn bttn-txt text-primary" href="#"><fa-icon [icon]="faMapMarkerAlt"></fa-icon>View on Map</a>    
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="applicant-data">
+                <div class="map-wrap">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.3651682590316!2d73.73074071491483!3d19.951139486591934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddecb29e50c0df%3A0x2a54768d77a5bfd3!2sPrismic%20Reflections%C2%AE!5e0!3m2!1sen!2sin!4v1590572082050!5m2!1sen!2sin" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
