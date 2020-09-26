@@ -23,7 +23,7 @@
           <div class="pr-side-inner-navbar" *ngFor="let nav of meterData.data" >
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" [ngClass]="{'active': nav.id == 1}" [routerLink]="['nav.link']">{{nav.navData}}</a>                
+                <a class="nav-link active" [ngClass]="{'active': nav.id == 1}" [routerLink]="[nav.link]">{{nav.navData}}</a>                
               </li>
             </ul>
           </div>

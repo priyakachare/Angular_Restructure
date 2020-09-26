@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { Router } from "@angular/router";
@@ -9,10 +10,8 @@ import { CommonService } from '../common/common.service';
   styleUrls: ['./login-logout.component.scss']
 })
 export class LoginLogoutComponent implements OnInit {
-
   loginForm: FormGroup;
   submitted = false;
-
 
   public logindiv:boolean = true;
   login() {
@@ -70,6 +69,9 @@ export class LoginLogoutComponent implements OnInit {
 
   get f() { return this.loginForm.controls; }
 
+  matchingVal;
+  id_string;
+  roll_privilages;
   loginProcess(){
     this.submitted = true;
 
@@ -77,17 +79,39 @@ export class LoginLogoutComponent implements OnInit {
     if (this.loginForm.invalid) {
         return;
     }
+
+    // if form is valid then call the login API
     if(this.loginForm.valid){
       this.commonService.login(this.loginForm.value).subscribe(result =>{
-        if(result.state === 'success'){
-          this.router.navigate(['/consumerops/registration']);
+        if(result.state === 'success'){  
+
+          // If login API run successfully then check Role & Privilege
+          this.commonService.checkRolePrivilege(result.token,result.id_string).subscribe(result=>{
+            for(let role of result.data.roles ){              
+              console.log('Role => '+role.role)
+              for(let module of role.modules.module){
+                console.log('Module  => '+module.name)
+                for(let sub_module of module.sub_module){
+                  console.log('Sub Module => '+sub_module.name)
+                  for(let privilege of sub_module.privilege){
+                    console.log('privilege => '+privilege.name)
+                  }
+                }                
+              }
+            }              
+          })
+
+          // Fetching UserDetail      
+          this.commonService.getUserDetails(result.token,result.id_string).subscribe(resp => {
+            if(resp.state === 'success'){
+              console.log('User Details =>'+resp.results.email + "  "+resp.results.created_date)
+              }            
+            });        
         }
       },
       err =>{
         alert('Provided credentials are wrong.')
       })
-    }else{
-      alert('please enter the details')
     }
   }
   ngOnInit(): void {

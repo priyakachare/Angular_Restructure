@@ -138,7 +138,7 @@ export class SideNavComponent implements OnInit {
   
 
    meterData = {title:'Meter Data' ,data :[
-    {id:1,navData:'Schedule',link:'#'},{id:2,navData:'Dispatch',link:'#'},{navData:'Validation',link:'#'},
+    {id:1,navData:'Schedule',link:'meter-data/schedule'},{id:2,navData:'Dispatch',link:'#'},{navData:'Validation',link:'#'},
     {navData:'Upload',link:'#'},{navData:'Smart Meter Data',link:'#'}
   ]};
 
@@ -146,7 +146,7 @@ export class SideNavComponent implements OnInit {
     this.getData.sideNavId.emit(id)  
 
     this.meterData ={title:'Meter Data' ,data :[
-      {id:1,navData:'Schedule',link:'#'},{id:2,navData:'Dispatch',link:'#'},{navData:'Validation',link:'#'},
+      {id:1,navData:'Schedule',link:'meter-data/schedule'},{id:2,navData:'Dispatch',link:'#'},{navData:'Validation',link:'#'},
       {navData:'Upload',link:'#'},{navData:'Smart Meter Data',link:'#'}
     ]};
 
