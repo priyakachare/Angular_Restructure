@@ -56,6 +56,11 @@ import { UploadComponent } from './meter-data/upload/upload.component';
 import { ScheduleDatatableComponent } from './meter-data/schedule/schedule-datatable/schedule-datatable.component';
 import { ScheduleFilterComponent } from './meter-data/schedule/schedule-filter/schedule-filter.component';
 import { ScheduleSummaryComponent } from './meter-data/schedule/schedule-summary/schedule-summary.component';
+import { AddressDetailsComponent } from './common/address-details/address-details.component';
+import { KycDetailsComponent } from './common/kyc-details/kyc-details.component';
+import { PaymentDetailsComponent } from './common/payment-details/payment-details.component';
+import { NoteDetailsComponent } from './common/note-details/note-details.component';
+import { TimelineDetailsComponent } from './common/timeline-details/timeline-details.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +99,12 @@ import { ScheduleSummaryComponent } from './meter-data/schedule/schedule-summary
     UploadComponent,
     ScheduleDatatableComponent,
     ScheduleFilterComponent,
-    ScheduleSummaryComponent
+    ScheduleSummaryComponent,
+    AddressDetailsComponent,
+    KycDetailsComponent,
+    PaymentDetailsComponent,
+    NoteDetailsComponent,
+    TimelineDetailsComponent
   ],
   imports: [
     BrowserModule,
