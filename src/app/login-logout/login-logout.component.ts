@@ -85,20 +85,12 @@ export class LoginLogoutComponent implements OnInit {
       this.commonService.login(this.loginForm.value).subscribe(result =>{
         if(result.state === 'success'){  
 
-          // If login API run successfully then check Role & Privilege
-          this.commonService.checkRolePrivilege(result.token,result.id_string).subscribe(result=>{
-            for(let role of result.data.roles ){              
-              console.log('Role => '+role.role)
-              for(let module of role.modules.module){
-                console.log('Module  => '+module.name)
-                for(let sub_module of module.sub_module){
-                  console.log('Sub Module => '+sub_module.name)
-                  for(let privilege of sub_module.privilege){
-                    console.log('privilege => '+privilege.name)
-                  }
-                }                
-              }
-            }              
+          //set token and id string in sessionStorage
+          sessionStorage.setItem("UserDetails",JSON.stringify({id_string:result.id_string, token:result.token}))
+
+          // If login API run successfully then check Role & Privilege  result.token,
+          this.commonService.checkRolePrivilege().subscribe(result=>{
+            this.router.navigateByUrl('/home');           
           })
 
           // Fetching UserDetail      

@@ -123,12 +123,7 @@
                 <div class="nav-block">
                     <nav class="inner-form-tabs">
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link st active" id="nav-addr-dtls-tab" data-toggle="tab" href="#nav-addr-dtls" role="tab" aria-controls="nav-addr-dtls" aria-selected="true">Address Detail</a>
-                            <a class="nav-item nav-link st" id="nav-kyc-tab" data-toggle="tab" href="#nav-kyc" role="tab" aria-controls="nav-kyc" aria-selected="false">KYC</a>
-                            <a class="nav-item nav-link st" id="nav-paymnt-tab" data-toggle="tab" href="#nav-paymnt"
-                            role="tab" aria-controls="nav-paymnt" aria-selected="true">Payment</a>
-                            <a class="nav-item nav-link st" id="nav-notes-tab" data-toggle="tab" href="#nav-notes" role="tab" aria-controls="nav-notes" aria-selected="false">Note</a>
-                            <a class="nav-item nav-link st" id="nav-timeline-tab" data-toggle="tab" href="#nav-timeline" role="tab" aria-controls="nav-timeline" aria-selected="false">Timeline</a>
+                            <a class="{{item.class}}" id="{{item.id}}" data-toggle="tab" href="{{item.href}}" role="tab" aria-controls="{{item.ariaControls}}" aria-selected="{{item.ariaSelected}}" *ngFor="let item of tabList">{{item.name}}</a>
                         </div>
                     </nav>
                 </div>
@@ -137,286 +132,31 @@
                     <div class="tab-content" >
                     	<!-- Tab panel for address details start -->
                     	<div class="tab-pane fade show active" id="nav-addr-dtls" role="tabpanel" aria-labelledby="nav-addr-dtls-tab">
-                            <div class="block-body">
-                                <div class="row">
-                                    <div class="col-4 pr-1">
-                                        <div class="applicant-data">
-                                            <div class="address-blk" *ngFor="let item of address">
-                                                <button class="btn bttn-sm bttn-white rounded bttn-billing st">{{item.heading}}</button>
-                                                <ul class="list-unstyled address-list">
-                                                    <li>{{item.address}}</li>
-                                                </ul>
-                                                <a class="btn bttn-txt text-primary" href="#"><fa-icon [icon]="faMapMarkerAlt"></fa-icon>View on Map</a>    
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="applicant-data">
-                                            <div class="map-wrap">
-                                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.3651682590316!2d73.73074071491483!3d19.951139486591934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddecb29e50c0df%3A0x2a54768d77a5bfd3!2sPrismic%20Reflections%C2%AE!5e0!3m2!1sen!2sin!4v1590572082050!5m2!1sen!2sin" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-address-details [data]="address"></app-address-details>
                         </div>
                         <!-- Tab panel for address detail end -->
 
                         <!-- Tab panel for KYC detail start -->
                         <div class="tab-pane fade" id="nav-kyc" role="tabpanel" aria-labelledby="nav-kyc-tab">
-                            <div class="applicant-data">
-                                <div class="upload-wrapper">
-                                    <div class="uploaded-items">
-                                        <ul class="list-group list-group-horizontal-sm">
-                                            <li class="list-group-item" *ngFor="let item of kycDocs">
-                                                <div class="thumbnail">
-                                                    <img class="st img-abs" src="{{item.doc}}" alt="img">
-                                                </div>
-                                                <p class="p p-12 file-name">{{item.name}}</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-kyc-details [data]="kycDocs"></app-kyc-details>
                         </div>
                         <!-- Tab panel for KYC detail end -->
 
                         <!-- Tab panel for Payment detail start -->
                         <div class="tab-pane fade" id="nav-paymnt" role="tabpanel" aria-labelledby="nav-paymnt-tab">
-                            <div class="block-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="applicant-data">
-                                            <div class="paymnt-blk">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div class="paymnt-list type-1">
-                                                            <ul class="list-group list-group-horizontal justify-content-start">
-                                                                <li class="list-group-item">
-                                                                    <p class="p text-primary">Registration fee</p>
-                                                                    <span>09 Jan 2020</span>              
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="paymnt-list type-2">
-                                                            <ul class="list-group list-group-horizontal justify-content-end">
-                                                                <li class="list-group-item">
-                                                                    <p class="p text-primary"><span class="icon"><img src="../../assets/images/icons/paid-icon.png" alt="img"></span>$ 3000.00</p>
-                                                                    <span>Amount Paid</span>               
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="paymnt-list type-3">
-                                                            <ul class="list-group list-group-horizontal justify-content-start">
-                                                                <li class="list-group-item">
-                                                                    <p class="p">Online</p>
-                                                                    <span>Payment Mode</span>
-                                                                </li>
-                                                                <li class="list-group-item">                  
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <p class="p">PUNB0035600</p>
-                                                                    <span>Transaction Number</span>                
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="paymnt-list type-4">
-                                                            <h4 class="h4 ttl">Payment Type</h4>
-                                                            <ul class="list-group list-group-horizontal justify-content-start">
-                                                                <li class="list-group-item">
-                                                                    <p class="p">Deposite</p>         
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <p class="p">$ 1500.00</p>            
-                                                                </li>
-                                                            </ul>
-                                                            <ul class="list-group list-group-horizontal justify-content-start">
-                                                                <li class="list-group-item">
-                                                                    <p class="p">Rental</p>         
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <p class="p">$ 1500.00</p>          
-                                                                </li>
-                                                            </ul>
-                                                            <ul class="list-group list-group-horizontal justify-content-start">
-                                                                <li class="list-group-item">
-                                                                    <p class="p">Processing fee</p>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <p class="p">$ 1500.00</p>                    
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-payment-details [data1]="static" [data2]="paymentData"></app-payment-details>
                         </div>
                         <!-- Tab panel for Payment detail end -->
 
                         <!-- Tab panel for Note detail start -->
                         <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">
-                            <div class="block-body inner-form">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="applicant-data">
-                                            <div class="row justify-content-end">
-                                                <div class="col-auto pl-0">
-                                                    <button class="btn btn-secondary st" (click)="toggle()"><fa-icon [icon]="faPlus"></fa-icon>Add Note</button>
-                                                </div>
-                                            </div>        
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <ng-container *ngIf="show">
-                                                        <div class="add-notes-wrap">
-                                                            <p class="p p-13">Notes</p>
-                                                            <div class="add-notes-card">
-                                                                <div class="txt-area">
-                                                                    <textarea class="form-control add-notes-textarea" name="" rows="10" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ait enim se, si uratur, Quam hoc suave! dicturum. Vitiosum est enim in dividendo partem in genere numerare. Summus">
-                                                                    </textarea>
-                                                                </div>
-                                                                <div class="body">
-                                                                    <div class="row">
-                                                                        <div class="col">
-                                                                            <div class="color-radio-wrap">
-                                                                                <div class="btn-group" data-toggle="buttons">
-                                                                                    <label class="btn colr1 color-radio-btn radio-btn-round active">
-                                                                                        <input type="radio" name="note-options" id="option1" autocomplete="off" checked>
-                                                                                        <span class="tick st"></span>
-                                                                                    </label>
-                                                                                    <label class="btn colr2 color-radio-btn radio-btn-round">
-                                                                                        <input type="radio" name="note-options" id="option2" autocomplete="off">
-                                                                                            <span class="tick st"></span>
-                                                                                    </label>  
-                                                                                    <label class="btn colr3 color-radio-btn radio-btn-round">
-                                                                                        <input type="radio" name="note-options" id="option3" autocomplete="off">
-                                                                                        <span class="tick st"></span>
-                                                                                    </label>                
-                                                                                    <label class="btn colr4 color-radio-btn radio-btn-round">
-                                                                                        <input type="radio" name="note-options" id="option4" autocomplete="off">
-                                                                                        <span class="tick st"></span>
-                                                                                    </label>                
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-auto pl-1">
-                                                                            <button class="btn btn-outline-light3 st" (click)="toggle()">Cancel</button>
-                                                                        </div>
-                                                                        <div class="col-auto pl-1">
-                                                                            <button class="btn btn-secondary st" (click)="toggle()">Add Note</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </ng-container>
-                                                    <ng-container *ngIf="!show">
-                                                        <div class="notes-card-wrap">
-                                                            <ul class="list-group list-group-horizontal notes-card-list">
-                                                                <li class="list-group-item">
-                                                                    <div class="notes-card colr1">
-                                                                        <div class="header">
-                                                                            <a class="print-doc"><fa-icon [icon]="faPrint"></fa-icon></a>
-                                                                            <div class="dropdown dot-option-dropdown">
-                                                                                <a class="dot-btn-v st" (click)="toggle()" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="body">
-                                                                            <h5 class="ttl">Payment Cash</h5>
-                                                                            <p class="p p-12 txt">Payment in cash will be accepted at Water Plant, Road No.2, R.T.C Colony (Land mark: Opp to IOCL Petrol Bunk)</p>
-                                                                            <ul class="list-group list-group-horizontal notes-card-body-list">
-                                                                                <li class="list-group-item"><p class="p p-12">16-09-2019 to 18-09-2019</p></li>
-                                                                                <li class="list-group-item"><p class="p p-12">10:00AM &amp; 2:30PM only</p></li>
-                                                                            </ul>
-                                                                            <div class="user-blk media">
-                                                                                <div class="img-blk">
-                                                                                    <img class="img-abs st" src="../../assets/images/john-doe.png" alt="John Doe">
-                                                                                </div>
-                                                                                <div class="media-body">
-                                                                                    <span class="p nm">John Doe</span>
-                                                                                    <span class="p dt">09 Jan 2020</span>
-                                                                                </div>     
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </ng-container>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-note-details [data]="notes"></app-note-details>
                         </div>
                         <!-- Tab panel for Note detail end -->
 
                         <!-- Tab panel for Timeline detail start -->
                         <div class="tab-pane fade" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
-                            <div class="block-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="applicant-data">
-                                            <div class="timeline-wrap">
-                                                <div class="media timeline-blk">
-                                                    <button class="btn bttn-sm bttn-grey rounded bttn-billing st">MAR 18</button>
-                                                    <div class="media-body">
-                                                        <h4 class="ttl">Registration Approve</h4>
-                                                        <p class="p p-12 time">3:34pm</p>
-                                                        <p class="p p-13 content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliter enim explicari, quod quaeritur,</p>
-                                                    </div>
-                                                </div>
-                                                <div class="media timeline-blk">
-                                                    <button class="btn bttn-sm bttn-grey rounded bttn-billing st">MAR 20</button>
-                                                    <div class="media-body">
-                                                        <h4 class="ttl">Registration Hold</h4>
-                                                        <p class="p p-12 time">3:34pm</p>
-                                                        <p class="p p-13 content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliter enim explicari, quod quaeritur,</p>
-                                                    </div>
-                                                </div>
-                                                <div class="media timeline-blk">
-                                                    <button class="btn bttn-sm bttn-grey rounded bttn-billing st">MAR 21</button>
-                                                    <div class="media-body">
-                                                        <h4 class="ttl">Registration Rejected</h4>
-                                                        <p class="p p-12 time">3:34pm</p>
-                                                        <p class="p p-13 content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliter enim explicari, quod quaeritur,</p>
-                                                    </div>
-                                                </div>
-                                                <div class="media timeline-blk">
-                                                    <button class="btn bttn-sm bttn-grey rounded bttn-billing st">MAR 22</button>
-                                                    <div class="media-body">
-                                                        <h4 class="ttl">Registration Rejected</h4>
-                                                        <p class="p p-12 time">3:34pm</p>
-                                                        <p class="p p-13 content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliter enim explicari, quod quaeritur,</p>
-                                                    </div>
-                                                </div>
-                                                <div class="media timeline-blk">
-                                                    <button class="btn bttn-sm bttn-grey rounded bttn-billing st">MAR 22</button>
-                                                    <div class="media-body">
-                                                        <h4 class="ttl">Registration Approve</h4>
-                                                        <p class="p p-12 time">3:34pm</p>
-                                                        <p class="p p-13 content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliter enim explicari, quod quaeritur,</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-timeline-details [data]="timeLine"></app-timeline-details>
                         </div>
                         <!-- Tab panel for Timeline detail end -->
                     </div>

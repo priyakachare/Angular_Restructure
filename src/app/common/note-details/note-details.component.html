@@ -1,0 +1,93 @@
+<div class="block-body inner-form">
+    <div class="row">
+        <div class="col">
+            <div class="applicant-data">
+                <div class="row justify-content-end">
+                    <div class="col-auto pl-0">
+                        <button class="btn btn-secondary st" (click)="toggle()"><fa-icon [icon]="faPlus"></fa-icon>Add Note</button>
+                    </div>
+                </div>        
+                <div class="row">
+                    <div class="col-12">
+                        <ng-container *ngIf="show">
+                            <div class="add-notes-wrap">
+                                <p class="p p-13">Notes</p>
+                                <div class="add-notes-card">
+                                    <div class="txt-area">
+                                        <textarea class="form-control add-notes-textarea" name="" rows="10" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ait enim se, si uratur, Quam hoc suave! dicturum. Vitiosum est enim in dividendo partem in genere numerare. Summus">
+                                        </textarea>
+                                    </div>
+                                    <div class="body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="color-radio-wrap">
+                                                    <div class="btn-group" data-toggle="buttons">
+                                                        <label class="btn colr1 color-radio-btn radio-btn-round active">
+                                                            <input type="radio" name="note-options" id="option1" autocomplete="off" checked>
+                                                            <span class="tick st"></span>
+                                                        </label>
+                                                        <label class="btn colr2 color-radio-btn radio-btn-round">
+                                                            <input type="radio" name="note-options" id="option2" autocomplete="off">
+                                                                <span class="tick st"></span>
+                                                        </label>  
+                                                        <label class="btn colr3 color-radio-btn radio-btn-round">
+                                                            <input type="radio" name="note-options" id="option3" autocomplete="off">
+                                                            <span class="tick st"></span>
+                                                        </label>                
+                                                        <label class="btn colr4 color-radio-btn radio-btn-round">
+                                                            <input type="radio" name="note-options" id="option4" autocomplete="off">
+                                                            <span class="tick st"></span>
+                                                        </label>                
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto pl-1">
+                                                <button class="btn btn-outline-light3 st" (click)="toggle()">Cancel</button>
+                                            </div>
+                                            <div class="col-auto pl-1">
+                                                <button class="btn btn-secondary st" (click)="toggle()">Add Note</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="!show">
+                            <div class="notes-card-wrap">
+                                <ul class="list-group list-group-horizontal notes-card-list">
+                                    <li class="list-group-item" *ngFor="let item of notes">
+                                        <div class="notes-card colr1">
+                                            <div class="header">
+                                                <a class="print-doc"><fa-icon [icon]="faPrint"></fa-icon></a>
+                                                <div class="dropdown dot-option-dropdown">
+                                                    <a class="dot-btn-v st" (click)="toggle()" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                                                </div>
+                                            </div>
+                                            <div class="body">
+                                                <h5 class="ttl">{{item.title}}</h5>
+                                                <p class="p p-12 txt">{{item.text}}</p>
+                                                <ul class="list-group list-group-horizontal notes-card-body-list">
+                                                    <li class="list-group-item"><p class="p p-12">{{item.dateRange}}</p></li>
+                                                    <li class="list-group-item"><p class="p p-12">{{item.time}}</p></li>
+                                                </ul>
+                                                <div class="user-blk media">
+                                                    <div class="img-blk">
+                                                        <img class="img-abs st" src="../../assets/images/john-doe.png" alt="John Doe">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <span class="p nm">{{item.user}}</span>
+                                                        <span class="p dt">{{item.date}}</span>
+                                                    </div>     
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
