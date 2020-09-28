@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-common',
+  selector: 'smart360-common',
   templateUrl: './common.component.html',
   styleUrls: ['./common.component.scss']
 })

@@ -8,9 +8,10 @@ import { LoginLogoutComponent } from './login-logout/login-logout.component';
 import { RegistrationDetailViewComponent } from './registration/registration-detail-view/registration-detail-view.component';
 import { TenantComponent } from './tenant/tenant.component';
 import { ScheduleComponent } from './meter-data/schedule/schedule.component';
+import { CommonComponent } from './common/common.component';
 
 const routes: Routes = [
-	{ path: 'home', component: HeaderComponent },
+	{ path: 'home', component: CommonComponent },
 	{ path: 'consumerops/registration', component: RegistrationComponent },
 	{ path: 'registration/add-registration', component: AddRegistrationComponent },
 	{ path: 'registration/view', component: RegistrationDetailViewComponent },
