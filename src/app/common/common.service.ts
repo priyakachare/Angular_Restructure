@@ -9,7 +9,7 @@ import { baseUrl } from 'src/environments/environment';
 export class CommonService {
 
   @Output() newItemEvent = new EventEmitter<string>();
-
+  @Output() moduleName = new EventEmitter<string>();
   @Output() sideNavId = new EventEmitter<string>();
 
   constructor(private http:HttpClient) {
@@ -20,12 +20,20 @@ export class CommonService {
      return this.http.post(baseUrl+'user/login/',data)
    }
 
+   token;
+   id_string;
    // API for checking Role & Privileges
-   checkRolePrivilege(token,id_string):Observable<any>{
+   checkRolePrivilege():Observable<any>{
+   
+   //get value of token and id string from sessionStorage
+   var userDetail = JSON.parse(sessionStorage.getItem("UserDetails"))   
+   this.token = userDetail.token
+   this.id_string = userDetail.id_string
+
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': token})
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
     };
-    return this.http.get(baseUrl+'user/'+id_string+'/role/',httpOptions)
+    return this.http.get(baseUrl+'user/'+this.id_string+'/role/',httpOptions)
   }
 
   // API for getting Single User Details
