@@ -10,7 +10,7 @@
               <ngx-simplebar [options]="menuScrollOptions" class="bento-dropdown-lt-scroll">                
                 <div class="row" >
                   <div class="col-sm-4" *ngFor="let module of module_list">
-                    <div class="{{module.listClass}}" (mouseover)="mouseHovered(module.id)" (click)="selectModuleId(module.id)">
+                    <div class="{{module.listClass}}" (mouseover)="mouseHovered(module.id)" (click)="selectModuleId(module.id,module.module)">
                       <div class="img-blk align-self-center">
                         <img src="{{module.img}}" alt="img">
                       </div>                        

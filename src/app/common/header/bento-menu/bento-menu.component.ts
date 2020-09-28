@@ -32,7 +32,7 @@ export class BentoMenuComponent implements OnInit {
   imgpath ="../../../assets/images/";
 
   modulesList = { data: [
-    {id: 1, module : 'Sales & Marketing',listClass:'media bento-menu-blk',img : this.path +'bento-menu-1.png',img1: this.imgpath +'bento-menu-bg-1.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
+    {id: 1, module : 'S&M',listClass:'media bento-menu-blk',img : this.path +'bento-menu-1.png',img1: this.imgpath +'bento-menu-bg-1.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Sales & Marketing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
     {id: 2 ,module : 'Consumer Care',listClass:'media bento-menu-blk',img : this.path +'bento-menu-2.png',img1: this.imgpath +'bento-menu-bg-2.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Consumer Care Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
     {id: 3, module : 'Consumer Ops',listClass:'media bento-menu-blk',img : this.path +'bento-menu-3.png',img1: this.imgpath +'bento-menu-bg-1.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Consumer Ops Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
     {id: 4, module : 'Gas Management',listClass:'media bento-menu-blk',img : this.path +'bento-menu-4.png',img1: this.imgpath +'bento-menu-bg-3.png',short_desc : 'Lorem ipsum dolor sit amet',long_desc: 'Gas Management Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae cum dixisset, finem ille. At ille pellit, qui permulcet sensum voluptate. Minime vero istorum quidem, inquit. Indicant '},
@@ -53,8 +53,9 @@ export class BentoMenuComponent implements OnInit {
   constructor(private getData:CommonService) { }
 
   //Set Module Id in Common Service EventEmitter
-  selectModuleId(val){
+  selectModuleId(val,module){
     this.getData.newItemEvent.emit(val);
+    this.getData.moduleName.emit(module);
   }
 
   modules:any = [];
@@ -62,15 +63,14 @@ export class BentoMenuComponent implements OnInit {
   module_list:any = [];
   val:any = [];
   ngOnInit(): void {
+
+    // According to Role and Privilege display Bento menu options
     this.getData.checkRolePrivilege().subscribe(result=>{
       for(let role of result.data.roles ){              
         for(let module of role.modules.module){
           this.modules.push({"name":module.name})
-          this.val = this.modulesList.data.filter(o1 => this.modules.some(o2 => o1.module === o2.name));           
         }
-        for(let module_val of this.val){
-          this.module_list.push(this.modulesList.data.find(item => item.module === module_val.module)); 
-        }
+        this.module_list = this.modulesList.data.filter(o1 => this.modules.some(o2 => o1.module === o2.name));           
       }   
     })
     $(document).ready(function(){

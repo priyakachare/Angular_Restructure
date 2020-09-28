@@ -9,7 +9,7 @@ import { baseUrl } from 'src/environments/environment';
 export class CommonService {
 
   @Output() newItemEvent = new EventEmitter<string>();
-
+  @Output() moduleName = new EventEmitter<string>();
   @Output() sideNavId = new EventEmitter<string>();
 
   constructor(private http:HttpClient) {

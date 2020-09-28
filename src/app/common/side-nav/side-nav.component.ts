@@ -14,130 +14,60 @@ export class SideNavComponent implements OnInit {
   moduleId;
   settingSnm;
   showPopUpFlag:boolean=false;
+  commonVal;
+  finalList;
+  constructor(private getData:CommonService) {     
+    this.getData.moduleName.subscribe(module=>{
+      this.commonVal = this.subModuleList.filter(obj=>obj.module===module);
+      this.finalList = this.commonVal.filter(o1 => this.module_subModule.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module))); 
+    });    
+  }  
 
-  constructor(private getData:CommonService) { 
-    this.navList = [
-      {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},
-      {id:2, module : 'Campaign',icon:'icons8 icons8-megaphone',link:'#',ngbPopover:"Campaign"},
-      {id:3, module : 'Survey',icon:'icons8 icons8-flow-chart',link:"#",ngbPopover:"Survey"},
-      {id:4, module : 'Registration',icon:'icons8 icons8-shared-document',link:'consumerops/registration',ngbPopover:"Registration"},
-      {id:5, module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers"},
-      {id:6, module : 'Reports',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"Reports"},
-      {id:7, module : 'Users',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Users"},
-      {id:8, module : 'Settings',icon:'icons8 icons8-settings',ngbPopover:"Settings"}
-    ];
+  subModuleList =[
+    {id:1,module:'Admin', sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"DashboardAdmin"},
+    {id:2,module:'Admin', sub_module : 'Utility Master',icon:'icons8 icons8-brief',link:'#',ngbPopover:"Utility Master"}, 
+    {id:3,module:'Admin', sub_module : 'System Configuration',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"System Configuration"},         
+    {id:1,module:'Consumer Care', sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard Consumer"},
+    {id:2,module:'Consumer Care', sub_module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers"},
+    {id:1,module:'S&M', sub_module : 'Registrations',icon:'icons8 icons8-shared-document',link:'#',ngbPopover:"Registration"},
+    {id:2,module:'Consumer Ops',sub_module : 'Survey',icon:'icons8 icons8-shared-document',link:'#',ngbPopover:"Survey"},
+  ]
 
-    this.getData.newItemEvent.subscribe(data =>{
-      this.moduleId = data
-      if(data == 1){
-        this.navList = [
-          {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},
-          {id:2, module : 'Campaign',icon:'icons8 icons8-megaphone',link:'#',ngbPopover:"Campaign"},
-          {id:3, module : 'Survey',icon:'icons8 icons8-flow-chart',link:'#',ngbPopover:"Survey"},
-          {id:4, module : 'Registration',icon:'icons8 icons8-shared-document',link:'consumerops/registration',ngbPopover:"Registration"},
-          {id:5, module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers"},
-          {id:6, module : 'Reports',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"Reports"},
-          {id:7, module : 'Users',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Users"},
-          {id:8, module : 'Settings',icon:'icons8 icons8-settings',link:'#',ngbPopover:"Settings"}
-        ];
-      }
-      else if(data == 2){
-        this.navList = [
-          {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},
-          {id:2, module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers"},
-          {id:3, module : 'Registration',icon:'icons8 icons8-shared-document',link:'consumerops/registration',ngbPopover:"Registration"},          
-          {id:4, module : 'Reports',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"Reports"},
-          {id:5, module : 'Users',icon:'icons8 icons8-user',link:'#',ngbPopover:"Users"},
-          {id:6, module : 'Settings',icon:'icons8 icons8-settings',link:'#',ngbPopover:"Settings"}
-        ];
-      }
-      else if(data == 3){
-        this.navList = [
-          {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},          
-          {id:2, module : 'Registration',icon:'icons8 icons8-shared-document',link:'#',ngbPopover:"Registration"},
-          {id:3, module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers"},   
-          {id:4, module : 'Meter Data',icon:'icons8 icons8-conflict',ngbPopover:"Meter Data"},
-          {id:5, module : 'Billing',icon:'icons8 icons8-paycheque',link:'#',ngbPopover:"Billing"},
-          {id:6, module : 'Payment',icon:'icons8 icons8-document',link:'#',ngbPopover:"Payment"},  
-          {id:7, module : 'Service',icon:'icons8 icons8-paycheque',link:'#',ngbPopover:"Service"},
-          {id:8, module : 'Complaint',icon:'icons8 icons8-document',link:'#',ngbPopover:"Complaint"},        
-          {id:9, module : 'Reports',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"Reports"},
-          {id:10, module : 'Users',icon:'icons8 icons8-user',link:'#',ngbPopover:"Users"},
-          {id:11, module : 'Settings',icon:'icons8 icons8-settings',link:'#',ngbPopover:"Settings"}
-        ];
-      }
-      else if(data == 4){
-        this.navList = [
-          {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},          
-          {id:2, module : 'Contracts',icon:'icons8 icons8-shared-document',link:'#',ngbPopover:"Contracts"},
-          {id:3, module : 'Supplier',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Supplier"},   
-          {id:4, module : 'Reports',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"Reports"},
-          {id:5, module : 'Users',icon:'icons8 icons8-user',link:'#',ngbPopover:"Users"},
-          {id:6, module : 'Settings',icon:'icons8 icons8-settings',link:'#',ngbPopover:"Settings"}
-        ];
-      }
-      else if(data == 5){
-        this.navList = [
-          {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},
-          {id:2, module : 'Dispatcher',icon:'icons8 icons8-submit-document',link:'#',ngbPopover:"Dispatcher"},             
-          {id:2, module : 'Assets',icon:'icons8 icons8-brief',link:'#',ngbPopover:"Assets"},   
-          {id:3, module : 'Reports',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"Reports"},
-          {id:4, module : 'Users',icon:'icons8 icons8-user',link:'#',ngbPopover:"Users"},
-          {id:5, module : 'Settings',icon:'icons8 icons8-settings',link:'#',ngbPopover:"Settings"}
-        ];
-      }
-      else if(data == 6){
-        this.navList = [
-          {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},          
-          {id:2, module : 'Assets',icon:'icons8 icons8-brief',link:'#',ngbPopover:"Assets"},   
-          {id:3, module : 'Reports',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"Reports"},
-          {id:4, module : 'Users',icon:'icons8 icons8-user',link:'#',ngbPopover:"Users"},
-          {id:5, module : 'Settings',icon:'icons8 icons8-settings',link:'#',ngbPopover:"Settings"}
-        ];
-      }
-      else if(data == 7){
-        this.navList = [
-          {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},          
-          {id:2, module : 'Request',icon:'icons8 icons8-estimate',link:'#',ngbPopover:"Request"},   
-          {id:3, module : 'Store',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"Store"},   
-          {id:4, module : 'Tenders',icon:'icons8 icons8-news',link:'#',ngbPopover:"Tenders"},   
-          {id:5, module : 'Product',icon:'icons8 icons8-document',link:'#',ngbPopover:"Product"},   
-          {id:6, module : 'Services',icon:'icons8 icons8-document',link:'#',ngbPopover:"Services"},
-          {id:7, module : 'Order',icon:'icons8 icons8-document',link:'#',ngbPopover:"Order"},   
-          {id:8, module : 'Contracts',icon:'icons8 icons8-document',link:'#',ngbPopover:"Contracts"},
-          {id:9, module : 'Supplier',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Supplier"},
-          {id:10, module : 'Reports',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"Reports"},
-          {id:11, module : 'Users',icon:'icons8 icons8-user',link:'#',ngbPopover:"Users"},
-          {id:12, module : 'Settings',icon:'icons8 icons8-settings',link:'#',ngbPopover:"Settings"}
-        ];
-      }
-      else if(data == 8){
-        this.navList = [
-          {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},          
-          {id:2, module : 'Reports',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"Reports"},
-          {id:3, module : 'Users',icon:'icons8 icons8-user',link:'#',ngbPopover:"Users"},
-          {id:4, module : 'Settings',icon:'icons8 icons8-settings',link:'#',ngbPopover:"Settings"}
-        ];
-      }
-      else if(data == 9){
-        this.navList = [
-          {id:1, module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard"},          
-        ];
-      }
-      else if(data == 10){
-        this.navList = [
-          {id:1, module : 'Utility Master',icon:'icons8 icons8-brief',link:'#',ngbPopover:"Utility Master"},          
-          {id:2, module : 'System Configuration',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"System Configuration"},
-          {id:3, module : 'Utility Configuration',icon:'icons8 icons8-user',link:'#',ngbPopover:"Utility Configuration"},
-          {id:4, module : 'Integrations',icon:'icons8 icons8-paycheque',link:'#',ngbPopover:"Integrations"}
-        ];
-      }      
-    }) 
-    
-  }   
-  
+  module_subModule:any = [];
+  subModuleVal:any = [];
+  sub_module_list:any = [];
+  defaultModule;
+  ngOnInit(): void {     
+    // According to Role and Privilege display Side nav data
+    this.getData.checkRolePrivilege().subscribe(result=>{
+      for(let role of result.data.roles ){              
+        for(let module of role.modules.module){
+          this.defaultModule = role.modules.module[0].name
+            for(let submodule of module.sub_module){
+              this.module_subModule.push({"module":module.name,"sub_module":submodule.name})
+            }            
+          }
+        } 
+      this.subModuleVal = this.subModuleList.filter(o1 => this.module_subModule.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));
+      this.commonVal = this.subModuleList.filter(obj=>obj.module===this.defaultModule);
+      this.finalList = this.commonVal.filter(o1 => this.module_subModule.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
+    })
 
-   meterData = {title:'Meter Data' ,data :[
+    $(document).ready(function(){
+      $(".menubttn2").parents(".pr-side-navbar").removeClass("open-slide");
+      $(".menubttn").parents(".pr-side-navbar").removeClass("open-slide");    
+      $('.menubttn2').click(function(){
+        $(this).toggleClass('open');
+      });
+
+      // For modal close on cross click
+      $('.modal').find('.close').on('click', function() {
+        $(this).parents('.modal').removeClass('show');
+      });  
+    });
+  }  
+
+  meterData = {title:'Meter Data' ,data :[
     {id:1,navData:'Schedule',link:'meter-data/schedule'},{id:2,navData:'Dispatch',link:'#'},{navData:'Validation',link:'#'},
     {navData:'Upload',link:'#'},{navData:'Smart Meter Data',link:'#'}
   ]};
@@ -164,8 +94,6 @@ export class SideNavComponent implements OnInit {
     }    
    }
 
-   
-
   status: boolean = false;
   bClickEvent(){
       this.status = !this.status;
@@ -174,20 +102,5 @@ export class SideNavComponent implements OnInit {
       $(".main-container").toggleClass("add-w");
       $("body").toggleClass("hide-popover");
   }
-
-  ngOnInit(): void {    
-    $(document).ready(function(){
-      $(".menubttn2").parents(".pr-side-navbar").removeClass("open-slide");
-      $(".menubttn").parents(".pr-side-navbar").removeClass("open-slide");    
-      $('.menubttn2').click(function(){
-        $(this).toggleClass('open');
-      });
-
-      // For modal close on cross click
-      $('.modal').find('.close').on('click', function() {
-        $(this).parents('.modal').removeClass('show');
-      });  
-    });
-  }  
 
 }
