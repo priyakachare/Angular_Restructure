@@ -46,7 +46,7 @@ export class ReadingDatatableComponent implements OnInit {
     },
     {
       name :  "Action"
-    }   
+    }
 ]
 
 
@@ -83,27 +83,14 @@ export class ReadingDatatableComponent implements OnInit {
   }
 
   // Use for store data come from API
-  dataSet = [
-    {
-      id: "ajkdaks-saidja-3242-sada",
-      month: "202003",
-      cycle: "21",
-      area: "Area 1",
-      subarea: "Sub Area 1",
-      status: ['success', 'pending', 'rejected'].sort((a, b) => .5 - Math.random())[0],
-      type: "Type 1",
-      consumers: "1000",
-      start_date: "19-Sep-2020",
-      end_date: "19-Dec-2020",
-      name : "Name 1"
-    }
-  ]
+  dataSet = []
 
   // For Getinng Datatable Records
   getReadingDatatable = () => {
     this.readingService.getReadingDatatable().subscribe(
       data => {
-        for (var value of data.results) {
+        console.log(data.results)
+        for (let value of data.results) {
           this.dataSet.push(
             {
               id: value.id_string,
@@ -111,10 +98,10 @@ export class ReadingDatatableComponent implements OnInit {
               cycle: value.bill_cycle_id.code,
               area: "Area 1",
               subarea: "Sub Area 1",
-              status: ['success', 'pending', 'rejected'].sort((a, b) => .5 - Math.random())[0],
+              status: [value.schedule_status_id.name],
               type: value.schedule_type_id.name,
               consumers: "1000",
-              start_date: "19-Sep-2020",
+              start_date: value.start_date,
               end_date: "19-Dec-2020",
               name : "Name 1"
             }
