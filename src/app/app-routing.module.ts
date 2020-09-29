@@ -17,6 +17,7 @@ const routes: Routes = [
 	{ path: 'registration/add-registration', component: AddRegistrationComponent },
 	{ path: 'registration/view', component: RegistrationDetailViewComponent },
 	// { path: 'consumerops/registration', component: RegistrationComponent },
+	{ path: 'registration/:id', component: RegistrationDetailViewComponent },
 	{ path: 'login', component: LoginLogoutComponent },
 	{ path: 'tenant', component: TenantComponent },
 	{ path: 'meter-data/schedule', component: ScheduleComponent },

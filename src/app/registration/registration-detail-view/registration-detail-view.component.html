@@ -1,4 +1,4 @@
-<section class="pr-section applicant-details-sec">
+<section class="pr-section applicant-details-sec" *ngIf="regDetails.profile.length != 0">
     <div class="row justify-content-center">
         <div class="col-6">
             <button class="btn bttn-transparent bttn-back d-inline-block" [routerLink]="['/consumerops/registration']"></button>
@@ -16,17 +16,42 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center"> 
         <!-- Registration detail block start -->
         <div class="col-auto pr-0">
             <div class="applicant-block-lt inner-wrap" style="height: 100%;">
                 <div class="applicant-block-lt-header">
                     <div class="row">
                         <div class="col align-self-center">
-                            <div class="badge badge-label-success">Approved</div>
+                            <div class="enqry-sts-blk" [ngSwitch]="regDetails.static.state">
+                                <div *ngSwitchCase="'CREATED'">
+                                  <div class="badge badge-label-success">Created</div>
+                                </div>
+                                <div *ngSwitchCase="'PENDING'">
+                                  <div class="badge badge-label-warning">Pending</div>
+                                </div>
+                                <div *ngSwitchCase="'APPROVED'">
+                                  <div class="badge badge-label-danger">Approved</div>
+                                </div>
+                                <div *ngSwitchCase="'REJECTED'">
+                                  <div class="badge badge-label-success">Rejected</div>
+                                </div>
+                                <div *ngSwitchCase="'HOLD'">
+                                  <div class="badge badge-label-warning">Hold</div>
+                                </div>
+                                <div *ngSwitchCase="'CANCELED'">
+                                  <div class="badge badge-label-danger">Canceled</div>
+                                </div>
+                                <div *ngSwitchCase="'COMPLETED'">
+                                  <div class="badge badge-label-success">Completed</div>
+                                </div>
+                                <div *ngSwitchCase="'ARCHIVED'">
+                                  <div class="badge badge-label-warning">Archived</div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-auto align-self-center">
-                            <h4 class="sh-ttl">Reg No: 00199234</h4>
+                            <h4 class="sh-ttl">Reg No: {{regDetails.static.registration_no}}</h4>
                         </div>
                     </div>
                 </div>
@@ -40,9 +65,10 @@
                                             <img class="img-abs st" src="../../assets/images/john-doe.png" alt="img">
                                         </div>                                                                      
                                         <div class="media-body">
-                                            <h5>John Doe</h5>
-                                            <p class="p">201-285-6456</p>
-                                            <p class="p adhr">Aadhaar No: **** **** **** <span class="showno"><i class="icons8 icons8-eye-2"></i></span></p>
+                                            <h5>{{regDetails.static.first_name}} {{regDetails.static.last_name}}</h5>
+                                            <p class="p" style="margin-bottom: 0px;">{{regDetails.static.phone_mobile}}</p>
+                                            <p class="p">{{regDetails.static.utility}}</p>
+                                            <!-- <p class="p adhr">Aadhaar No: **** **** **** <span class="showno"><i class="icons8 icons8-eye-2"></i></span></p> -->
                                         </div>
                                     </div>
                                 </div>
@@ -91,21 +117,10 @@
                                     </div>
                                     <div class="custom-tab-pane tab-pane fade" id="profl" role="tabpanel" aria-labelledby="profl-tab">
                                         <div class="row">
-                                            <div class="col-6">
-                                                <p class="p p-13">Category</p>
-                                                <h6 class="h6">Domestic</h6>
-                                            </div>
-                                            <div class="col-6">
-                                                <p class="p p-13">Sub Category</p>
-                                                <h6 class="h6">Individual</h6>
-                                            </div>
-                                            <div class="col-6">
-                                                <p class="p p-13">Area</p>
-                                                <h6 class="h6">Kothrud</h6>
-                                            </div>
-                                            <div class="col-6">
-                                                <p class="p p-13" sty>Sub area</p>
-                                                <h6 class="h6">Paud road</h6>
+                                            <div class="col-6" *ngFor="let item of regDetails.profile">
+                                                <p class="p p-13">{{item.name}}</p>
+                                                <h6 class="h6" *ngIf="item.name != 'Created date'">{{item.value}}</h6>
+                                                <h6 class="h6" *ngIf="item.name == 'Created date'">{{item.value | date : 'dd MMM yy'}}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -175,9 +190,9 @@
         <div class="col-auto pl-1">
             <button class="btn btn-outline-light3 st">Hold</button>
         </div>
-        <div class="col-auto pl-1">
+        <!-- <div class="col-auto pl-1">
             <button class="btn btn-outline-light3 st">Revisit</button>
-        </div>
+        </div> -->
         <div class="col-auto pl-1">
             <button class="btn btn-secondary st">Approve</button>
         </div>
