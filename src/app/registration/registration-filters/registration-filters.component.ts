@@ -10,24 +10,18 @@ import { FilterService } from '../../common/filter/filter.service';
 })
 export class RegistrationFiltersComponent implements OnInit {
 
-  constructor(private filterService : FilterService) { }
+  constructor() { }
 
   ngOnInit(): void {
-  	this.sendFiltersData()
-    this.sendButtonData()
   }
 
-  sendFiltersData(){
-    this.filterService.filterEvent.emit(this.filters);
-  }
-
-  sendButtonData(){
-    this.filterService.buttonEvent.emit(this.button);
-  }
+  
 
   button = {
     name : 'Register',
-    routerLink : '/registration/add-registration'
+    routerLink : '/registration/add-registration',
+    isHref : false,
+    href : '#tt'
   }
 
   filters = [

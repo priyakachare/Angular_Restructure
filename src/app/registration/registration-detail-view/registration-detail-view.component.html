@@ -31,10 +31,10 @@
                                   <div class="badge badge-label-warning">Pending</div>
                                 </div>
                                 <div *ngSwitchCase="'APPROVED'">
-                                  <div class="badge badge-label-danger">Approved</div>
+                                  <div class="badge badge-label-success">Approved</div>
                                 </div>
                                 <div *ngSwitchCase="'REJECTED'">
-                                  <div class="badge badge-label-success">Rejected</div>
+                                  <div class="badge badge-label-danger">Rejected</div>
                                 </div>
                                 <div *ngSwitchCase="'HOLD'">
                                   <div class="badge badge-label-warning">Hold</div>
@@ -46,7 +46,7 @@
                                   <div class="badge badge-label-success">Completed</div>
                                 </div>
                                 <div *ngSwitchCase="'ARCHIVED'">
-                                  <div class="badge badge-label-warning">Archived</div>
+                                  <div class="badge badge-label-success">Archived</div>
                                 </div>
                             </div>
                         </div>
@@ -185,16 +185,13 @@
             <button class="btn btn-outline-light3 bttn-print st"><fa-icon [icon]="faPrint"></fa-icon>Print</button>
         </div>
         <div class="col-auto pl-1">
-            <button class="btn btn-outline-light3 st">Reject</button>
+            <button (click)="rejectRegistration()" *ngIf="controlRejectButtonView()" class="btn btn-outline-light3 st">Reject</button>
         </div>
         <div class="col-auto pl-1">
-            <button class="btn btn-outline-light3 st">Hold</button>
+            <button (click)="holdRegistration()" *ngIf="controlHoldButtonView()" class="btn btn-outline-light3 st">Hold</button>
         </div>
-        <!-- <div class="col-auto pl-1">
-            <button class="btn btn-outline-light3 st">Revisit</button>
-        </div> -->
         <div class="col-auto pl-1">
-            <button class="btn btn-secondary st">Approve</button>
+            <button (click)="approveRegistration()" *ngIf="controlApproveButtonView()" class="btn btn-secondary st">Approve</button>
         </div>
     </div>
     <!-- Actions button end -->

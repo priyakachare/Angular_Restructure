@@ -3,6 +3,7 @@ import { faChevronLeft, faChevronRight, faPen, faCalendarAlt,faFilePdf,faMapMark
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationService } from '../registration.service';
+import { baseUrl } from 'src/environments/environment';
 
 @Component({
   selector: 'app-registration-detail-view',
@@ -187,7 +188,7 @@ export class RegistrationDetailViewComponent implements OnInit {
 
   idString : any;
 
-  constructor(private route : ActivatedRoute, private registrationService : RegistrationService) {
+  constructor(private router : Router, private route : ActivatedRoute, private registrationService : RegistrationService) {
 
     this.route.params.subscribe(params => {
       this.idString = params.id
@@ -256,6 +257,54 @@ export class RegistrationDetailViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  approveRegistration(){
+    this.registrationService.approveRegistration(this.idString).subscribe(data=>{
+      if(data.state == 'success'){
+        window.location.reload();
+      }
+    })
+  }
+
+  holdRegistration(){
+    this.registrationService.holdRegistration(this.idString).subscribe(data=>{
+      if(data.state == 'success'){
+        window.location.reload();
+      }
+    })
+  }
+
+  rejectRegistration(){
+    this.registrationService.rejectRegistration(this.idString).subscribe(data=>{
+      if(data.state == 'success'){
+        window.location.reload();
+      }
+    })
+  }
+
+  controlApproveButtonView(){
+    if (this.regDetails.static['state'] == 'PENDING') {
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  controlHoldButtonView(){
+    if (this.regDetails.static['state'] == 'PENDING') {
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  controlRejectButtonView(){
+    if (this.regDetails.static['state'] == 'PENDING') {
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }

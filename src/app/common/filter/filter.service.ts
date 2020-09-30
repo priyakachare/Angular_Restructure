@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter, Output } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -6,8 +6,6 @@ import { Observable, Subject } from 'rxjs';
 })
 export class FilterService {
 
-  @Output() filterEvent = new EventEmitter<any>();
-  @Output() buttonEvent = new EventEmitter<any>();
   private subject1 = new Subject<any>();
   private subject2 = new Subject<any>();
 
