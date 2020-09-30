@@ -59,6 +59,7 @@ export class LoginLogoutComponent implements OnInit {
     this.showpwd4 = !this.showpwd4;
   }
   
+  
   constructor(private router: Router, private commonService:CommonService,private formBuilder: FormBuilder) { 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
