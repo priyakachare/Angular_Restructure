@@ -4,7 +4,7 @@
   </div>
   <ul class="nav flex-column" *ngFor="let navData of finalList">
     <li class="nav-item"  placement="right" ngbPopover="{{navData.ngbPopover}}" triggers="mouseenter:mouseleave" container="body">
-      <a class="nav-link"  [ngClass]="{'active': navData.id == 1}" [routerLink]="[navData.link]" (click)="showPopup(navData.id)"><span><i class="{{navData.icon}}"></i></span>{{navData.sub_module}}</a>
+      <a class="nav-link"  [ngClass]="{'active': navData.id == 1}" [routerLink]="[navData.link]" (click)="showPopup(navData.sub_module)"><span><i class="{{navData.icon}}"></i></span>{{navData.sub_module}}</a>
     </li>    
   </ul>
 </div>

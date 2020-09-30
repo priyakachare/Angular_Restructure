@@ -87,11 +87,7 @@ export class LoginLogoutComponent implements OnInit {
 
           //set token and id string in sessionStorage
           sessionStorage.setItem("UserDetails",JSON.stringify({id_string:result.id_string, token:result.token}))
-
-          // If login API run successfully then check Role & Privilege  result.token,
-          this.commonService.checkRolePrivilege().subscribe(result=>{
-            this.router.navigateByUrl('/home');           
-          })
+          this.router.navigateByUrl('/home');           
 
           // Fetching UserDetail      
           this.commonService.getUserDetails(result.token,result.id_string).subscribe(resp => {

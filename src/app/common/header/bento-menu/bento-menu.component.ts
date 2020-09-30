@@ -66,6 +66,7 @@ export class BentoMenuComponent implements OnInit {
 
     // According to Role and Privilege display Bento menu options
     this.getData.checkRolePrivilege().subscribe(result=>{
+      this.getData.moduleObj.emit(result)
       for(let role of result.data.roles ){              
         for(let module of role.modules.module){
           this.modules.push({"name":module.name})

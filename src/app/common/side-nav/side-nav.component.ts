@@ -29,26 +29,25 @@ export class SideNavComponent implements OnInit {
     {id:3,module:'Admin', sub_module : 'System Configuration',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"System Configuration"},         
     {id:1,module:'Consumer Care', sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard Consumer"},
     {id:2,module:'Consumer Care', sub_module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers"},
-    {id:1,module:'S&M', sub_module : 'Registrations',icon:'icons8 icons8-shared-document',link:'#',ngbPopover:"Registration"},
+    {id:1,module:'S&M', sub_module : 'Registrations',icon:'icons8 icons8-shared-document',link:'/consumerops/registration',ngbPopover:"Registration"},
     {id:2,module:'Consumer Ops',sub_module : 'Survey',icon:'icons8 icons8-shared-document',link:'#',ngbPopover:"Survey"},
   ]
 
   module_subModule:any = [];
-  subModuleVal:any = [];
   sub_module_list:any = [];
   defaultModule;
+
   ngOnInit(): void {     
     // According to Role and Privilege display Side nav data
-    this.getData.checkRolePrivilege().subscribe(result=>{
-      for(let role of result.data.roles ){              
+    this.getData.moduleObj.subscribe(result=>{
+      for(let role of result.data.roles ){  
+        this.defaultModule = result.data.roles[0].modules.module[0].name
         for(let module of role.modules.module){
-          this.defaultModule = role.modules.module[0].name
             for(let submodule of module.sub_module){
               this.module_subModule.push({"module":module.name,"sub_module":submodule.name})
             }            
           }
         } 
-      this.subModuleVal = this.subModuleList.filter(o1 => this.module_subModule.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));
       this.commonVal = this.subModuleList.filter(obj=>obj.module===this.defaultModule);
       this.finalList = this.commonVal.filter(o1 => this.module_subModule.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
     })
@@ -72,8 +71,8 @@ export class SideNavComponent implements OnInit {
     {navData:'Upload',link:'#'},{navData:'Smart Meter Data',link:'#'}
   ]};
 
-  showPopup(id){   
-    this.getData.sideNavId.emit(id)  
+  showPopup(sub_module){   
+    this.getData.sideNavId.emit(sub_module)  
 
     this.meterData ={title:'Meter Data' ,data :[
       {id:1,navData:'Schedule',link:'meter-data/schedule'},{id:2,navData:'Dispatch',link:'#'},{navData:'Validation',link:'#'},
@@ -84,14 +83,14 @@ export class SideNavComponent implements OnInit {
       {id:1,navData:'Survey Type',link:'#'},{id:2,navData:'Campaign Type',link:'#'},{navData:'Campaign Frequency Type',link:'#'},
     ]};
 
-    if(this.moduleId ==3 && id==4){
-      this.showPopUpFlag = !this.showPopUpFlag
-      this.meterData = this.meterData
-    }
-    else if(this.moduleId==1 && id==8||this.moduleId==undefined && id==8){
-      this.showPopUpFlag = !this.showPopUpFlag
-      this.meterData = this.settingSnm
-    }    
+    // if(this.moduleId ==3 && id==4){
+    //   this.showPopUpFlag = !this.showPopUpFlag
+    //   this.meterData = this.meterData
+    // }
+    // else if(this.moduleId==1 && id==8||this.moduleId==undefined && id==8){
+    //   this.showPopUpFlag = !this.showPopUpFlag
+    //   this.meterData = this.settingSnm
+    // }    
    }
 
   status: boolean = false;

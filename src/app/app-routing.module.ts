@@ -11,9 +11,12 @@ import { ScheduleComponent } from './meter-data/schedule/schedule.component';
 import { CommonComponent } from './common/common.component';
 
 const routes: Routes = [
+	{ path: '', redirectTo: '/login', pathMatch: 'full' },
 	{ path: 'home', component: CommonComponent },
 	{ path: 'consumerops/registration', component: RegistrationComponent },
 	{ path: 'registration/add-registration', component: AddRegistrationComponent },
+	{ path: 'registration/view', component: RegistrationDetailViewComponent },
+	// { path: 'consumerops/registration', component: RegistrationComponent },
 	{ path: 'registration/:id', component: RegistrationDetailViewComponent },
 	{ path: 'login', component: LoginLogoutComponent },
 	{ path: 'tenant', component: TenantComponent },
