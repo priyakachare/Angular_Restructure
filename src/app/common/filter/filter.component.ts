@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router,Routes, RouterModule } from '@angular/router';
 import { faTrash, faCalendarAlt, faPrint, faFileCsv, faFilePdf, faFileExcel, faEye, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FilterService } from '../filter/filter.service';
@@ -10,16 +10,16 @@ import { FilterService } from '../filter/filter.service';
 })
 export class FilterComponent implements OnInit {
 
-  constructor(private filterService : FilterService) {
-    this.filterService.filterEvent.subscribe(data=>{
-      this.filters = data
-    })
-    this.filterService.buttonEvent.subscribe(data=>{
-      this.button = data
-    })
+  @Input() filterData;
+  @Input() buttonData;
+
+  constructor(private filterService: FilterService) {
   }
 
   ngOnInit(): void {
+    console.log(this.buttonData)
+    this.filters = this.filterData;
+    this.button = this.buttonData
   }
 
   filters = []
