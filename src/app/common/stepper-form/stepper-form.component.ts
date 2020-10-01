@@ -17,7 +17,7 @@ export class StepperFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.operator()
+    this.operator
   }
 
   blocks = []

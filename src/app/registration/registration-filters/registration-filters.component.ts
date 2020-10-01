@@ -20,8 +20,6 @@ export class RegistrationFiltersComponent implements OnInit {
   button = {
     name : 'Register',
     routerLink : '/registration/add-registration',
-    isHref : false,
-    href : '#tt'
   }
 
   filters = [
