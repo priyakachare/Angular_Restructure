@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faChevronLeft, faChevronRight, faPen, faCalendarAlt,faFilePdf,faMapMarkerAlt, faPrint ,faTimesCircle, faEye, faPlus, faFileCsv, faStar, faFileExcel } from '@fortawesome/free-solid-svg-icons';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { RegistrationService } from '../registration.service';
+import { RegistrationService } from '../registration.service'; 
 import { baseUrl } from 'src/environments/environment';
 
 @Component({
@@ -84,24 +84,7 @@ export class RegistrationDetailViewComponent implements OnInit {
   // Data for payment details end
 
   // Data for payment details start
-  notes = [
-    {
-      title : 'Payment Cash',
-      text : 'Payment in cash will be accepted at Water Plant, Road No.2, R.T.C Colony (Land mark: Opp to IOCL Petrol Bunk)',
-      dateRange : '16-09-2019 to 18-09-2019',
-      time : '10:00AM & 2:30PM only',
-      user : 'John Doe',
-      date : '09 Jan 2020'
-    },
-    {
-      title : 'Payment Cash',
-      text : 'Payment in cash will be accepted at Water Plant, Road No.2, R.T.C Colony (Land mark: Opp to IOCL Petrol Bunk)',
-      dateRange : '16-09-2019 to 18-09-2019',
-      time : '10:00AM & 2:30PM only',
-      user : 'John Doe',
-      date : '09 Jan 2020'
-    },
-  ]
+  notes = []
   // Data for payment details end
 
   // Data for timeline details start
@@ -194,8 +177,8 @@ export class RegistrationDetailViewComponent implements OnInit {
       this.idString = params.id
     });
 
+    // Registration details Api start
     this.registrationService.getRegistrationDetails(this.idString).subscribe(data=>{
-      console.log(data.result)
       this.regDetails.static['first_name'] = data['result']['first_name']
       this.regDetails.static['last_name'] = data['result']['last_name']
       this.regDetails.static['state'] = data['result']['state']
@@ -254,11 +237,28 @@ export class RegistrationDetailViewComponent implements OnInit {
         },
       ]
     })
+    // Registration details Api end
+
+    // Registration notes Api start
+    this.registrationService.getRegistrationNotes(this.idString).subscribe(data=>{
+      for(let note of data){
+        this.notes.push({
+          id : note['id_string'],
+          note_name : note['note_name'],
+          note : note['note'],
+          date : note['created_date'],
+          time : note['created_date'],
+          user : this.regDetails.static['first_name']+" "+this.regDetails.static['last_name'],
+        })
+      }
+    })
+    // Registration notes Api end
   }
 
   ngOnInit(): void {
   }
 
+  // Registration approve Api start
   approveRegistration(){
     this.registrationService.approveRegistration(this.idString).subscribe(data=>{
       if(data.state == 'success'){
@@ -266,7 +266,9 @@ export class RegistrationDetailViewComponent implements OnInit {
       }
     })
   }
+  // Registration approve Api end
 
+  // Registration hold Api start
   holdRegistration(){
     this.registrationService.holdRegistration(this.idString).subscribe(data=>{
       if(data.state == 'success'){
@@ -274,7 +276,9 @@ export class RegistrationDetailViewComponent implements OnInit {
       }
     })
   }
+  // Registration hold Api end
 
+  // Registration reject Api start
   rejectRegistration(){
     this.registrationService.rejectRegistration(this.idString).subscribe(data=>{
       if(data.state == 'success'){
@@ -282,6 +286,7 @@ export class RegistrationDetailViewComponent implements OnInit {
       }
     })
   }
+  // Registration reject Api end
 
   controlApproveButtonView(){
     if (this.regDetails.static['state'] == 'PENDING') {

@@ -5,7 +5,7 @@
             <div class="inner-page-title d-inline-block"><h4 class="h4">Registration details </h4></div>
         </div>
         <div class="col-6">
-            <div class="inner-page-pagination">
+            <div class="inner-page-pagination"> 
                 <nav class="">
                     <ul class="pagination">
                         <li class="{{item.listClass}}" *ngFor="let item of buttons">
@@ -153,7 +153,7 @@
 
                         <!-- Tab panel for KYC detail start -->
                         <div class="tab-pane fade" id="nav-kyc" role="tabpanel" aria-labelledby="nav-kyc-tab">
-                            <app-kyc-details [data]="kycDocs"></app-kyc-details>
+                            <app-kyc-details [docsData]="kycDocs"></app-kyc-details>
                         </div>
                         <!-- Tab panel for KYC detail end -->
 

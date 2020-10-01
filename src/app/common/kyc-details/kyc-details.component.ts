@@ -7,13 +7,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class KycDetailsComponent implements OnInit {
 
-  @Input() data;
+  @Input() docsData;
   kycDocs = []
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
-  	this.kycDocs = this.data
+  	this.kycDocs = this.docsData
   }
 
 }
