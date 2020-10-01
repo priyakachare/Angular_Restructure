@@ -16,7 +16,7 @@ export class TenantFilterComponent implements OnInit {
   }
 
   sendFiltersData(){
-    // this.filterService.filterEvent.emit(this.filters);
+    this.filterService.filterEvent.emit(this.filters);
   }
 
   filters = [
