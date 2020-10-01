@@ -10,9 +10,12 @@ import { FilterService } from '../../common/filter/filter.service';
 })
 export class RegistrationFiltersComponent implements OnInit {
 
-  constructor() { }
+  constructor(private filterService: FilterService) { }
 
   ngOnInit(): void {
+    this.filterService.getButtonEvent().subscribe(data=>{
+      console.log(data.event.type)
+    })
   }
 
   

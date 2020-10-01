@@ -17,7 +17,6 @@ export class FilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.buttonData)
     this.filters = this.filterData;
     this.button = this.buttonData
   }
@@ -38,6 +37,10 @@ export class FilterComponent implements OnInit {
 
   recordsChange(){
     this.filterService.sendPagination(this.selectedPagination)
+  }
+
+  buttonClicked(event){
+    this.filterService.sendButtonEvent(event)
   }
 
 } 
