@@ -30,6 +30,7 @@ export class SideNavComponent implements OnInit {
     {id:1,module:'Consumer Care', sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard Consumer"},
     {id:2,module:'Consumer Care', sub_module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers"},
     {id:1,module:'S&M', sub_module : 'Registrations',icon:'icons8 icons8-shared-document',link:'/consumerops/registration',ngbPopover:"Registration"},
+    {id:2,module:'S&M', sub_module : 'Campaign',icon:'icons8 icons8-megaphone',link:'/campaign',ngbPopover:"Campaign"},
     {id:2,module:'Consumer Ops',sub_module : 'Meter Data',icon:'icons8 icons8-conflict',link:'#',ngbPopover:"Meter Data"},
   ]
 
