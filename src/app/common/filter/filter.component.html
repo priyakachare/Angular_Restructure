@@ -15,11 +15,8 @@
       data-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse"><span>2</span>Filter</button>
   </div>
   <app-tools></app-tools>
-  <div class="col-auto pl-0" *ngIf="button.isHref == true">
-    
-  </div>
-  <div class="col-auto pl-0" *ngIf="button.isHref == false">
-    <button class="btn btn-secondary st" routerLink="{{button.routerLink}}">{{button.name}}</button>
+  <div class="col-auto pl-0">
+    <button class="btn btn-secondary st" (click)="buttonClicked($event)" routerLink="{{button.routerLink}}">{{button.name}}</button>
   </div>
 </div>
 

@@ -8,6 +8,7 @@ export class FilterService {
 
   private subject1 = new Subject<any>();
   private subject2 = new Subject<any>();
+  private subject3 = new Subject<any>();
 
   sendSearchText(message: string) {
         this.subject1.next({ text: message });
@@ -23,6 +24,14 @@ export class FilterService {
 
   getPagination(): Observable<any> {
         return this.subject2.asObservable();
+    }
+
+  sendButtonEvent(event: any) {
+      this.subject3.next({ event: event });
+  }
+
+  getButtonEvent(): Observable<any> {
+        return this.subject3.asObservable();
     }
 
   constructor() { }
