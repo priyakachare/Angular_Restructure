@@ -67,6 +67,10 @@ import { NoticeComponent } from './meter-data/schedule/notice/notice.component';
 import { ReadingDatatableComponent } from './meter-data/schedule/reading/reading-datatable/reading-datatable.component';
 import { ReadingFilterComponent } from './meter-data/schedule/reading/reading-filter/reading-filter.component';
 import { ReadingSummaryComponent } from './meter-data/schedule/reading/reading-summary/reading-summary.component';
+import { CampaignComponent } from './campaign/campaign.component';
+import { CampaignDatatableComponent } from './campaign/campaign-datatable/campaign-datatable.component';
+import { CampaignFilterComponent } from './campaign/campaign-filter/campaign-filter.component';
+import { CampaignSummaryComponent } from './campaign/campaign-summary/campaign-summary.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +120,11 @@ import { ReadingSummaryComponent } from './meter-data/schedule/reading/reading-s
     NoticeComponent,
     ReadingDatatableComponent,
     ReadingFilterComponent,
-    ReadingSummaryComponent
+    ReadingSummaryComponent,
+    CampaignComponent,
+    CampaignDatatableComponent,
+    CampaignFilterComponent,
+    CampaignSummaryComponent
   ],
   imports: [
     BrowserModule,

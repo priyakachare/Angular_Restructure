@@ -9,11 +9,13 @@ import { RegistrationDetailViewComponent } from './registration/registration-det
 import { TenantComponent } from './tenant/tenant.component';
 import { ScheduleComponent } from './meter-data/schedule/schedule.component';
 import { CommonComponent } from './common/common.component';
+import { CampaignComponent } from './campaign/campaign.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/login', pathMatch: 'full' },
 	{ path: 'home', component: CommonComponent },
 	{ path: 'consumerops/registration', component: RegistrationComponent },
+	{ path: 'campaign', component: CampaignComponent },
 	{ path: 'registration/add-registration', component: AddRegistrationComponent },
 	{ path: 'registration/view', component: RegistrationDetailViewComponent },
 	// { path: 'consumerops/registration', component: RegistrationComponent },
