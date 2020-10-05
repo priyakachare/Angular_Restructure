@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterService } from '../../../../common/filter/filter.service';
-import { ReadingService } from '../../../../meter-data/schedule/reading/reading.service'
+import { ReadingService } from '../../../../meter-data/schedule/reading/reading.service';
 import { faPen} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
