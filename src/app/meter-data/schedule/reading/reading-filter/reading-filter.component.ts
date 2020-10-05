@@ -11,16 +11,9 @@ export class ReadingFilterComponent implements OnInit {
   constructor(private filterService : FilterService) { }
 
   ngOnInit(): void {
-    this.sendFiltersData()
-    this.sendButtonData()
-  }
-
-  sendFiltersData(){
-    this.filterService.filterEvent.emit(this.filters);
-  }
-
-  sendButtonData(){
-    this.filterService.buttonEvent.emit(this.button);
+    this.filterService.getButtonEvent().subscribe(data=>{
+      console.log(data.event.type)
+    })
   }
 
   button = {
