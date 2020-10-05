@@ -11,6 +11,7 @@ export class KycDetailsComponent implements OnInit {
   kycDocs = []
 
   constructor() {
+    
   }
 
   ngOnInit(): void {

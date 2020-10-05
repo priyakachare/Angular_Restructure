@@ -17,7 +17,7 @@ export class RegistrationFiltersComponent implements OnInit {
       console.log(data.event.type)
     })
   }
-
+ 
   
 
   button = {

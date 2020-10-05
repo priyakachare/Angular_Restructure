@@ -172,7 +172,7 @@ export class RegistrationDetailViewComponent implements OnInit {
   idString : any;
 
   constructor(private router : Router, private route : ActivatedRoute, private registrationService : RegistrationService) {
-
+    
     this.route.params.subscribe(params => {
       this.idString = params.id
     });

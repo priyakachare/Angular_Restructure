@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterService } from '../../common/filter/filter.service';
 
-@Component({
+@Component({ 
   selector: 'app-tenant-filter',
   templateUrl: './tenant-filter.component.html',
   styleUrls: ['./tenant-filter.component.scss']
