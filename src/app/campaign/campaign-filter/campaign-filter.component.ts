@@ -1,28 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,Routes, RouterModule } from '@angular/router';
-import { faTrash, faCalendarAlt, faPrint, faFileCsv, faFilePdf, faFileExcel, faEye, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FilterService } from '../../common/filter/filter.service';
 
 @Component({
-  selector: 'app-registration-filters',
-  templateUrl: './registration-filters.component.html',
-  styleUrls: ['./registration-filters.component.scss']
+  selector: 'app-campaign-filter',
+  templateUrl: './campaign-filter.component.html',
+  styleUrls: ['./campaign-filter.component.scss']
 })
-export class RegistrationFiltersComponent implements OnInit {
+export class CampaignFilterComponent implements OnInit {
 
-  constructor(private filterService: FilterService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.filterService.getButtonEvent().subscribe(data=>{
-      console.log(data.event.type)
-    })
   }
- 
+
   
 
   button = {
-    name : 'Register',
-    routerLink : '/registration/add-registration',
+    name : 'Campaign',
+    routerLink : '',
+    isHref : false,
+    href : '#tt'
   }
 
   filters = [

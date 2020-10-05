@@ -1,4 +1,4 @@
-<div class="block-body inner-form">
+<div class="block-body inner-form" *ngIf="notes.length != 0"> 
     <div class="row">
         <div class="col">
             <div class="applicant-data">
@@ -64,11 +64,11 @@
                                                 </div>
                                             </div>
                                             <div class="body">
-                                                <h5 class="ttl">{{item.title}}</h5>
-                                                <p class="p p-12 txt">{{item.text}}</p>
+                                                <h5 class="ttl">{{item.note_name}}</h5>
+                                                <p class="p p-12 txt">{{item.note}}</p>
                                                 <ul class="list-group list-group-horizontal notes-card-body-list">
-                                                    <li class="list-group-item"><p class="p p-12">{{item.dateRange}}</p></li>
-                                                    <li class="list-group-item"><p class="p p-12">{{item.time}}</p></li>
+                                                    <li class="list-group-item"><p class="p p-12">{{item.date | date : 'dd MMM yy'}}</p></li>
+                                                    <li class="list-group-item"><p class="p p-12">{{item.time | date : 'shortTime'}}</p></li>
                                                 </ul>
                                                 <div class="user-blk media">
                                                     <div class="img-blk">
@@ -76,7 +76,7 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <span class="p nm">{{item.user}}</span>
-                                                        <span class="p dt">{{item.date}}</span>
+                                                        <span class="p dt">{{item.date | date : 'dd MMM yy'}}</span>
                                                     </div>     
                                                 </div>
                                             </div>

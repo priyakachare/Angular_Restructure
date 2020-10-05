@@ -57,7 +57,7 @@ import { ScheduleDatatableComponent } from './meter-data/schedule/schedule-datat
 import { ScheduleFilterComponent } from './meter-data/schedule/schedule-filter/schedule-filter.component';
 import { ScheduleSummaryComponent } from './meter-data/schedule/schedule-summary/schedule-summary.component';
 import { AddressDetailsComponent } from './common/address-details/address-details.component';
-// import { KycDetailsComponent } from './common/kyc-details/kyc-details.component';
+import { KycDetailsComponent } from './common/kyc-details/kyc-details.component';
 import { PaymentDetailsComponent } from './common/payment-details/payment-details.component';
 import { NoteDetailsComponent } from './common/note-details/note-details.component';
 import { TimelineDetailsComponent } from './common/timeline-details/timeline-details.component';
@@ -67,6 +67,10 @@ import { NoticeComponent } from './meter-data/schedule/notice/notice.component';
 import { ReadingDatatableComponent } from './meter-data/schedule/reading/reading-datatable/reading-datatable.component';
 import { ReadingFilterComponent } from './meter-data/schedule/reading/reading-filter/reading-filter.component';
 import { ReadingSummaryComponent } from './meter-data/schedule/reading/reading-summary/reading-summary.component';
+import { CampaignComponent } from './campaign/campaign.component';
+import { CampaignDatatableComponent } from './campaign/campaign-datatable/campaign-datatable.component';
+import { CampaignFilterComponent } from './campaign/campaign-filter/campaign-filter.component';
+import { CampaignSummaryComponent } from './campaign/campaign-summary/campaign-summary.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +111,7 @@ import { ReadingSummaryComponent } from './meter-data/schedule/reading/reading-s
     ScheduleFilterComponent,
     ScheduleSummaryComponent,
     AddressDetailsComponent,
-    // KycDetailsComponent,
+    KycDetailsComponent,
     PaymentDetailsComponent,
     NoteDetailsComponent,
     TimelineDetailsComponent,
@@ -116,7 +120,11 @@ import { ReadingSummaryComponent } from './meter-data/schedule/reading/reading-s
     NoticeComponent,
     ReadingDatatableComponent,
     ReadingFilterComponent,
-    ReadingSummaryComponent
+    ReadingSummaryComponent,
+    CampaignComponent,
+    CampaignDatatableComponent,
+    CampaignFilterComponent,
+    CampaignSummaryComponent
   ],
   imports: [
     BrowserModule,
