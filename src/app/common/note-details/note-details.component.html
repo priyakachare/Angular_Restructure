@@ -1,4 +1,4 @@
-<div class="block-body inner-form" *ngIf="notes.length != 0"> 
+<div class="block-body inner-form"> 
     <div class="row">
         <div class="col">
             <div class="applicant-data">
@@ -14,28 +14,28 @@
                                 <p class="p p-13">Notes</p>
                                 <div class="add-notes-card">
                                     <div class="txt-area">
-                                        <textarea class="form-control add-notes-textarea" name="" rows="10" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ait enim se, si uratur, Quam hoc suave! dicturum. Vitiosum est enim in dividendo partem in genere numerare. Summus">
-                                        </textarea>
+                                        <textarea class="form-control add-notes-textarea" (keyup)="onNoteChange($event)" name="note" rows="10" placeholder="Write your note here.."></textarea>
                                     </div>
-                                    <div class="body">
+                                    <p class="p p-13" id="note-error" style="color:red; display: none;">Note can't be empty!</p>
+                                    <div class="body"> 
                                         <div class="row">
                                             <div class="col">
                                                 <div class="color-radio-wrap">
                                                     <div class="btn-group" data-toggle="buttons">
                                                         <label class="btn colr1 color-radio-btn radio-btn-round active">
-                                                            <input type="radio" name="note-options" id="option1" autocomplete="off" checked>
+                                                            <input type="radio" name="note-options" id="option1" autocomplete="off" (click)="changeColor($event)" checked value="notes-card colr1">
                                                             <span class="tick st"></span>
                                                         </label>
                                                         <label class="btn colr2 color-radio-btn radio-btn-round">
-                                                            <input type="radio" name="note-options" id="option2" autocomplete="off">
-                                                                <span class="tick st"></span>
+                                                            <input type="radio" name="note-options" id="option2" autocomplete="off" (click)="changeColor($event)" value="notes-card colr2">
+                                                            <span class="tick st"></span>
                                                         </label>  
                                                         <label class="btn colr3 color-radio-btn radio-btn-round">
-                                                            <input type="radio" name="note-options" id="option3" autocomplete="off">
+                                                            <input type="radio" name="note-options" id="option3" autocomplete="off" (click)="changeColor($event)" value="notes-card colr3">
                                                             <span class="tick st"></span>
                                                         </label>                
                                                         <label class="btn colr4 color-radio-btn radio-btn-round">
-                                                            <input type="radio" name="note-options" id="option4" autocomplete="off">
+                                                            <input type="radio" name="note-options" id="option4" autocomplete="off" (click)="changeColor($event)" value="notes-card colr4">
                                                             <span class="tick st"></span>
                                                         </label>                
                                                     </div>
@@ -45,7 +45,7 @@
                                                 <button class="btn btn-outline-light3 st" (click)="toggle()">Cancel</button>
                                             </div>
                                             <div class="col-auto pl-1">
-                                                <button class="btn btn-secondary st" (click)="toggle()">Add Note</button>
+                                                <button class="btn btn-secondary st" (click)="addNote()">Add Note</button>
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                             </div>
                         </ng-container>
                         <ng-container *ngIf="!show">
-                            <div class="notes-card-wrap">
+                            <div class="notes-card-wrap" *ngIf="notes.length != 0">
                                 <ul class="list-group list-group-horizontal notes-card-list">
                                     <li class="list-group-item" *ngFor="let item of notes">
                                         <div class="notes-card colr1">

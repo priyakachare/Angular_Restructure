@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationService } from '../registration.service'; 
 import { baseUrl } from 'src/environments/environment';
+import { NoteDetailsService } from '../../common/note-details/note-details.service';
 
 @Component({
   selector: 'app-registration-detail-view',
@@ -171,11 +172,14 @@ export class RegistrationDetailViewComponent implements OnInit {
 
   idString : any;
 
-  constructor(private router : Router, private route : ActivatedRoute, private registrationService : RegistrationService) {
+  constructor(private router : Router, private route : ActivatedRoute,
+    private registrationService : RegistrationService, private noteService : NoteDetailsService) {
     
     this.route.params.subscribe(params => {
       this.idString = params.id
     });
+
+    const notesPromise = this.registrationService.getRegistrationNotes(this.idString).toPromise();
 
     // Registration details Api start
     this.registrationService.getRegistrationDetails(this.idString).subscribe(data=>{
@@ -236,26 +240,32 @@ export class RegistrationDetailViewComponent implements OnInit {
           heading : 'Billing Address'
         },
       ]
+
+      // Registration notes Api start
+      notesPromise.then(data=>{
+        for(let note of data){
+          this.notes.push({
+            id : note['id_string'],
+            note_name : note['note_name'],
+            note : note['note'],
+            date : note['created_date'],
+            time : note['created_date'],
+            user : this.regDetails.static['first_name']+" "+this.regDetails.static['last_name'],
+          })
+        }
+      })
+      // Registration notes Api end
+
     })
     // Registration details Api end
-
-    // Registration notes Api start
-    this.registrationService.getRegistrationNotes(this.idString).subscribe(data=>{
-      for(let note of data){
-        this.notes.push({
-          id : note['id_string'],
-          note_name : note['note_name'],
-          note : note['note'],
-          date : note['created_date'],
-          time : note['created_date'],
-          user : this.regDetails.static['first_name']+" "+this.regDetails.static['last_name'],
-        })
-      }
-    })
-    // Registration notes Api end
   }
 
   ngOnInit(): void {
+    this.noteService.getNoteResponse().subscribe(data=>{
+      this.registrationService.addRegistrationNote(this.idString,data['data']).subscribe(resp=>{
+        console.log(resp)
+      })
+    })
   }
 
   // Registration approve Api start
