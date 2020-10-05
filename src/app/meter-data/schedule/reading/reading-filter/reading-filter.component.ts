@@ -16,11 +16,11 @@ export class ReadingFilterComponent implements OnInit {
   }
 
   sendFiltersData(){
-    this.filterService.filterEvent.emit(this.filters);
+    // this.filterService.filterEvent.emit(this.filters);
   }
 
   sendButtonData(){
-    this.filterService.buttonEvent.emit(this.button);
+    // this.filterService.buttonEvent.emit(this.button);
   }
 
   button = {

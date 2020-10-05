@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faChevronDown, faSearch, faMapMarkerAlt, faPlus, faBell } from '@fortawesome/free-solid-svg-icons';
+import { CommonService } from '../../common.service';
 
 @Component({
   selector: 'smart360-location',
@@ -9,11 +10,15 @@ import { faChevronDown, faSearch, faMapMarkerAlt, faPlus, faBell } from '@fortaw
 export class LocationComponent implements OnInit {
   faMapMarkerAlt = faMapMarkerAlt;
 
-  location = 'Pune'
+  utilities:any=[]
 
-  constructor() { }
+  constructor(private commonService:CommonService) { }
 
   ngOnInit(): void {
+    this.commonService.utilityList.subscribe(data=>{
+      this.utilities = data
+      console.log('----------------'+this.utilities)
+    })
   }
 
 }
