@@ -60,10 +60,10 @@ export class RegistrationService {
     return this.http.post(baseUrl+'registration/'+id_string+'/note',data, httpOptions)
   }
 
-  // getRegistrationPayment(id_string):Observable<any>{
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkX3N0cmluZyI6IjkxZDhjZmE5LWM3ZWUtNGQ1NS04NjE3LWYzNjI2MDg2M2M0OCIsInN0cmluZyI6IjQ1QkZFRiJ9.mNjcisDU9XE-r6KQkkvgF5-hZmh3Vgt4ExNW8K8f0g4'})
-  //   };
-  //   return this.http.get(baseUrl+'registration/'+id_string+'/payment',httpOptions)
-  // }
+  getRegistrationPayments(id_string):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkX3N0cmluZyI6IjkxZDhjZmE5LWM3ZWUtNGQ1NS04NjE3LWYzNjI2MDg2M2M0OCIsInN0cmluZyI6IjQ1QkZFRiJ9.mNjcisDU9XE-r6KQkkvgF5-hZmh3Vgt4ExNW8K8f0g4'})
+    };
+    return this.http.get(baseUrl+'registration/'+id_string+'/payments',httpOptions)
+  }
 }

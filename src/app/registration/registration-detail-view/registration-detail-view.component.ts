@@ -5,6 +5,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationService } from '../registration.service'; 
 import { baseUrl } from 'src/environments/environment';
 import { NoteDetailsService } from '../../common/note-details/note-details.service';
+import { PaymentDetailsService } from '../../common/payment-details/payment-details.service';
 
 @Component({
   selector: 'app-registration-detail-view',
@@ -60,28 +61,15 @@ export class RegistrationDetailViewComponent implements OnInit {
   // Data for kyc details end
 
   // Data for payment details start
-  static = {
-    type : 'Registration fee',
-    date : '09 Jan 2020',
-    amount : 3000,
-    mode : 'Online',
-    id : 'TXN0035600'
-  }
+  // static = {
+  //   type : 'Registration fee',
+  //   date : '09 Jan 2020',
+  //   amount : 3000,
+  //   mode : 'Online',
+  //   id : 'TXN0035600'
+  // }
 
-  paymentData = [
-    {
-      type : 'Deposite',
-      amount : 1500.00
-    },
-    {
-      type : 'Rental',
-      amount : 1000.00
-    },
-    {
-      type : 'Processing fee',
-      amount : 100.00
-    },
-  ]
+  // paymentData = []
   // Data for payment details end
 
   // Data for payment details start
@@ -173,7 +161,8 @@ export class RegistrationDetailViewComponent implements OnInit {
   idString : any;
 
   constructor(private router : Router, private route : ActivatedRoute,
-    private registrationService : RegistrationService, private noteService : NoteDetailsService) {
+    private registrationService : RegistrationService, private noteService : NoteDetailsService,
+    private paymentDetailsService : PaymentDetailsService) {
     
     this.route.params.subscribe(params => {
       this.idString = params.id
@@ -258,14 +247,23 @@ export class RegistrationDetailViewComponent implements OnInit {
 
     })
     // Registration details Api end
+
+    // Code for sending payments to component start
+    this.registrationService.getRegistrationPayments(this.idString).subscribe(data=>{
+      this.paymentDetailsService.sendPayments(data)
+    })
+    // Code for sending payments to component start
   }
 
   ngOnInit(): void {
+    // Code for receiving note data from note component start
     this.noteService.getNoteResponse().subscribe(data=>{
       this.registrationService.addRegistrationNote(this.idString,data['data']).subscribe(resp=>{
-        console.log(resp)
+        
       })
     })
+    // Code for receiving note data from note component end
+
   }
 
   // Registration approve Api start
