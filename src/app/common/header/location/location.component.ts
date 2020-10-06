@@ -20,4 +20,8 @@ export class LocationComponent implements OnInit {
     })
   }
 
+  onOptionsSelected(utility_id_string){
+    this.commonService.utilityIdString.emit(utility_id_string)
+  }
+
 }

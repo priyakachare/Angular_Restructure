@@ -13,6 +13,7 @@ export class CommonService {
   @Output() moduleObj = new EventEmitter<string>();
   @Output() sideNavId = new EventEmitter<string>();
   @Output() utilityList = new EventEmitter<string>();
+  @Output() utilityIdString = new EventEmitter<string>();
 
   constructor(private http:HttpClient) {
    }
@@ -61,6 +62,14 @@ export class CommonService {
     };
     return this.http.get(baseUrl+'utility/'+selected_utility+'/module/list',httpOptions)
    }
+
+    // API for list of Sub Module according to utility
+    getUtilitySubModuleList(selected_utility):Observable<any>{
+      const httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
+      };
+      return this.http.get(baseUrl+'utility/'+selected_utility+'/submodule/list',httpOptions)
+     }
 
     // API for logout
     logOut(id_string):Observable<any>{
