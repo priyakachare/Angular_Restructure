@@ -20,6 +20,7 @@ export class ReadingFilterComponent implements OnInit {
   }
 
   sendButtonData(){
+    // this.filterService.buttonEvent.emit(this.button);
     this.filterService.getButtonEvent().subscribe(data=>{
       console.log(data.event.type)
     })
