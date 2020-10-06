@@ -1,12 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentDetailsService {
 
-  private subject1 = new Subject<any>();
+  private subject1 = new BehaviorSubject<any>({});
 
   sendPayments(data: any) {
     this.subject1.next({ payments : data });
