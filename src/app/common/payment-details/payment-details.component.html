@@ -1,5 +1,5 @@
-<div class="block-body" *ngIf="paymentData.length != 0"> 
-    <div class="row" *ngFor="let item of paymentData">
+<div class="block-body" *ngFor="let item of paymentData"> 
+    <div class="row" *ngIf="paymentData.length != 0">
         <div class="col">
             <div class="applicant-data"> 
                 <div class="paymnt-blk">
@@ -62,4 +62,5 @@
             </div>
         </div>
     </div>
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 </div>
