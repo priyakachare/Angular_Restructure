@@ -10,7 +10,7 @@
         <button class="btn btn-sm btn-primary text-uppercase" type="button">View Profile</button>
         <div class="dropdown-divider"></div>
         <div *ngFor="let pro1 of profile.links">
-        <a class="dropdown-item" href="{{pro1.link}}">{{pro1.options}}</a>
+        <a class="dropdown-item" (click)="selectItem(pro1.options)">{{pro1.options}}</a>
       </div>
       </div>
     </div>

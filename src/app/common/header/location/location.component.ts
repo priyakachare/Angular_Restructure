@@ -17,7 +17,6 @@ export class LocationComponent implements OnInit {
   ngOnInit(): void {
     this.commonService.utilityList.subscribe(data=>{
       this.utilities = data
-      console.log('----------------'+this.utilities)
     })
   }
 

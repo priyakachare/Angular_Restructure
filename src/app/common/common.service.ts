@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { baseUrl } from 'src/environments/environment';
@@ -61,6 +61,15 @@ export class CommonService {
     };
     return this.http.get(baseUrl+'utility/'+selected_utility+'/module/list',httpOptions)
    }
+
+    // API for logout
+    logOut(id_string):Observable<any>{
+
+      const httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
+      };
+      return this.http.post(baseUrl+'user/logout/',{"id_string":id_string},httpOptions)
+     }
 }
 
   
