@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core'; 
 import { StepperFormService } from './stepper-form.service';
+declare var $ : any
 
 @Component({
   selector: 'app-stepper-form',
@@ -18,6 +19,9 @@ export class StepperFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.operator
+    this.stepperFormService.getTrigger().subscribe(data=>{
+      $(data['trigger']).trigger( "click" );
+    })
   }
 
   blocks = []
