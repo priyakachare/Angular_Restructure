@@ -66,8 +66,20 @@ export class BentoMenuComponent implements OnInit {
   firstUtility:any;
   all_utilities:any=[];
   finalModuleList:any=[];
+
+  id_string:any=[]
   ngOnInit(): void {
 
+    // For Change Utility on droupdown change bento menu
+    this.getData.utilityIdString.subscribe(id_string=>{
+      this.firstUtility = id_string
+      // Taking list of module according to firstUtility
+      this.getData.getUtilityModuleList(this.firstUtility).subscribe(modules =>{
+        this.utility_module_list = modules.results
+        this.getData.moduleName.emit(this.utility_module_list[0].module_name)
+        this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
+      })
+    })
     // According to Role and Privilege display Bento menu options
     this.getData.checkRolePrivilege().subscribe(result=>{
       this.getData.moduleObj.emit(result)
@@ -86,13 +98,14 @@ export class BentoMenuComponent implements OnInit {
 
       }   
         
-      this.firstUtility = utility_obj.data.utilities[1].id_string
+      this.firstUtility = utility_obj.data.utilities[0].id_string
       this.getData.utilityList.emit(this.all_utilities) 
 
 
       // Taking list of module according to firstUtility
       this.getData.getUtilityModuleList(this.firstUtility).subscribe(modules =>{
         this.utility_module_list = modules.results
+        // this.getData.defaultUtilityModule.emit(this.utility_module_list[0].module_name)
         this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
       })
     })

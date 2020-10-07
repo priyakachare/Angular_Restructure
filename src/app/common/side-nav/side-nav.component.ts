@@ -16,29 +16,49 @@ export class SideNavComponent implements OnInit {
   showPopUpFlag:boolean=false;
   commonVal;
   finalList;
+  utilityIdString;
   constructor(private getData:CommonService) {     
     this.getData.moduleName.subscribe(module=>{
       this.commonVal = this.subModuleList.filter(obj=>obj.module===module);
-      this.finalList = this.commonVal.filter(o1 => this.module_subModule.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module))); 
+      this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
+      
     });    
+
+    // For Change Utility on droupdown change bento menu
+    this.getData.utilityIdString.subscribe(id_string=>{
+      // Taking list of module according to firstUtility
+      this.getData.getUtilitySubModuleList(id_string).subscribe(submodules =>{
+        this.subModules = submodules.results        
+      })
+    })
   }  
 
   subModuleList =[
-    {id:1,module:'Admin', sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"DashboardAdmin"},
-    {id:2,module:'Admin', sub_module : 'Utility Master',icon:'icons8 icons8-brief',link:'#',ngbPopover:"Utility Master"}, 
-    {id:3,module:'Admin', sub_module : 'System Configuration',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"System Configuration"},         
-    {id:1,module:'Consumer Care', sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard Consumer"},
-    {id:2,module:'Consumer Care', sub_module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers"},
-    {id:1,module:'S&M', sub_module : 'Registrations',icon:'icons8 icons8-shared-document',link:'/consumerops/registration',ngbPopover:"Registration"},
-    {id:2,module:'S&M', sub_module : 'Campaign',icon:'icons8 icons8-megaphone',link:'/campaign',ngbPopover:"Campaign"},
-    {id:2,module:'Consumer Ops',sub_module : 'Meter Data',icon:'icons8 icons8-conflict',link:'#',ngbPopover:"Meter Data"},
+    {module : 'Consumer Care',sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard Consumer Care"},
+    {module : 'Admin',sub_module : 'Utility Master',icon:'icons8 icons8-brief',link:'#',ngbPopover:"Utility Master"}, 
+    {module : 'Admin',sub_module : 'System Configuration',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"System Configuration"},         
+    {module : 'Consumer Ops',sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard Consumer"},
+    {module : 'Consumer Care',sub_module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers care"},
+    {module : 'S&M',sub_module : 'Registrations',icon:'icons8 icons8-shared-document',link:'/consumerops/registration',ngbPopover:"Registration"},
+    {module : 'S&M',sub_module : 'Campaign',icon:'icons8 icons8-megaphone',link:'/campaign',ngbPopover:"Campaign"},
+    {module : 'Consumer Ops',sub_module : 'Meter Data',icon:'icons8 icons8-conflict',link:'#',ngbPopover:"Meter Data"},
   ]
 
   module_subModule:any = [];
   sub_module_list:any = [];
   defaultModule;
+  subModules:any=[];
+  utility_idstring;
+  defaultModuleName;
 
-  ngOnInit(): void {     
+  ngOnInit(): void {         
+
+    // After Change Utility set the side nav data
+    this.getData.moduleName.subscribe(moduleName=>{
+      this.commonVal = this.subModuleList.filter(obj=>obj.module===moduleName);
+      this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
+    })
+
     // According to Role and Privilege display Side nav data
     this.getData.moduleObj.subscribe(result=>{
       for(let role of result.data.roles ){  
@@ -50,15 +70,14 @@ export class SideNavComponent implements OnInit {
           }
         } 
       this.commonVal = this.subModuleList.filter(obj=>obj.module===this.defaultModule);
-      this.finalList = this.commonVal.filter(o1 => this.module_subModule.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
+      this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
     })
+
+      
+      
 
     $(document).ready(function(){
       $(".menubttn").parents(".pr-side-navbar").removeClass("open-slide");    
-      // $(".menubttn").parents(".pr-side-navbar").removeClass("open-slide");    
-      // $('.menubttn').click(function(){
-      //   $(this).toggleClass('open');
-      // });
 
       // For modal close on cross click
       $('.modal').find('.close').on('click', function() {

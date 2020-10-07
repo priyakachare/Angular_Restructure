@@ -1,6 +1,6 @@
 <div class="d-inline-block">
-    <select #selectElem class="filter-select record-select" >
-        <option *ngFor="let utility of utilities" [value]="utility.id_string">
+    <select #selectElem class="filter-select record-select" (change)='onOptionsSelected(selectElem.value)'>
+        <option *ngFor="let utility of utilities" [value]="utility.id_string" [selected]="utility.selected == true">
             {{utility.name}}
         </option>
     </select>
