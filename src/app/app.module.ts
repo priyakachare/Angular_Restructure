@@ -71,6 +71,8 @@ import { CampaignComponent } from './campaign/campaign.component';
 import { CampaignDatatableComponent } from './campaign/campaign-datatable/campaign-datatable.component';
 import { CampaignFilterComponent } from './campaign/campaign-filter/campaign-filter.component';
 import { CampaignSummaryComponent } from './campaign/campaign-summary/campaign-summary.component';
+import { ResetPasswordComponent } from './login-logout/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './login-logout/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -124,7 +126,9 @@ import { CampaignSummaryComponent } from './campaign/campaign-summary/campaign-s
     CampaignComponent,
     CampaignDatatableComponent,
     CampaignFilterComponent,
-    CampaignSummaryComponent
+    CampaignSummaryComponent,
+    ResetPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
