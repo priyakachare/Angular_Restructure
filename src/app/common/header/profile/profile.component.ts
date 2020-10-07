@@ -1,5 +1,8 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faChevronDown, faSearch, faMapMarkerAlt, faPlus, faBell } from '@fortawesome/free-solid-svg-icons';
+import { CommonService } from '../../common.service';
 
 @Component({
   selector: 'smart360-profile',
@@ -27,8 +30,22 @@ export class ProfileComponent implements OnInit {
   ] 
   };
 
-  constructor() { }
+  id_string;
+  constructor(private commonService:CommonService,private router:Router) { }
+  selectItem(selectedVal){
+    //get value of token and id string from sessionStorage
+   var userDetail = JSON.parse(sessionStorage.getItem("UserDetails"))   
+   this.id_string = userDetail.id_string
 
+    if(selectedVal === 'Logout'){
+      this.commonService.logOut(this.id_string).subscribe(data =>{
+        if(data.state === "success"){
+          sessionStorage.removeItem("UserDetails")
+          this.router.navigateByUrl('/login');   
+        }
+      })
+    }
+  }
   ngOnInit(): void {
   }
 

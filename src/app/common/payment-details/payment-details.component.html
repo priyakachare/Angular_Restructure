@@ -1,15 +1,15 @@
-<div class="block-body"> 
-    <div class="row">
+<div class="block-body" *ngFor="let item of paymentData"> 
+    <div class="row" *ngIf="paymentData.length != 0">
         <div class="col">
-            <div class="applicant-data">
+            <div class="applicant-data"> 
                 <div class="paymnt-blk">
                     <div class="row">
                         <div class="col-6">
                             <div class="paymnt-list type-1">
                                 <ul class="list-group list-group-horizontal justify-content-start">
                                     <li class="list-group-item">
-                                        <p class="p text-primary">{{static.type}}</p>
-                                        <span>{{static.date}}</span>              
+                                        <p class="p text-primary">{{item.payment_type.name}}</p>
+                                        <span>{{item.transaction_date | date : 'dd MMM yy' }}</span>              
                                     </li>
                                 </ul>
                             </div>
@@ -18,7 +18,7 @@
                             <div class="paymnt-list type-2">
                                 <ul class="list-group list-group-horizontal justify-content-end">
                                     <li class="list-group-item">
-                                        <p class="p text-primary"><span class="icon"><img src="../../assets/images/icons/paid-icon.png" alt="img"></span>$ {{static.amount}}</p>
+                                        <p class="p text-primary"><span class="icon"><img src="../../assets/images/icons/paid-icon.png" alt="img"></span>$ {{item.transaction_amount}}</p>
                                         <span>Amount Paid</span>               
                                     </li>
                                 </ul>
@@ -30,13 +30,13 @@
                             <div class="paymnt-list type-3">
                                 <ul class="list-group list-group-horizontal justify-content-start">
                                     <li class="list-group-item">
-                                        <p class="p">{{static.mode}}</p>
+                                        <p class="p">{{item.payment_mode.name}}</p>
                                         <span>Payment Mode</span>
                                     </li>
                                     <li class="list-group-item">                  
                                     </li>
                                     <li class="list-group-item">
-                                        <p class="p">{{static.id}}</p>
+                                        <p class="p">{{item.receipt_no}}</p>
                                         <span>Transaction Number</span>                
                                     </li>
                                 </ul>
@@ -46,13 +46,13 @@
                     <div class="row">
                         <div class="col">
                             <div class="paymnt-list type-4">
-                                <h4 class="h4 ttl">Payment Type</h4>
-                                <ul class="list-group list-group-horizontal justify-content-start" *ngFor="let item of paymentData">
+                                <h4 class="h4 ttl">Payment Sub Type</h4>
+                                <ul class="list-group list-group-horizontal justify-content-start">
                                     <li class="list-group-item">
-                                        <p class="p">{{item.type}}</p>         
+                                        <p class="p">{{item.payment_sub_type.name}}</p>         
                                     </li>
                                     <li class="list-group-item">
-                                        <p class="p">$ {{item.amount}}</p>            
+                                        <p class="p">$ {{item.transaction_amount}}</p>            
                                     </li>
                                 </ul>
                             </div>
@@ -62,4 +62,5 @@
             </div>
         </div>
     </div>
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 </div>

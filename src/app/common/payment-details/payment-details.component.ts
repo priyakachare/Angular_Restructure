@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { PaymentDetailsService } from './payment-details.service';
 
 @Component({
   selector: 'app-payment-details',
@@ -7,18 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PaymentDetailsComponent implements OnInit {
 
-  @Input() data1;
-  @Input() data2;
-
-  static : any;
-
   paymentData = []
 
-  constructor() { }
+  constructor(private paymentDetailsService : PaymentDetailsService) {
+    this.paymentDetailsService.getPayments().subscribe(resp=>{
+      this.paymentData = resp['payments']
+      console.log(this.paymentData)
+    })
+  }
 
   ngOnInit(): void {
-  	this.static = this.data1
-  	this.paymentData = this.data2
+  	
   }
 
 }

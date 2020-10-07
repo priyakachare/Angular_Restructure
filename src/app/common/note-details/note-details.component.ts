@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core'; 
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'; 
 import { faChevronLeft, faChevronRight, faPen, faCalendarAlt,faFilePdf,faMapMarkerAlt, faPrint ,faTimesCircle, faEye, faPlus, faFileCsv, faStar, faFileExcel } from '@fortawesome/free-solid-svg-icons';
+import { NoteDetailsService } from '../note-details/note-details.service';
+declare var $:any
 
 @Component({
   selector: 'app-note-details',
@@ -10,20 +12,44 @@ export class NoteDetailsComponent implements OnInit {
 
   @Input() data;
 
+  notes = []
   faPlus = faPlus;
   faPrint = faPrint
+  color : String = "notes-card colr1"
+  note : any;
+  response : any;
 
-  notes = []
-
-  constructor() { }
+  constructor(private noteService : NoteDetailsService) { }
 
   ngOnInit(): void {
     this.notes = this.data
+    console.log()
   }
 
   public show:boolean = false;
   toggle() {
     this.show = !this.show;
+  }
+
+  changeColor(e) {
+    this.color = e.target.defaultValue;
+  }
+
+  onNoteChange(e){
+    this.note = e.target.value;
+    $("#note-error").hide()
+  }
+
+  addNote(){
+    if(this.note == null || this.note == ""){
+      $("#note-error").show()
+    }else{
+      this.response = {
+        note : this.note,
+        note_color : this.color
+      }
+      this.noteService.sendNoteResponse(this.response)
+    }
   }
 
 }

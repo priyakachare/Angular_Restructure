@@ -10,14 +10,16 @@ import { FilterService } from '../../common/filter/filter.service';
 })
 export class RegistrationFiltersComponent implements OnInit {
 
-  constructor(private filterService: FilterService) { }
+  constructor(private filterService: FilterService, private router: Router) { }
 
   ngOnInit(): void {
     this.filterService.getButtonEvent().subscribe(data=>{
-      console.log(data.event.type)
+      if(data.event.type == 'click'){
+        this.router.navigateByUrl('registration/add-registration')
+      }
     })
   }
-
+ 
   
 
   button = {

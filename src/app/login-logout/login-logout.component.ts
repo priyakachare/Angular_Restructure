@@ -91,7 +91,7 @@ export class LoginLogoutComponent implements OnInit {
           this.router.navigateByUrl('/home');           
 
           // Fetching UserDetail      
-          this.commonService.getUserDetails(result.token,result.id_string).subscribe(resp => {
+          this.commonService.getUserDetails().subscribe(resp => {
             if(resp.state === 'success'){
               console.log('User Details =>'+resp.results.email + "  "+resp.results.created_date)
               }            
