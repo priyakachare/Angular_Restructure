@@ -1,4 +1,4 @@
-<app-stepper-form [operator]="testing()"> 
+<app-stepper-form [operator]="testing()">
 	<div class="col pl-0">
         <div class="cust-form-col-rt">
             <div class="row">
@@ -31,40 +31,51 @@
                                     <div class="registration-form inner-form">
                                         <div class="row inner-form-wrap">
                                             <div class="col-12">
-                                                <form name="form">
+                                                <form name="form" [formGroup]="applicantDetailsForm" (ngSubmit)="onSubmit()">
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <label>First Name</label>
-                                                            <input type="text" #textbox class="form-control" placeholder="First Name" [(ngModel)]="firstName" value="Thomas Shelby" name="textValue" />
+                                                            <input type="text" #textbox class="form-control" placeholder="First Name" value="Thomas Shelby" name="firstName" formControlName="firstNameControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.firstNameControl.errors }"/>
+                                                            <div *ngIf="applicantDetailsFormSubmitted && ad.firstNameControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ad.firstNameControl.errors.required">First name can't be empty!</div>
+                                                            </div>
                                                         </div>
                                                         <div class="col">
                                                             <label>Middle Name</label>
-                                                            <input type="text" #textbox class="form-control" placeholder="Middle Name" [(ngModel)]="middleName" value="Thomas Shelby" name="textValue" />
+                                                            <input type="text" #textbox class="form-control" placeholder="Middle Name" name="textValue"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <label>Last Name</label>
-                                                            <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="lastName" name="lastName"/>
+                                                            <input type="text" class="form-control" placeholder="Last Name" name="lastName" formControlName="lastNameControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.lastNameControl.errors }"/>
+                                                            <div *ngIf="applicantDetailsFormSubmitted && ad.lastNameControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ad.lastNameControl.errors.required">Last name can't be empty!</div>
+                                                            </div>
                                                         </div>
                                                         <div class="col">
                                                             <label>Utility</label>
-                                                            <ng-select [items]="utility" bindLabel="utilityName" placeholder="Select Utility"
-                                                                [(ngModel)]="selectedUtility" name="utilityName">
+                                                            <ng-select [items]="[]" [(ngModel)]="selectedUtility" bindLabel="utilityName" placeholder="Select Utility" name="utilityName" [ngModelOptions]="{standalone: true}">
                                                             </ng-select>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <label>Mobile Number</label>
-                                                            <input type="text" class="form-control" placeholder="Mobile Number" [(ngModel)]="mobileNo" name="mobileNo"/>
+                                                            <input type="text" class="form-control" placeholder="Mobile Number" name="mobileNo" formControlName="mobileNoControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.mobileNoControl.errors }"/>
+                                                            <div *ngIf="applicantDetailsFormSubmitted && ad.mobileNoControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ad.mobileNoControl.errors.required">Mobile no. can't be empty!</div>
+                                                            </div>
                                                         </div>
                                                         <div class="col">
                                                             <label>Email</label>
-                                                            <input type="email" class="form-control" placeholder="Email ID" [(ngModel)]="email" name="email">
+                                                            <input type="email" class="form-control" placeholder="Email ID" name="email" formControlName="emailControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.emailControl.errors }">
+                                                            <div *ngIf="applicantDetailsFormSubmitted && ad.emailControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ad.emailControl.errors.required">Mobile no. can't be empty!</div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row">
+                                                    <!-- <div class="form-row">
                                                         <div class="col">
                                                             <label>ID Document</label>
                                                             <ng-select [items]="document" bindLabel="name" placeholder="Select ID Document"
@@ -75,55 +86,66 @@
                                                             <label>ID Number</label>
                                                             <input type="text" class="form-control" placeholder="ID Number" />
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <label>Consumer category</label>
-                                                            <ng-select [items]="consumerCategory" bindLabel="name" placeholder="Select Consumer category"
-                                                                [(ngModel)]="selectedConsumerCategory" name="name">
+                                                            <ng-select [items]="consumerCategories" bindLabel="name" placeholder="Select Consumer category" formControlName="consumerCategoryControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.consumerCategoryControl.errors }" name="consumerCategory" [clearable]="false" id="consumerCategory">
                                                             </ng-select>
+                                                            <div *ngIf="applicantDetailsFormSubmitted && ad.consumerCategoryControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ad.consumerCategoryControl.errors.required">Please select consumer category!</div>
+                                                            </div>
                                                         </div>
                                                         <div class="col">
                                                             <label>Consumer sub category</label>
-                                                            <ng-select [items]="consumerSubCategory" bindLabel="name" placeholder="Select Consumer sub category"
-                                                                [(ngModel)]="selectedConsumerSubCategory" name="name">
+                                                            <ng-select [items]="consumerSubCategory" bindLabel="name"placeholder="Select Consumer sub category" formControlName="consumerSubCategoryControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.consumerSubCategoryControl.errors }" name="consumerSubCategory" [clearable]="false">
                                                             </ng-select>
+                                                            <div *ngIf="applicantDetailsFormSubmitted && ad.consumerSubCategoryControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ad.consumerSubCategoryControl.errors.required">Please select consumer sub category!</div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <label>Ownership</label>
-                                                            <ng-select [items]="Ownership" bindLabel="name" placeholder="Select Ownership"
-                                                                [(ngModel)]="selectedOwnership" name="name">
+                                                            <ng-select [items]="Ownership" bindLabel="name" placeholder="Select Ownership" formControlName="ownershipControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.ownershipControl.errors }" name="ownership" [clearable]="false">
                                                             </ng-select>
+                                                            <div *ngIf="applicantDetailsFormSubmitted && ad.ownershipControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ad.ownershipControl.errors.required">Please select ownership!</div>
+                                                            </div>
                                                         </div>
                                                         <div class="col">
                                                             <label>VIP</label>
-                                                            <ng-select [items]="vip" type="text" bindLabel="name" placeholder="Select Yes/No" [(ngModel)]="selectedVip" bindValue="name"
-                                                                name = "name">
+                                                            <ng-select [items]="vip" type="text" bindLabel="name" placeholder="Select Yes/No" bindValue="name" formControlName="vipControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.vipControl.errors }" name="vip" [clearable]="false">
                                                             </ng-select>
+                                                            <div *ngIf="applicantDetailsFormSubmitted && ad.vipControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ad.vipControl.errors.required">Please select vip!</div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
                                                         
                                                         <div class="col-6">
                                                             <label>Pipeline</label>
-                                                            <ng-select [items]="pipeline" type="text" bindLabel="name"  placeholder="Select Pipeline"
-                                                                [(ngModel)]="selectedPipeline" bindValue="name" name="pipelineName">
+                                                            <ng-select [items]="pipeline" type="text" bindLabel="name"  placeholder="Select Pipeline" bindValue="name" formControlName="pipelineControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.pipelineControl.errors }" name="pipeline" [clearable]="false">
                                                             </ng-select>
+                                                            <div *ngIf="applicantDetailsFormSubmitted && ad.pipelineControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ad.pipelineControl.errors.required">Please select pipeline!</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row justify-content-center form-bttn-row">
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-outline-light3 st">Cancel</button>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-secondary st" id="proceed_1">Proceed</button>
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
-                                        <div class="row justify-content-center form-bttn-row">
-                                            <div class="col-auto">
-                                                <button class="btn btn-outline-light3 st">Cancel</button>
-                                            </div>
-                                            <div class="col-auto">
-                                                <button class="btn btn-secondary st" id="proceed_1">Proceed</button>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>                               
