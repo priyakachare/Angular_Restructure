@@ -10,6 +10,8 @@ import { TenantComponent } from './tenant/tenant.component';
 import { ScheduleComponent } from './meter-data/schedule/schedule.component';
 import { CommonComponent } from './common/common.component';
 import { CampaignComponent } from './campaign/campaign.component';
+import { ComplaintComponent } from './complaint/complaint.component';
+import { ServicesComponent } from './services/services.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,6 +24,9 @@ const routes: Routes = [
 	{ path: 'registration/:id', component: RegistrationDetailViewComponent },
 	{ path: 'login', component: LoginLogoutComponent },
 	{ path: 'tenant', component: TenantComponent },
+	{ path: 'complaint', component: ComplaintComponent },
+	{ path: 'complaint/:id', component: ComplaintComponent },
+	{ path: 'services', component: ServicesComponent },
 	{ path: 'meter-data/schedule', component: ScheduleComponent },
 ]
 
