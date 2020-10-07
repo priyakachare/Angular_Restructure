@@ -57,6 +57,10 @@ export class AddRegistrationComponent implements OnInit {
 
   applicantDetailsForm: FormGroup;
   applicantDetailsFormSubmitted = false;
+  addressDetailsForm: FormGroup;
+  addressDetailsFormSubmitted = false;
+  paymentDetailsForm: FormGroup;
+  paymentDetailsFormSubmitted = false;
   showtoast = false; 
   autohide = true;
   textValue = 'Thomas Shelby';
@@ -228,6 +232,8 @@ export class AddRegistrationComponent implements OnInit {
   addCustomUser = (term) => ({id: term, name: term});
 
   constructor(private stepperFormService:StepperFormService, private formBuilder: FormBuilder) {
+
+    // Applicant details form code start
     this.applicantDetailsForm = this.formBuilder.group({
       firstNameControl: ['', [Validators.required]],
       lastNameControl: ['', [Validators.required]],
@@ -239,11 +245,41 @@ export class AddRegistrationComponent implements OnInit {
       vipControl: [null, [Validators.required]],
       pipelineControl: [null, [Validators.required]],
     });
+    // Applicant details form code start
+
+    // Payment details form code start
+    this.paymentDetailsForm = this.formBuilder.group({
+      firstNameControl: ['', [Validators.required]],
+    });
+    // Payment details form code end
+
+    // Address details form code start
+    this.addressDetailsForm = this.formBuilder.group({
+      addressLineControl: ['', [Validators.required]],
+      streetControl: ['', [Validators.required]],
+      stateProvinceRegionControl: [null, [Validators.required]],
+      cityControl: [null, [Validators.required]],
+      zipCodeControl: [null, [Validators.required]],
+      areaControl: [null, [Validators.required]],
+      subAreaControl: [null, [Validators.required]],
+    });
+    // Address details form code end
   }
 
+  // Applicant details form control start
   get ad() { return this.applicantDetailsForm.controls; }
+  // Applicant details form control end
 
-  onSubmit() {
+  // Address details form control start
+  get add() { return this.addressDetailsForm.controls; }
+  // Address details form control end
+
+  // Payment details form control start
+  get pd() { return this.paymentDetailsForm.controls; }
+  // Payment details form control end
+
+  // Applicant details form submit start
+  onApplicantDetailsFormSubmit() {
       this.applicantDetailsFormSubmitted = true;
 
       if (this.applicantDetailsForm.invalid) {
@@ -251,8 +287,32 @@ export class AddRegistrationComponent implements OnInit {
       }else{
         this.stepperFormService.sendTrigger("#applicant-pay-tab")
       }
-
   }
+  // Applicant details form submit end
+
+  // Address details form submit start
+  onAddressDetailsFormSubmit() {
+      this.addressDetailsFormSubmitted = true;
+
+      if (this.addressDetailsForm.invalid) {
+          return;
+      }else{
+        this.stepperFormService.sendTrigger("#applicant-pay-tab")
+      }
+  }
+  // Address details form submit end
+
+  // Payment details form submit start
+  onPaymentDetailsFormSubmit() {
+      this.paymentDetailsFormSubmitted = true;
+
+      if (this.paymentDetailsForm.invalid) {
+          return;
+      }else{
+        this.stepperFormService.sendTrigger("#applicant-addr-tab")
+      }
+  }
+  // Payment details form submit end
 
   ngOnInit(): void {
     this.sendStepperFormData()
