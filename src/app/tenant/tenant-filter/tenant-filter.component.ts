@@ -12,7 +12,7 @@ export class TenantFilterComponent implements OnInit {
   constructor(private filterService : FilterService) { }
 
   ngOnInit(): void {
-  	this.sendFiltersData()
+  	
   }
 
   sendFiltersData(){

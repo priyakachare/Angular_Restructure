@@ -12,6 +12,8 @@ import { CommonComponent } from './common/common.component';
 import { CampaignComponent } from './campaign/campaign.component';
 import { ResetPasswordComponent } from './login-logout/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './login-logout/change-password/change-password.component';
+import { ComplaintComponent } from './complaint/complaint.component';
+import { ServicesComponent } from './services/services.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,6 +25,9 @@ const routes: Routes = [
 	{ path: 'registration/:id', component: RegistrationDetailViewComponent },
 	{ path: 'login', component: LoginLogoutComponent },
 	{ path: 'tenant', component: TenantComponent },
+	{ path: 'complaint', component: ComplaintComponent },
+	{ path: 'complaint/:id', component: ComplaintComponent },
+	{ path: 'services', component: ServicesComponent },
 	{ path: 'meter-data/schedule', component: ScheduleComponent },
 	{ path: 'reset-password/:<uidb64>/:<token>', component: ResetPasswordComponent },
 	{ path: 'change-password', component: ChangePasswordComponent },
