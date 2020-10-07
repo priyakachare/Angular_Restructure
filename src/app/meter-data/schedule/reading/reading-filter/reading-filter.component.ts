@@ -26,6 +26,7 @@ export class ReadingFilterComponent implements OnInit {
     })
   }
 
+ 
   button = {
     name : 'SCHEDULE',
     routerLink : '/registration/add-registration'

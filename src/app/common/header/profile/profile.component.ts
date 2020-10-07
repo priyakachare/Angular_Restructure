@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
     { options : 'ESS', link:"#"},
     { options : 'Helpdesk', link:"#"},
     { options : 'Help', link:"#"},
+    { options : 'Change Password', link:"change-password"},
     { options : 'Logout', link:"#"}
   ] 
   };
@@ -41,9 +42,12 @@ export class ProfileComponent implements OnInit {
       this.commonService.logOut(this.id_string).subscribe(data =>{
         if(data.state === "success"){
           sessionStorage.removeItem("UserDetails")
-          this.router.navigateByUrl('/login');   
+          this.router.navigateByUrl('/login'); 
         }
       })
+    }
+    else if(selectedVal === 'Change Password'){
+      this.router.navigateByUrl('/change-password'); 
     }
   }
   ngOnInit(): void {

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { Router } from "@angular/router";
 import { CommonService } from '../common/common.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login-logout',
@@ -103,6 +104,22 @@ export class LoginLogoutComponent implements OnInit {
       })
     }
   }
+
+  // send email for reset password
+  onSubmit(f: NgForm){
+    const resetPasswordObserver = {
+      next: x => {
+        alert('Password Reset Request Sent\n Please! check your email');
+        console.log('Check email');
+        this.router.navigateByUrl('/login');
+      },
+      error: err => {
+        alert('Provided credentials are wrong.')
+        console.log(err)}
+    };
+    this.commonService.sendEmail(f.value).subscribe(resetPasswordObserver);
+  }
+
   ngOnInit(): void {
 
     $(document).ready(function(){

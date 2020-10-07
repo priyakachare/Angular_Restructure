@@ -71,6 +71,19 @@ import { CampaignComponent } from './campaign/campaign.component';
 import { CampaignDatatableComponent } from './campaign/campaign-datatable/campaign-datatable.component';
 import { CampaignFilterComponent } from './campaign/campaign-filter/campaign-filter.component';
 import { CampaignSummaryComponent } from './campaign/campaign-summary/campaign-summary.component';
+import { ResetPasswordComponent } from './login-logout/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './login-logout/change-password/change-password.component';
+import { ComplaintComponent } from './complaint/complaint.component';
+import { ComplaintAddComponent } from './complaint/complaint-add/complaint-add.component';
+import { ComplaintListComponent } from './complaint/complaint-list/complaint-list.component';
+import { ComplaintDashboardComponent } from './complaint/complaint-dashboard/complaint-dashboard.component';
+import { ComplaintFiltersComponent } from './complaint/complaint-filters/complaint-filters.component';
+import { ServicesComponent } from './services/services.component';
+import { ServicesAddComponent } from './services/services-add/services-add.component';
+import { ServicesDashboardComponent } from './services/services-dashboard/services-dashboard.component';
+import { ServicesFiltersComponent } from './services/services-filters/services-filters.component';
+import { ServicesListComponent } from './services/services-list/services-list.component';
+import { ComplaintViewComponent } from './complaint/complaint-view/complaint-view.component';
 
 @NgModule({
   declarations: [
@@ -124,7 +137,20 @@ import { CampaignSummaryComponent } from './campaign/campaign-summary/campaign-s
     CampaignComponent,
     CampaignDatatableComponent,
     CampaignFilterComponent,
-    CampaignSummaryComponent
+    CampaignSummaryComponent,
+    ResetPasswordComponent,
+    ChangePasswordComponent,
+    ComplaintComponent,
+    ComplaintAddComponent,
+    ComplaintListComponent,
+    ComplaintDashboardComponent,
+    ComplaintFiltersComponent,
+    ServicesComponent,
+    ServicesAddComponent,
+    ServicesDashboardComponent,
+    ServicesFiltersComponent,
+    ServicesListComponent,
+    ComplaintViewComponent
   ],
   imports: [
     BrowserModule,
