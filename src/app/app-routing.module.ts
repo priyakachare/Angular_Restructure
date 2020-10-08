@@ -15,6 +15,7 @@ import { ResetPasswordComponent } from './login-logout/reset-password/reset-pass
 import { ChangePasswordComponent } from './login-logout/change-password/change-password.component';
 import { ComplaintComponent } from './complaint/complaint.component';
 import { ServicesComponent } from './services/services.component';
+import { UtilityComponent } from './utility/utility.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -31,6 +32,7 @@ const routes: Routes = [
 	{ path: 'services', component: ServicesComponent },
 	{ path: 'meter-data/schedule', component: ScheduleComponent },
 	{ path: 'user', component: UserComponent },
+	{ path: 'utility', component: UtilityComponent },
 	{ path: 'reset-password/:<uidb64>/:<token>', component: ResetPasswordComponent },
 	{ path: 'change-password', component: ChangePasswordComponent },
 ]

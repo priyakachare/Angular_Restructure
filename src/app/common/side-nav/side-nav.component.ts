@@ -114,7 +114,7 @@ export class SideNavComponent implements OnInit {
     ]};
 
     this.utilitymasterAdmin ={title:'Utility Master' ,data :[
-      {id:1,navData:'Utility',link:'#'},{id:2,navData:'Plans',link:'#'},
+      {id:1,navData:'Utility',link:'/utility'},{id:2,navData:'Plans',link:'#'},
     ]};
 
     if(sub_module === "Meter Data"){
