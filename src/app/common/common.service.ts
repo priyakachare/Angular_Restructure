@@ -14,6 +14,7 @@ export class CommonService {
   @Output() sideNavId = new EventEmitter<string>();
   @Output() utilityList = new EventEmitter<string>();
   @Output() utilityIdString = new EventEmitter<string>();
+  @Output() checkBlankUtility = new EventEmitter<string>();
 
   constructor(private http:HttpClient) {
    }

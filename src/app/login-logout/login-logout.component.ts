@@ -59,7 +59,7 @@ export class LoginLogoutComponent implements OnInit {
     this.showpwd4 = !this.showpwd4;
   }
   
-  
+  contentEditable;
   constructor(private router: Router, private commonService:CommonService,private formBuilder: FormBuilder) { 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -85,7 +85,6 @@ export class LoginLogoutComponent implements OnInit {
     if(this.loginForm.valid){
       this.commonService.login(this.loginForm.value).subscribe(result =>{
         if(result.state === 'success'){  
-
           //set token and id string in sessionStorage
           sessionStorage.setItem("UserDetails",JSON.stringify({id_string:result.id_string, token:result.token}))
           this.router.navigateByUrl('/home');           
@@ -103,6 +102,11 @@ export class LoginLogoutComponent implements OnInit {
       })
     }
   }
+
+  toggleEditable(val) {
+
+  }
+
   ngOnInit(): void {
 
     $(document).ready(function(){

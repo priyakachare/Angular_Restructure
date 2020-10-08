@@ -71,6 +71,12 @@ import { CampaignComponent } from './campaign/campaign.component';
 import { CampaignDatatableComponent } from './campaign/campaign-datatable/campaign-datatable.component';
 import { CampaignFilterComponent } from './campaign/campaign-filter/campaign-filter.component';
 import { CampaignSummaryComponent } from './campaign/campaign-summary/campaign-summary.component';
+import { UserComponent } from './user/user.component';
+import { UserAddComponent } from './user/user-add/user-add.component';
+import { UserDetailViewComponent } from './user/user-detail-view/user-detail-view.component';
+import { UserFiltersComponent } from './user/user-filters/user-filters.component';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { UserSummaryComponent } from './user/user-summary/user-summary.component';
 
 @NgModule({
   declarations: [
@@ -124,7 +130,13 @@ import { CampaignSummaryComponent } from './campaign/campaign-summary/campaign-s
     CampaignComponent,
     CampaignDatatableComponent,
     CampaignFilterComponent,
-    CampaignSummaryComponent
+    CampaignSummaryComponent,
+    UserComponent,
+    UserAddComponent,
+    UserDetailViewComponent,
+    UserFiltersComponent,
+    UserListComponent,
+    UserSummaryComponent
   ],
   imports: [
     BrowserModule,

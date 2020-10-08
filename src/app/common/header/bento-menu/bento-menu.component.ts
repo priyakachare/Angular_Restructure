@@ -76,8 +76,14 @@ export class BentoMenuComponent implements OnInit {
       // Taking list of module according to firstUtility
       this.getData.getUtilityModuleList(this.firstUtility).subscribe(modules =>{
         this.utility_module_list = modules.results
-        this.getData.moduleName.emit(this.utility_module_list[0].module_name)
-        this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
+        if(this.utility_module_list != ""){
+          this.getData.moduleName.emit(this.utility_module_list[0].module_name)
+          this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
+        }else{
+          this.getData.moduleName.emit(this.utility_module_list)
+          this.finalModuleList = [{"module_name":"","img":""}]
+        }
+        
       })
     })
     // According to Role and Privilege display Bento menu options
@@ -105,8 +111,13 @@ export class BentoMenuComponent implements OnInit {
       // Taking list of module according to firstUtility
       this.getData.getUtilityModuleList(this.firstUtility).subscribe(modules =>{
         this.utility_module_list = modules.results
-        // this.getData.defaultUtilityModule.emit(this.utility_module_list[0].module_name)
-        this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
+        if(this.utility_module_list != ""){
+          this.getData.moduleName.emit(this.utility_module_list[0].module_name)
+          this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
+        }else{
+          this.finalModuleList = [{"module_name":"","img":""}]
+        }
+        this.getData.checkBlankUtility.emit(this.utility_module_list)
       })
     })
  

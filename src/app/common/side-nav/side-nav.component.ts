@@ -42,6 +42,7 @@ export class SideNavComponent implements OnInit {
     {module : 'S&M',sub_module : 'Registrations',icon:'icons8 icons8-shared-document',link:'/consumerops/registration',ngbPopover:"Registration"},
     {module : 'S&M',sub_module : 'Campaign',icon:'icons8 icons8-megaphone',link:'/campaign',ngbPopover:"Campaign"},
     {module : 'Consumer Ops',sub_module : 'Meter Data',icon:'icons8 icons8-conflict',link:'#',ngbPopover:"Meter Data"},
+    {module : 'S&M',sub_module : 'Users',icon:'icons8 icons8-cv',link:'/user',ngbPopover:"Users"},
   ]
 
   module_subModule:any = [];
@@ -50,6 +51,7 @@ export class SideNavComponent implements OnInit {
   subModules:any=[];
   utility_idstring;
   defaultModuleName;
+  utilitymasterAdmin;
 
   ngOnInit(): void {         
 
@@ -69,8 +71,15 @@ export class SideNavComponent implements OnInit {
             }            
           }
         } 
-      this.commonVal = this.subModuleList.filter(obj=>obj.module===this.defaultModule);
-      this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
+        this.getData.checkBlankUtility.subscribe(checkUtility=>{
+          if(checkUtility != ""){
+            this.commonVal = this.subModuleList.filter(obj=>obj.module===this.defaultModule);
+            this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
+          }else{
+            this.finalList =  [{}]
+          }
+        })
+      
     })
 
       
@@ -92,6 +101,7 @@ export class SideNavComponent implements OnInit {
   ]};
 
   showPopup(sub_module){   
+
     this.getData.sideNavId.emit(sub_module)  
 
     this.meterData ={title:'Meter Data' ,data :[
@@ -103,9 +113,17 @@ export class SideNavComponent implements OnInit {
       {id:1,navData:'Survey Type',link:'#'},{id:2,navData:'Campaign Type',link:'#'},{navData:'Campaign Frequency Type',link:'#'},
     ]};
 
+    this.utilitymasterAdmin ={title:'Utility Master' ,data :[
+      {id:1,navData:'Utility',link:'#'},{id:2,navData:'Plans',link:'#'},
+    ]};
+
     if(sub_module === "Meter Data"){
       this.showPopUpFlag = !this.showPopUpFlag
       this.meterData = this.meterData
+    }
+    else if(sub_module === "Utility Master"){
+      this.showPopUpFlag = !this.showPopUpFlag
+      this.meterData = this.utilitymasterAdmin
     }
     // else if(this.moduleId==1 && id==8||this.moduleId==undefined && id==8){
     //   this.showPopUpFlag = !this.showPopUpFlag

@@ -10,6 +10,7 @@ import { TenantComponent } from './tenant/tenant.component';
 import { ScheduleComponent } from './meter-data/schedule/schedule.component';
 import { CommonComponent } from './common/common.component';
 import { CampaignComponent } from './campaign/campaign.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
 	{ path: 'login', component: LoginLogoutComponent },
 	{ path: 'tenant', component: TenantComponent },
 	{ path: 'meter-data/schedule', component: ScheduleComponent },
+	{ path: 'user', component: UserComponent },
 ]
 
 @NgModule({
