@@ -536,7 +536,7 @@
                         <!-- Tab panel for KYC documents end -->
 
                         <!-- Tab panel for review and submit start -->
-                        <div class="tab-pane fade" id="rvw-sbmt" role="tabpanel" aria-labelledby="rvw-sbmt-tab">
+                        <div class="tab-pane fade" id="rvw-sbmt" role="tabpanel" aria-labelledby="rvw-sbmt-tab" *ngIf="this.applicantDetailsForm.valid && this.addressDetailsForm.valid">
                             <div class="row br-btm">
                                 <div class="col-auto align-self-center">
                                     <h4 class="h4 ttl">Review &amp; Submit</h4>                                    
@@ -565,51 +565,51 @@
                                                     <div class="row">
                                                         <div class="col-3">
                                                             <p class="p p-13">First Name</p>
-                                                            <h6 class="h6">Branch</h6>
+                                                            <h6 class="h6">{{this.applicantDetailsForm.value.firstNameControl}}</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Middle Name</p>
-                                                            <h6 class="h6">09 Jan 2020</h6>
+                                                            <h6 class="h6">{{this.applicantDetailsForm.value.middleNameControl}}</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Last Name</p>
-                                                            <h6 class="h6">Thomas Shelby</h6>
+                                                            <h6 class="h6">{{this.applicantDetailsForm.value.lastNameControl}}</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Utility</p>
-                                                            <h6 class="h6">Thomas Shelby</h6>
+                                                            <h6 class="h6">{{this.applicantDetailsForm.value.utilityControl.name}}</h6>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-3">
                                                             <p class="p p-13">Mobile Number</p>
-                                                            <h6 class="h6">1234 6538 6456</h6>
+                                                            <h6 class="h6">{{this.applicantDetailsForm.value.mobileNoControl}}</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Email</p>
-                                                            <h6 class="h6">+91 9849163057</h6>
+                                                            <h6 class="h6">{{this.applicantDetailsForm.value.emailControl}}</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Consumer Category</p>
-                                                            <h6 class="h6">Yes</h6>
+                                                            <h6 class="h6">{{this.applicantDetailsForm.value.consumerCategoryControl.name}}</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Consumer Sub Category</p>
-                                                            <h6 class="h6">Yes</h6>
+                                                            <h6 class="h6">{{this.applicantDetailsForm.value.consumerSubCategoryControl.name}}</h6>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-3">
                                                             <p class="p p-13">Ownership</p>
-                                                            <h6 class="h6">1234 6538 6456</h6>
+                                                            <h6 class="h6">{{this.applicantDetailsForm.value.ownershipControl.name}}</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Vip</p>
-                                                            <h6 class="h6"><span class="flag-green"></span>Yes</h6>
+                                                            <h6 class="h6"><span class="flag-green"></span>{{this.applicantDetailsForm.value.vipControl.name}}</h6>
                                                         </div>
                                                         <div class="col-3">
-                                                            <p class="p p-13">Pipeline</p>
-                                                            <h6 class="h6">Yes</h6>
+                                                            <p class="p p-13">Connectivity</p>
+                                                            <h6 class="h6">{{this.applicantDetailsForm.value.connectivityControl.name}}</h6>
                                                         </div>
                                                     </div>
                                                 </div>                                                    
