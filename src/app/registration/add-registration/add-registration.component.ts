@@ -3,7 +3,8 @@ import { faTrash, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icon
 import { StepperFormService } from '../../common/stepper-form/stepper-form.service';
 import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { NgSelectComponent } from '@ng-select/ng-select';
-declare var $ : any
+import { RegistrationService } from '../registration.service';
+declare var $ : any;
 
 @Component({
   selector: 'app-add-registration',
@@ -63,12 +64,13 @@ export class AddRegistrationComponent implements OnInit {
   paymentDetailsFormSubmitted = false;
   showtoast = false; 
   autohide = true;
+  isAddressSame = false;
+  address = "A504, Prime Heights, Sus road, Pashan, Pune 421005"
   textValue = 'Thomas Shelby';
   model: any;
   date: {day: number, year: number, month: string};
   faCalendarAlt = faCalendarAlt;
   faTrash = faTrash;
-  selectedUtility = "MNGL pune"
   selectedDocument: any;
   selectedPipeline: string[];
   selectedPaymentType: any;
@@ -78,25 +80,8 @@ export class AddRegistrationComponent implements OnInit {
   selectedScheme2: any;
   selectedPaymentMode: any;
   selectedPaymentMode2: any;
-  selectedStateProvince: any;
-  selectedCity: any;
-  selectedZipCode: any;
-  selectedArea: any;
-  selectedSubArea: any;
-  selectedBillingAddress: any;
-  selectedBillingCity: any;
-  selectedBillingZipCode: any;
-  selectedBillingArea: any;
-  selectedBillingSubArea: any;
-  selectedOwnership: any;
   selectedDocumentType = 'Personal details';
   selectedKycDocuments = 'Pancard';
-  firstName = 'Rohan'; 
-  middleName = ''; 
-  lastName = ''; 
-  mobileNo = ''; 
-  email = ''; 
-  name = '';
 
   document = [
     {id: 1, name: 'Document 1'},
@@ -115,13 +100,12 @@ export class AddRegistrationComponent implements OnInit {
     {id: 2, name: 'Ownership 2'},
   ];
   vip =  [
-    {id: 1, name: 'Yes'},
-    {id: 2, name: 'No'},
+    {id: 'True', name: 'Yes'},
+    {id: 'False', name: 'No'},
   ];
-  pipeline = [
-    {id: 1, name: 'Option 1'},
-    {id: 2, name: 'Option 2'},
-    {id: 3, name: 'Option 3'},
+  connectivity = [
+    {id: 'True', name: 'Yes'},
+    {id: 'False', name: 'No'},
   ];
 
   paymentType = [
@@ -155,7 +139,7 @@ export class AddRegistrationComponent implements OnInit {
     {id: 3, name: 'Payment Mode 3'},
   ];
   stateProvince= [
-    {id: 1, name: 'Texas'},
+    {id: 'afa-342', name: 'Texas'},
     {id: 2, name: 'New Jersey'},
     {id: 3, name: 'Alaska'},
   ];
@@ -231,20 +215,24 @@ export class AddRegistrationComponent implements OnInit {
   }
   addCustomUser = (term) => ({id: term, name: term});
 
-  constructor(private stepperFormService:StepperFormService, private formBuilder: FormBuilder) {
+  constructor(private stepperFormService:StepperFormService, private formBuilder: FormBuilder, 
+    private registrationService : RegistrationService) {
 
     // Applicant details form code start
     this.applicantDetailsForm = this.formBuilder.group({
       firstNameControl: ['', [Validators.required]],
+      middleNameControl: ['',],
       lastNameControl: ['', [Validators.required]],
       mobileNoControl: ['', [Validators.required]],
       emailControl: ['', [Validators.required]],
+      utilityControl: [null, [Validators.required]],
       consumerCategoryControl: [null, [Validators.required]],
       consumerSubCategoryControl: [null, [Validators.required]],
       ownershipControl: [null, [Validators.required]],
       vipControl: [null, [Validators.required]],
-      pipelineControl: [null, [Validators.required]],
+      connectivityControl: [null, [Validators.required]],
     });
+    this.applicantDetailsForm.controls.utilityControl.setValue({id:"57ed8a45-014a-4f72-826a-dcf6824c454e", name:"MNGL Pune"})
     // Applicant details form code start
 
     // Payment details form code start
@@ -262,6 +250,13 @@ export class AddRegistrationComponent implements OnInit {
       zipCodeControl: [null, [Validators.required]],
       areaControl: [null, [Validators.required]],
       subAreaControl: [null, [Validators.required]],
+      billingAddressLineControl: ['', [Validators.required]],
+      billingStreetControl: ['', [Validators.required]],
+      billingStateProvinceRegionControl: [null, [Validators.required]],
+      billingCityControl: [null, [Validators.required]],
+      billingZipCodeControl: [null, [Validators.required]],
+      billingAreaControl: [null, [Validators.required]],
+      billingSubAreaControl: [null, [Validators.required]],
     });
     // Address details form code end
   }
@@ -297,7 +292,7 @@ export class AddRegistrationComponent implements OnInit {
       if (this.addressDetailsForm.invalid) {
           return;
       }else{
-        this.stepperFormService.sendTrigger("#applicant-pay-tab")
+        this.stepperFormService.sendTrigger("#kyc-doc-tab")
       }
   }
   // Address details form submit end
@@ -378,6 +373,64 @@ export class AddRegistrationComponent implements OnInit {
       });
   }
 
+  copyAddress(){
+    this.isAddressSame = !this.isAddressSame
+    if(this.isAddressSame == true){
+      this.addressDetailsForm.patchValue({
+        billingAddressLineControl : this.addressDetailsForm.get('addressLineControl').value,
+        billingStreetControl : this.addressDetailsForm.get('streetControl').value,
+        billingStateProvinceRegionControl : this.addressDetailsForm.get('stateProvinceRegionControl').value,
+        billingCityControl : this.addressDetailsForm.get('cityControl').value,
+        billingZipCodeControl : this.addressDetailsForm.get('zipCodeControl').value,
+        billingAreaControl : this.addressDetailsForm.get('areaControl').value,
+        billingSubAreaControl : this.addressDetailsForm.get('subAreaControl').value,
+      })
+    }else{
+      this.addressDetailsForm.controls.billingAddressLineControl.setValue(null)
+      this.addressDetailsForm.controls.billingStreetControl.setValue(null)
+      this.addressDetailsForm.controls.billingStateProvinceRegionControl.setValue(null)
+      this.addressDetailsForm.controls.billingCityControl.setValue(null)
+      this.addressDetailsForm.controls.billingZipCodeControl.setValue(null)
+      this.addressDetailsForm.controls.billingAreaControl.setValue(null)
+      this.addressDetailsForm.controls.billingSubAreaControl.setValue(null)
+    }
+  }
 
+  toggleAddress(id){
+    if(id == 'service'){
+      this.address = this.addressDetailsForm.get('addressLineControl').value
+    }else{
+      this.address = this.addressDetailsForm.get('billingAddressLineControl').value
+    }
+  }
+
+  onRegistrationSubmit(){
+    this.showtoast = true;
+    console.log(this.applicantDetailsForm.value)
+    console.log(this.addressDetailsForm.value)
+    let data = {
+      utility_id : this.applicantDetailsForm.value.utilityControl.id,
+      first_name : this.applicantDetailsForm.value.firstNameControl,
+      middle_name : this.applicantDetailsForm.value.middleNameControl,
+      last_name : this.applicantDetailsForm.value.lastNameControl,
+      email_id : this.applicantDetailsForm.value.emailControl,
+      phone_mobile : this.applicantDetailsForm.value.mobileNoControl,
+      address_line_1 : this.addressDetailsForm.value.addressLineControl,
+      street : this.addressDetailsForm.value.streetControl,
+      zipcode : this.addressDetailsForm.value.zipCodeControl.name,
+      // state_id : 
+      // city_id : 
+      // area_id : 
+      // sub_area_id : 
+      // ownership_id : 
+      // consumer_category_id : 
+      // sub_category_id : 
+      is_vip : this.applicantDetailsForm.value.vipControl.id,
+      connectivity : this.applicantDetailsForm.value.connectivityControl.id,
+    }
+    this.registrationService.addRegistration(data).subscribe(data=>{
+      console.log(data)
+    })
+  }
 
 }
