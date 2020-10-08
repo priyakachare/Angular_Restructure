@@ -87,16 +87,18 @@
                                 </div>
 
                                 <!-- Forgot Password -->
-                                <div class="form-row" *ngIf="forgotpwddiv">
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" placeholder="Julie@test.com" [(ngModel)]="email" name="email"/>
+                                <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                                    <div class="form-row" *ngIf="forgotpwddiv">
+                                        <div class="col-12">
+                                            <input type="email" class="form-control" placeholder="Julie@test.com" ngModel #email="ngModel" id="resetPasswordEmail" name="email"/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-row" *ngIf="forgotpwddiv">
-                                    <div class="col-12">
-                                        <button class="btn btn-secondary st text-center sign-in-btn btn-block" (click)="resetpwd()">Submit</button>
-                                    </div>
-                                </div>
+                                    <div class="form-row" *ngIf="forgotpwddiv">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-secondary st text-center sign-in-btn btn-block">Send Password Reset Link</button>
+                                        </div>
+                                    </div>                               
+                                </form>
 
                                 <!-- Reset Password -->
                                 <div class="form-row" *ngIf="resetpwddiv">

@@ -77,6 +77,19 @@ import { UserDetailViewComponent } from './user/user-detail-view/user-detail-vie
 import { UserFiltersComponent } from './user/user-filters/user-filters.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserSummaryComponent } from './user/user-summary/user-summary.component';
+import { ResetPasswordComponent } from './login-logout/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './login-logout/change-password/change-password.component';
+import { ComplaintComponent } from './complaint/complaint.component';
+import { ComplaintAddComponent } from './complaint/complaint-add/complaint-add.component';
+import { ComplaintListComponent } from './complaint/complaint-list/complaint-list.component';
+import { ComplaintDashboardComponent } from './complaint/complaint-dashboard/complaint-dashboard.component';
+import { ComplaintFiltersComponent } from './complaint/complaint-filters/complaint-filters.component';
+import { ServicesComponent } from './services/services.component';
+import { ServicesAddComponent } from './services/services-add/services-add.component';
+import { ServicesDashboardComponent } from './services/services-dashboard/services-dashboard.component';
+import { ServicesFiltersComponent } from './services/services-filters/services-filters.component';
+import { ServicesListComponent } from './services/services-list/services-list.component';
+import { ComplaintViewComponent } from './complaint/complaint-view/complaint-view.component';
 
 @NgModule({
   declarations: [
@@ -136,7 +149,20 @@ import { UserSummaryComponent } from './user/user-summary/user-summary.component
     UserDetailViewComponent,
     UserFiltersComponent,
     UserListComponent,
-    UserSummaryComponent
+    UserSummaryComponent,
+    ResetPasswordComponent,
+    ChangePasswordComponent,
+    ComplaintComponent,
+    ComplaintAddComponent,
+    ComplaintListComponent,
+    ComplaintDashboardComponent,
+    ComplaintFiltersComponent,
+    ServicesComponent,
+    ServicesAddComponent,
+    ServicesDashboardComponent,
+    ServicesFiltersComponent,
+    ServicesListComponent,
+    ComplaintViewComponent
   ],
   imports: [
     BrowserModule,

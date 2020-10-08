@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { faTrash, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { StepperFormService } from '../../common/stepper-form/stepper-form.service';
+import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
+import { NgSelectComponent } from '@ng-select/ng-select';
+declare var $ : any
 
 @Component({
   selector: 'app-add-registration',
@@ -52,6 +55,12 @@ export class AddRegistrationComponent implements OnInit {
     }
   ]
 
+  applicantDetailsForm: FormGroup;
+  applicantDetailsFormSubmitted = false;
+  addressDetailsForm: FormGroup;
+  addressDetailsFormSubmitted = false;
+  paymentDetailsForm: FormGroup;
+  paymentDetailsFormSubmitted = false;
   showtoast = false; 
   autohide = true;
   textValue = 'Thomas Shelby';
@@ -59,11 +68,8 @@ export class AddRegistrationComponent implements OnInit {
   date: {day: number, year: number, month: string};
   faCalendarAlt = faCalendarAlt;
   faTrash = faTrash;
-  selectedUtility: any;
+  selectedUtility = "MNGL pune"
   selectedDocument: any;
-  selectedConsumerCategory: any;
-  selectedConsumerSubCategory: any;
-  selectedVip: string[];
   selectedPipeline: string[];
   selectedPaymentType: any;
   selectedPaymentType2: any;
@@ -92,15 +98,11 @@ export class AddRegistrationComponent implements OnInit {
   email = ''; 
   name = '';
 
-  utility = [
-    {id: 1, utilityName: 'Utility 1'},
-    {id: 2, utilityName: 'Utility 2'},
-  ];
   document = [
     {id: 1, name: 'Document 1'},
     {id: 2, name: 'Document 2'},
   ];
-  consumerCategory = [
+  consumerCategories : any[] = [
     {id: 1, name: 'Consumer Category 1'},
     {id: 2, name: 'Consumer Category 2'},
   ];
@@ -229,7 +231,88 @@ export class AddRegistrationComponent implements OnInit {
   }
   addCustomUser = (term) => ({id: term, name: term});
 
-  constructor(private stepperFormService:StepperFormService) { }
+  constructor(private stepperFormService:StepperFormService, private formBuilder: FormBuilder) {
+
+    // Applicant details form code start
+    this.applicantDetailsForm = this.formBuilder.group({
+      firstNameControl: ['', [Validators.required]],
+      lastNameControl: ['', [Validators.required]],
+      mobileNoControl: ['', [Validators.required]],
+      emailControl: ['', [Validators.required]],
+      consumerCategoryControl: [null, [Validators.required]],
+      consumerSubCategoryControl: [null, [Validators.required]],
+      ownershipControl: [null, [Validators.required]],
+      vipControl: [null, [Validators.required]],
+      pipelineControl: [null, [Validators.required]],
+    });
+    // Applicant details form code start
+
+    // Payment details form code start
+    this.paymentDetailsForm = this.formBuilder.group({
+      firstNameControl: ['', [Validators.required]],
+    });
+    // Payment details form code end
+
+    // Address details form code start
+    this.addressDetailsForm = this.formBuilder.group({
+      addressLineControl: ['', [Validators.required]],
+      streetControl: ['', [Validators.required]],
+      stateProvinceRegionControl: [null, [Validators.required]],
+      cityControl: [null, [Validators.required]],
+      zipCodeControl: [null, [Validators.required]],
+      areaControl: [null, [Validators.required]],
+      subAreaControl: [null, [Validators.required]],
+    });
+    // Address details form code end
+  }
+
+  // Applicant details form control start
+  get ad() { return this.applicantDetailsForm.controls; }
+  // Applicant details form control end
+
+  // Address details form control start
+  get add() { return this.addressDetailsForm.controls; }
+  // Address details form control end
+
+  // Payment details form control start
+  get pd() { return this.paymentDetailsForm.controls; }
+  // Payment details form control end
+
+  // Applicant details form submit start
+  onApplicantDetailsFormSubmit() {
+      this.applicantDetailsFormSubmitted = true;
+
+      if (this.applicantDetailsForm.invalid) {
+          return;
+      }else{
+        this.stepperFormService.sendTrigger("#applicant-pay-tab")
+      }
+  }
+  // Applicant details form submit end
+
+  // Address details form submit start
+  onAddressDetailsFormSubmit() {
+      this.addressDetailsFormSubmitted = true;
+
+      if (this.addressDetailsForm.invalid) {
+          return;
+      }else{
+        this.stepperFormService.sendTrigger("#applicant-pay-tab")
+      }
+  }
+  // Address details form submit end
+
+  // Payment details form submit start
+  onPaymentDetailsFormSubmit() {
+      this.paymentDetailsFormSubmitted = true;
+
+      if (this.paymentDetailsForm.invalid) {
+          return;
+      }else{
+        this.stepperFormService.sendTrigger("#applicant-addr-tab")
+      }
+  }
+  // Payment details form submit end
 
   ngOnInit(): void {
     this.sendStepperFormData()
@@ -279,16 +362,16 @@ export class AddRegistrationComponent implements OnInit {
         $(this).parent(".list-group-item").addClass("active");
       });
       $("#proceed_1").on('click', function(){
-        $('#applicant-pay-tab').trigger( "click" );
+        // $('#applicant-pay-tab').trigger( "click" );
       });
       $("#proceed_2").on('click', function(){
-        $('#applicant-addr-tab').trigger( "click" );
+        // $('#applicant-addr-tab').trigger( "click" );
       });
       $("#proceed_3").on('click', function(){
-        $('#kyc-doc-tab').trigger( "click" );
+        // $('#kyc-doc-tab').trigger( "click" );
       });
       $("#proceed_4").on('click', function(){
-        $('#rvw-sbmt-tab').trigger( "click" );
+        // $('#rvw-sbmt-tab').trigger( "click" );
       });
       $("#proceed_5").on('click', function(){
         console.log("end-of-form");

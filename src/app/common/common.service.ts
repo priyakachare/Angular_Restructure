@@ -80,6 +80,35 @@ export class CommonService {
       };
       return this.http.post(baseUrl+'user/logout/',{"id_string":id_string},httpOptions)
      }
+
+
+
+    // API for sending email for password reset
+    sendEmail(model: any){
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+      let options = { headers: headers };
+      return this.http.post(baseUrl + "user/request-reset-email" +'/', model, options);
+    }
+
+    // API for reset-password
+    resetPassword(model: any){
+      return this.http.patch(baseUrl + "user/password-reset-complete/<uidb64>/<token>" +'/', model);
+    }
+
+    // API for change-password
+    changePassword(model: any){
+      var userDetail = JSON.parse(sessionStorage.getItem("UserDetails"))   
+      this.token = userDetail.token
+      console.log(this.token)
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json' ,'Authorization': this.token
+        // changePasswordUrl:this.changePasswordUrl
+      });
+      let options = { headers: headers };
+      return this.http.put(baseUrl + "user/change-password" +'/', model,options);
+    }
 }
 
   
