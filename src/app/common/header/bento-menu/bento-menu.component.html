@@ -12,7 +12,7 @@
                   <div class="col-sm-4" *ngFor="let module of finalModuleList">
                     <div class="media bento-menu-blk" (mouseover)="mouseHovered(module.module_name)" (click)="selectModuleId(module.id,module.module_name)">
                       <div class="img-blk align-self-center">
-                        <img src="{{module.img}}" alt="img">
+                        <img src="{{module.img}}" alt="">
                       </div>                        
                       <div class="media-body align-self-center">
                         <h6 class="h6">{{module.module_name}}</h6>
@@ -34,7 +34,7 @@
               </div>
             </div>
             <div class="img-blk">
-              <img src="{{selectedVal.img1}}" alt="img">                
+              <img src="{{selectedVal.img1}}" alt="">                
             </div>
           </div>
         </div>

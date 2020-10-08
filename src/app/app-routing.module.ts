@@ -10,6 +10,7 @@ import { TenantComponent } from './tenant/tenant.component';
 import { ScheduleComponent } from './meter-data/schedule/schedule.component';
 import { CommonComponent } from './common/common.component';
 import { CampaignComponent } from './campaign/campaign.component';
+import { UserComponent } from './user/user.component';
 import { ResetPasswordComponent } from './login-logout/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './login-logout/change-password/change-password.component';
 import { ComplaintComponent } from './complaint/complaint.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
 	{ path: 'complaint/:id', component: ComplaintComponent },
 	{ path: 'services', component: ServicesComponent },
 	{ path: 'meter-data/schedule', component: ScheduleComponent },
+	{ path: 'user', component: UserComponent },
 	{ path: 'reset-password/:<uidb64>/:<token>', component: ResetPasswordComponent },
 	{ path: 'change-password', component: ChangePasswordComponent },
 ]

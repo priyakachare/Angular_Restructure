@@ -71,6 +71,12 @@ import { CampaignComponent } from './campaign/campaign.component';
 import { CampaignDatatableComponent } from './campaign/campaign-datatable/campaign-datatable.component';
 import { CampaignFilterComponent } from './campaign/campaign-filter/campaign-filter.component';
 import { CampaignSummaryComponent } from './campaign/campaign-summary/campaign-summary.component';
+import { UserComponent } from './user/user.component';
+import { UserAddComponent } from './user/user-add/user-add.component';
+import { UserDetailViewComponent } from './user/user-detail-view/user-detail-view.component';
+import { UserFiltersComponent } from './user/user-filters/user-filters.component';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { UserSummaryComponent } from './user/user-summary/user-summary.component';
 import { ResetPasswordComponent } from './login-logout/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './login-logout/change-password/change-password.component';
 import { ComplaintComponent } from './complaint/complaint.component';
@@ -138,6 +144,12 @@ import { ComplaintViewComponent } from './complaint/complaint-view/complaint-vie
     CampaignDatatableComponent,
     CampaignFilterComponent,
     CampaignSummaryComponent,
+    UserComponent,
+    UserAddComponent,
+    UserDetailViewComponent,
+    UserFiltersComponent,
+    UserListComponent,
+    UserSummaryComponent,
     ResetPasswordComponent,
     ChangePasswordComponent,
     ComplaintComponent,
