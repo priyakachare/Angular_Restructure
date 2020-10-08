@@ -90,6 +90,11 @@ import { ServicesDashboardComponent } from './services/services-dashboard/servic
 import { ServicesFiltersComponent } from './services/services-filters/services-filters.component';
 import { ServicesListComponent } from './services/services-list/services-list.component';
 import { ComplaintViewComponent } from './complaint/complaint-view/complaint-view.component';
+import { UtilityComponent } from './utility/utility.component';
+import { UtilityAddComponent } from './utility/utility-add/utility-add.component';
+import { UtilityFiltersComponent } from './utility/utility-filters/utility-filters.component';
+import { UtilitySummaryComponent } from './utility/utility-summary/utility-summary.component';
+import { UtilityListComponent } from './utility/utility-list/utility-list.component';
 
 @NgModule({
   declarations: [
@@ -162,7 +167,12 @@ import { ComplaintViewComponent } from './complaint/complaint-view/complaint-vie
     ServicesDashboardComponent,
     ServicesFiltersComponent,
     ServicesListComponent,
-    ComplaintViewComponent
+    ComplaintViewComponent,
+    UtilityComponent,
+    UtilityAddComponent,
+    UtilityFiltersComponent,
+    UtilitySummaryComponent,
+    UtilityListComponent
   ],
   imports: [
     BrowserModule,

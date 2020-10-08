@@ -1,0 +1,82 @@
+<div class="row" >
+    <div class="col-auto" *ngFor="let utility of dataSet">
+        <div class="admin-utility-card" >
+            <div class="utility-card-header">
+                <div class="logo-blk">
+                    <img class="st" src="../../assets/images/utility-logo.png" alt="img">
+                    <span class="edt"  tooltipClass="pr-tooltip" placement="top" ngbTooltip="edit" [openDelay]="300" [closeDelay]="500"><i class="icons8 icons8-edit"></i></span>
+                </div>
+                <h4 class="ttl">{{utility.name}}</h4>
+                <p class="p">{{utility.tenant.name}}</p>
+                <p class="p fw-500 text-dark"></p>                    
+            </div>
+            <div class="utility-card-body">
+                <hr class="hr dashed-br">
+                <div class="row">
+                    <div class="col-3">
+                        <p class="p p-13 mb-1">Short Name</p>
+                        <h6 class="h6">{{utility.short_name}}</h6>
+                    </div>
+                    <div class="col-3">
+                        <p class="p p-13 mb-1">City</p>
+                        <h6 class="h6"></h6>
+                    </div>
+                    <div class="col-3">
+                        <p class="p p-13 mb-1">State</p>
+                        <h6 class="h6"></h6>
+                    </div>
+                    <div class="col-3">
+                        <p class="p p-13 mb-1">Country</p>
+                        <h6 class="h6"></h6>
+                    </div>
+                </div>
+                <hr class="hr dashed-br">
+                <div class="row justify-content-start">
+                    <div class="col-3" >
+                        <p class="p p-13 mb-1">Module</p>
+                        <h6 class="h6" ></h6>
+                    </div>
+                    <div class="col-9">
+                        <p class="p p-13 mb-1">Sub Module</p>
+                        <h6 class="h6 text-truncate"></h6>
+                    </div>
+                </div>
+                <hr class="hr dashed-br">
+                <div class="short-info">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="p p-13">Product</p>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="h6">Gas</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="p p-13">Consumer Category</p>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="h6">PNG</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="p p-13">Sub Category</p>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="h6">Domestic</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-auto">
+        <div class="admin-add-utility-card">
+            <div class="add-utility-card-body">
+                <button class="btn add-plus-bttn-lg st" role="button">&times;</button>
+                <p class="p">Add Master Utility</p>
+            </div>                
+        </div>
+    </div>
+</div>
