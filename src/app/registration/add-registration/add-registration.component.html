@@ -42,7 +42,7 @@
                                                         </div>
                                                         <div class="col">
                                                             <label>Middle Name</label>
-                                                            <input type="text" #textbox class="form-control" placeholder="Middle Name" name="textValue"/>
+                                                            <input type="text" #textbox class="form-control" placeholder="Middle Name" name="textValue" formControlName="middleNameControl"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
@@ -55,7 +55,7 @@
                                                         </div>
                                                         <div class="col">
                                                             <label>Utility</label>
-                                                            <ng-select [items]="[]" [(ngModel)]="selectedUtility" bindLabel="utilityName" placeholder="Select Utility" name="utilityName" [ngModelOptions]="{standalone: true}">
+                                                            <ng-select [items]="[]" bindLabel="name" placeholder="Select Utility" name="utilityName" formControlName="utilityControl" [clearable]="false" [readonly]="true">
                                                             </ng-select>
                                                         </div>
                                                     </div>
@@ -116,7 +116,7 @@
                                                         </div>
                                                         <div class="col">
                                                             <label>VIP</label>
-                                                            <ng-select [items]="vip" type="text" bindLabel="name" placeholder="Select Yes/No" bindValue="name" formControlName="vipControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.vipControl.errors }" name="vip" [clearable]="false">
+                                                            <ng-select [items]="vip"  bindLabel="name" placeholder="Select Yes/No" formControlName="vipControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.vipControl.errors }" name="vip" [clearable]="false">
                                                             </ng-select>
                                                             <div *ngIf="applicantDetailsFormSubmitted && ad.vipControl.errors" class="invalid-feedback">
                                                                 <div *ngIf="ad.vipControl.errors.required">Please select vip!</div>
@@ -126,11 +126,11 @@
                                                     <div class="form-row">
                                                         
                                                         <div class="col-6">
-                                                            <label>Pipeline</label>
-                                                            <ng-select [items]="pipeline" type="text" bindLabel="name"  placeholder="Select Pipeline" bindValue="name" formControlName="pipelineControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.pipelineControl.errors }" name="pipeline" [clearable]="false">
+                                                            <label>Connectivity</label>
+                                                            <ng-select [items]="connectivity" bindLabel="name"  placeholder="Select Connectivity" formControlName="connectivityControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.connectivityControl.errors }" name="connectivity" [clearable]="false">
                                                             </ng-select>
-                                                            <div *ngIf="applicantDetailsFormSubmitted && ad.pipelineControl.errors" class="invalid-feedback">
-                                                                <div *ngIf="ad.pipelineControl.errors.required">Please select pipeline!</div>
+                                                            <div *ngIf="applicantDetailsFormSubmitted && ad.connectivityControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ad.connectivityControl.errors.required">Please select connectivity!</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -277,13 +277,13 @@
                                         <ul class="list-group list-group-horizontal justify-content-end">
                                             <li class="list-group-item">
                                                 <div class="pr-checkbox">
-                                                    <input type="checkbox" name="optionsRadios" id="checkOther" value="other" ng-model="formData.other" ng-true-value="'other'" ng-init="formData.other='other'">
+                                                    <input type="checkbox" name="optionsRadios" id="checkOther" [checked]="isAddressSame" (change)="copyAddress()">
                                                     <label for="checkOther"></label>
                                                 </div>
                                                 <label class="checkbox-label" for="checkOther">Click here if billing Address same as Meter Address</label>
                                             </li>
                                         </ul>
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -367,51 +367,67 @@
                                                         </form>
                                                     </div>
                                                     <div class="tab-pane fade" id="nav-billing" role="tabpanel" aria-labelledby="nav-billing-tab">
-                                                        <form name="form">
+                                                        <form name="form" [formGroup]="addressDetailsForm" (ngSubmit)="onAddressDetailsFormSubmit()">
                                                             <div class="form-row">
                                                                 <div class="col-12">
-                                                                    <label>Home / Appartment</label>
-                                                                    <textarea class="form-control text-uppercase" placeholder="3964  Small Street" rows="2" value="3964  Small Street"></textarea>
+                                                                    <label>Address Line 1</label>
+                                                                    <textarea class="form-control text-uppercase" placeholder="Address" rows="2" name="billingAddressLine" formControlName="billingAddressLineControl" [ngClass]="{ 'is-invalid': addressDetailsFormSubmitted && add.billingAddressLineControl.errors }"></textarea>
+                                                                    <div *ngIf="addressDetailsFormSubmitted && add.billingAddressLineControl.errors" class="invalid-feedback">
+                                                                        <div *ngIf="add.billingAddressLineControl.errors.required">Address can't be empty!</div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="col-6">
                                                                     <label>Street</label>
-                                                                    <textarea class="form-control" placeholder="1235 New street" rows="1" value="1235 New street"></textarea>
+                                                                    <textarea class="form-control" placeholder="Street" rows="1" name="billingStreet" formControlName="billingStreetControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingStreetControl.errors}"></textarea>
+                                                                    <div *ngIf="addressDetailsFormSubmitted && add.billingStreetControl.errors" class="invalid-feedback">
+                                                                        <div *ngIf="add.billingStreetControl.errors.required">Street can't be empty!</div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <label>State / Province / Region</label>
-                                                                    <ng-select [items]="billingAddress" bindLabel="name" appendTo="body" placeholder=""
-                                                                        [(ngModel)]="selectedBillingAddress" name="name">
+                                                                    <ng-select [items]="stateProvince" bindLabel="name" appendTo="body" placeholder="Select state/province/region" name="billingStateProvinceRegion" formControlName="billingStateProvinceRegionControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingStateProvinceRegionControl.errors}">
                                                                     </ng-select>
+                                                                    <div *ngIf="addressDetailsFormSubmitted && add.billingStateProvinceRegionControl.errors" class="invalid-feedback">
+                                                                        <div *ngIf="add.billingStateProvinceRegionControl.errors.required">Please select state/province/region!</div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="col">
                                                                     <label>City</label>
-                                                                    <ng-select [items]="billingCity" bindLabel="name" appendTo="body" placeholder=""
-                                                                        [(ngModel)]="selectedBillingCity" name="name">
+                                                                    <ng-select [items]="city" bindLabel="name" appendTo="body" placeholder="Select City" name="billingCity" formControlName="billingCityControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingCityControl.errors}">
                                                                     </ng-select>
+                                                                    <div *ngIf="addressDetailsFormSubmitted && add.billingCityControl.errors" class="invalid-feedback">
+                                                                        <div *ngIf="add.billingCityControl.errors.required">Please select city!</div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="col">
                                                                     <label>Postal / Zip Code </label>
-                                                                    <ng-select [items]="billingZipCode" bindLabel="name" appendTo="body" placeholder="Select Scheme"
-                                                                        [(ngModel)]="selectedBillingZipCode" name="name">
+                                                                    <ng-select [items]="zipCode" bindLabel="name" appendTo="body" placeholder="Select Postal/Zip code" name="billingZipCode" formControlName="billingZipCodeControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingZipCodeControl.errors}">
                                                                     </ng-select>
+                                                                    <div *ngIf="addressDetailsFormSubmitted && add.billingZipCodeControl.errors" class="invalid-feedback">
+                                                                        <div *ngIf="add.billingZipCodeControl.errors.required">Please select postal/zip code!</div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="col">
                                                                     <label>Area</label>
-                                                                    <ng-select [items]="billingArea" bindLabel="name" appendTo="body" placeholder="Select Payment Type"
-                                                                        [(ngModel)]="selectedBillingArea" name="name">
+                                                                    <ng-select [items]="area" bindLabel="name" appendTo="body" placeholder="Select Area" name="billingArea" formControlName="billingAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingAreaControl.errors}">
                                                                     </ng-select>
+                                                                    <div *ngIf="addressDetailsFormSubmitted && add.billingAreaControl.errors" class="invalid-feedback">
+                                                                        <div *ngIf="add.billingAreaControl.errors.required">Please select area!</div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="col">
                                                                     <label>Sub Area</label>
-                                                                    <ng-select [items]="billingSubArea" bindLabel="name" appendTo="body" placeholder="Select Scheme"
-                                                                        [(ngModel)]="selectedBillingSubArea" name="name"> 
+                                                                    <ng-select [items]="subArea" bindLabel="name" appendTo="body" placeholder="Select Sub area" name="billingSubArea" formControlName="billingSubAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingSubAreaControl.errors}">
                                                                     </ng-select>
+                                                                    <div *ngIf="addressDetailsFormSubmitted && add.billingSubAreaControl.errors" class="invalid-feedback">
+                                                                        <div *ngIf="add.billingSubAreaControl.errors.required">Please select sub area!</div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -548,33 +564,47 @@
                                                 <div class="applicant-data">
                                                     <div class="row">
                                                         <div class="col-3">
-                                                            <p class="p p-13">Reg. Number</p>
-                                                            <h6 class="h6">00199243592</h6>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <p class="p p-13">Source</p>
+                                                            <p class="p p-13">First Name</p>
                                                             <h6 class="h6">Branch</h6>
                                                         </div>
                                                         <div class="col-3">
-                                                            <p class="p p-13">Raised On</p>
+                                                            <p class="p p-13">Middle Name</p>
                                                             <h6 class="h6">09 Jan 2020</h6>
                                                         </div>
                                                         <div class="col-3">
-                                                            <p class="p p-13">Consumer Name</p>
+                                                            <p class="p p-13">Last Name</p>
+                                                            <h6 class="h6">Thomas Shelby</h6>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <p class="p p-13">Utility</p>
                                                             <h6 class="h6">Thomas Shelby</h6>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-3">
-                                                            <p class="p p-13">ID Number</p>
+                                                            <p class="p p-13">Mobile Number</p>
                                                             <h6 class="h6">1234 6538 6456</h6>
                                                         </div>
                                                         <div class="col-3">
-                                                            <p class="p p-13">Mobile Number</p>
+                                                            <p class="p p-13">Email</p>
                                                             <h6 class="h6">+91 9849163057</h6>
                                                         </div>
                                                         <div class="col-3">
-                                                            <p class="p p-13">VIP</p>
+                                                            <p class="p p-13">Consumer Category</p>
+                                                            <h6 class="h6">Yes</h6>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <p class="p p-13">Consumer Sub Category</p>
+                                                            <h6 class="h6">Yes</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <p class="p p-13">Ownership</p>
+                                                            <h6 class="h6">1234 6538 6456</h6>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <p class="p p-13">Vip</p>
                                                             <h6 class="h6"><span class="flag-green"></span>Yes</h6>
                                                         </div>
                                                         <div class="col-3">
@@ -645,15 +675,14 @@
                                             <div class="review-submit-card-body">
                                                 <div class="applicant-data">
                                                     <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="address-blk">
-                                                                <ul class="list-unstyled address-list">
-                                                                    <li>3964  Small Street New york, 1235 New street </li>
-                                                                    <li>AL - 35573, USA</li>
-                                                                </ul>
-                                                                <button class="btn bttn-sm bttn-white rounded bttn-billing st">Billing</button>
-                                                            </div>
+                                                        <div class="col-6">
+                                                            <h6 class="h6">{{address}}</h6>
                                                         </div>
+                                                        <div class="col-6">
+                                                            <button class="btn bttn-sm bttn-white rounded bttn-billing st" style="background: #d9d9d9;margin-left: 50px;" (click)="toggleAddress('service')">Service</button>
+                                                            <button class="btn bttn-sm bttn-white rounded bttn-billing st" style="background: #d9d9d9;margin-left: 10px;" (click)="toggleAddress('billing')">Billing</button>
+                                                        </div>
+                                                        <!-- <button class="btn bttn-sm bttn-white rounded bttn-billing st">Billing</button> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -693,7 +722,7 @@
                                     <button class="btn btn-outline-light3 st">Cancel</button>
                                 </div>
                                 <div class="col-auto">
-                                    <button class="btn btn-secondary st" id="proceed_5" (click)="showtoast = true">Submit</button>
+                                    <button class="btn btn-secondary st" id="proceed_5" (click)="onRegistrationSubmit()">Submit</button>
                                 </div>
                             </div>                              
                         </div>

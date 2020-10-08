@@ -9,6 +9,7 @@ export class StepperFormService {
 
   @Output() stepperFormEvent = new EventEmitter<any>();
   private subject1 = new BehaviorSubject<any>({});
+  private subject2 = new BehaviorSubject<any>({});
 
   constructor() { }
 
@@ -18,5 +19,13 @@ export class StepperFormService {
 
   getTrigger(): Observable<any> {
     return this.subject1.asObservable();
+  }
+
+  sendFunction(data: any) {
+    this.subject2.next(data);
+  }
+
+  getFunction(): Observable<any> {
+    return this.subject2.asObservable();
   }
 }
