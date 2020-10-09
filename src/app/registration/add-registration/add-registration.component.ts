@@ -65,8 +65,7 @@ export class AddRegistrationComponent implements OnInit {
   showtoast = false; 
   autohide = true;
   isAddressSame = false;
-  address = "A504, Prime Heights, Sus road, Pashan, Pune 421005"
-  textValue = 'Thomas Shelby';
+  address = ""
   model: any;
   date: {day: number, year: number, month: string};
   faCalendarAlt = faCalendarAlt;
@@ -292,6 +291,7 @@ export class AddRegistrationComponent implements OnInit {
       if (this.addressDetailsForm.invalid) {
           return;
       }else{
+        this.address = this.addressDetailsForm.value.addressLineControl
         this.stepperFormService.sendTrigger("#kyc-doc-tab")
       }
   }
