@@ -13,14 +13,18 @@ export class UtilityFiltersComponent implements OnInit {
   constructor(private filterService: FilterService, private router: Router) { }
 
   ngOnInit(): void {
-
+    this.filterService.getButtonEvent().subscribe(data=>{
+      if(data.event.type == 'click'){
+        this.router.navigateByUrl('utility/add-utility')
+      }
+    })
   }
  
   
 
   button = {
     name : 'ADD',
-    routerLink : '',
+    routerLink : 'utility/add-utility',
   }
 
   filters = [

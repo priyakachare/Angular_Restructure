@@ -81,7 +81,9 @@ export class BentoMenuComponent implements OnInit {
           this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
         }else{
           this.getData.moduleName.emit(this.utility_module_list)
-          this.finalModuleList = [{"module_name":"","img":""}]
+          // this.finalModuleList = [{"module_name":"","img":""}]
+          this.finalModuleList = []
+
         }
         
       })

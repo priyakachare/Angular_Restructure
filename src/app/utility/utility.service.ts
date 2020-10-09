@@ -33,4 +33,15 @@ export class UtilityService {
   };
   return this.http.get(baseUrl+'utility/'+id_string+'/module/list', httpOptions)
 }
+
+
+// API for add utility
+addUtility(data):Observable<any>{
+  var userDetail = JSON.parse(sessionStorage.getItem("UserDetails"))   
+  this.token = userDetail.token
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
+  };
+  return this.http.post(baseUrl+'utility/', data ,httpOptions)
+  }
 }
