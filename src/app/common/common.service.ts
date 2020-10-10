@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { baseUrl } from 'src/environments/environment';
+import { SessionService } from '../common-services/session-service/session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class CommonService {
   @Output() utilityIdString = new EventEmitter<string>();
   @Output() checkBlankUtility = new EventEmitter<string>();
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private sessionService:SessionService) {
    }
 
    // Login API
@@ -26,13 +27,14 @@ export class CommonService {
 
    token;
    id_string;
+   userDetail;
    // API for checking Role & Privileges
    checkRolePrivilege():Observable<any>{
    
    //get value of token and id string from sessionStorage
-   var userDetail = JSON.parse(sessionStorage.getItem("UserDetails"))   
-   this.token = userDetail.token
-   this.id_string = userDetail.id_string
+   this.userDetail = this.sessionService.getter()
+   this.token = this.userDetail.token
+   this.id_string = this.userDetail.id_string
 
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
