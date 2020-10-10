@@ -71,7 +71,7 @@
                                                             <label>Email</label>
                                                             <input type="email" class="form-control" placeholder="Email ID" name="email" formControlName="emailControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.emailControl.errors }">
                                                             <div *ngIf="applicantDetailsFormSubmitted && ad.emailControl.errors" class="invalid-feedback">
-                                                                <div *ngIf="ad.emailControl.errors.required">Mobile no. can't be empty!</div>
+                                                                <div *ngIf="ad.emailControl.errors.required">Email can't be empty!</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -88,7 +88,7 @@
                                                         </div>
                                                     </div> -->
                                                     <div class="form-row">
-                                                        <div class="col">
+                                                        <div class="col" *ngIf="consumerCategories.length !=0">
                                                             <label>Consumer category</label>
                                                             <ng-select [items]="consumerCategories" bindLabel="name" placeholder="Select Consumer category" formControlName="consumerCategoryControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.consumerCategoryControl.errors }" name="consumerCategory" [clearable]="false" id="consumerCategory">
                                                             </ng-select>
@@ -96,9 +96,9 @@
                                                                 <div *ngIf="ad.consumerCategoryControl.errors.required">Please select consumer category!</div>
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col" *ngIf="consumerSubCategories.length !=0">
                                                             <label>Consumer sub category</label>
-                                                            <ng-select [items]="consumerSubCategory" bindLabel="name"placeholder="Select Consumer sub category" formControlName="consumerSubCategoryControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.consumerSubCategoryControl.errors }" name="consumerSubCategory" [clearable]="false">
+                                                            <ng-select [items]="consumerSubCategories" bindLabel="name"placeholder="Select Consumer sub category" formControlName="consumerSubCategoryControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.consumerSubCategoryControl.errors }" name="consumerSubCategory" [clearable]="false">
                                                             </ng-select>
                                                             <div *ngIf="applicantDetailsFormSubmitted && ad.consumerSubCategoryControl.errors" class="invalid-feedback">
                                                                 <div *ngIf="ad.consumerSubCategoryControl.errors.required">Please select consumer sub category!</div>
@@ -106,9 +106,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
-                                                        <div class="col">
+                                                        <div class="col" *ngIf="ownerships.length !=0">
                                                             <label>Ownership</label>
-                                                            <ng-select [items]="Ownership" bindLabel="name" placeholder="Select Ownership" formControlName="ownershipControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.ownershipControl.errors }" name="ownership" [clearable]="false">
+                                                            <ng-select [items]="ownerships" bindLabel="name" placeholder="Select Ownership" formControlName="ownershipControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.ownershipControl.errors }" name="ownership" [clearable]="false">
                                                             </ng-select>
                                                             <div *ngIf="applicantDetailsFormSubmitted && ad.ownershipControl.errors" class="invalid-feedback">
                                                                 <div *ngIf="ad.ownershipControl.errors.required">Please select ownership!</div>
@@ -319,9 +319,9 @@
                                                                         <div *ngIf="add.streetControl.errors.required">Street can't be empty!</div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-6">
+                                                                <div class="col-6" *ngIf="stateProvinces.length !=0">
                                                                     <label>State / Province / Region</label>
-                                                                    <ng-select [items]="stateProvince" bindLabel="name" appendTo="body" placeholder="Select state/province/region" name="stateProvinceRegion" formControlName="stateProvinceRegionControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.stateProvinceRegionControl.errors}">
+                                                                    <ng-select [items]="stateProvinces" bindLabel="name" appendTo="body" placeholder="Select state/province/region" name="stateProvinceRegion" formControlName="stateProvinceRegionControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.stateProvinceRegionControl.errors}">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.stateProvinceRegionControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.stateProvinceRegionControl.errors.required">Please select state/province/region!</div>
@@ -329,9 +329,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
-                                                                <div class="col">
+                                                                <div class="col" *ngIf="cities.length !=0">
                                                                     <label>City</label>
-                                                                    <ng-select [items]="city" bindLabel="name" appendTo="body" placeholder="Select City" name="city" formControlName="cityControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.cityControl.errors}">
+                                                                    <ng-select [items]="cities" bindLabel="name" appendTo="body" placeholder="Select City" name="city" formControlName="cityControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.cityControl.errors}">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.cityControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.cityControl.errors.required">Please select city!</div>
@@ -339,25 +339,24 @@
                                                                 </div>
                                                                 <div class="col">
                                                                     <label>Postal / Zip Code </label>
-                                                                    <ng-select [items]="zipCode" bindLabel="name" appendTo="body" placeholder="Select Postal/Zip code" name="zipCode" formControlName="zipCodeControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.zipCodeControl.errors}">
-                                                                    </ng-select>
+                                                                    <input type="text" class="form-control" placeholder="Select Postal/Zip code" name="zipCode" formControlName="zipCodeControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.zipCodeControl.errors}">
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.zipCodeControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.zipCodeControl.errors.required">Please select postal/zip code!</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
-                                                                <div class="col">
+                                                                <div class="col" *ngIf="areas.length !=0">
                                                                     <label>Area</label>
-                                                                    <ng-select [items]="area" bindLabel="name" appendTo="body" placeholder="Select Area" name="area" formControlName="areaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.areaControl.errors}">
+                                                                    <ng-select [items]="areas" bindLabel="name" appendTo="body" placeholder="Select Area" name="area" formControlName="areaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.areaControl.errors}">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.areaControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.areaControl.errors.required">Please select area!</div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col">
+                                                                <div class="col" *ngIf="subAreas.length !=0">
                                                                     <label>Sub Area</label>
-                                                                    <ng-select [items]="subArea" bindLabel="name" appendTo="body" placeholder="Select Sub area" name="subArea" formControlName="subAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.subAreaControl.errors}">
+                                                                    <ng-select [items]="subAreas" bindLabel="name" appendTo="body" placeholder="Select Sub area" name="subArea" formControlName="subAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.subAreaControl.errors}">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.subAreaControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.subAreaControl.errors.required">Please select sub area!</div>
@@ -385,9 +384,9 @@
                                                                         <div *ngIf="add.billingStreetControl.errors.required">Street can't be empty!</div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-6">
+                                                                <div class="col-6" *ngIf="stateProvinces.length !=0">
                                                                     <label>State / Province / Region</label>
-                                                                    <ng-select [items]="stateProvince" bindLabel="name" appendTo="body" placeholder="Select state/province/region" name="billingStateProvinceRegion" formControlName="billingStateProvinceRegionControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingStateProvinceRegionControl.errors}">
+                                                                    <ng-select [items]="stateProvinces" bindLabel="name" appendTo="body" placeholder="Select state/province/region" name="billingStateProvinceRegion" formControlName="billingStateProvinceRegionControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingStateProvinceRegionControl.errors}">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingStateProvinceRegionControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingStateProvinceRegionControl.errors.required">Please select state/province/region!</div>
@@ -395,9 +394,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
-                                                                <div class="col">
+                                                                <div class="col" *ngIf="cities.length !=0">
                                                                     <label>City</label>
-                                                                    <ng-select [items]="city" bindLabel="name" appendTo="body" placeholder="Select City" name="billingCity" formControlName="billingCityControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingCityControl.errors}">
+                                                                    <ng-select [items]="cities" bindLabel="name" appendTo="body" placeholder="Select City" name="billingCity" formControlName="billingCityControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingCityControl.errors}">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingCityControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingCityControl.errors.required">Please select city!</div>
@@ -405,25 +404,24 @@
                                                                 </div>
                                                                 <div class="col">
                                                                     <label>Postal / Zip Code </label>
-                                                                    <ng-select [items]="zipCode" bindLabel="name" appendTo="body" placeholder="Select Postal/Zip code" name="billingZipCode" formControlName="billingZipCodeControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingZipCodeControl.errors}">
-                                                                    </ng-select>
+                                                                    <input type="text" class="form-control" placeholder="Select Postal/Zip code" name="billingZipCode" formControlName="billingZipCodeControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingZipCodeControl.errors}">
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingZipCodeControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingZipCodeControl.errors.required">Please select postal/zip code!</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
-                                                                <div class="col">
+                                                                <div class="col" *ngIf="areas.length !=0">
                                                                     <label>Area</label>
-                                                                    <ng-select [items]="area" bindLabel="name" appendTo="body" placeholder="Select Area" name="billingArea" formControlName="billingAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingAreaControl.errors}">
+                                                                    <ng-select [items]="areas" bindLabel="name" appendTo="body" placeholder="Select Area" name="billingArea" formControlName="billingAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingAreaControl.errors}">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingAreaControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingAreaControl.errors.required">Please select area!</div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col">
+                                                                <div class="col" *ngIf="subAreas.length !=0">
                                                                     <label>Sub Area</label>
-                                                                    <ng-select [items]="subArea" bindLabel="name" appendTo="body" placeholder="Select Sub area" name="billingSubArea" formControlName="billingSubAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingSubAreaControl.errors}">
+                                                                    <ng-select [items]="subAreas" bindLabel="name" appendTo="body" placeholder="Select Sub area" name="billingSubArea" formControlName="billingSubAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingSubAreaControl.errors}">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingSubAreaControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingSubAreaControl.errors.required">Please select sub area!</div>

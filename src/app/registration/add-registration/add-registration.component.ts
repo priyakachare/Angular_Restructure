@@ -4,6 +4,7 @@ import { StepperFormService } from '../../common/stepper-form/stepper-form.servi
 import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { RegistrationService } from '../registration.service';
+import { ApiService } from '../../common-services/api-service/api.service';
 declare var $ : any;
 
 @Component({
@@ -13,6 +14,7 @@ declare var $ : any;
 })
 export class AddRegistrationComponent implements OnInit {
 
+  // Stepper data start
   blocks = [
     {
       name : 'Applicant details',
@@ -55,13 +57,18 @@ export class AddRegistrationComponent implements OnInit {
       listClass : 'nav-item list-group-item'
     }
   ]
+  // Stepper data end
 
+  // Forms build start
   applicantDetailsForm: FormGroup;
   applicantDetailsFormSubmitted = false;
   addressDetailsForm: FormGroup;
   addressDetailsFormSubmitted = false;
   paymentDetailsForm: FormGroup;
   paymentDetailsFormSubmitted = false;
+  // Forms build end
+  
+  utilityIdString = '57ed8a45-014a-4f72-826a-dcf6824c454e'
   showtoast = false; 
   autohide = true;
   isAddressSame = false;
@@ -82,22 +89,28 @@ export class AddRegistrationComponent implements OnInit {
   selectedDocumentType = 'Personal details';
   selectedKycDocuments = 'Pancard';
 
-  document = [
-    {id: 1, name: 'Document 1'},
-    {id: 2, name: 'Document 2'},
-  ];
-  consumerCategories : any[] = [
-    {id: 1, name: 'Consumer Category 1'},
-    {id: 2, name: 'Consumer Category 2'},
-  ];
-  consumerSubCategory = [
-    {id: 1, name: 'Consumer SubCategory 1'},
-    {id: 2, name: 'Consumer SubCategory 2'},
-  ];
-  Ownership = [
-    {id: 1, name: 'Ownership 1'},
-    {id: 2, name: 'Ownership 2'},
-  ];
+  document : any[] = [];
+  consumerCategories : any[] = [];
+  consumerSubCategories : any[] = [];
+  ownerships : any[] = [];
+  stateProvinces : any[] = [];
+  cities : any[] = [];
+  areas : any[] = [];
+  subAreas : any[] = [];
+  paymentType : any[] = [];
+  paymentType2 : any[] = [];
+  paymentType3 : any[] = [];
+  scheme : any[] = [];
+  scheme2 : any[] = [];
+  paymentMode : any[] = [];
+  billingAddress : any[] = [];
+  billingCity : any[] = [];
+  zipCode : any[] = [];
+  billingZipCode : any[] = [];
+  billingArea : any[] = [];
+  billingSubArea : any[] = [];
+  documentType : any[] = [];
+  kycDocument : any[] = [];
   vip =  [
     {id: 'True', name: 'Yes'},
     {id: 'False', name: 'No'},
@@ -105,97 +118,6 @@ export class AddRegistrationComponent implements OnInit {
   connectivity = [
     {id: 'True', name: 'Yes'},
     {id: 'False', name: 'No'},
-  ];
-
-  paymentType = [
-    {id: 1, name: 'Payment Type 1'},
-    {id: 2, name: 'Payment Type 2'},
-    {id: 3, name: 'Payment Type 3'},
-  ];
-  paymentType2 = [
-    {id: 1, name: 'Payment Type 1'},
-    {id: 2, name: 'Payment Type 2'},
-    {id: 3, name: 'Payment Type 3'},
-  ];
-  paymentType3 = [
-    {id: 1, name: 'Payment Type 1'},
-    {id: 2, name: 'Payment Type 2'},
-    {id: 3, name: 'Payment Type 3'},
-  ];
-  scheme= [
-    {id: 1, name: 'Scheme 1'},
-    {id: 2, name: 'Scheme 2'},
-    {id: 3, name: 'Scheme 3'},
-  ];
-  scheme2= [
-    {id: 1, name: 'Scheme 1'},
-    {id: 2, name: 'Scheme 2'},
-    {id: 3, name: 'Scheme 3'},
-  ];
-  paymentMode= [
-    {id: 1, name: 'Payment Mode 1'},
-    {id: 2, name: 'Payment Mode 2'},
-    {id: 3, name: 'Payment Mode 3'},
-  ];
-  stateProvince= [
-    {id: 'afa-342', name: 'Texas'},
-    {id: 2, name: 'New Jersey'},
-    {id: 3, name: 'Alaska'},
-  ];
-  billingAddress= [
-    {id: 1, name: 'Chicago'},
-    {id: 2, name: 'Los Angeles'},
-    {id: 3, name: 'Boston'},
-  ];
-  city= [
-    {id: 1, name: 'Chicago'},
-    {id: 2, name: 'Los Angeles'},
-    {id: 3, name: 'Boston'},
-  ];
-  billingCity= [
-    {id: 1, name: 'Chicago'},
-    {id: 2, name: 'Los Angeles'},
-    {id: 3, name: 'Boston'},
-  ];
-  zipCode= [
-    {id: 1, name: '99501'},
-    {id: 2, name: '85001'},
-    {id: 3, name: '72201'},
-  ];
-  billingZipCode= [
-    {id: 1, name: '99501'},
-    {id: 2, name: '85001'},
-    {id: 3, name: '72201'},
-  ];
-  area= [
-    {id: 1, name: 'Area 1'},
-    {id: 2, name: 'Area 2'},
-    {id: 3, name: 'Area 3'},
-  ];
-  billingArea= [
-    {id: 1, name: 'Area 1'},
-    {id: 2, name: 'Area 2'},
-    {id: 3, name: 'Area 3'},
-  ];
-  subArea= [
-    {id: 1, name: 'Sub Area 1'},
-    {id: 2, name: 'Sub Area 2'},
-    {id: 3, name: 'Sub Area 3'},
-  ]; 
-  billingSubArea= [
-    {id: 1, name: 'Sub Area 1'},
-    {id: 2, name: 'Sub Area 2'},
-    {id: 3, name: 'Sub Area 3'},
-  ]; 
-
-  documentType= [
-    {id: 1, name2: 'Personal details'},
-    {id: 2, name2: 'Address details'},
-  ];
-  kycDocument= [
-    {id: 3, name: 'Pancard'},
-    {id: 4, name: 'Energy Bill'},
-    {id: 5, name: 'Aadhaar Card'},
   ];
 
   files: File[] = [];
@@ -215,7 +137,7 @@ export class AddRegistrationComponent implements OnInit {
   addCustomUser = (term) => ({id: term, name: term});
 
   constructor(private stepperFormService:StepperFormService, private formBuilder: FormBuilder, 
-    private registrationService : RegistrationService) {
+    private registrationService : RegistrationService, private apiService : ApiService) {
 
     // Applicant details form code start
     this.applicantDetailsForm = this.formBuilder.group({
@@ -246,7 +168,7 @@ export class AddRegistrationComponent implements OnInit {
       streetControl: ['', [Validators.required]],
       stateProvinceRegionControl: [null, [Validators.required]],
       cityControl: [null, [Validators.required]],
-      zipCodeControl: [null, [Validators.required]],
+      zipCodeControl: ['', [Validators.required]],
       areaControl: [null, [Validators.required]],
       subAreaControl: [null, [Validators.required]],
       billingAddressLineControl: ['', [Validators.required]],
@@ -258,6 +180,62 @@ export class AddRegistrationComponent implements OnInit {
       billingSubAreaControl: [null, [Validators.required]],
     });
     // Address details form code end
+
+    // Consumer categories dropdown api call start
+    this.apiService.get('consumer/'+this.utilityIdString+'/categories').subscribe(data=>{
+      for(let item of data){
+        this.consumerCategories.push(item)
+      }
+    })
+    // Consumer categories dropdown api call end
+
+    // Consumer sub categories dropdown api call start
+    this.apiService.get('consumer/'+this.utilityIdString+'/sub-categories').subscribe(data=>{
+      for(let item of data){
+        this.consumerSubCategories.push(item)
+      }
+    })
+    // Consumer sub categories dropdown api call end
+
+    // Consumer ownerships dropdown api call start
+    this.apiService.get('consumer/'+this.utilityIdString+'/ownerships').subscribe(data=>{
+      for(let item of data){
+        this.ownerships.push(item)
+      }
+    })
+    // Consumer ownerships dropdown api call end
+
+    // State/Provience dropdown api call start
+    this.apiService.get(this.utilityIdString+'/states').subscribe(data=>{
+      for(let item of data){
+        this.stateProvinces.push(item)
+      }
+    })
+    // State/Provience dropdown api call end
+
+    // Cities dropdown api call start
+    this.apiService.get(this.utilityIdString+'/cities').subscribe(data=>{
+      for(let item of data){
+        this.cities.push(item)
+      }
+    })
+    // Cities dropdown api call end
+
+    // Areas dropdown api call start
+    this.apiService.get(this.utilityIdString+'/areas').subscribe(data=>{
+      for(let item of data){
+        this.areas.push(item)
+      }
+    })
+    // Areas dropdown api call end
+
+    // Sub Areas dropdown api call start
+    this.apiService.get(this.utilityIdString+'/sub-areas').subscribe(data=>{
+      for(let item of data){
+        this.subAreas.push(item)
+      }
+    })
+    // Sub Areas dropdown api call end
   }
 
   // Applicant details form control start
@@ -417,7 +395,7 @@ export class AddRegistrationComponent implements OnInit {
       phone_mobile : this.applicantDetailsForm.value.mobileNoControl,
       address_line_1 : this.addressDetailsForm.value.addressLineControl,
       street : this.addressDetailsForm.value.streetControl,
-      zipcode : this.addressDetailsForm.value.zipCodeControl.name,
+      zipcode : this.addressDetailsForm.value.zipCodeControl,
       // state_id : 
       // city_id : 
       // area_id : 
