@@ -233,12 +233,7 @@ export class UtilityAddComponent implements OnInit {
     {id: 4, name: 'region 2'},
     {id: 5, name: 'region 3'},
   ];
-  selectedModule: any;
-  module = [
-    {id: 1, modul: 'Option 1'},
-    {id: 2, modul: 'Option 2'},
-    {id: 3, modul: 'Option 3'},
-  ];
+  
   selectedSubModule: any;
   subModule = [
     {id: 1, submodul: 'Option 1'},
@@ -426,8 +421,29 @@ export class UtilityAddComponent implements OnInit {
     }
   }
   
+  moduleList;
+  countriesList;
+  regionsList;
+  stateList;
+  citiesList;
   ngOnInit(): void {
     this.sendStepperFormData()
+    this.utilityService.getModuleListData().subscribe(modules=>{
+      this.moduleList = modules.results
+    })
+    this.utilityService.getCountriesListData().subscribe(countries=>{
+      this.countriesList = countries.results
+    })
+    this.utilityService.getRegionsListData().subscribe(regions=>{
+      this.regionsList = regions.results
+    })
+    // this.utilityService.getStateListData().subscribe(states=>{
+    //   this.stateList = states.results
+    // })
+    // this.utilityService.getCityListData().subscribe(cities=>{
+    //   this.citiesList = cities.results
+    // })
+
   }
 
   sendStepperFormData(){

@@ -10,8 +10,6 @@ import { CommonService} from '../common.service';
 })
 export class SideNavComponent implements OnInit {
   faPlus = faPlus;
-  navList;
-  moduleId;
   settingSnm;
   showPopUpFlag:boolean=false;
   commonVal;
@@ -45,13 +43,11 @@ export class SideNavComponent implements OnInit {
     {module : 'S&M',sub_module : 'Users',icon:'icons8 icons8-cv',link:'/user',ngbPopover:"Users"},
   ]
 
-  module_subModule:any = [];
-  sub_module_list:any = [];
+  moduleSubModule:any = [];
   defaultModule;
   subModules:any=[];
-  utility_idstring;
   defaultModuleName;
-  utilitymasterAdmin;
+  utilityMasterAdmin;
 
   ngOnInit(): void {         
 
@@ -67,7 +63,7 @@ export class SideNavComponent implements OnInit {
         this.defaultModule = result.data.roles[0].modules.module[0].name
         for(let module of role.modules.module){
             for(let submodule of module.sub_module){
-              this.module_subModule.push({"module":module.name,"sub_module":submodule.name})
+              this.moduleSubModule.push({"module":module.name,"sub_module":submodule.name})
             }            
           }
         } 
@@ -79,15 +75,10 @@ export class SideNavComponent implements OnInit {
             this.finalList =  []
           }
         })
-      
-    })
-
-      
-      
+    }) 
 
     $(document).ready(function(){
-      $(".menubttn").parents(".pr-side-navbar").removeClass("open-slide");    
-
+      $(".menubttn").parents(".pr-side-navbar").removeClass("open-slide");  
       // For modal close on cross click
       $('.modal').find('.close').on('click', function() {
         $(this).parents('.modal').removeClass('show');
@@ -113,7 +104,7 @@ export class SideNavComponent implements OnInit {
       {id:1,navData:'Survey Type',link:'#'},{id:2,navData:'Campaign Type',link:'#'},{navData:'Campaign Frequency Type',link:'#'},
     ]};
 
-    this.utilitymasterAdmin ={title:'Utility Master' ,data :[
+    this.utilityMasterAdmin ={title:'Utility Master' ,data :[
       {id:1,navData:'Utility',link:'/utility'},{id:2,navData:'Plans',link:'#'},
     ]};
 
@@ -123,7 +114,7 @@ export class SideNavComponent implements OnInit {
     }
     else if(sub_module === "Utility Master"){
       this.showPopUpFlag = !this.showPopUpFlag
-      this.meterData = this.utilitymasterAdmin
+      this.meterData = this.utilityMasterAdmin
     }
     // else if(this.moduleId==1 && id==8||this.moduleId==undefined && id==8){
     //   this.showPopUpFlag = !this.showPopUpFlag
