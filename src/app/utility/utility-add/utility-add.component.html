@@ -1,1 +1,490 @@
-<p>utility-add works!</p>
+<app-stepper-form [operator]="testing()">
+    <div class="col pl-0">
+        <div class="cust-form-col-rt">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="registration-inner inner-wrap tab-content" id="registerTabContent">
+
+                        <div class="tab-pane fade show active" id="utility-dtls" role="tabpanel" aria-labelledby="utility-dtls-tab">
+
+                            <div class="row br-btm">
+                                <div class="col-auto align-self-center">
+                                    <h4 class="h4 ttl">Utility Details</h4>                                
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="registration-form inner-form">
+
+                                        <div class="row inner-form-wrap">
+                                            <div class="col-12">
+                                                <form name="form" [formGroup]="uitilityDetailsForm" (ngSubmit)="onUtilityDetailsFormSubmit()">
+                                                    <div class="form-row">
+                                                            <div class="col">
+                                                                <label>Tenent </label>
+                                                                <ng-select [items]="[]" bindLabel="name" placeholder="Select Tenant" name="tenantName" formControlName="tenentNameControl" [clearable]="false" [readonly]="true">
+                                                                </ng-select>
+                                                            </div>
+                                                            <!-- <input type="text" #textbox class="form-control" placeholder="Tenent Name" value="Gail" name="textValue" formControlName="tenentNameControl" [ngClass]="{ 'is-invalid': uitilityDetailsFormSubmitted && ud.tenentNameControl.errors }" />
+                                                            <div *ngIf="uitilityDetailsFormSubmitted && ud.tenentNameControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ud.tenentNameControl.errors.required">Tenent name can't be empty!</div>
+                                                            </div> -->
+                                                        <div class="col">
+                                                            <label>Utility Name</label>
+                                                            <input type="text" #textbox class="form-control" placeholder="Utility Name"  value="BGL" name="textValue" formControlName="uitilityNameControl" [ngClass]="{ 'is-invalid': uitilityDetailsFormSubmitted && ud.uitilityNameControl.errors }" />
+                                                            <div *ngIf="uitilityDetailsFormSubmitted && ud.uitilityNameControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ud.uitilityNameControl.errors.required">Utility name can't be empty!</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Short Name</label>
+                                                            <input type="text" class="form-control" placeholder="Short Name" formControlName="utilitySortNameControl" [ngClass]="{ 'is-invalid': uitilityDetailsFormSubmitted && ud.utilitySortNameControl.errors }" />
+                                                            <div *ngIf="uitilityDetailsFormSubmitted && ud.utilitySortNameControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ud.utilitySortNameControl.errors.required">Utility Sort name can't be empty!</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Utility type</label>
+                                                            <ng-select [items]="utility" bindLabel="utilityName" placeholder="Select Utility" formControlName="utilityTypeControl" [ngClass]="{ 'is-invalid': uitilityDetailsFormSubmitted && ud.utilityTypeControl.errors }" [clearable]="false" 
+                                                                 name="utility">
+                                                            </ng-select>
+                                                            <div *ngIf="uitilityDetailsFormSubmitted && ud.utilityTypeControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ud.utilityTypeControl.errors.required">Utility Type can't be empty!</div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Region</label>
+                                                            <ng-select [items]="region" bindLabel="name" placeholder="Select Region" formControlName="regionControl" [ngClass]="{ 'is-invalid': uitilityDetailsFormSubmitted && ud.regionControl.errors }" [clearable]="false" 
+                                                                 name="region">
+                                                            </ng-select>
+                                                            <div *ngIf="uitilityDetailsFormSubmitted && ud.regionControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ud.regionControl.errors.required">Reagion can't be empty!</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Country</label>
+                                                            <ng-select [items]="country" bindLabel="name" placeholder="Select Country" formControlName="countryControl" [ngClass]="{ 'is-invalid': uitilityDetailsFormSubmitted && ud.countryControl.errors }" [clearable]="false" 
+                                                                 name="country">
+                                                            </ng-select>
+                                                            <div *ngIf="uitilityDetailsFormSubmitted && ud.countryControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ud.countryControl.errors.required">Country can't be empty!</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>State</label>
+                                                            <ng-select [items]="state" bindLabel="name" placeholder="Select State" formControlName="stateControl" [ngClass]="{ 'is-invalid': uitilityDetailsFormSubmitted && ud.stateControl.errors }" [clearable]="false" 
+                                                               name="state">
+                                                            </ng-select>
+                                                            <div *ngIf="uitilityDetailsFormSubmitted && ud.stateControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ud.stateControl.errors.required">State can't be empty!</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>City</label>
+                                                            <ng-select [items]="city" bindLabel="name" placeholder="Select City" formControlName="cityControl" [ngClass]="{ 'is-invalid': uitilityDetailsFormSubmitted && ud.cityControl.errors }" [clearable]="false" 
+                                                                 name="city">
+                                                            </ng-select>
+                                                            <div *ngIf="uitilityDetailsFormSubmitted && ud.cityControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="ud.cityControl.errors.required">City can't be empty!</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row justify-content-center form-bttn-row">
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-outline-light3 st">Cancel</button>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-secondary st" id="proceed_1">Proceed</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="tab-pane fade" id="module-dtl" role="tabpanel" aria-labelledby="module-dtl-tab">
+
+                            <div class="row br-btm">
+                                <div class="col-auto align-self-center">
+                                    <h4 class="h4 ttl">Module Details</h4>                                    
+                                </div>
+                                <div class="col align-self-center">
+                                    <div class="details-list">
+                                        <ul class="list-group list-group-horizontal justify-content-end">
+                                            <li class="list-group-item">
+                                            </li>
+                                        </ul>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="registration-form inner-form">
+
+                                        <div class="row inner-form-wrap">
+                                            <div class="col-12">
+                                                <form name="form" [formGroup]="moduleDetailsForm" (ngSubmit)="onModuleDetailsFormSubmit()">
+
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Select Module</label>
+                                                            
+                                                            <ng-select  class="filter-select" [items]="module" bindLabel="modul" placeholder="Select State" formControlName="moduleControl" [ngClass]="{ 'is-invalid': moduleDetailsFormSubmitted && md.moduleControl.errors }" [clearable]="false" 
+                                                               name="modul">
+                                                            </ng-select>
+                                                            <div *ngIf="moduleDetailsFormSubmitted && md.moduleControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="md.moduleControl.errors.required">Module can't be empty!</div>
+                                                            </div>
+                                                        </div>       
+                                                    </div>
+                                                    <div class="form-row"></div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Sub Module</label>
+                                                            <ng-select [multiple]="true" [items]="subModule" bindLabel="submodul" appendTo="body" placeholder="Sub Module"  name="submodul" formControlName="subModuleControl" [ngClass]="{ 'is-invalid': moduleDetailsFormSubmitted && md.subModuleControl.errors }" [clearable]="false" >
+                                                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" id="item-{{index}}" class="custom-control-input" [ngModel]="item$.selected"/>
+                                                                        <label class="custom-control-label" for="item-{{index}}"></label>
+                                                                        {{item.submodul}}
+                                                                    </div>
+                                                                </ng-template>
+                                                            </ng-select>
+                                                            <div *ngIf="moduleDetailsFormSubmitted && md.subModuleControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="md.subModuleControl.errors.required">Sub Module can't be empty!</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col-6 align-self-end">
+                                                            <button class="btn bttn-text st mb-1" style="min-width: unset;"><fa-icon [icon]="faPlus"></fa-icon>Add</button>
+                                                        </div>
+                                                        
+                                                    </div> 
+                                                    <div class="row justify-content-center form-bttn-row">
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-outline-light3 st">Cancel</button>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-secondary st" id="proceed_2">Proceed</button>
+                                                        </div>
+                                                    </div>
+                                                            
+                                                </form>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="tab-pane fade" id="product-dtl" role="tabpanel" aria-labelledby="product-dtl-tab">
+
+                            <div class="row br-btm">
+                                <div class="col-auto align-self-center">
+                                    <h4 class="h4 ttl">Product Details</h4>                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="registration-form inner-form">
+                                        <div class="row inner-form-wrap">
+                                            <div class="col-12">
+                                                <div class="tab-content" id="nav-tabContent">
+                                                    <div class="tab-pane fade show active" id="nav-service" role="tabpanel" aria-labelledby="nav-service-tab">
+                                                        <form name="form" [formGroup]="productDetailsForm" (ngSubmit)="onProductDetailsFormSubmit()">
+                                                            <div class="form-row">                           
+                                                                <div class="col">
+                                                                    <label>Select product</label>
+                                                                    <ng-select [multiple]="true" [items]="subModule" bindLabel="submodul" appendTo="body" placeholder="Select product"  name="submodul" formControlName="productControl" [ngClass]="{ 'is-invalid': productDetailsFormSubmitted && pd.productControl.errors }" [clearable]="false">
+                                                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                                            <div class="custom-control custom-checkbox">
+                                                                                <input type="checkbox" id="item-{{index}}" class="custom-control-input"/>
+                                                                                <label class="custom-control-label" for="item-{{index}}"></label>
+                                                                                {{item.submodul}}
+                                                                            </div>
+                                                                        </ng-template>
+                                                                    </ng-select>
+                                                                    <div *ngIf="productDetailsFormSubmitted && pd.productControl.errors" class="invalid-feedback">
+                                                                        <div *ngIf="pd.productControl.errors.required">Product can't be empty!</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="col-6 align-self-end">
+                                                                    <button class="btn bttn-text st mb-1" style="min-width: unset;"><fa-icon [icon]="faPlus"></fa-icon>Add</button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row justify-content-center form-bttn-row">
+                                                                <div class="col-auto">
+                                                                    <button class="btn btn-outline-light3 st">Cancel</button>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <button class="btn btn-secondary st" id="proceed_3">Proceed</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                        
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="tab-pane fade" id="consumer-dtl" role="tabpanel" aria-labelledby="consumer-dtl-tab">
+                            
+                            <div class="row br-btm">
+                                <div class="col-auto align-self-center">
+                                    <h4 class="h4 ttl">Consumer Details</h4>                                    
+                                </div>
+                                <div class="col align-self-center">
+                                    <div class="details-list">
+                                        <ul class="list-group list-group-horizontal justify-content-end">
+                                            <li class="list-group-item"></li>
+                                        </ul>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="registration-form inner-form">
+                                        <div class="row inner-form-wrap">
+                                            <div class="col-12">
+                                                <form name="form" [formGroup]="consumerDetailsForm" (ngSubmit)="onConsumerDetailsFormSubmit()">
+                                                    <div class="form-row">                                
+                                                        <div class="col">
+                                                            <label>Consumer Category</label>
+                                                            <ng-select  class="filter-select" [items]="consumerCat" bindLabel="conscat" placeholder="Consumer Category" formControlName="consumerCategoryControl" [ngClass]="{ 'is-invalid': productDetailsFormSubmitted && cd.consumerCategoryControl.errors }" [clearable]="false" 
+                                                                 name="conscat">
+                                                            </ng-select>
+                                                            <div *ngIf="productDetailsFormSubmitted && cd.consumerCategoryControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="cd.consumerCategoryControl.errors.required">Consumer Category can't be empty!</div>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>Sub Category</label>
+                                                            <ng-select class="filter-select" [items]="subConsumerCat" bindLabel="subconscat" placeholder="Sub Category" formControlName="consumerCategorysubControl" [ngClass]="{ 'is-invalid': productDetailsFormSubmitted && cd.consumerCategorysubControl.errors }" [clearable]="false" 
+                                                                 name="subconscat">
+                                                            </ng-select>
+                                                            <div *ngIf="productDetailsFormSubmitted && cd.consumerCategorysubControl.errors" class="invalid-feedback">
+                                                                <div *ngIf="cd.consumerCategorysubControl.errors.required">Consumer SubCategory can't be empty!</div>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="row justify-content-center form-bttn-row">
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-outline-light3 st">Cancel</button>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-secondary st" id="proceed_4">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="rvw-sbmt" role="tabpanel" aria-labelledby="rvw-sbmt-tab">
+
+                            <div class="row br-btm">
+                                <div class="col-auto align-self-center">
+                                    <h4 class="h4 ttl">Review &amp; Submit</h4>                                    
+                                </div>
+                                <div class="col align-self-center">
+                                    <div class="details-list">
+                                        <ul class="list-group list-group-horizontal justify-content-end">
+                                            <li class="list-group-item"></li>
+                                        </ul>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="review-submit-wrap">
+
+                                        <div class="review-submit-card">
+                                            <div class="review-submit-card-header">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h6 class="ttl">Utility Details</h6>
+                                                    </div>
+                                                </div>                                                    
+                                            </div>
+                                            <div class="review-submit-card-body">
+                                                <div class="applicant-data">
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <p class="p p-13">Tenant name</p>
+                                                            <h6 class="h6">{{tenantName}}</h6>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <p class="p p-13">Utility name</p>
+                                                            <h6 class="h6">{{utilityName}}</h6>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <p class="p p-13">Short name</p>
+                                                            <h6 class="h6">{{shortName}}</h6>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <p class="p p-13">Utility type</p>
+                                                            <h6 class="h6">Type 1</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <p class="p p-13">Region</p>
+                                                            <h6 class="h6">America</h6>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <p class="p p-13">Country</p>
+                                                            <h6 class="h6">USA</h6>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <p class="p p-13">State</p>
+                                                            <h6 class="h6">Texas</h6>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <p class="p p-13">City</p>
+                                                            <h6 class="h6">New York</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                    
+                                            </div>
+                                        </div>
+                                        <div class="review-submit-card">
+                                            <div class="review-submit-card-header">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h6 class="ttl">Module Details</h6>
+                                                    </div>
+                                                </div>                                                    
+                                            </div>
+                                            <div class="review-submit-card-body">
+                                                <div class="applicant-data">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <p class="p p-13">Modules</p>
+                                                            <h6 class="h6">Consumer ops</h6>
+                                                            <h6 class="h6">S and M</h6>
+                                                            <h6 class="h6">Finance</h6>
+                                                            <h6 class="h6">Consume care</h6>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="p p-13">Submodules</p>
+                                                            <h6 class="h6">Registration</h6>
+                                                            <h6 class="h6">Consumer</h6>
+                                                            <h6 class="h6">Meter data</h6>
+                                                            <h6 class="h6">Billing</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                    
+                                            </div>
+                                        </div>
+
+                                     
+
+                                        <div class="review-submit-card">
+                                            <div class="review-submit-card-header">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h6 class="ttl">Product Details</h6>
+                                                    </div>
+                                                </div>                                                    
+                                            </div>
+                                            <div class="review-submit-card-body">
+                                                <div class="applicant-data">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <p class="p p-13">Products</p>
+                                                            <h6 class="h6">Product 1</h6>
+                                                            <h6 class="h6">Product 2</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="review-submit-card">
+                                            <div class="review-submit-card-header">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h6 class="ttl">Consumer Details</h6>
+                                                    </div>
+                                                </div>                                                    
+                                            </div>
+                                            <div class="review-submit-card-body">
+                                                <div class="applicant-data">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <p class="p p-13">Consumer category</p>
+                                                            <h6 class="h6">Industrial</h6>
+                                                            <h6 class="h6">Domestic</h6>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="p p-13">Consumer sub-category</p>
+                                                            <h6 class="h6">Builder</h6>
+                                                            <h6 class="h6">Individual</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center form-bttn-row">
+                                <div class="col-auto">
+                                    <button class="btn btn-outline-light3 st">Cancel</button>
+                                </div>
+                                <div class="col-auto">
+                                    <button class="btn btn-secondary st" id="proceed_5" (click)="onUtilitySubmit()">Submit</button>
+                                </div>
+                            </div>                              
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <ngb-toast class="success" *ngIf="showtoast" header="dwd" [delay]="2000" [autohide]="autohide" (mouseenter)="autohide = false" (mouseleave)="autohide = true" (hide)="showtoast = false; autohide = true">
+                <div>New Utility Successfully Created!!</div>
+            </ngb-toast>
+        </div>
+    </div>
+</app-stepper-form>

@@ -35,8 +35,8 @@ export class SideNavComponent implements OnInit {
 
   subModuleList =[
     {module : 'Consumer Care',sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard Consumer Care"},
-    {module : 'Admin',sub_module : 'Utility Master',icon:'icons8 icons8-brief',link:'#',ngbPopover:"Utility Master"}, 
-    {module : 'Admin',sub_module : 'System Configuration',icon:'icons8 icons8-todo-list',link:'#',ngbPopover:"System Configuration"},         
+    {module : 'Admin',sub_module : 'Utility Master',icon:'icons8 icons8-brief',ngbPopover:"Utility Master"}, 
+    {module : 'Admin',sub_module : 'System Configuration',icon:'icons8 icons8-todo-list',ngbPopover:"System Configuration"},         
     {module : 'Consumer Ops',sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard Consumer"},
     {module : 'Consumer Care',sub_module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers care"},
     {module : 'S&M',sub_module : 'Registrations',icon:'icons8 icons8-shared-document',link:'/consumerops/registration',ngbPopover:"Registration"},
@@ -76,7 +76,7 @@ export class SideNavComponent implements OnInit {
             this.commonVal = this.subModuleList.filter(obj=>obj.module===this.defaultModule);
             this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
           }else{
-            this.finalList =  [{}]
+            this.finalList =  []
           }
         })
       
