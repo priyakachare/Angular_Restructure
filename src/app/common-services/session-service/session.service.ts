@@ -7,14 +7,16 @@ import { Observable } from 'rxjs';
 export class SessionService {
 
   constructor() { }
+
   data;
-  setter(id_string,data,token,token_data){
-  	sessionStorage.setItem("UserDetails",JSON.stringify({id_string:data,token:token_data}))
+  //set the value in Session storage
+  setter(key,data){
+  	sessionStorage.setItem(key,data)
   }
 
-  getter():Observable<any>{
-    var userDetail = JSON.parse(sessionStorage.getItem("UserDetails"))  
-    this.data = {"id_string":userDetail.id_string,"token":userDetail.token} 
+  //get the value from Session storage
+  getter(key):Observable<any>{
+    this.data = sessionStorage.getItem(key)  
     return this.data
   }
 

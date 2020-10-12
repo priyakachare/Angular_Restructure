@@ -88,17 +88,10 @@ export class LoginLogoutComponent implements OnInit {
       this.commonService.login(this.loginForm.value).subscribe(result =>{
         if(result.state === 'success'){  
           //set token and id string in sessionStorage
-          this.sessionService.setter("id_string",result.id_string,"token",result.token)
+          this.sessionService.setter("id_string",result.id_string)
+          this.sessionService.setter("token",result.token)
 
-          // sessionStorage.setItem("UserDetails",JSON.stringify({id_string:result.id_string, token:result.token}))
           this.router.navigateByUrl('/home');           
-
-          // Fetching UserDetail      
-          this.commonService.getUserDetails().subscribe(resp => {
-            if(resp.state === 'success'){
-              console.log('User Details =>'+resp.results.email + "  "+resp.results.created_date)
-              }            
-            });        
         }
       },
       err =>{
