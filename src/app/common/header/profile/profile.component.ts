@@ -2,6 +2,7 @@ import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faChevronDown, faSearch, faMapMarkerAlt, faPlus, faBell } from '@fortawesome/free-solid-svg-icons';
+import { SessionService } from 'src/app/common-services/session-service/session.service';
 import { CommonService } from '../../common.service';
 
 @Component({
@@ -32,11 +33,12 @@ export class ProfileComponent implements OnInit {
   };
 
   id_string;
-  constructor(private commonService:CommonService,private router:Router) { }
+  userDetail;
+  constructor(private commonService:CommonService,private router:Router,private sessionService:SessionService) { }
   selectItem(selectedVal){
     //get value of token and id string from sessionStorage
-   var userDetail = JSON.parse(sessionStorage.getItem("UserDetails"))   
-   this.id_string = userDetail.id_string
+    this.userDetail = this.sessionService.getter()
+    this.id_string = this.userDetail.id_string
 
     if(selectedVal === 'Logout'){
       this.commonService.logOut(this.id_string).subscribe(data =>{

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { Router } from "@angular/router";
 import { CommonService } from '../common/common.service';
 import { NgForm } from '@angular/forms';
+import { SessionService } from '../common-services/session-service/session.service';
 
 @Component({
   selector: 'app-login-logout',
@@ -61,7 +62,7 @@ export class LoginLogoutComponent implements OnInit {
   }
   
   contentEditable;
-  constructor(private router: Router, private commonService:CommonService,private formBuilder: FormBuilder) { 
+  constructor(private router: Router, private commonService:CommonService,private formBuilder: FormBuilder,private sessionService:SessionService) { 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]],
@@ -87,7 +88,9 @@ export class LoginLogoutComponent implements OnInit {
       this.commonService.login(this.loginForm.value).subscribe(result =>{
         if(result.state === 'success'){  
           //set token and id string in sessionStorage
-          sessionStorage.setItem("UserDetails",JSON.stringify({id_string:result.id_string, token:result.token}))
+          this.sessionService.setter("id_string",result.id_string,"token",result.token)
+
+          // sessionStorage.setItem("UserDetails",JSON.stringify({id_string:result.id_string, token:result.token}))
           this.router.navigateByUrl('/home');           
 
           // Fetching UserDetail      
