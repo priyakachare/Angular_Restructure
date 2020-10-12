@@ -153,7 +153,7 @@ export class AddRegistrationComponent implements OnInit {
       vipControl: [null, [Validators.required]],
       connectivityControl: [null, [Validators.required]],
     });
-    this.applicantDetailsForm.controls.utilityControl.setValue({id:"57ed8a45-014a-4f72-826a-dcf6824c454e", name:"MNGL Pune"})
+    this.applicantDetailsForm.controls.utilityControl.setValue({id_string:"57ed8a45-014a-4f72-826a-dcf6824c454e", name:"MNGL Pune"})
     // Applicant details form code start
 
     // Payment details form code start
@@ -387,7 +387,7 @@ export class AddRegistrationComponent implements OnInit {
     console.log(this.applicantDetailsForm.value)
     console.log(this.addressDetailsForm.value)
     let data = {
-      utility_id : this.applicantDetailsForm.value.utilityControl.id,
+      utility_id : this.applicantDetailsForm.value.utilityControl.id_string,
       first_name : this.applicantDetailsForm.value.firstNameControl,
       middle_name : this.applicantDetailsForm.value.middleNameControl,
       last_name : this.applicantDetailsForm.value.lastNameControl,
@@ -396,17 +396,24 @@ export class AddRegistrationComponent implements OnInit {
       address_line_1 : this.addressDetailsForm.value.addressLineControl,
       street : this.addressDetailsForm.value.streetControl,
       zipcode : this.addressDetailsForm.value.zipCodeControl,
-      // state_id : 
-      // city_id : 
-      // area_id : 
-      // sub_area_id : 
-      // ownership_id : 
-      // consumer_category_id : 
-      // sub_category_id : 
+      state_id : this.addressDetailsForm.value.stateProvinceRegionControl.id_string,
+      city_id : this.addressDetailsForm.value.cityControl.id_string,
+      area_id : this.addressDetailsForm.value.areaControl.id_string,
+      sub_area_id : this.addressDetailsForm.value.subAreaControl.id_string,
+      billing_address_line_1 : this.addressDetailsForm.value.billingAddressLineControl,
+      billing_street : this.addressDetailsForm.value.billingStreetControl,
+      billing_zipcode : this.addressDetailsForm.value.billingZipCodeControl,
+      billing_state_id : this.addressDetailsForm.value.billingStateProvinceRegionControl.id_string,
+      billing_city_id : this.addressDetailsForm.value.billingCityControl.id_string,
+      billing_area_id : this.addressDetailsForm.value.billingAreaControl.id_string,
+      billing_sub_area_id : this.addressDetailsForm.value.billingSubAreaControl.id_string,
+      ownership_id : this.applicantDetailsForm.value.ownershipControl.id_string,
+      consumer_category_id : this.applicantDetailsForm.value.consumerCategoryControl.id_string,
+      sub_category_id : this.applicantDetailsForm.value.consumerSubCategoryControl.id_string,
       is_vip : this.applicantDetailsForm.value.vipControl.id,
       connectivity : this.applicantDetailsForm.value.connectivityControl.id,
     }
-    this.registrationService.addRegistration(data).subscribe(data=>{
+    this.apiService.post('registration/', data).subscribe(data=>{
       console.log(data)
     })
   }

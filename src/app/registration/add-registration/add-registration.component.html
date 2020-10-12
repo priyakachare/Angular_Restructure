@@ -272,19 +272,7 @@
                                 <div class="col-auto align-self-center">
                                     <h4 class="h4 ttl">Address Details</h4>                                    
                                 </div>
-                                <div class="col align-self-center">
-                                    <div class="details-list">
-                                        <ul class="list-group list-group-horizontal justify-content-end">
-                                            <li class="list-group-item">
-                                                <div class="pr-checkbox">
-                                                    <input type="checkbox" name="optionsRadios" id="checkOther" [checked]="isAddressSame" (change)="copyAddress()">
-                                                    <label for="checkOther"></label>
-                                                </div>
-                                                <label class="checkbox-label" for="checkOther">Click here if billing Address same as Meter Address</label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="col-12">
@@ -368,9 +356,22 @@
                                                     <div class="tab-pane fade" id="nav-billing" role="tabpanel" aria-labelledby="nav-billing-tab">
                                                         <form name="form" [formGroup]="addressDetailsForm" (ngSubmit)="onAddressDetailsFormSubmit()">
                                                             <div class="form-row">
+                                                                <div class="col align-self-center">
+                                                                    <div class="details-list">
+                                                                        <ul class="list-group list-group-horizontal justify-content-end">
+                                                                            <li class="list-group-item">
+                                                                                <div class="pr-checkbox">
+                                                                                    <input type="checkbox" name="optionsRadios" id="checkOther" [checked]="isAddressSame" (change)="copyAddress()">
+                                                                                    <label for="checkOther"></label>
+                                                                                </div>
+                                                                                <label class="checkbox-label" for="checkOther">Click here if billing Address same as Service Address</label>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="col-12">
                                                                     <label>Address Line 1</label>
-                                                                    <textarea class="form-control text-uppercase" placeholder="Address" rows="2" name="billingAddressLine" formControlName="billingAddressLineControl" [ngClass]="{ 'is-invalid': addressDetailsFormSubmitted && add.billingAddressLineControl.errors }"></textarea>
+                                                                    <textarea class="form-control text-uppercase" placeholder="Address" rows="2" name="billingAddressLine" formControlName="billingAddressLineControl" [ngClass]="{ 'is-invalid': addressDetailsFormSubmitted && add.billingAddressLineControl.errors }" [readonly]="isAddressSame"></textarea>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingAddressLineControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingAddressLineControl.errors.required">Address can't be empty!</div>
                                                                     </div>
@@ -379,14 +380,14 @@
                                                             <div class="form-row">
                                                                 <div class="col-6">
                                                                     <label>Street</label>
-                                                                    <textarea class="form-control" placeholder="Street" rows="1" name="billingStreet" formControlName="billingStreetControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingStreetControl.errors}"></textarea>
+                                                                    <textarea class="form-control" placeholder="Street" rows="1" name="billingStreet" formControlName="billingStreetControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingStreetControl.errors}" [readonly]="isAddressSame"></textarea>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingStreetControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingStreetControl.errors.required">Street can't be empty!</div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6" *ngIf="stateProvinces.length !=0">
                                                                     <label>State / Province / Region</label>
-                                                                    <ng-select [items]="stateProvinces" bindLabel="name" appendTo="body" placeholder="Select state/province/region" name="billingStateProvinceRegion" formControlName="billingStateProvinceRegionControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingStateProvinceRegionControl.errors}">
+                                                                    <ng-select [items]="stateProvinces" bindLabel="name" appendTo="body" placeholder="Select state/province/region" name="billingStateProvinceRegion" formControlName="billingStateProvinceRegionControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingStateProvinceRegionControl.errors}" [readonly]="isAddressSame">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingStateProvinceRegionControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingStateProvinceRegionControl.errors.required">Please select state/province/region!</div>
@@ -396,7 +397,7 @@
                                                             <div class="form-row">
                                                                 <div class="col" *ngIf="cities.length !=0">
                                                                     <label>City</label>
-                                                                    <ng-select [items]="cities" bindLabel="name" appendTo="body" placeholder="Select City" name="billingCity" formControlName="billingCityControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingCityControl.errors}">
+                                                                    <ng-select [items]="cities" bindLabel="name" appendTo="body" placeholder="Select City" name="billingCity" formControlName="billingCityControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingCityControl.errors}" [readonly]="isAddressSame">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingCityControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingCityControl.errors.required">Please select city!</div>
@@ -404,7 +405,7 @@
                                                                 </div>
                                                                 <div class="col">
                                                                     <label>Postal / Zip Code </label>
-                                                                    <input type="text" class="form-control" placeholder="Select Postal/Zip code" name="billingZipCode" formControlName="billingZipCodeControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingZipCodeControl.errors}">
+                                                                    <input type="text" class="form-control" placeholder="Select Postal/Zip code" name="billingZipCode" formControlName="billingZipCodeControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingZipCodeControl.errors}" [readonly]="isAddressSame">
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingZipCodeControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingZipCodeControl.errors.required">Please select postal/zip code!</div>
                                                                     </div>
@@ -413,7 +414,7 @@
                                                             <div class="form-row">
                                                                 <div class="col" *ngIf="areas.length !=0">
                                                                     <label>Area</label>
-                                                                    <ng-select [items]="areas" bindLabel="name" appendTo="body" placeholder="Select Area" name="billingArea" formControlName="billingAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingAreaControl.errors}">
+                                                                    <ng-select [items]="areas" bindLabel="name" appendTo="body" placeholder="Select Area" name="billingArea" formControlName="billingAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingAreaControl.errors}" [readonly]="isAddressSame">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingAreaControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingAreaControl.errors.required">Please select area!</div>
@@ -421,7 +422,7 @@
                                                                 </div>
                                                                 <div class="col" *ngIf="subAreas.length !=0">
                                                                     <label>Sub Area</label>
-                                                                    <ng-select [items]="subAreas" bindLabel="name" appendTo="body" placeholder="Select Sub area" name="billingSubArea" formControlName="billingSubAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingSubAreaControl.errors}">
+                                                                    <ng-select [items]="subAreas" bindLabel="name" appendTo="body" placeholder="Select Sub area" name="billingSubArea" formControlName="billingSubAreaControl" [ngClass]="{'is-invalid':addressDetailsFormSubmitted && add.billingSubAreaControl.errors}" [readonly]="isAddressSame">
                                                                     </ng-select>
                                                                     <div *ngIf="addressDetailsFormSubmitted && add.billingSubAreaControl.errors" class="invalid-feedback">
                                                                         <div *ngIf="add.billingSubAreaControl.errors.required">Please select sub area!</div>
