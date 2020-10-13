@@ -1,11 +1,16 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { faTrash, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { StepperFormService } from '../../common/stepper-form/stepper-form.service';
-import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { RegistrationService } from '../registration.service';
 import { ApiService } from '../../common-services/api-service/api.service';
 declare var $ : any;
+
+
+export class SellingPoint {
+    selling_point: string
+}
 
 @Component({
   selector: 'app-add-registration',
@@ -69,6 +74,7 @@ export class AddRegistrationComponent implements OnInit {
   // Forms build end
   
   utilityIdString = '57ed8a45-014a-4f72-826a-dcf6824c454e'
+  chequeDemandDraft = true;
   showtoast = false; 
   autohide = true;
   isAddressSame = false;
@@ -97,18 +103,15 @@ export class AddRegistrationComponent implements OnInit {
   cities : any[] = [];
   areas : any[] = [];
   subAreas : any[] = [];
-  paymentType : any[] = [];
-  paymentType2 : any[] = [];
-  paymentType3 : any[] = [];
-  scheme : any[] = [];
-  scheme2 : any[] = [];
-  paymentMode : any[] = [];
-  billingAddress : any[] = [];
-  billingCity : any[] = [];
-  zipCode : any[] = [];
-  billingZipCode : any[] = [];
-  billingArea : any[] = [];
-  billingSubArea : any[] = [];
+  paymentModes : any[] = [
+    {id_string : '1245-fsdg-6545-hgty', name : 'Cash'},
+    {id_string : '1245-fsdg-6545-hgty', name : 'Cheque/DD'}
+  ];
+  paymentTypes : any[] = [
+    {id_string : '1245-fsdg-6545-hgty', name : 'Registration'},
+  ];
+  paymentSubTypes : any[] = [];
+  paymentChannels : any[] = [];
   documentType : any[] = [];
   kycDocument : any[] = [];
   vip =  [
@@ -158,7 +161,9 @@ export class AddRegistrationComponent implements OnInit {
 
     // Payment details form code start
     this.paymentDetailsForm = this.formBuilder.group({
-      firstNameControl: ['', [Validators.required]],
+      transactionsControl: this.formBuilder.array(
+        [this.formBuilder.group({transactionType:[null], transactionSubType:[null], transactionAmount:[null], transactionTax:[null]})]
+        )
     });
     // Payment details form code end
 
@@ -385,7 +390,6 @@ export class AddRegistrationComponent implements OnInit {
   onRegistrationSubmit(){
     this.showtoast = true;
     console.log(this.applicantDetailsForm.value)
-    console.log(this.addressDetailsForm.value)
     let data = {
       utility_id : this.applicantDetailsForm.value.utilityControl.id_string,
       first_name : this.applicantDetailsForm.value.firstNameControl,
@@ -416,6 +420,22 @@ export class AddRegistrationComponent implements OnInit {
     this.apiService.post('registration/', data).subscribe(data=>{
       console.log(data)
     })
+  }
+
+  get Transactions() {
+    return this.paymentDetailsForm.get('transactionsControl') as FormArray;
+  }
+
+  addTransactionRow(){
+    this.Transactions.push(this.formBuilder.group({transactionType:[null], transactionSubType:[null], transactionAmount:[null], transactionTax:[null]}));
+  }
+
+  removeTransactionRow(index){
+    if (index != 0){
+      this.Transactions.removeAt(index); 
+    }else{
+      return false
+    }
   }
 
 }
