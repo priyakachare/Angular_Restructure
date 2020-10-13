@@ -33,17 +33,15 @@ export class ProfileComponent implements OnInit {
   };
 
   id_string;
-  userDetail;
   constructor(private commonService:CommonService,private router:Router,private sessionService:SessionService) { }
   selectItem(selectedVal){
     //get value of token and id string from sessionStorage
-    this.userDetail = this.sessionService.getter()
-    this.id_string = this.userDetail.id_string
+    this.id_string =  this.sessionService.getter("id_string")
 
     if(selectedVal === 'Logout'){
       this.commonService.logOut(this.id_string).subscribe(data =>{
         if(data.state === "success"){
-          sessionStorage.removeItem("UserDetails")
+          sessionStorage.removeItem("token")
           this.router.navigateByUrl('/login'); 
         }
       })

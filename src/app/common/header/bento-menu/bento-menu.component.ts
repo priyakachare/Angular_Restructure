@@ -59,12 +59,10 @@ export class BentoMenuComponent implements OnInit {
   }
 
   modules:any = [];
-  sub_modules = [];
   module_list:any = [];
   utility_module_list;
-  val:any = [];
   firstUtility:any;
-  all_utilities:any=[];
+  allUtilities:any=[];
   finalModuleList:any=[];
 
   id_string:any=[]
@@ -102,12 +100,11 @@ export class BentoMenuComponent implements OnInit {
     // Taking All Utilities of login user
     this.getData.getUserUtility().subscribe(utility_obj=>{
       for(let utility of utility_obj.data.utilities){
-        this.all_utilities.push({"id_string":utility.id_string,"name":utility.name})
+        this.allUtilities.push({"id_string":utility.id_string,"name":utility.name})
 
-      }   
-        
+      }           
       this.firstUtility = utility_obj.data.utilities[0].id_string
-      this.getData.utilityList.emit(this.all_utilities) 
+      this.getData.utilityList.emit(this.allUtilities) 
 
 
       // Taking list of module according to firstUtility
@@ -117,13 +114,12 @@ export class BentoMenuComponent implements OnInit {
           this.getData.moduleName.emit(this.utility_module_list[0].module_name)
           this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
         }else{
-          this.finalModuleList = [{"module_name":"","img":""}]
+          this.finalModuleList = []
         }
         this.getData.checkBlankUtility.emit(this.utility_module_list)
       })
     })
  
-
     $(document).ready(function(){
       $(document).on('click', '.bento-dropdown .dropdown-menu', function(e){ 
         e.stopPropagation(); 

@@ -28,13 +28,13 @@ export class CommonService {
    token;
    id_string;
    userDetail;
+   
    // API for checking Role & Privileges
    checkRolePrivilege():Observable<any>{
    
    //get value of token and id string from sessionStorage
-   this.userDetail = this.sessionService.getter()
-   this.token = this.userDetail.token
-   this.id_string = this.userDetail.id_string
+   this.token = this.sessionService.getter("token")
+   this.id_string = this.sessionService.getter("id_string")
 
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})

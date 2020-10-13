@@ -8,7 +8,7 @@
           <div class="col-9 px-0 cust-col-9">            
             <div class="bento-dropdown-lt">
               <ngx-simplebar [options]="menuScrollOptions" class="bento-dropdown-lt-scroll">                
-                <div class="row" >
+                <div class="row" *ngIf="finalModuleList != ''">
                   <div class="col-sm-4" *ngFor="let module of finalModuleList">
                     <div class="media bento-menu-blk" (mouseover)="mouseHovered(module.module_name)" (click)="selectModuleId(module.id,module.module_name)">
                       <div class="img-blk align-self-center">
