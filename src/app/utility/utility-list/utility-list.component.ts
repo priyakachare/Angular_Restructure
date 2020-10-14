@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from 'src/app/common-services/session-service/session.service';
+import { CommonService } from 'src/app/common/common.service';
 import { UtilityService } from '../utility.service'
 
 @Component({
@@ -9,19 +11,24 @@ import { UtilityService } from '../utility.service'
 export class UtilityListComponent implements OnInit {
 
   dataSet;
-  moduleList;
-  constructor(private utilityservice:UtilityService) { }
+  constructor(private utilityservice:UtilityService,private getData:CommonService,private sessionService:SessionService) { }
 
   ngOnInit(): void {
 
-    this.utilityservice.getUtilityListData().subscribe(utilitydata=>{
-      this.dataSet = utilitydata.results
-      // for(let utility of this.dataSet){
-      //   this.utilityservice.getUtilityModuleListData(utility.id_string).subscribe(module=>{
-      //     this.moduleList = module.results
-      //   })
+    // Display utility details at time of page load
+    this.getData.defaultUtility.subscribe(result=>{
+      this.sessionService.setter("utility_id_string",result)
+      this.utilityservice.getUtilityListData(result).subscribe(utilitydata=>{
+        this.dataSet = utilitydata.result
+      })
+    })
 
-      // }
+    // Display utility details After changing utility
+    this.getData.utilityIdString.subscribe(result=>{
+      this.sessionService.setter("utility_id_string",result)
+      this.utilityservice.getUtilityListData(result).subscribe(utilitydata=>{
+        this.dataSet = utilitydata.result
+      })
     })
   }
 
