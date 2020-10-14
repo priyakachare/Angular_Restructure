@@ -174,75 +174,64 @@
                                     <div class="registration-form inner-form">
                                         <div class="row inner-form-wrap">
                                             <div class="col-12">
-                                                <form name="form">
+                                                <form name="form" [formGroup]="paymentDetailsForm" (ngSubmit)="onPaymentDetailsFormSubmit()">
+                                                    <div formArrayName="transactionsControl">
+                                                        <div class="form-row" *ngFor="let item of Transactions.controls; let i=index" [formGroupName]="i">
+                                                            <div class="col">
+                                                                <label>Payment Type</label>
+                                                                <ng-select [items]="paymentTypes" bindLabel="name" appendTo="body" placeholder="Select Payment Type" name="name" [clearable]="false" formControlName="transactionType">
+                                                                </ng-select>
+                                                            </div>
+                                                            <div class="col">
+                                                                <label>Payment Sub Type</label>
+                                                                <ng-select [items]="paymentSubTypes" bindLabel="name" appendTo="body" placeholder="Select Payment Sub Type" name="name" [clearable]="false" formControlName="transactionSubType">
+                                                                </ng-select>
+                                                            </div>
+                                                            <div class="col">
+                                                                <label>Amount</label>
+                                                                <input type="text" class="form-control" placeholder="Amount" formControlName="transactionAmount"/>
+                                                            </div>
+                                                            <div class="col">
+                                                                <label>Tax</label>
+                                                                <input type="text" class="form-control" placeholder="Tax" formControlName="transactionTax"/>
+                                                            </div>
+                                                            <div class="col-auto align-self-center action-col">
+                                                                <button class="bttn-transparent bttn-icon" tooltipClass="pr-tooltip" placement="top" ngbTooltip="Remove" [openDelay]="200" [closeDelay]="200" (click)="removeTransactionRow(i)"><fa-icon [icon]="faTrash"></fa-icon></button> 
+                                                            </div>
+                                                        </div>
+                                                    </div>                                                 
                                                     <div class="form-row">
-                                                        <div class="col">
-                                                            <label>Payment Type</label>
-                                                            <ng-select [items]="paymentType" bindLabel="name" appendTo="body" placeholder="Select Payment Type"
-                                                                [(ngModel)]="selectedPaymentType" name="name">
-                                                            </ng-select>
-                                                        </div>
-                                                        <div class="col">
-                                                            <label>Scheme</label>
-                                                            <ng-select [items]="scheme" bindLabel="name" appendTo="body" placeholder="Select Scheme"
-                                                                [(ngModel)]="selectedScheme" name="name">
-                                                            </ng-select>
-                                                        </div>
-                                                        <div class="col">
-                                                            <label>Amount</label>
-                                                            <input type="text" class="form-control" placeholder="" value="$ 501" />
-                                                        </div>
-                                                        <div class="col-auto align-self-center action-col">
-                                                            <button class="btn bttn-transparent bttn-icon" tooltipClass="pr-tooltip" placement="top" ngbTooltip="Remove" [openDelay]="300" [closeDelay]="500"><fa-icon [icon]="faTrash"></fa-icon></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-row">
-                                                        <div class="col">
-                                                            <label>Payment Type</label>
-                                                            <ng-select [items]="paymentType2" bindLabel="name" appendTo="body" placeholder="Select Payment Type"
-                                                                [(ngModel)]="selectedPaymentType2" name="name">
-                                                            </ng-select>
-                                                        </div>
-                                                        <div class="col">
-                                                            <label>Scheme</label>
-                                                            <ng-select [items]="scheme2" bindLabel="name" appendTo="body" placeholder="Select Scheme"
-                                                                [(ngModel)]="selectedScheme2" name="name">
-                                                            </ng-select>
-                                                        </div>
-                                                        <div class="col">
-                                                            <label>Amount</label>
-                                                            <input type="text" class="form-control" placeholder="" value="$ 501" />
-                                                        </div>
-                                                        <div class="col-auto align-self-center action-col">
-                                                            <button class="btn bttn-transparent bttn-icon" tooltipClass="pr-tooltip" placement="top" ngbTooltip="Remove" [openDelay]="300" [closeDelay]="500"><fa-icon [icon]="faTrash"></fa-icon></button>
-                                                        </div>
-                                                    </div>                                                    
-                                                    <div class="form-row">
-                                                        <div class="col">
-                                                            <button class="btn bttn-transparent bttn-add" type="button">Add</button>
-                                                        </div>
+                                                        <button class="btn bttn-transparent bttn-add" type="button" (click)="addTransactionRow()">Add</button>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <label>Payment Mode</label>
-                                                            <ng-select [items]="paymentMode" bindLabel="name" appendTo="body" placeholder="Select Payment Mode"
-                                                                [(ngModel)]="selectedPaymentMode" name="name">
+                                                            <ng-select [items]="paymentModes" bindLabel="name" appendTo="body" placeholder="Select Payment Mode" name="name">
                                                             </ng-select>
                                                         </div>
                                                         <div class="col">
-                                                            <label>Channel</label>
-                                                            <input type="text" class="form-control" placeholder="" value="UPI" />
+                                                            <label>Payment Channel</label>
+                                                            <ng-select [items]="paymentChannels" bindLabel="name" appendTo="body" placeholder="Select Payment Mode" name="name">
+                                                            </ng-select>
                                                         </div>
                                                         <div class="col">
-                                                            <label>Transaction Number</label>
-                                                            <input type="text" class="form-control" placeholder="" value="001259952400" />
+                                                            <label>Transaction Id</label>
+                                                            <input type="text" class="form-control" placeholder="" value="TXN23887645" />
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col-4">
+                                                            <label>Payment Amount</label>
+                                                            <input type="text" class="form-control" placeholder="" value="3000" />
+                                                        </div>
+                                                        <div class="col-4" [hidden]="chequeDemandDraft">
+                                                            <label>Cheque/DD No.</label>
+                                                            <input type="text" class="form-control" placeholder="" value="3000" />
+                                                        </div>
+                                                        <div class="col-4">
                                                             <label>Transaction Date</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" placeholder="yyyy--mm--dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" container="body">
+                                                                <input type="text" class="form-control" placeholder="yyyy--mm--dd" name="dp" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" container="body">
                                                                 <div class="input-group-append">
                                                                     <button class="btn bttn-transparent bttn-icon" type="button" (click)="d.toggle()"><fa-icon [icon]="faCalendarAlt"></fa-icon></button>
                                                                 </div>
@@ -478,8 +467,7 @@
                                                         </div>
                                                         <div class="col-4">
                                                             <label>Select Documents</label>
-                                                            <ng-select [items]="kycDocument" bindLabel="name" appendTo="body" placeholder=""
-                                                                [(ngModel)]="selectedKycDocuments" name="name">
+                                                            <ng-select [items]="kycDocument" bindLabel="name" appendTo="body" placeholder="" [(ngModel)]="selectedKycDocuments" name="name">
                                                             </ng-select>
                                                         </div>
                                                     </div>
