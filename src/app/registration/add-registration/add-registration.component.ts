@@ -103,13 +103,8 @@ export class AddRegistrationComponent implements OnInit {
   cities : any[] = [];
   areas : any[] = [];
   subAreas : any[] = [];
-  paymentModes : any[] = [
-    {id_string : '1245-fsdg-6545-hgty', name : 'Cash'},
-    {id_string : '1245-fsdg-6545-hgty', name : 'Cheque/DD'}
-  ];
-  paymentTypes : any[] = [
-    {id_string : '1245-fsdg-6545-hgty', name : 'Registration'},
-  ];
+  paymentModes : any[] = [];
+  paymentTypes : any[] = [];
   paymentSubTypes : any[] = [];
   paymentChannels : any[] = [];
   documentType : any[] = [];
@@ -162,8 +157,9 @@ export class AddRegistrationComponent implements OnInit {
     // Payment details form code start
     this.paymentDetailsForm = this.formBuilder.group({
       transactionsControl: this.formBuilder.array(
-        [this.formBuilder.group({transactionType:[null], transactionSubType:[null], transactionAmount:[null], transactionTax:[null]})]
+        [this.formBuilder.group({transaction_type_id:[null], transaction_sub_type_id:[null], transaction_amount:[null], tax_amount:[null]})]
         ),
+      paymentTypeControl: [null,],
       paymentModeControl: [null,],
       paymentChannelControl: [null,],
       transactionIdControl: [null,],
@@ -247,6 +243,38 @@ export class AddRegistrationComponent implements OnInit {
       }
     })
     // Sub Areas dropdown api call end
+
+    // Payment types dropdown api call start
+    this.apiService.get('payment/payment-types').subscribe(data=>{
+      for(let item of data){
+        this.paymentTypes.push(item)
+      }
+    })
+    // Payment types dropdown api call end
+
+    // Payment sub types dropdown api call start
+    this.apiService.get('payment/payment-sub-types').subscribe(data=>{
+      for(let item of data){
+        this.paymentSubTypes.push(item)
+      }
+    })
+    // Payment sub types dropdown api call end
+
+    // Payment modes dropdown api call start
+    this.apiService.get('payment/'+this.utilityIdString+'/payment-modes').subscribe(data=>{
+      for(let item of data){
+        this.paymentModes.push(item)
+      }
+    })
+    // Payment modes dropdown api call end
+
+    // Payment channel dropdown api call start
+    this.apiService.get('payment/'+this.utilityIdString+'/payment-channels').subscribe(data=>{
+      for(let item of data){
+        this.paymentChannels.push(item)
+      }
+    })
+    // Payment channel dropdown api call end
   }
 
   // Applicant details form control start
@@ -289,7 +317,7 @@ export class AddRegistrationComponent implements OnInit {
   // Payment details form submit start
   onPaymentDetailsFormSubmit() {
       this.paymentDetailsFormSubmitted = true;
-
+      console.log(this.paymentDetailsForm.value)
       if (this.paymentDetailsForm.invalid) {
           return;
       }else{
@@ -403,7 +431,6 @@ export class AddRegistrationComponent implements OnInit {
 
   onRegistrationSubmit(){
     this.showtoast = true;
-    console.log(this.applicantDetailsForm.value)
     let data = {
       utility_id : this.applicantDetailsForm.value.utilityControl.id_string,
       first_name : this.applicantDetailsForm.value.firstNameControl,
@@ -430,6 +457,16 @@ export class AddRegistrationComponent implements OnInit {
       sub_category_id : this.applicantDetailsForm.value.consumerSubCategoryControl.id_string,
       is_vip : this.applicantDetailsForm.value.vipControl.id,
       connectivity : this.applicantDetailsForm.value.connectivityControl.id,
+      transactions : this.paymentDetailsForm.value.transactionsControl,
+      payment : {
+        payment_type_id : this.paymentDetailsForm.value.paymentTypeControl,
+        payment_mode_id : this.paymentDetailsForm.value.paymentModeControl.id_string,
+        payment_channel_id : this.paymentDetailsForm.value.paymentChannelControl,
+        transaction_id : this.paymentDetailsForm.value.transactionIdControl,
+        transaction_amount : this.paymentDetailsForm.value.paymentAmountControl,
+        cheque_dd_no : this.paymentDetailsForm.value.chequeDdControl,
+        // transaction_date : this.paymentDetailsForm.value.transationDateControl
+      }
     }
     this.apiService.post('registration/', data).subscribe(data=>{
       console.log(data)
@@ -441,7 +478,7 @@ export class AddRegistrationComponent implements OnInit {
   }
 
   addTransactionRow(){
-    this.Transactions.push(this.formBuilder.group({transactionType:[null], transactionSubType:[null], transactionAmount:[null], transactionTax:[null]}));
+    this.Transactions.push(this.formBuilder.group({transaction_type_id:[null], transaction_sub_type_id:[null], transaction_amount:[null], tax_amount:[null]}));
   }
 
   removeTransactionRow(index){

@@ -177,23 +177,23 @@
                                                 <form name="form" [formGroup]="paymentDetailsForm" (ngSubmit)="onPaymentDetailsFormSubmit()">
                                                     <div formArrayName="transactionsControl">
                                                         <div class="form-row" *ngFor="let item of Transactions.controls; let i=index" [formGroupName]="i">
-                                                            <div class="col">
+                                                            <div class="col" *ngIf="paymentTypes.length != 0">
                                                                 <label>Payment Type</label>
-                                                                <ng-select [items]="paymentTypes" bindLabel="name" appendTo="body" placeholder="Select Payment Type" name="name" [clearable]="false" formControlName="transactionType">
+                                                                <ng-select [items]="paymentTypes" bindLabel="name" bindValue="id_string" appendTo="body" placeholder="Select Payment Type" name="name" [clearable]="false" formControlName="transaction_type_id">
                                                                 </ng-select>
                                                             </div>
-                                                            <div class="col">
+                                                            <div class="col" *ngIf="paymentSubTypes.length != 0">
                                                                 <label>Payment Sub Type</label>
-                                                                <ng-select [items]="paymentSubTypes" bindLabel="name" appendTo="body" placeholder="Select Payment Sub Type" name="name" [clearable]="false" formControlName="transactionSubType">
+                                                                <ng-select [items]="paymentSubTypes" bindValue="id_string" bindLabel="name" appendTo="body" placeholder="Select Payment Sub Type" name="name" [clearable]="false" formControlName="transaction_sub_type_id">
                                                                 </ng-select>
                                                             </div>
                                                             <div class="col">
                                                                 <label>Amount</label>
-                                                                <input type="text" class="form-control" placeholder="Amount" formControlName="transactionAmount"/>
+                                                                <input type="text" class="form-control" placeholder="Amount" formControlName="transaction_amount"/>
                                                             </div>
                                                             <div class="col">
                                                                 <label>Tax</label>
-                                                                <input type="text" class="form-control" placeholder="Tax" formControlName="transactionTax"/>
+                                                                <input type="text" class="form-control" placeholder="Tax" formControlName="tax_amount"/>
                                                             </div>
                                                             <div class="col-auto align-self-center action-col">
                                                                 <button class="bttn-transparent bttn-icon" tooltipClass="pr-tooltip" placement="top" ngbTooltip="Remove" [openDelay]="200" [closeDelay]="200" (click)="removeTransactionRow(i)"><fa-icon [icon]="faTrash"></fa-icon></button> 
@@ -204,31 +204,36 @@
                                                         <button class="btn bttn-transparent bttn-add" type="button" (click)="addTransactionRow()">Add</button>
                                                     </div>
                                                     <div class="form-row">
-                                                        <div class="col">
+                                                        <div class="col-3" *ngIf="paymentTypes.length != 0">
+                                                            <label>Payment Type</label>
+                                                            <ng-select [items]="paymentTypes" bindValue="id_string" bindLabel="name" appendTo="body" placeholder="Select Payment Type" name="name" [clearable]="false" formControlName="paymentTypeControl">
+                                                            </ng-select>
+                                                        </div>
+                                                        <div class="col-3" *ngIf="paymentModes.length != 0">
                                                             <label>Payment Mode</label>
                                                             <ng-select [items]="paymentModes" bindLabel="name" appendTo="body" placeholder="Select Payment Mode" name="name" formControlName="paymentModeControl">
                                                             </ng-select>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col-3" *ngIf="paymentChannels.length != 0">
                                                             <label>Payment Channel</label>
-                                                            <ng-select [items]="paymentChannels" bindLabel="name" appendTo="body" placeholder="Select Payment Mode" name="name" formControlName="paymentChannelControl">
+                                                            <ng-select [items]="paymentChannels" bindValue="id_string" bindLabel="name" appendTo="body" placeholder="Select Payment Channel" name="name" formControlName="paymentChannelControl">
                                                             </ng-select>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col-3">
                                                             <label>Transaction Id</label>
                                                             <input type="text" class="form-control" placeholder="Transaction ID" value="TXN23887645" formControlName="transactionIdControl"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
-                                                        <div class="col-4">
+                                                        <div class="col-3">
                                                             <label>Payment Amount</label>
                                                             <input type="text" class="form-control" placeholder="Payment amount" value="3000" formControlName="paymentAmountControl"/>
                                                         </div>
-                                                        <div class="col-4" [hidden]="chequeDemandDraft">
+                                                        <div class="col-3" [hidden]="chequeDemandDraft">
                                                             <label>Cheque/DD No.</label>
                                                             <input type="text" class="form-control" placeholder="Cheque/DD" value="3000" formControlName="chequeDdControl"/>
                                                         </div>
-                                                        <div class="col-4">
+                                                        <div class="col-3">
                                                             <label>Transaction Date</label>
                                                             <div class="input-group">
                                                                 <input type="text" class="form-control" placeholder="yyyy--mm--dd" name="dp" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" container="body" formControlName="transationDateControl">
