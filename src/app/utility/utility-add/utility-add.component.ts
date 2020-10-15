@@ -4,6 +4,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { StepperFormService } from '../../common/stepper-form/stepper-form.service';
 import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { UtilityService } from '../utility.service';
+import { SessionService } from 'src/app/common-services/session-service/session.service';
 
 @Component({
   selector: 'app-utility-add',
@@ -304,14 +305,6 @@ export class UtilityAddComponent implements OnInit {
       listClass : 'nav-item list-group-item'
     },
     {
-      name : 'Consumer',
-      id : 'consumer-dtl-tab',
-      href : '#consumer-dtl',
-      class : 'nav-link',
-      areaControl : 'consumer-dtl',
-      listClass : 'nav-item list-group-item'
-    },
-    {
       name : 'Review & Submit',
       id : 'rvw-sbmt-tab',
       href : '#rvw-sbmt',
@@ -330,20 +323,16 @@ export class UtilityAddComponent implements OnInit {
   consumerDetailsForm: FormGroup;
   consumerDetailsFormSubmitted = false;
 
-  constructor(private stepperFormService:StepperFormService,private formBuilder: FormBuilder,private utilityService:UtilityService) { 
+  constructor(private stepperFormService:StepperFormService,private formBuilder: FormBuilder,private utilityService:UtilityService,private sessionService:SessionService) { 
     // Utility details form code start
     this.uitilityDetailsForm = this.formBuilder.group({
       tenentNameControl: [null, [Validators.required]],
       uitilityNameControl: ['', [Validators.required]],
       utilitySortNameControl: ['', [Validators.required]],
-      utilityTypeControl: [null, [Validators.required]],
       regionControl: [null, [Validators.required]],
       countryControl: [null, [Validators.required]],
-      stateControl: [null, [Validators.required]],
-      cityControl: [null, [Validators.required]],
     });
 
-    this.uitilityDetailsForm.controls.tenentNameControl.setValue({id:"de41a16c-1c4c-4e18-93f0-8c7e5152c399", name:"GAIL"})
 
      // Module details form code start
      this.moduleDetailsForm = this.formBuilder.group({
@@ -354,12 +343,6 @@ export class UtilityAddComponent implements OnInit {
       // Product details form code start
       this.productDetailsForm = this.formBuilder.group({
         productControl: [null, [Validators.required]],
-       })
-
-        // consumer details form code start
-      this.consumerDetailsForm = this.formBuilder.group({
-        consumerCategoryControl: [null, [Validators.required]],
-        consumerCategorysubControl: [null, [Validators.required]],
        })
   }
 
@@ -402,49 +385,72 @@ export class UtilityAddComponent implements OnInit {
     if (this.productDetailsForm.invalid) {
       return;
     }else{
-      this.stepperFormService.sendTrigger("#consumer-dtl-tab")
+      this.stepperFormService.sendTrigger("#rvw-sbmt-tab")
     }
   }
 
   tenantName;
   utilityName;
-  shortName;
-  onConsumerDetailsFormSubmit(){
-    this.consumerDetailsFormSubmitted = true
-    if (this.consumerDetailsForm.invalid) {
-      return;
-    }else{
-      this.tenantName = this.uitilityDetailsForm.value.tenentNameControl.name,
-      this.utilityName = this.uitilityDetailsForm.value.uitilityNameControl
-      this.shortName = this.uitilityDetailsForm.value.utilitySortNameControl
-      this.stepperFormService.sendTrigger("#rvw-sbmt-tab")
-    }
-  }
+  shortName;  
   
-  moduleList;
+  moduleList1:any=[];
   countriesList;
   regionsList;
   stateList;
   citiesList;
+  submodulesList;
+  productsList;
+  categoryList;
+  tenantList;
+
   ngOnInit(): void {
-    this.sendStepperFormData()
-    this.utilityService.getModuleListData().subscribe(modules=>{
-      this.moduleList = modules.results
-    })
+    this.sendStepperFormData()    
     this.utilityService.getCountriesListData().subscribe(countries=>{
       this.countriesList = countries.results
     })
     this.utilityService.getRegionsListData().subscribe(regions=>{
       this.regionsList = regions.results
     })
-    // this.utilityService.getStateListData().subscribe(states=>{
-    //   this.stateList = states.results
-    // })
-    // this.utilityService.getCityListData().subscribe(cities=>{
-    //   this.citiesList = cities.results
-    // })
-
+    this.utilityService.getProductListData().subscribe(products=>{
+      this.productsList = products.results
+    })
+    this.utilityService.getCategoryListData().subscribe(category=>{
+      this.categoryList = category.results
+    })
+    this.utilityService.getTenantListData().subscribe(tenants=>{
+      this.tenantList = tenants.results
+    })
   }
+
+  // According to tenant idstring featch module list from tenantmodule
+  tenant_id_string;
+  moduleList;
+  submoduleList1;
+    getTenantIdString(){   
+         
+      this.tenant_id_string = this.uitilityDetailsForm.value.tenentNameControl.id_string
+      this.utilityService.getModuleListData(this.tenant_id_string).subscribe(modules=>{
+        this.moduleList1=[]
+        for(let module of modules.results){
+          this.moduleList1.push({"id_string":module.id_string,"name":module.module_id.name})
+          }
+        this.moduleList=this.moduleList1
+      })
+
+    }
+    // According to module idstring featch submodule list from tenantsubmodule
+    module;submodule;
+    getModuleIdString(){
+      this.module = this.moduleDetailsForm.value.moduleControl.id_string
+      this.utilityService.getSubModuleListData(this.module).subscribe(submodules=>{
+        this.submoduleList1 = []
+        for(let submodule of submodules.results){
+          this.submoduleList1.push({"id_string":submodule.id_string,"name":submodule.sub_module_id.name})
+        }
+        this.submodulesList = this.submoduleList1
+      })
+    }
+
 
   sendStepperFormData(){
     this.stepperFormService.stepperFormEvent.emit(this.blocks);
@@ -510,20 +516,21 @@ export class UtilityAddComponent implements OnInit {
 
     onUtilitySubmit(){
       this.showtoast = true;
+
       let data = {
-        tenant : this.uitilityDetailsForm.value.tenentNameControl.id,
+        tenant : this.uitilityDetailsForm.value.tenentNameControl.name,
         name : this.uitilityDetailsForm.value.uitilityNameControl,
         short_name : this.uitilityDetailsForm.value.utilitySortNameControl,
-        // utility_type : this.uitilityDetailsForm.value.utilityTypeControl,
-        // region : this.uitilityDetailsForm.value.regionControl,
-        // country : this.uitilityDetailsForm.value.countryControl,
-        // state : this.uitilityDetailsForm.value.stateControl,
-        // city : this.uitilityDetailsForm.value.cityControl,
+        module : this.moduleDetailsForm.value.moduleControl.name,
+        // submodule : this.moduleDetailsForm.value.submoduleControl.name
       }
+      this.utilityService.addUtility(data).subscribe(result=>{
+        if(result.state === 'success'){
 
-      this.utilityService.addUtility(data).subscribe(data=>{
-        console.log(data)
+        }
+
       })
     }
+    
  
 }

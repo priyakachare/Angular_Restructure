@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faChevronDown, faSearch, faMapMarkerAlt, faPlus, faBell } from '@fortawesome/free-solid-svg-icons';
 import * as $ from 'jquery';
+import { SessionService } from 'src/app/common-services/session-service/session.service';
+import { UtilityService } from 'src/app/utility/utility.service';
 import { CommonService } from '../../common.service';
 
 
@@ -50,7 +52,7 @@ export class BentoMenuComponent implements OnInit {
     this.selectedVal = this.finalModuleList.find(data => data.module_name === val)  
   }
   
-  constructor(private getData:CommonService) { }
+  constructor(private getData:CommonService, private sessionService:SessionService,private utilityService:UtilityService) { }
 
   //Set Module Id in Common Service EventEmitter
   selectModuleId(val,module){
@@ -71,6 +73,8 @@ export class BentoMenuComponent implements OnInit {
     // For Change Utility on droupdown change bento menu
     this.getData.utilityIdString.subscribe(id_string=>{
       this.firstUtility = id_string
+      
+
       // Taking list of module according to firstUtility
       this.getData.getUtilityModuleList(this.firstUtility).subscribe(modules =>{
         this.utility_module_list = modules.results
@@ -79,7 +83,6 @@ export class BentoMenuComponent implements OnInit {
           this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
         }else{
           this.getData.moduleName.emit(this.utility_module_list)
-          // this.finalModuleList = [{"module_name":"","img":""}]
           this.finalModuleList = []
 
         }
@@ -101,11 +104,14 @@ export class BentoMenuComponent implements OnInit {
     this.getData.getUserUtility().subscribe(utility_obj=>{
       for(let utility of utility_obj.data.utilities){
         this.allUtilities.push({"id_string":utility.id_string,"name":utility.name})
-
       }           
       this.firstUtility = utility_obj.data.utilities[0].id_string
+
+      // for display utility list in dropdown
       this.getData.utilityList.emit(this.allUtilities) 
 
+      // set default utility value for display utility detail
+      this.getData.defaultUtility.emit(this.firstUtility)
 
       // Taking list of module according to firstUtility
       this.getData.getUtilityModuleList(this.firstUtility).subscribe(modules =>{

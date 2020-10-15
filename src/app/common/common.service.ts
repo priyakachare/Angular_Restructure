@@ -14,6 +14,7 @@ export class CommonService {
   @Output() moduleObj = new EventEmitter<string>();
   @Output() sideNavId = new EventEmitter<string>();
   @Output() utilityList = new EventEmitter<string>();
+  @Output() defaultUtility = new EventEmitter<string>();
   @Output() utilityIdString = new EventEmitter<string>();
   @Output() checkBlankUtility = new EventEmitter<string>();
 
