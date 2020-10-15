@@ -107,11 +107,12 @@ export class BentoMenuComponent implements OnInit {
       }           
       this.firstUtility = utility_obj.data.utilities[0].id_string
 
-      // for display utility list in dropdown
-      this.getData.utilityList.emit(this.allUtilities) 
-
       // set default utility value for display utility detail
-      this.getData.defaultUtility.emit(this.firstUtility)
+      this.sessionService.setter("utility_id_string",this.firstUtility)
+
+      // for display utility list in dropdown
+      this.getData.utilityList.emit(this.allUtilities)   
+
 
       // Taking list of module according to firstUtility
       this.getData.getUtilityModuleList(this.firstUtility).subscribe(modules =>{
