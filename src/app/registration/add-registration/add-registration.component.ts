@@ -163,7 +163,13 @@ export class AddRegistrationComponent implements OnInit {
     this.paymentDetailsForm = this.formBuilder.group({
       transactionsControl: this.formBuilder.array(
         [this.formBuilder.group({transactionType:[null], transactionSubType:[null], transactionAmount:[null], transactionTax:[null]})]
-        )
+        ),
+      paymentModeControl: [null,],
+      paymentChannelControl: [null,],
+      transactionIdControl: [null,],
+      paymentAmountControl: [null,],
+      chequeDdControl: [null,],
+      transationDateControl: [null,],
     });
     // Payment details form code end
 
@@ -294,6 +300,14 @@ export class AddRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.sendStepperFormData()
+
+    this.paymentDetailsForm.get("paymentModeControl").valueChanges.subscribe(val=>{
+      if(val.name == "Cheque/DD"){
+        this.chequeDemandDraft = !this.chequeDemandDraft
+      }else{
+        this.chequeDemandDraft = true
+      }
+    })
   }
 
   sendStepperFormData(){

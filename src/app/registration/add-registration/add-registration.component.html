@@ -206,47 +206,47 @@
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <label>Payment Mode</label>
-                                                            <ng-select [items]="paymentModes" bindLabel="name" appendTo="body" placeholder="Select Payment Mode" name="name">
+                                                            <ng-select [items]="paymentModes" bindLabel="name" appendTo="body" placeholder="Select Payment Mode" name="name" formControlName="paymentModeControl">
                                                             </ng-select>
                                                         </div>
                                                         <div class="col">
                                                             <label>Payment Channel</label>
-                                                            <ng-select [items]="paymentChannels" bindLabel="name" appendTo="body" placeholder="Select Payment Mode" name="name">
+                                                            <ng-select [items]="paymentChannels" bindLabel="name" appendTo="body" placeholder="Select Payment Mode" name="name" formControlName="paymentChannelControl">
                                                             </ng-select>
                                                         </div>
                                                         <div class="col">
                                                             <label>Transaction Id</label>
-                                                            <input type="text" class="form-control" placeholder="" value="TXN23887645" />
+                                                            <input type="text" class="form-control" placeholder="Transaction ID" value="TXN23887645" formControlName="transactionIdControl"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col-4">
                                                             <label>Payment Amount</label>
-                                                            <input type="text" class="form-control" placeholder="" value="3000" />
+                                                            <input type="text" class="form-control" placeholder="Payment amount" value="3000" formControlName="paymentAmountControl"/>
                                                         </div>
                                                         <div class="col-4" [hidden]="chequeDemandDraft">
                                                             <label>Cheque/DD No.</label>
-                                                            <input type="text" class="form-control" placeholder="" value="3000" />
+                                                            <input type="text" class="form-control" placeholder="Cheque/DD" value="3000" formControlName="chequeDdControl"/>
                                                         </div>
                                                         <div class="col-4">
                                                             <label>Transaction Date</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" placeholder="yyyy--mm--dd" name="dp" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" container="body">
+                                                                <input type="text" class="form-control" placeholder="yyyy--mm--dd" name="dp" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" container="body" formControlName="transationDateControl">
                                                                 <div class="input-group-append">
                                                                     <button class="btn bttn-transparent bttn-icon" type="button" (click)="d.toggle()"><fa-icon [icon]="faCalendarAlt"></fa-icon></button>
                                                                 </div>
                                                             </div>
                                                         </div> 
                                                     </div>
+                                                    <div class="row justify-content-center form-bttn-row">
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-outline-light3 st">Cancel</button>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-secondary st" id="proceed_2">Proceed</button>
+                                                        </div>
+                                                    </div>
                                                 </form>
-                                            </div>
-                                        </div>
-                                        <div class="row justify-content-center form-bttn-row">
-                                            <div class="col-auto">
-                                                <button class="btn btn-outline-light3 st">Cancel</button>
-                                            </div>
-                                            <div class="col-auto">
-                                                <button class="btn btn-secondary st" id="proceed_2">Proceed</button>
                                             </div>
                                         </div>
                                     </div>
