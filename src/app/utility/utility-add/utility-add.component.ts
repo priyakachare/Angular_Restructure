@@ -423,39 +423,38 @@ export class UtilityAddComponent implements OnInit {
     this.utilityService.getTenantListData().subscribe(tenants=>{
       this.tenantList = tenants.results
     })
-    // this.moduleDetailsForm.get("moduleControl").valueChanges.subscribe(val=>{
-    //   console.log('==============='+val.id_string)
-    // })
+    
   }
 
   // According to tenant idstring featch module list from tenantmodule
   tenant_id_string;
-  moduleList;
+  moduleList=[];
+  submoduleList;
   submoduleList1;
-    getTenantIdString(){   
-         
+    getTenantIdString(){            
       this.tenant_id_string = this.uitilityDetailsForm.value.tenentNameControl.id_string
       this.utilityService.getModuleListData(this.tenant_id_string).subscribe(modules=>{
-        this.moduleList1=[]
+        this.moduleList=[]
         for(let module of modules.results){
-          this.moduleList1.push({"id_string":module.id_string,"name":module.module_id.name})
+          this.moduleList.push({"id_string":module.id_string,"name":module.module_id.name})
           }
-        this.moduleList=this.moduleList1
       })
-
     }
-    // According to module idstring featch submodule list from tenantsubmodule
-    module;submodule;
-    getModuleIdString(){
-      this.module = this.moduleDetailsForm.value.moduleDivControl.moduleControl.id_string
-      
-      this.utilityService.getSubModuleListData(this.module).subscribe(submodules=>{
-        this.submoduleList1 = []
-        for(let submodule of submodules.results){
 
-          this.submoduleList1.push({"id_string":submodule.id_string,"name":submodule.sub_module_id.name})
+    // According to module idstring featch submodule list from tenantsubmodule
+    module;
+    getModuleId(id){
+      this.module = this.Transactions.at(id).get('moduleControl').value.id_string
+      this.utilityService.getSubModuleListData(this.module).subscribe(submodules=>{
+        if(submodules.results != ''){
+            this.submoduleList1=[];
+          for(let submodule of submodules.results){
+            this.submoduleList1.push({"id_string":submodule.id_string,"name":submodule.sub_module_id.name})
+          }
+          this.submoduleList = this.submoduleList1
+        }else{
+        this.submoduleList = []
         }
-        this.submodulesList = this.submoduleList1
       })
     }
 
@@ -542,20 +541,10 @@ export class UtilityAddComponent implements OnInit {
     
     get Transactions() {
       return this.moduleDetailsForm.get('moduleDivControl') as FormArray;
-    }
-  
+    }  
     addModulesRow(){
       this.Transactions.push(this.formBuilder.group({moduleControl:[null], subModuleControl:[null]}));
-    }
-
-    get Product() {
-      return this.productDetailsForm.get('productDivControl') as FormArray;
-    }
-  
-    addProductRow(){
-      this.Product.push(this.formBuilder.group({productControl:[null]}));
-    }
-
+    }    
     removeTransactionRow(index){
       if (index != 0){
         this.Transactions.removeAt(index); 
@@ -564,6 +553,12 @@ export class UtilityAddComponent implements OnInit {
       }
     }
 
+    get Product() {
+      return this.productDetailsForm.get('productDivControl') as FormArray;
+    }  
+    addProductRow(){
+      this.Product.push(this.formBuilder.group({productControl:[null]}));
+    }
     removeProductRow(index){
       if (index != 0){
         this.Product.removeAt(index); 
