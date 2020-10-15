@@ -523,7 +523,7 @@ export class UtilityAddComponent implements OnInit {
 
     onUtilitySubmit(){
       this.showtoast = true;
-
+      console.log('----------'+this.moduleDetailsForm.value.moduleControl)
       let data = {
         tenant : this.uitilityDetailsForm.value.tenentNameControl.name,
         name : this.uitilityDetailsForm.value.uitilityNameControl,

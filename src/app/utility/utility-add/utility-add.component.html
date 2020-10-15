@@ -173,12 +173,12 @@
                                                         <div class="form-row" *ngFor="let item of Transactions.controls; let i=index" [formGroupName]="i">
                                                             <div class="col">
                                                                 <label>Select Module</label>                                                                
-                                                                <ng-select  class="filter-select" (change)="getModuleId(i)" [items]="moduleList" bindLabel="name" [clearable]="false" placeholder="Select State" formControlName="moduleControl" [ngClass]="{ 'is-invalid': moduleDetailsFormSubmitted && md.moduleControl.errors }" [clearable]="false" 
+                                                                <ng-select  class="filter-select" (change)="getModuleId(i)" [items]="moduleList" bindLabel="name" [clearable]="false" placeholder="Select State" formControlName="moduleControl" 
                                                                 name="name">
                                                                 </ng-select>
-                                                                <div *ngIf="moduleDetailsFormSubmitted && md.moduleControl.errors" class="invalid-feedback">
+                                                                <!-- <div *ngIf="moduleDetailsFormSubmitted && md.moduleControl.errors" class="invalid-feedback">
                                                                     <div *ngIf="md.moduleControl.errors.required">Module can't be empty!</div>
-                                                                </div>
+                                                                </div> -->
                                                             </div> 
                                                             <div class="col" >
                                                                 <label>Sub Module</label>
@@ -191,9 +191,9 @@
                                                                         </div>
                                                                     </ng-template>
                                                                 </ng-select>
-                                                                <div *ngIf="moduleDetailsFormSubmitted && md.subModuleControl.errors" class="invalid-feedback">
+                                                                <!-- <div *ngIf="moduleDetailsFormSubmitted && md.subModuleControl.errors" class="invalid-feedback">
                                                                     <div *ngIf="md.subModuleControl.errors.required">Sub Module can't be empty!</div>
-                                                                </div>
+                                                                </div> -->
                                                             </div>  
                                                             <div class="col-auto align-self-center action-col">
                                                                 <button class="bttn-transparent bttn-icon" tooltipClass="pr-tooltip" placement="top" ngbTooltip="Remove" [openDelay]="200" [closeDelay]="200" (click)="removeTransactionRow(i)"><fa-icon [icon]="faTrash"></fa-icon></button> 
