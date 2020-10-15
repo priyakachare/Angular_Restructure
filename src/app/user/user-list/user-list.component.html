@@ -14,7 +14,7 @@
 		            	<td class="showOnHover">{{item.registrationNo}}
 		            		<span class="show">
 		            			<span class="enqry-no-blk">{{item.registrationNo}}</span>
-                                <span class="enqry-name-blk">{{item.name}}</span>
+                                <span class="enqry-name-blk">{{item.first_name}}</span>
                                 <div class="enqry-sts-blk" [ngSwitch]="item.status">
 				                    <div *ngSwitchCase="'Approved'">
 				                      <div class="badge badge-label-success">Approved</div>
@@ -33,6 +33,9 @@
 			                    </div>
 				            </span>
 						</td>
+						<td>{{item.first_name}}</td>						
+						<td>{{item.phone_mobile}}</td>
+						<td>{{item.email}}</td>
 						<td>
 		            		<div class="enqry-sts-blk" [ngSwitch]="item.status">
 			                    <div *ngSwitchCase="'Approved'">
@@ -46,13 +49,8 @@
 			                    </div>
 			                </div>
 			            </td>
-						<td>{{item.phone_mobile}}</td>
-						<td>{{item.phone_mobile}}</td>
-			            <td>{{item.email}}</td>
-			            <td>{{item.subCategory}}</td>
-			            <td>{{item.area}}</td>
-			            <td>{{item.source}}</td>
-			            <td>{{item.createdOn| date : 'dd MMM yy'}}</td>
+						<td>{{item.department.name}}</td>
+			            <td>{{item.role}}</td>
 			            <td class="action">
 			            	<ul class="list-group list-group-horizontal action-list">
 			                    <li class="list-group-item st" (click)="testing(item.id)" ngbTooltip="View" [openDelay]="200" [closeDelay]="200">

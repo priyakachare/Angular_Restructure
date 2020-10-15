@@ -26,17 +26,12 @@ export class UserListComponent implements OnInit {
         {
             name:       "Mobile no.",
         },
-        {
-          name:       "Status",
-        },
+        
         {
             name:       "Email",
         },
         {
-            name:       "Utility",
-        },
-        {
-            name:       "City",
+          name:       "Status",
         },
         {
             name:       "Department",

@@ -423,6 +423,9 @@ export class UtilityAddComponent implements OnInit {
     this.utilityService.getTenantListData().subscribe(tenants=>{
       this.tenantList = tenants.results
     })
+    // this.moduleDetailsForm.get("moduleControl").valueChanges.subscribe(val=>{
+    //   console.log('==============='+val.id_string)
+    // })
   }
 
   // According to tenant idstring featch module list from tenantmodule
