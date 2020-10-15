@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import * as $ from 'jquery';
 import { CommonService} from '../common.service';
@@ -15,7 +16,7 @@ export class SideNavComponent implements OnInit {
   commonVal;
   finalList;
   utilityIdString;
-  constructor(private getData:CommonService) {     
+  constructor(private getData:CommonService,private router: Router) {     
     this.getData.moduleName.subscribe(module=>{
       this.commonVal = this.subModuleList.filter(obj=>obj.module===module);
       this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
@@ -32,11 +33,11 @@ export class SideNavComponent implements OnInit {
   }  
 
   subModuleList =[
-    {module : 'Consumer Care',sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard Consumer Care"},
+    {module : 'Consumer Care',sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'/campaign',ngbPopover:"Dashboard Consumer Care"},
     {module : 'Admin',sub_module : 'Utility Master',icon:'icons8 icons8-brief',ngbPopover:"Utility Master"}, 
     {module : 'Admin',sub_module : 'System Configuration',icon:'icons8 icons8-todo-list',ngbPopover:"System Configuration"},         
-    {module : 'Consumer Ops',sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'#',ngbPopover:"Dashboard Consumer"},
-    {module : 'Consumer Care',sub_module : 'Consumers',icon:'icons8 icons8-cv',link:'#',ngbPopover:"Consumers care"},
+    {module : 'Consumer Ops',sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'/user',ngbPopover:"Dashboard Consumer"},
+    {module : 'Consumer Care',sub_module : 'Consumers',icon:'icons8 icons8-cv',link:'/campaign',ngbPopover:"Consumers care"},
     {module : 'S&M',sub_module : 'Registrations',icon:'icons8 icons8-shared-document',link:'/consumerops/registration',ngbPopover:"Registration"},
     {module : 'S&M',sub_module : 'Campaign',icon:'icons8 icons8-megaphone',link:'/campaign',ngbPopover:"Campaign"},
     {module : 'Consumer Ops',sub_module : 'Meter Data',icon:'icons8 icons8-conflict',link:'#',ngbPopover:"Meter Data"},
@@ -49,12 +50,15 @@ export class SideNavComponent implements OnInit {
   defaultModuleName;
   utilityMasterAdmin;
 
-  ngOnInit(): void {         
+  ngOnInit(): void { 
 
     // After Change Utility set the side nav data
     this.getData.moduleName.subscribe(moduleName=>{
       this.commonVal = this.subModuleList.filter(obj=>obj.module===moduleName);
-      this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
+      this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module))); 
+      // this.router.navigateByUrl(this.finalList[0].link); 
+
+      // console.log('********11******'+moduleName+"======="+this.finalList[0].link)
     })
 
     // According to Role and Privilege display Side nav data
@@ -70,12 +74,17 @@ export class SideNavComponent implements OnInit {
         this.getData.checkBlankUtility.subscribe(checkUtility=>{
           if(checkUtility != ""){
             this.commonVal = this.subModuleList.filter(obj=>obj.module===this.defaultModule);
-            this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
+            this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module))); 
+            // console.log('********22******'+"======="+this.finalList[0].link)
+
           }else{
             this.finalList =  []
           }
         })
+
     }) 
+
+    
 
     $(document).ready(function(){
       $(".menubttn").parents(".pr-side-navbar").removeClass("open-slide");  

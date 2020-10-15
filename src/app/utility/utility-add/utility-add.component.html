@@ -169,37 +169,40 @@
                                         <div class="row inner-form-wrap">
                                             <div class="col-12">
                                                 <form name="form" [formGroup]="moduleDetailsForm" (ngSubmit)="onModuleDetailsFormSubmit()">
-
-                                                    <div class="form-row">
-                                                        <div class="col">
-                                                            <label>Select Module</label>
-                                                            
-                                                            <ng-select  class="filter-select" (change)="getModuleIdString()" [items]="moduleList" bindLabel="name" placeholder="Select State" formControlName="moduleControl" [ngClass]="{ 'is-invalid': moduleDetailsFormSubmitted && md.moduleControl.errors }" [clearable]="false" 
-                                                             name="sname">
-                                                            </ng-select>
-                                                            <div *ngIf="moduleDetailsFormSubmitted && md.moduleControl.errors" class="invalid-feedback">
-                                                                <div *ngIf="md.moduleControl.errors.required">Module can't be empty!</div>
-                                                            </div>
-                                                        </div> 
-                                                        <div class="col">
-                                                            <label>Sub Module</label>
-                                                            <ng-select [multiple]="true" [items]="submodulesList" bindLabel="name" appendTo="body" placeholder="Select Module"  name="name" formControlName="subModuleControl" [ngClass]="{ 'is-invalid': moduleDetailsFormSubmitted && md.subModuleControl.errors }" [clearable]="false">
-                                                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" id="item-{{index}}" class="custom-control-input"/>
-                                                                        <label class="custom-control-label" for="item-{{index}}"></label>
-                                                                        {{item.name}}
-                                                                    </div>
-                                                                </ng-template>
-                                                            </ng-select>
-                                                            <div *ngIf="moduleDetailsFormSubmitted && md.subModuleControl.errors" class="invalid-feedback">
-                                                                <div *ngIf="md.subModuleControl.errors.required">Sub Module can't be empty!</div>
-                                                            </div>
-                                                        </div>      
+                                                    <div formArrayName="moduleDivControl">
+                                                        <div class="form-row" *ngFor="let item of Transactions.controls; let i=index" [formGroupName]="i">
+                                                            <div class="col">
+                                                                <label>Select Module</label>                                                                
+                                                                <ng-select  class="filter-select" (change)="getModuleId(i)" [items]="moduleList" bindLabel="name" [clearable]="false" placeholder="Select State" formControlName="moduleControl" [ngClass]="{ 'is-invalid': moduleDetailsFormSubmitted && md.moduleControl.errors }" [clearable]="false" 
+                                                                name="name">
+                                                                </ng-select>
+                                                                <div *ngIf="moduleDetailsFormSubmitted && md.moduleControl.errors" class="invalid-feedback">
+                                                                    <div *ngIf="md.moduleControl.errors.required">Module can't be empty!</div>
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col" >
+                                                                <label>Sub Module</label>
+                                                                <ng-select [multiple]="true" [items]="submoduleList" bindLabel="name" appendTo="body" placeholder="Select Module"  name="name" formControlName="subModuleControl" [clearable]="false"  >
+                                                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox" id="item-{{index}}" class="custom-control-input"/>
+                                                                            <label class="custom-control-label" for="item-{{index}}"></label>
+                                                                            {{item.name}}
+                                                                        </div>
+                                                                    </ng-template>
+                                                                </ng-select>
+                                                                <div *ngIf="moduleDetailsFormSubmitted && md.subModuleControl.errors" class="invalid-feedback">
+                                                                    <div *ngIf="md.subModuleControl.errors.required">Sub Module can't be empty!</div>
+                                                                </div>
+                                                            </div>  
+                                                            <div class="col-auto align-self-center action-col">
+                                                                <button class="bttn-transparent bttn-icon" tooltipClass="pr-tooltip" placement="top" ngbTooltip="Remove" [openDelay]="200" [closeDelay]="200" (click)="removeTransactionRow(i)"><fa-icon [icon]="faTrash"></fa-icon></button> 
+                                                            </div>    
+                                                        </div>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col-6 align-self-end">
-                                                            <button class="btn bttn-text st mb-1" style="min-width: unset;"><fa-icon [icon]="faPlus"></fa-icon>Add</button>
+                                                            <button class="btn bttn-transparent bttn-add" type="button" (click)="addModulesRow()">Add</button>
                                                         </div>
                                                         
                                                     </div> 
@@ -237,26 +240,31 @@
                                                 <div class="tab-content" id="nav-tabContent">
                                                     <div class="tab-pane fade show active" id="nav-service" role="tabpanel" aria-labelledby="nav-service-tab">
                                                         <form name="form" [formGroup]="productDetailsForm" (ngSubmit)="onProductDetailsFormSubmit()">
-                                                            <div class="form-row">                           
-                                                                <div class="col">
-                                                                    <label>Select product</label>
-                                                                    <ng-select [multiple]="true" [items]="productsList" bindLabel="name" appendTo="body" placeholder="Select product"  name="name" formControlName="productControl" [ngClass]="{ 'is-invalid': productDetailsFormSubmitted && pd.productControl.errors }" [clearable]="false">
-                                                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                                                                            <div class="custom-control custom-checkbox">
-                                                                                <input type="checkbox" id="item-{{index}}" class="custom-control-input"/>
-                                                                                <label class="custom-control-label" for="item-{{index}}"></label>
-                                                                                {{item.name}}
-                                                                            </div>
-                                                                        </ng-template>
-                                                                    </ng-select>
-                                                                    <div *ngIf="productDetailsFormSubmitted && pd.productControl.errors" class="invalid-feedback">
-                                                                        <div *ngIf="pd.productControl.errors.required">Product can't be empty!</div>
+                                                            <div formArrayName="productDivControl">
+                                                                <div class="form-row" *ngFor="let item of Product.controls; let i=index" [formGroupName]="i">                           
+                                                                    <div class="col">
+                                                                        <label>Select product</label>
+                                                                        <ng-select [multiple]="true" [items]="productsList" bindLabel="name" appendTo="body" placeholder="Select product"  name="name" formControlName="productControl" [clearable]="false">
+                                                                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                                                <div class="custom-control custom-checkbox">
+                                                                                    <input type="checkbox" id="item-{{index}}" class="custom-control-input"/>
+                                                                                    <label class="custom-control-label" for="item-{{index}}"></label>
+                                                                                    {{item.name}}
+                                                                                </div>
+                                                                            </ng-template>
+                                                                        </ng-select>
+                                                                        <!-- <div *ngIf="productDetailsFormSubmitted && pd.productControl.errors" class="invalid-feedback">
+                                                                            <div *ngIf="pd.productControl.errors.required">Product can't be empty!</div>
+                                                                        </div> -->
                                                                     </div>
+                                                                    <div class="col-auto align-self-center action-col">
+                                                                        <button class="bttn-transparent bttn-icon" tooltipClass="pr-tooltip" placement="top" ngbTooltip="Remove" [openDelay]="200" [closeDelay]="200" (click)="removeProductRow(i)"><fa-icon [icon]="faTrash"></fa-icon></button> 
+                                                                    </div>  
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="col-6 align-self-end">
-                                                                    <button class="btn bttn-text st mb-1" style="min-width: unset;"><fa-icon [icon]="faPlus"></fa-icon>Add</button>
+                                                                    <button class="btn bttn-transparent bttn-add" type="button" (click)="addProductRow()">Add</button>
                                                                 </div>
                                                             </div>
                                                             <div class="row justify-content-center form-bttn-row">
