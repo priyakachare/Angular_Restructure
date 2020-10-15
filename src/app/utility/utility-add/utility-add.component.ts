@@ -523,13 +523,14 @@ export class UtilityAddComponent implements OnInit {
 
     onUtilitySubmit(){
       this.showtoast = true;
-      console.log('----------'+this.moduleDetailsForm.value.moduleControl)
       let data = {
         tenant : this.uitilityDetailsForm.value.tenentNameControl.name,
         name : this.uitilityDetailsForm.value.uitilityNameControl,
         short_name : this.uitilityDetailsForm.value.utilitySortNameControl,
-        module : this.moduleDetailsForm.value.moduleControl.name,
-        // submodule : this.moduleDetailsForm.value.submoduleControl.name
+        region : this.uitilityDetailsForm.value.regionControl.name,
+        country : this.uitilityDetailsForm.value.countryControl.name,
+        module : this.moduleDetailsForm.value.moduleDivControl,
+        product : this.productDetailsForm.value.productDivControl,
       }
       this.utilityService.addUtility(data).subscribe(result=>{
         if(result.state === 'success'){
