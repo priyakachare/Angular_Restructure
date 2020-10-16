@@ -46,7 +46,7 @@
                                                                 <div *ngIf="ud.utilitySortNameControl.errors.required">Utility Sort name can't be empty!</div>
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col" *ngIf="regionsList.length !=0 ">
                                                             <label>Region</label>
                                                             <ng-select [items]="regionsList" bindLabel="name" placeholder="Select Region" formControlName="regionControl" [ngClass]="{ 'is-invalid': uitilityDetailsFormSubmitted && ud.regionControl.errors }" [clearable]="false" 
                                                                  name="regions">
@@ -257,7 +257,7 @@
                             </div>
                             
                         </div>
-                        <div class="tab-pane fade" id="rvw-sbmt" role="tabpanel" aria-labelledby="rvw-sbmt-tab">
+                        <div class="tab-pane fade" id="rvw-sbmt" role="tabpanel" aria-labelledby="rvw-sbmt-tab" *ngIf="this.uitilityDetailsForm.valid && this.moduleDetailsForm.valid && this.productDetailsForm.valid">
 
                             <div class="row br-btm">
                                 <div class="col-auto align-self-center">
@@ -288,7 +288,7 @@
                                                     <div class="row">
                                                         <div class="col-3">
                                                             <p class="p p-13">Tenant name</p>
-                                                            <h6 class="h6"></h6>
+                                                            <h6 class="h6">{{this.uitilityDetailsForm.value.tenentNameControl.name}}</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Utility name</p>
@@ -299,26 +299,15 @@
                                                             <h6 class="h6">{{this.uitilityDetailsForm.value.utilitySortNameControl}}</h6>
                                                         </div>
                                                         <div class="col-3">
-                                                            <p class="p p-13">Utility type</p>
-                                                            <h6 class="h6">Type 1</h6>
+                                                            <p class="p p-13">Region</p>
+                                                            <h6 class="h6">{{this.uitilityDetailsForm.value.regionControl.name}}</h6>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-3">
-                                                            <p class="p p-13">Region</p>
-                                                            <h6 class="h6">America</h6>
-                                                        </div>
+                                                        
                                                         <div class="col-3">
                                                             <p class="p p-13">Country</p>
-                                                            <h6 class="h6">USA</h6>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <p class="p p-13">State</p>
-                                                            <h6 class="h6">Texas</h6>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <p class="p p-13">City</p>
-                                                            <h6 class="h6">New York</h6>
+                                                            <h6 class="h6">{{this.uitilityDetailsForm.value.countryControl.name}}</h6>
                                                         </div>
                                                     </div>
                                                 </div>                                                    
@@ -336,18 +325,7 @@
                                                 <div class="applicant-data">
                                                     <div class="row">
                                                         <div class="col-6">
-                                                            <p class="p p-13">Modules</p>
-                                                            <h6 class="h6">Consumer ops</h6>
-                                                            <h6 class="h6">S and M</h6>
-                                                            <h6 class="h6">Finance</h6>
-                                                            <h6 class="h6">Consume care</h6>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="p p-13">Submodules</p>
-                                                            <h6 class="h6">Registration</h6>
-                                                            <h6 class="h6">Consumer</h6>
-                                                            <h6 class="h6">Meter data</h6>
-                                                            <h6 class="h6">Billing</h6>
+                                                            <!-- {{this.moduleDetailsForm.value.moduleDivControl}} -->
                                                         </div>
                                                     </div>
                                                 </div>                                                    
@@ -366,9 +344,7 @@
                                                 <div class="applicant-data">
                                                     <div class="row">
                                                         <div class="col-6">
-                                                            <p class="p p-13">Products</p>
-                                                            <h6 class="h6">Product 1</h6>
-                                                            <h6 class="h6">Product 2</h6>
+                                                          <!-- {{this.productDetailsForm.value.productDivControl}} -->
                                                         </div>
                                                     </div>
                                                 </div>
