@@ -12,6 +12,7 @@ import { CommonService} from '../common.service';
 export class SideNavComponent implements OnInit {
   faPlus = faPlus;
   settingSnm;
+  utilityConfigurationAdmin;
   showPopUpFlag:boolean=false;
   commonVal;
   finalList;
@@ -35,7 +36,8 @@ export class SideNavComponent implements OnInit {
   subModuleList =[
     {module : 'Consumer Care',sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'/campaign',ngbPopover:"Dashboard Consumer Care"},
     {module : 'Admin',sub_module : 'Utility Master',icon:'icons8 icons8-brief',ngbPopover:"Utility Master"}, 
-    {module : 'Admin',sub_module : 'System Configuration',icon:'icons8 icons8-todo-list',ngbPopover:"System Configuration"},         
+    {module : 'Admin',sub_module : 'System Configuration',icon:'icons8 icons8-todo-list',ngbPopover:"System Configuration"},  
+    {module : 'Admin',sub_module : 'Utility Configuration',icon:'icons8 icons8-user',ngbPopover:"Utility Configuration"},                
     {module : 'Consumer Ops',sub_module : 'Dashboard',icon:'icons8 icons8-speed',link:'/user',ngbPopover:"Dashboard Consumer"},
     {module : 'Consumer Care',sub_module : 'Consumers',icon:'icons8 icons8-cv',link:'/campaign',ngbPopover:"Consumers care"},
     {module : 'S&M',sub_module : 'Registrations',icon:'icons8 icons8-shared-document',link:'/consumerops/registration',ngbPopover:"Registration"},
@@ -43,6 +45,7 @@ export class SideNavComponent implements OnInit {
     {module : 'Consumer Ops',sub_module : 'Meter Data',icon:'icons8 icons8-conflict',link:'#',ngbPopover:"Meter Data"},
     {module : 'S&M',sub_module : 'Users',icon:'icons8 icons8-cv',link:'/user',ngbPopover:"Users"},
   ]
+
 
   moduleSubModule:any = [];
   defaultModule;
@@ -56,9 +59,6 @@ export class SideNavComponent implements OnInit {
     this.getData.moduleName.subscribe(moduleName=>{
       this.commonVal = this.subModuleList.filter(obj=>obj.module===moduleName);
       this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module))); 
-      // this.router.navigateByUrl(this.finalList[0].link); 
-
-      // console.log('********11******'+moduleName+"======="+this.finalList[0].link)
     })
 
     // According to Role and Privilege display Side nav data
@@ -75,16 +75,11 @@ export class SideNavComponent implements OnInit {
           if(checkUtility != ""){
             this.commonVal = this.subModuleList.filter(obj=>obj.module===this.defaultModule);
             this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module))); 
-            // console.log('********22******'+"======="+this.finalList[0].link)
-
           }else{
             this.finalList =  []
           }
         })
-
-    }) 
-
-    
+    })     
 
     $(document).ready(function(){
       $(".menubttn").parents(".pr-side-navbar").removeClass("open-slide");  
@@ -117,6 +112,10 @@ export class SideNavComponent implements OnInit {
       {id:1,navData:'Utility',link:'/utility'},{id:2,navData:'Plans',link:'#'},
     ]};
 
+    this.utilityConfigurationAdmin ={title:'Utility Configuration' ,data :[
+      {id:1,navData:'Configuration',link:'/utility/configration'}
+    ]};
+
     if(sub_module === "Meter Data"){
       this.showPopUpFlag = !this.showPopUpFlag
       this.meterData = this.meterData
@@ -125,10 +124,11 @@ export class SideNavComponent implements OnInit {
       this.showPopUpFlag = !this.showPopUpFlag
       this.meterData = this.utilityMasterAdmin
     }
-    // else if(this.moduleId==1 && id==8||this.moduleId==undefined && id==8){
-    //   this.showPopUpFlag = !this.showPopUpFlag
-    //   this.meterData = this.settingSnm
-    // }    
+    else if(sub_module === "Utility Configuration"){
+      this.showPopUpFlag = !this.showPopUpFlag
+      this.meterData = this.utilityConfigurationAdmin
+    }
+    
    }
 
   status: boolean = false;

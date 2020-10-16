@@ -34,6 +34,7 @@ export class BreadcrumbComponent implements OnInit {
     {module : 'Consumer Ops',sub_module:'Settings',modulelink:'#'},
     {module : 'Admin',sub_module:'Utility Master',modulelink:'#'},
     {module : 'Admin',sub_module:'System Configuration',modulelink:'#'},
+    {module : 'Admin',sub_module:'Utility Configuration',modulelink:'#'},
 ] };
 
   constructor(private getData:CommonService) {

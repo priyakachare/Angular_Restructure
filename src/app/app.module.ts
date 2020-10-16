@@ -95,6 +95,9 @@ import { UtilityAddComponent } from './utility/utility-add/utility-add.component
 import { UtilityFiltersComponent } from './utility/utility-filters/utility-filters.component';
 import { UtilitySummaryComponent } from './utility/utility-summary/utility-summary.component';
 import { UtilityListComponent } from './utility/utility-list/utility-list.component';
+import { AdminComponent } from './admin/admin.component';
+import { UtilityConfigurationComponent } from './admin/utility-configuration/utility-configuration.component';
+import { RoleComponent } from './admin/utility-configuration/role/role.component';
 
 @NgModule({
   declarations: [
@@ -172,7 +175,10 @@ import { UtilityListComponent } from './utility/utility-list/utility-list.compon
     UtilityAddComponent,
     UtilityFiltersComponent,
     UtilitySummaryComponent,
-    UtilityListComponent
+    UtilityListComponent,
+    AdminComponent,
+    UtilityConfigurationComponent,
+    RoleComponent
   ],
   imports: [
     BrowserModule,

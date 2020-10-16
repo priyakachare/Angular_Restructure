@@ -17,6 +17,7 @@ import { ComplaintComponent } from './complaint/complaint.component';
 import { ServicesComponent } from './services/services.component';
 import { UtilityComponent } from './utility/utility.component';
 import { UtilityAddComponent } from './utility/utility-add/utility-add.component';
+import { UtilityConfigurationComponent } from './admin/utility-configuration/utility-configuration.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -35,6 +36,7 @@ const routes: Routes = [
 	{ path: 'user', component: UserComponent },
 	{ path: 'utility', component: UtilityComponent },
 	{ path: 'utility/add-utility', component: UtilityAddComponent },
+	{ path: 'utility/configration', component: UtilityConfigurationComponent },
 	{ path: 'reset-password/:<uidb64>/:<token>', component: ResetPasswordComponent },
 	{ path: 'change-password', component: ChangePasswordComponent },
 ]
