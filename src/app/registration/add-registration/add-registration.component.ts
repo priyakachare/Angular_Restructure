@@ -8,10 +8,6 @@ import { ApiService } from '../../common-services/api-service/api.service';
 declare var $ : any;
 
 
-export class SellingPoint {
-    selling_point: string
-}
-
 @Component({
   selector: 'app-add-registration',
   templateUrl: './add-registration.component.html',
@@ -79,19 +75,9 @@ export class AddRegistrationComponent implements OnInit {
   autohide = true;
   isAddressSame = false;
   address = ""
-  model: any;
-  date: {day: number, year: number, month: string};
   faCalendarAlt = faCalendarAlt;
   faTrash = faTrash;
   selectedDocument: any;
-  selectedPipeline: string[];
-  selectedPaymentType: any;
-  selectedPaymentType2: any;
-  selectedPaymentType3: any;
-  selectedScheme: any;
-  selectedScheme2: any;
-  selectedPaymentMode: any;
-  selectedPaymentMode2: any;
   selectedDocumentType = 'Personal details';
   selectedKycDocuments = 'Pancard';
 
@@ -430,6 +416,7 @@ export class AddRegistrationComponent implements OnInit {
   }
 
   onRegistrationSubmit(){
+    console.log(this.paymentDetailsForm.value.transactionsControl)
     this.showtoast = true;
     let data = {
       utility_id : this.applicantDetailsForm.value.utilityControl.id_string,
@@ -459,6 +446,7 @@ export class AddRegistrationComponent implements OnInit {
       connectivity : this.applicantDetailsForm.value.connectivityControl.id,
       transactions : this.paymentDetailsForm.value.transactionsControl,
       payment : {
+        utility_id : this.applicantDetailsForm.value.utilityControl.id_string,
         payment_type_id : this.paymentDetailsForm.value.paymentTypeControl,
         payment_mode_id : this.paymentDetailsForm.value.paymentModeControl.id_string,
         payment_channel_id : this.paymentDetailsForm.value.paymentChannelControl,
@@ -488,5 +476,7 @@ export class AddRegistrationComponent implements OnInit {
       return false
     }
   }
+
+  
 
 }

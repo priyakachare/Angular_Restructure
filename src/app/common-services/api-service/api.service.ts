@@ -9,7 +9,7 @@ import { baseUrl } from 'src/environments/environment';
 export class ApiService {
 
   httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkX3N0cmluZyI6IjkxZDhjZmE5LWM3ZWUtNGQ1NS04NjE3LWYzNjI2MDg2M2M0OCIsInN0cmluZyI6Ijg2OTYwNyJ9.sQU1GtRNJnsep1umFA2lM9QvRGl-IGle0aPnG3wy9tU'})
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkX3N0cmluZyI6IjkxZDhjZmE5LWM3ZWUtNGQ1NS04NjE3LWYzNjI2MDg2M2M0OCIsInN0cmluZyI6IjM2RTcyQiJ9.hr6tgo2CgGI-coqdHgjLidM0wgaTV9YMR9svYmIE29s'})
   };
 
   constructor(private http : HttpClient) { }
