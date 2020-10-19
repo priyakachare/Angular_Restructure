@@ -86,7 +86,8 @@ export class LoginLogoutComponent implements OnInit {
     // if form is valid then call the login API
     if(this.loginForm.valid){
       this.commonService.login(this.loginForm.value).subscribe(result =>{
-        if(result.state === 'success'){  
+        if(result.state === 'success'){ 
+           
           //set token and id string in sessionStorage
           this.sessionService.setter("id_string",result.id_string)
           this.sessionService.setter("token",result.token)
@@ -118,6 +119,7 @@ export class LoginLogoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sessionService.remove('moduleName')
 
     $(document).ready(function(){
       $('smart360-header, smart360-side-nav, smart360-footer').css('display', 'none');

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute} from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import * as $ from 'jquery';
+import { SessionService } from 'src/app/common-services/session-service/session.service';
 import { CommonService} from '../common.service';
 
 @Component({
@@ -17,11 +18,23 @@ export class SideNavComponent implements OnInit {
   commonVal;
   finalList;
   utilityIdString;
-  constructor(private getData:CommonService,private router: Router) {     
-    this.getData.moduleName.subscribe(module=>{
-      this.commonVal = this.subModuleList.filter(obj=>obj.module===module);
-      this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
-      
+  subscription;
+  constructor(private getData:CommonService,private router: Router,private activatedRoute:ActivatedRoute,private sessionService:SessionService) {     
+    
+    // This code for display side nav according to module/ not reset sidenav after refresh the page
+    this.getData.moduleName.subscribe(module=>{     
+      setTimeout(()=>{
+        if(this.sessionService.getter('moduleName')){
+        this.commonVal = this.subModuleList.filter(obj=>JSON.stringify(obj.module)==JSON.stringify(this.sessionService.getter('moduleName')));
+        this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module)));  
+        if(this.finalList[0].link){
+          this.router.navigate([this.finalList[0].link]);
+        }else{
+          this.router.navigate(['/home']);
+        }
+        this.showPopup(this.finalList[0].sub_module)
+      }
+      })
     });    
 
     // For Change Utility on droupdown change bento menu
@@ -53,13 +66,22 @@ export class SideNavComponent implements OnInit {
   defaultModuleName;
   utilityMasterAdmin;
 
-  ngOnInit(): void { 
+  ngOnInit(): void {     
 
     // After Change Utility set the side nav data
-    this.getData.moduleName.subscribe(moduleName=>{
-      this.commonVal = this.subModuleList.filter(obj=>obj.module===moduleName);
-      this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module))); 
-    })
+    // this.getData.moduleName.subscribe(moduleName=>{
+    //   setTimeout(()=>{
+    //     this.commonVal = this.subModuleList.filter(obj=>JSON.stringify(obj.module)==JSON.stringify(this.sessionService.getter('moduleName')));
+    //     this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module))); 
+    //     if(this.finalList[0].link){
+    //       this.router.navigate([this.finalList[0].link]);
+    //     }else{
+    //       this.router.navigate(['/home']);
+    //       this.showPopup(this.finalList[0].sub_module)
+    //     }
+    // })
+
+    // })
 
     // According to Role and Privilege display Side nav data
     this.getData.moduleObj.subscribe(result=>{
@@ -71,10 +93,15 @@ export class SideNavComponent implements OnInit {
             }            
           }
         } 
+        // check if utility is blank then not display any sidenav options
         this.getData.checkBlankUtility.subscribe(checkUtility=>{
+          if(this.sessionService.getter('moduleName')){
+            this.defaultModule = JSON.stringify(this.sessionService.getter('moduleName'))
+          }
           if(checkUtility != ""){
-            this.commonVal = this.subModuleList.filter(obj=>obj.module===this.defaultModule);
+            this.commonVal = this.subModuleList.filter(obj=>obj.module==this.defaultModule);
             this.finalList = this.subModuleList.filter(o1 => this.commonVal.some(o2 => (o1.module === o2.module)&&(o1.sub_module === o2.sub_module))); 
+
           }else{
             this.finalList =  []
           }
@@ -95,8 +122,8 @@ export class SideNavComponent implements OnInit {
     {navData:'Upload',link:'#'},{navData:'Smart Meter Data',link:'#'}
   ]};
 
-  showPopup(sub_module){   
-
+  showPopup(sub_module,link?){  
+     
     this.getData.sideNavId.emit(sub_module)  
 
     this.meterData ={title:'Meter Data' ,data :[
@@ -117,16 +144,24 @@ export class SideNavComponent implements OnInit {
     ]};
 
     if(sub_module === "Meter Data"){
+
       this.showPopUpFlag = !this.showPopUpFlag
       this.meterData = this.meterData
     }
     else if(sub_module === "Utility Master"){
+
       this.showPopUpFlag = !this.showPopUpFlag
       this.meterData = this.utilityMasterAdmin
     }
     else if(sub_module === "Utility Configuration"){
+
       this.showPopUpFlag = !this.showPopUpFlag
       this.meterData = this.utilityConfigurationAdmin
+    }else if(link){
+
+      this.router.navigate([link])
+    }else{
+      this.showPopUpFlag = false
     }
     
    }
@@ -138,5 +173,4 @@ export class SideNavComponent implements OnInit {
       $(".main-container").toggleClass("add-w");
       $("body").toggleClass("hide-popover");
   }
-
 }

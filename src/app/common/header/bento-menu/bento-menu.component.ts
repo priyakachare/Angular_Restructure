@@ -54,10 +54,16 @@ export class BentoMenuComponent implements OnInit {
   
   constructor(private getData:CommonService, private sessionService:SessionService,private utilityService:UtilityService) { }
 
-  //Set Module Id in Common Service EventEmitter
+  module;
+  //Set Module values on click of bentomenu module
   selectModuleId(val,module){
     this.getData.newItemEvent.emit(val);
     this.getData.moduleName.emit(module);
+    this.module = this.sessionService.getter('moduleName')
+    if(this.module){
+      this.sessionService.remove('moduleName')
+    }
+    this.sessionService.setter('moduleName',module)
   }
 
   modules:any = [];
@@ -74,13 +80,18 @@ export class BentoMenuComponent implements OnInit {
     this.getData.utilityIdString.subscribe(id_string=>{
       this.firstUtility = id_string
       
-
       // Taking list of module according to firstUtility
       this.getData.getUtilityModuleList(this.firstUtility).subscribe(modules =>{
         this.utility_module_list = modules.results
         if(this.utility_module_list != ""){
           this.getData.moduleName.emit(this.utility_module_list[0].module_name)
           this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
+          this.module = this.sessionService.getter('moduleName')
+          if(this.module){
+            this.sessionService.remove('moduleName')
+          }
+          this.sessionService.setter("utility_id_string",id_string)
+          this.sessionService.setter('moduleName',this.utility_module_list[0].module_name)
         }else{
           this.getData.moduleName.emit(this.utility_module_list)
           this.finalModuleList = []
@@ -108,24 +119,31 @@ export class BentoMenuComponent implements OnInit {
       this.firstUtility = utility_obj.data.utilities[0].id_string
 
       // set default utility value for display utility detail
-      this.sessionService.setter("utility_id_string",this.firstUtility)
+      // this.sessionService.setter("utility_id_string",this.firstUtility)
 
       // for display utility list in dropdown
       this.getData.utilityList.emit(this.allUtilities)   
 
-
+      this.module = this.sessionService.getter('moduleName')
+      
       // Taking list of module according to firstUtility
       this.getData.getUtilityModuleList(this.firstUtility).subscribe(modules =>{
         this.utility_module_list = modules.results
         if(this.utility_module_list != ""){
           this.getData.moduleName.emit(this.utility_module_list[0].module_name)
           this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
-        }else{
-          this.finalModuleList = []
-        }
-        this.getData.checkBlankUtility.emit(this.utility_module_list)
-      })
-    })
+          if(this.module){
+            // this.sessionService.remove('moduleName')
+              }else{
+                this.sessionService.setter('moduleName',this.finalModuleList[0].module)
+              }
+              // this.sessionService.setter('moduleName',this.finalModuleList[0].module)
+            }else{
+              this.finalModuleList = []
+            }
+            this.getData.checkBlankUtility.emit(this.utility_module_list)
+          })
+        })
  
     $(document).ready(function(){
       $(document).on('click', '.bento-dropdown .dropdown-menu', function(e){ 
@@ -133,5 +151,4 @@ export class BentoMenuComponent implements OnInit {
       });
     });
   }
-
 }
