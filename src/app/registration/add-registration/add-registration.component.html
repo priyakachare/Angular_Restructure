@@ -179,7 +179,7 @@
                                                         <div class="form-row" *ngFor="let item of Transactions.controls; let i=index" [formGroupName]="i">
                                                             <div class="col" *ngIf="paymentTypes.length != 0">
                                                                 <label>Payment Type</label>
-                                                                <ng-select [items]="paymentTypes" bindLabel="name" bindValue="id_string" appendTo="body" placeholder="Select Payment Type" name="name" [clearable]="false" formControlName="transaction_type_id">
+                                                                <ng-select [items]="paymentTypes" bindValue="id_string" bindLabel="name" appendTo="body" placeholder="Select Payment Type" name="name" [clearable]="false" formControlName="transaction_type_id">
                                                                 </ng-select>
                                                             </div>
                                                             <div class="col" *ngIf="paymentSubTypes.length != 0">
@@ -528,7 +528,7 @@
                         <!-- Tab panel for KYC documents end -->
 
                         <!-- Tab panel for review and submit start -->
-                        <div class="tab-pane fade" id="rvw-sbmt" role="tabpanel" aria-labelledby="rvw-sbmt-tab" *ngIf="this.applicantDetailsForm.valid && this.addressDetailsForm.valid">
+                        <div class="tab-pane fade" id="rvw-sbmt" role="tabpanel" aria-labelledby="rvw-sbmt-tab">
                             <div class="row br-btm">
                                 <div class="col-auto align-self-center">
                                     <h4 class="h4 ttl">Review &amp; Submit</h4>                                    
@@ -544,7 +544,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="review-submit-wrap">
-                                        <div class="review-submit-card">
+                                        <div class="review-submit-card" *ngIf="this.applicantDetailsForm.valid">
                                             <div class="review-submit-card-header">
                                                 <div class="row">
                                                     <div class="col-12">
@@ -620,43 +620,25 @@
                                                     <div class="row">
                                                         <div class="col-3">
                                                             <p class="p p-13">Payment Type</p>
-                                                            <h6 class="h6">Deposite</h6>
+                                                            <h6 class="h6">transaction_type_id</h6>
                                                         </div>
                                                         <div class="col-3">
-                                                            <p class="p p-13">Scheme</p>
-                                                            <h6 class="h6">February Delight</h6>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <p class="p p-13">Amount</p>
-                                                            <h6 class="h6">$ 2500</h6>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <p class="p p-13">Total Amount</p>
-                                                            <h6 class="h6">$ 2500</h6>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-3">
-                                                            <p class="p p-13">Payment Type</p>
-                                                            <h6 class="h6">Rental</h6>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <p class="p p-13">Scheme</p>
-                                                            <h6 class="h6">February Delight</h6>
+                                                            <p class="p p-13">Payment Sub Type</p>
+                                                            <h6 class="h6">transaction_s</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Amount</p>
-                                                            <h6 class="h6">$ 2500</h6>
+                                                            <h6 class="h6">transaction_amount</h6>
                                                         </div>
                                                         <div class="col-3">
-                                                            <p class="p p-13">Total Amount</p>
-                                                            <h6 class="h6">$ 2500</h6>
+                                                            <p class="p p-13">Tax</p>
+                                                            <h6 class="h6">tax_amount</h6>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="review-submit-card">
+                                        <div class="review-submit-card" *ngIf="this.addressDetailsForm.valid">
                                             <div class="review-submit-card-header">
                                                 <div class="row">
                                                     <div class="col-12">
