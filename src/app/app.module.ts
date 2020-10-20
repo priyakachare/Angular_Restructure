@@ -98,6 +98,7 @@ import { UtilityListComponent } from './utility/utility-list/utility-list.compon
 import { AdminComponent } from './admin/admin.component';
 import { UtilityConfigurationComponent } from './admin/utility-configuration/utility-configuration.component';
 import { RoleComponent } from './admin/utility-configuration/role/role.component';
+import { PaymentTypePipe } from './registration/add-registration/payment-type.pipe';
 
 @NgModule({
   declarations: [
@@ -178,7 +179,8 @@ import { RoleComponent } from './admin/utility-configuration/role/role.component
     UtilityListComponent,
     AdminComponent,
     UtilityConfigurationComponent,
-    RoleComponent
+    RoleComponent,
+    PaymentTypePipe,
   ],
   imports: [
     BrowserModule,
