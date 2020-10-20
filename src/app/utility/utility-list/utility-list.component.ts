@@ -20,7 +20,7 @@ export class UtilityListComponent implements OnInit {
 
     // Display utility details After changing utility
     this.getData.utilityIdString.subscribe(result=>{
-      this.sessionService.setter("utility_id_string",result)
+      // this.sessionService.setter("utility_id_string",result)
       this.utilityservice.getUtilityListData(result).subscribe(utilitydata=>{
         this.dataSet = utilitydata.result.name
       })

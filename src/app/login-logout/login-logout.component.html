@@ -48,7 +48,7 @@
                                 <div class="form-row" *ngIf="logindiv">
                                     <div class="col-12">
                                         <label for="">Email ID</label>
-                                        <input type="text" class="form-control" formControlName="email" placeholder="Juile@test.com"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                        <input type="text" class="form-control" formControlName="email" placeholder="Juile@test.com"  [ngClass]="{ 'is-invalid': submitted && f?.email?.errors }" />
                                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                             <div *ngIf="f.email.errors.required">Email is required</div>
                                             <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
@@ -62,8 +62,8 @@
                                             formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
                                         <label class="pwd_ico" for="login_pwd3" (click)="showhidepwd3()"><span><i ngClass='{{showpwd3 ? "icons8-eye" : "icons8-hide"}}' class="icons8"></i></span></label>
                                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                            <div *ngIf="f.password.errors.required">Password is required</div>
-                                            <div *ngIf="f.password.errors.minlength">Password must be at least 4 characters</div>
+                                            <div *ngIf="f.password?.errors?.required">Password is required</div>
+                                            <div *ngIf="f.password?.errors?.minlength">Password must be at least 4 characters</div>
                                         </div>
                                     </div>
                                 </div>

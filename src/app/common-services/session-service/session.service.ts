@@ -20,5 +20,10 @@ export class SessionService {
     return this.data
   }
 
+  // remove value from Session storage
+  remove(key){
+    this.data = sessionStorage.removeItem(key)  
+  }
+
   
 }
