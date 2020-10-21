@@ -617,22 +617,22 @@
                                             </div>
                                             <div class="review-submit-card-body">
                                                 <div class="applicant-data">
-                                                    <div class="row">
+                                                    <div class="row" *ngFor="let item of this.paymentDetailsForm.value.transactionsControl">
                                                         <div class="col-3">
                                                             <p class="p p-13">Payment Type</p>
-                                                            <h6 class="h6">transaction_type_id</h6>
+                                                            <h6 class="h6">{{item.transaction_type_id | paymentType: paymentTypes}}</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Payment Sub Type</p>
-                                                            <h6 class="h6">transaction_s</h6>
+                                                            <h6 class="h6">{{item.transaction_sub_type_id | paymentType: paymentSubTypes}}</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Amount</p>
-                                                            <h6 class="h6">transaction_amount</h6>
+                                                            <h6 class="h6">{{item.transaction_amount}}</h6>
                                                         </div>
                                                         <div class="col-3">
                                                             <p class="p p-13">Tax</p>
-                                                            <h6 class="h6">tax_amount</h6>
+                                                            <h6 class="h6">{{item.tax_amount}}</h6>
                                                         </div>
                                                     </div>
                                                 </div>
