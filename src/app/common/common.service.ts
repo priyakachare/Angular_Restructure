@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { baseUrl } from 'src/environments/environment';
 import { SessionService } from '../common-services/session-service/session.service';
 
@@ -18,11 +18,18 @@ export class CommonService {
   @Output() utilityIdString = new EventEmitter<string>();
   @Output() checkBlankUtility = new EventEmitter<string>();
 
+  public changeTabSource = new Subject<any>(); // it use for component communication(pass the data without relation of component)
+  public subModuleList = new Subject<any>();
+  private selectedUtilityDisplay = new BehaviorSubject<any>('');
+  currentMessageSource = this.selectedUtilityDisplay.asObservable();
+
+  // currentTabSource = this.changeTabSource.asObservable();
+
   constructor(private http:HttpClient,private sessionService:SessionService) {
    }
 
    // Login API
-   login(data):Observable<any>{
+   login(data){
      return this.http.post(baseUrl+'user/login/',data)
    }
 
@@ -31,7 +38,7 @@ export class CommonService {
    userDetail;
    
    // API for checking Role & Privileges
-   checkRolePrivilege():Observable<any>{
+   checkRolePrivilege(){
    
    //get value of token and id string from sessionStorage
    this.token = this.sessionService.getter("token")
@@ -44,7 +51,7 @@ export class CommonService {
   }
 
   // API for getting Single User Details
-   getUserDetails():Observable<any>{
+   getUserDetails(){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
     };
@@ -52,7 +59,7 @@ export class CommonService {
    }
 
     // API for Taking utilities of user
-   getUserUtility():Observable<any>{
+   getUserUtility(){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
     };
@@ -60,7 +67,7 @@ export class CommonService {
    }
 
     // API for list of Module according to utility
-   getUtilityModuleList(selected_utility):Observable<any>{
+   getUtilityModuleList(selected_utility){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
     };
@@ -68,7 +75,7 @@ export class CommonService {
    }
 
     // API for list of Sub Module according to utility
-    getUtilitySubModuleList(selected_utility):Observable<any>{
+    getUtilitySubModuleList(selected_utility){
       const httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
       };
@@ -76,7 +83,7 @@ export class CommonService {
      }
 
     // API for logout
-    logOut(id_string):Observable<any>{
+    logOut(id_string){
 
       const httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
@@ -112,7 +119,20 @@ export class CommonService {
       let options = { headers: headers };
       return this.http.put(baseUrl + "user/change-password" +'/', model,options);
     }
-}
 
-  
+    // store utility id_string for pass the utility id_string to bento component
+    getUtilities(msg?){
+      this.changeTabSource.next(msg); // it only hold the data
+    } 
+
+    // it hold the utility id_string and pass to side nav
+    getSideNavData(msg?){
+      this.subModuleList.next(msg)
+    }
+
+    
+    selectedUtility(msg?){ 
+      this.selectedUtilityDisplay.next(msg)
+    }
+  } 
   
