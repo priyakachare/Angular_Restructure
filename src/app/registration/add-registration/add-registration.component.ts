@@ -67,6 +67,8 @@ export class AddRegistrationComponent implements OnInit {
   addressDetailsFormSubmitted = false;
   paymentDetailsForm: FormGroup;
   paymentDetailsFormSubmitted = false;
+  kycDetailsForm: FormGroup;
+  kycDetailsFormSubmitted = false;
   // Forms build end
   
   utilityIdString = '57ed8a45-014a-4f72-826a-dcf6824c454e'
@@ -77,9 +79,6 @@ export class AddRegistrationComponent implements OnInit {
   address = ""
   faCalendarAlt = faCalendarAlt;
   faTrash = faTrash;
-  selectedDocument: any;
-  selectedDocumentType = 'Personal details';
-  selectedKycDocuments = 'Pancard';
 
   document : any[] = [];
   consumerCategories : any[] = [];
@@ -93,8 +92,8 @@ export class AddRegistrationComponent implements OnInit {
   paymentTypes : any[] = [];
   paymentSubTypes : any[] = [];
   paymentChannels : any[] = [];
-  documentType : any[] = [];
-  kycDocument : any[] = [];
+  documentTypes : any[] = [];
+  documentSubTypes : any[] = [];
   vip =  [
     {id: 'True', name: 'Yes'},
     {id: 'False', name: 'No'},
@@ -154,6 +153,14 @@ export class AddRegistrationComponent implements OnInit {
       transationDateControl: [null,],
     });
     // Payment details form code end
+
+    // KYC details form code start
+    this.kycDetailsForm = this.formBuilder.group({
+      documentsControl: this.formBuilder.array(
+        [this.formBuilder.group({document_type_id:[null], document_sub_type_id:[null], file:[null]})]
+        ),
+    });
+    // KYC details form code end
 
     // Address details form code start
     this.addressDetailsForm = this.formBuilder.group({
@@ -261,6 +268,22 @@ export class AddRegistrationComponent implements OnInit {
       }
     })
     // Payment channel dropdown api call end
+
+    // Document types dropdown api call start
+    this.apiService.get('utility/'+this.utilityIdString+'/document-type/list').subscribe(data=>{
+      for(let item of data){
+        this.documentTypes.push(item)
+      }
+    })
+    // Document types dropdown api call end
+
+    // Document types dropdown api call start
+    this.apiService.get('utility/'+this.utilityIdString+'/document-sub-type/list').subscribe(data=>{
+      for(let item of data){
+        this.documentSubTypes.push(item)
+      }
+    })
+    // Document types dropdown api call end
   }
 
   // Applicant details form control start
@@ -311,6 +334,16 @@ export class AddRegistrationComponent implements OnInit {
       }
   }
   // Payment details form submit end
+
+  // KYC details form submit start
+  onKycDetailsFormSubmit() {
+      for(let item of this.kycDetailsForm.value.documentsControl){
+        if(item.document_sub_type_id != null && item.document_type_id != null && item.file != null){
+          console.log(item)
+        }
+      }
+  }
+  // KYC details form submit end
 
   ngOnInit(): void {
     this.sendStepperFormData()
@@ -465,6 +498,10 @@ export class AddRegistrationComponent implements OnInit {
     return this.paymentDetailsForm.get('transactionsControl') as FormArray;
   }
 
+  get Documents() {
+    return this.kycDetailsForm.get('documentsControl') as FormArray;
+  }
+
   addTransactionRow(){
     this.Transactions.push(this.formBuilder.group({transaction_type_id:[null], transaction_sub_type_id:[null], transaction_amount:[null], tax_amount:[null]}));
   }
@@ -472,6 +509,18 @@ export class AddRegistrationComponent implements OnInit {
   removeTransactionRow(index){
     if (index != 0){
       this.Transactions.removeAt(index); 
+    }else{
+      return false
+    }
+  }
+
+  addDocumentRow(){
+    this.Documents.push(this.formBuilder.group({document_type_id:[null], document_sub_type_id:[null], file:[null]}));
+  }
+
+  removeDocumentRow(index){
+    if (index != 0){
+      this.Documents.removeAt(index); 
     }else{
       return false
     }
