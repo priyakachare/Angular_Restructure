@@ -442,7 +442,8 @@
 <!--Basic Role-Role Add Start-->
 <div class="pr-modal">
     <div class="modal right fade" id="addRole_Role_Modal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="addTypeModalLabel">
-      <div class="modal-dialog" role="document">
+      <!-- <div class="modal-dialog" role="document" style="min-width:570px;"> -->
+        <div class="modal-dialog" role="document">
         <form name="form" [formGroup]="addRoleForm" (ngSubmit)="onAddRoleSubmit()">
             <div class="modal-content">    
                 <div class="modal-header pr-modal-header">
@@ -515,121 +516,41 @@
                                     </div>
                                     </div>
                                 </div>
-                                
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="role-divider text-dark my-0">Modules</div>
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <label>Select Module</label>
-                                        <ng-select [items]="utilityModule" bindLabel="module_name" formControlName="moduleControl"
-                                        appendTo="body" placeholder="Select Module"
-                                        name="name">
-                                        </ng-select>
-                                        <div *ngIf="addRoleFormSubmitted && ar.moduleControl.errors" class="invalid-feedback">
-                                            <div *ngIf="ar.moduleControl.errors.required">Mobile no. can't be empty!</div>
-                                        </div>
-                                    </div>
-                                </div>                           
                             </div>
-                            <div class="col-12">
-        
-                                <ngb-accordion [closeOthers]="true" activeIds="sandm">
-                                    <ngb-panel id="sandm">
-                                        <ng-template ngbPanelHeader let-opened="opened">
-                                            <button ngbPanelToggle class="btn btn-link stretched-link st">S&amp;M</button>
-                                        </ng-template>
-                                        <ng-template ngbPanelContent>
-                                            <div class="data-block">
-                                                <div class="row data-row" style="margin-left: 4px; margin-right: 1px;">
-                                                    <div class="col-6 align-self-center">
-                                                        <p class="p p-13">Registration</p>
+                            <div formArrayName="utilityModuleDivControl">
+                                <div class="col-12" *ngFor="let list of subModuleList; let i=index" >        
+                                    <ngb-accordion [closeOthers]="true">
+                                        <ngb-panel>
+                                            <ng-template ngbPanelHeader let-opened="opened" >
+                                                <button ngbPanelToggle class="btn btn-link stretched-link st" formCotrolName="moduleControl">{{list[0].utility_module}}</button>
+                                                    
+                                            </ng-template>
+                                            <!-- <div formArrayName="utilitySubModuleDivControl"> -->
+                                            <ng-template ngbPanelContent >
+                                                <div class="data-block" *ngFor="let subModule of list; let j=index" >
+                                                    <div class="row data-row" style="margin-left: 4px; margin-right: 1px;">
+                                                        <div class="col-6 align-self-center"  >
+                                                            <p class="p p-13">{{subModule.submodule_name}}</p>
+                                                        </div>
+                                                        <div class="col-6 align-self-center text-center">
+                                                            <ng-select class="small-select view disable-arrow disable-dropdown disable-clear-all" [items]="privilegeList" [searchable]="false" [clearable]="false" 
+                                                            bindLabel="name" placeholder="Select" name="name"  >
+                                                            </ng-select>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-6 align-self-center text-right">
-                                                        <ng-select class="small-select view" [searchable]="false" [clearable]="false" [items]="status5" bindLabel="status5" placeholder="Select" name="status5" appendTo="body">
-                                                        </ng-select>
-                                                    </div>
+                                                    <!-- formControlName="moduleSubControl" -->
+                                                    <!-- formControlName="privilegeControl" -->
                                                 </div>
-                                                <div class="row data-row" style="margin-left: 4px; margin-right: 1px;">
-                                                    <div class="col-6 align-self-center">
-                                                        <p class="p p-13">Consumer</p>
-                                                    </div>
-                                                    <div class="col-6 align-self-center text-right">
-                                                        <ng-select class="small-select" [searchable]="false" [clearable]="false" [items]="status1" bindLabel="status1" placeholder="Select"  name="status1" appendTo="body">
-                                                        </ng-select>
-                                                    </div>
-                                                </div>
-                                                <div class="row data-row" style="margin-left: 4px; margin-right: 1px;">
-                                                    <div class="col-6 align-self-center">
-                                                        <p class="p p-13">Campaign</p>
-                                                    </div>
-                                                    <div class="col-6 align-self-center text-right">
-                                                        <ng-select class="small-select edit" [searchable]="false" [clearable]="false" [items]="status2" bindLabel="status2" placeholder="Select" name="status2" appendTo="body">
-                                                        </ng-select>
-                                                    </div>
-                                                </div>
-                                                <div class="row data-row" style="margin-left: 4px; margin-right: 1px;">
-                                                    <div class="col-6 align-self-center">
-                                                        <p class="p p-13">Survey</p>
-                                                    </div>
-                                                    <div class="col-6 align-self-center text-right">
-                                                        <ng-select class="small-select edit" [searchable]="false" [clearable]="false" [items]="status3" bindLabel="status3" placeholder="Select"  name="status3" appendTo="body">
-                                                        </ng-select>
-                                                    </div>
-                                                </div>
-                                                <div class="row data-row" style="margin-left: 4px; margin-right: 1px;">
-                                                    <div class="col-6 align-self-center">
-                                                        <p class="p p-13">User</p>
-                                                    </div>
-                                                    <div class="col-6 align-self-center text-right">
-                                                        <ng-select class="small-select edit" [searchable]="false" [clearable]="false" [items]="status4" bindLabel="status4" placeholder="Select" name="status4" appendTo="body">
-                                                        </ng-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </ng-template>
-                                    </ngb-panel>
-                                
-                                    <ngb-panel id="consops">
-                                        <ng-template ngbPanelHeader>
-                                            <button ngbPanelToggle class="btn btn-link stretched-link st">Consumer Ops</button>
-                                        </ng-template>
-                                        <ng-template ngbPanelContent>
-                                            <div class="data-block">
-                                                <div class="row data-row" style="margin-left: 4px; margin-right: 1px;">
-                                                    <div class="col-6 align-self-center">
-                                                        <p class="p p-13">Registration</p>
-                                                    </div>
-                                                    <div class="col-6 align-self-center text-right">
-                                                        <ng-select class="small-select view" [searchable]="false" [clearable]="false" [items]="status5" bindLabel="status5" placeholder="Select"  name="status5" appendTo="body">
-                                                        </ng-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </ng-template>
-                                    </ngb-panel>
-                                
-                                    <ngb-panel id="conscare">
-                                        <ng-template ngbPanelHeader>
-                                            <button ngbPanelToggle class="btn btn-link stretched-link st">Consumer Care</button>
-                                        </ng-template>
-                                        <ng-template ngbPanelContent>
-                                            <div class="data-block">
-                                                <div class="row data-row" style="margin-left: 4px; margin-right: 1px;">
-                                                    <div class="col-6 align-self-center">
-                                                        <p class="p p-13">Registration</p>
-                                                    </div>
-                                                    <div class="col-6 align-self-center text-right">
-                                                        <ng-select class="small-select view" [searchable]="false" [clearable]="false" [items]="status5" bindLabel="status5" placeholder="Select" name="status5" appendTo="body">
-                                                        </ng-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </ng-template>
-                                    </ngb-panel>
-                                </ngb-accordion>
+                                            </ng-template>
+                                        <!-- </div> -->
+                                        </ngb-panel>
+                                    </ngb-accordion>
+                                </div>
                             </div>
                         </div>
                     </div>

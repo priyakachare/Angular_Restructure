@@ -78,5 +78,23 @@ export class UtilityConfigurationService {
     return this.http.get(baseUrl+'utility/'+this.utility_id_string+'/module/list',httpOptions)
    }
 
-   
+   // API for Taking utility sub module List module wise
+  getUtilitySubModuleList(module_id_string):Observable<any>{
+    //get value of token and id string from sessionStorage
+   this.token = this.sessionService.getter("token")
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
+    };
+    return this.http.get(baseUrl+'utility/module/'+module_id_string+'/submodule/list',httpOptions)
+   }
+
+   // API for Taking utility sub module List module wise
+  getPrivilegesList():Observable<any>{
+    //get value of token and id string from sessionStorage
+   this.token = this.sessionService.getter("token")
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})
+    };
+    return this.http.get(baseUrl+'privilege/list',httpOptions)
+   }
 }

@@ -45,6 +45,7 @@ export class LocationComponent implements OnInit {
         this.getData.getUtilities(id)
       }else{
           this.facilityId = responce.data.utilities[0].id_string
+          this.sessionService.setter("utility_id_string",this.facilityId)
           this.getData.getUtilities(this.facilityId)
       }
       

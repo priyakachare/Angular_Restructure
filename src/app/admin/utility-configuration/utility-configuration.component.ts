@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { faChevronLeft, faChevronRight, faPen, faMapMarkerAlt, faPrint, faTimesCircle, faTrash, faCalendarAlt, faFileCsv, faFilePdf, faFileExcel, faEye, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
 import { UtilityConfigurationService } from './utility-configuration.service';
+import * as _ from 'underscore'
 
 @Component({
   selector: 'app-utility-configuration',
@@ -204,36 +205,6 @@ export class UtilityConfigurationComponent implements OnInit {
     {id: 3, name: 'Utility  3'},
   ];
  
-  selectedStatus1: 'View';
-  status1 = [
-    {id: 1, status1: 'View'},
-    {id: 2, status1: 'Edit'},
-  ];
-
-  selectedStatus2: 'View';
-  status2 = [
-    {id: 1, status2: 'View'},
-    {id: 2, status2: 'Edit'},
-  ];
-
-  selectedStatus3: 'View';
-  status3 = [
-    {id: 1, status3: 'View'},
-    {id: 2, status3: 'Edit'},
-  ];
-
-  selectedStatus4: 'View';
-  status4 = [
-    {id: 1, status4: 'View'},
-    {id: 2, status4: 'Edit'},
-  ];
-
-  selectedStatus5: 'View';
-  status5 = [
-    {id: 1, status5: 'View'},
-    {id: 2, status5: 'Edit'},
-  ];
-
   selectedViewRegister: any;
   register = [
     {id: 1, register: 'View'},
@@ -301,7 +272,11 @@ export class UtilityConfigurationComponent implements OnInit {
       roleSubTypeControl: [null,],
       formFactorControl: [null,],
       departmentControl: [null,],
-      moduleControl: [null,]
+
+      utilityModuleDivControl: this.formBuilder.array(
+        [this.formBuilder.group({moduleControl:[null],moduleSubControl:[null],privilegeControl:[null]})],
+       
+        ),
 
     })
   }
@@ -316,13 +291,27 @@ export class UtilityConfigurationComponent implements OnInit {
   roleSubType;
   formFactorList;
   departmentList;
-  utilityModule;
+  privilegeList;
+  utilityModule:any=[];
+  subModuleList:any=[];
+
+  get Modules() {
+    return this.addRoleForm.get('utilityModuleDivControl') as FormArray;
+  }  
+
 
   onAddRoleSubmit(){
     this.addRoleFormSubmitted = true;
     if (this.addRoleForm.invalid) {
       return;
     }
+
+    let data = {
+      subModule:this.addRoleForm.value.utilityModuleDivControl,
+      product : this.addRoleForm.value.utilityModuleDivControl,
+    }
+
+    console.log('-----------',data)
   }
 
 
@@ -331,11 +320,6 @@ export class UtilityConfigurationComponent implements OnInit {
     this.selectedDepartment = this.department[0]
     this.selectedDepartment1 = this.department1[0]
     this.selectedDepartment2 = this.department2[0]
-    this.selectedViewRegister = this.register[0]
-    this.selectedViewConsumer = this.consumer[0]
-    this.selectedViewCampaign = this.campaign[0]
-    this.selectedViewSurvey = this.survey[0]
-    this.selectedViewUser = this.user[0]
 
     this.utilityConfigService.getRoleList().subscribe(roles=>{
       this.roleDataSet = roles.results
@@ -345,7 +329,6 @@ export class UtilityConfigurationComponent implements OnInit {
       for(let item of rolesType.results){
         this.roleTypeList.push(item)
       }
-      // this.roleTypeList = rolesType.results
     })
 
     this.addRoleForm.get("roleTypeControl").valueChanges.subscribe(val=>{
@@ -362,11 +345,23 @@ export class UtilityConfigurationComponent implements OnInit {
       this.departmentList = department.results
     })
 
-    this.utilityConfigService.getUtilityModuleList().subscribe(module=>{
-      this.utilityModule = module.results
+    this.utilityConfigService.getPrivilegesList().subscribe(privilege=>{
+      this.privilegeList = privilege.results
     })
 
-    
+    this.utilityConfigService.getUtilityModuleList().subscribe(module=>{
+      var that=this;
+    _.each(module.results,function(result){
+      that.utilityModule.push({"id_string":result.id_string})
+    })
+    _.each(this.utilityModule,function(module){
+      that.utilityConfigService.getUtilitySubModuleList(module.id_string).subscribe(subModule=>{
+        that.subModuleList.push(subModule.results)
+
+      })       
+    })  
+
+    })
   }
 
 }
