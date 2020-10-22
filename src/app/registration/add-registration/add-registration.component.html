@@ -463,20 +463,32 @@
                                     <div class="registration-form inner-form">
                                         <div class="row inner-form-wrap">
                                             <div class="col-12">
-                                                    <form name="form">
-                                                    <div class="form-row">
-                                                        <div class="col-4">
-                                                            <label>Select Type</label>
-                                                            <ng-select [items]="documentType" bindLabel="name2" appendTo="body" placeholder="" [(ngModel)]="selectedDocumentType" name="name2" bindValue="name2">
-                                                            </ng-select>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label>Select Documents</label>
-                                                            <ng-select [items]="kycDocument" bindLabel="name" appendTo="body" placeholder="" [(ngModel)]="selectedKycDocuments" name="name">
-                                                            </ng-select>
+                                                <form name="form" [formGroup]="kycDetailsForm" (ngSubmit)="onKycDetailsFormSubmit()">
+                                                    <div formArrayName="documentsControl">
+                                                        <div class="form-row" *ngFor="let item of Documents.controls; let i=index" [formGroupName]="i">
+                                                            <div class="col" *ngIf="documentTypes.length != 0">
+                                                                <label>Document Type</label>
+                                                                <ng-select [items]="documentTypes" bindValue="id_string" bindLabel="name" appendTo="body" placeholder="Select document type"  name="name" formControlName="document_type_id">
+                                                                </ng-select>
+                                                            </div>
+                                                            <div class="col" *ngIf="documentSubTypes.length != 0">
+                                                                <label>Document Sub Type</label>
+                                                                <ng-select [items]="documentSubTypes" bindValue="id_string" bindLabel="name" appendTo="body" placeholder="Select document sub type" name="name" formControlName="document_sub_type_id">
+                                                                </ng-select>
+                                                            </div>
+                                                            <div class="col">
+                                                                <label>File</label>
+                                                                <input type="file" formControlName="file">
+                                                            </div>
+                                                            <div class="col-auto align-self-center action-col" style="margin-top: -25px;">
+                                                                <button class="bttn-transparent bttn-icon" tooltipClass="pr-tooltip" placement="top" ngbTooltip="Remove" [openDelay]="200" [closeDelay]="200" (click)="removeDocumentRow(i)"><fa-icon [icon]="faTrash"></fa-icon></button> 
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row"> 
+                                                    <div class="form-row">
+                                                        <button class="btn bttn-transparent bttn-add" type="button" (click)="addDocumentRow()">Add</button>
+                                                    </div>
+                                                    <!-- <div class="form-row"> 
                                                         <div class="col-12">
                                                             <div class="upload-wrapper custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
                                                                 <div class="upload-inner">
@@ -491,12 +503,12 @@
                                                                                 </div>
                                                                             </ngx-dropzone-label>
                                                                         </div>
-                                                                        <!-- <div class="media-body">
+                                                                        <div class="media-body">
                                                                             <p class="p p-13 progress-txt inline-block">Electricity Bill</p>
                                                                             <span class="p p-13 progress-status inline-block">50%</span>
                                                                             <p><ngb-progressbar [showValue]="true" type="primary" [value]="50" height="5px"></ngb-progressbar></p>
                                                                             <span class="btn bttn-remove">x</span>
-                                                                        </div> -->
+                                                                        </div>
                                                                     </div>                                           
                                                                 </div>
                                                             </div>
@@ -508,19 +520,20 @@
                                                                 </ul>
                                                             </div>
                                                         </div>
+                                                    </div> -->
+                                                    <br>
+                                                    <div class="row justify-content-center form-bttn-row">
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-outline-light3 st">Cancel</button>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-secondary st" id="proceed_4">Submit</button>
+                                                        </div>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
-                                        <br>
-                                        <div class="row justify-content-center form-bttn-row">
-                                            <div class="col-auto">
-                                                <button class="btn btn-outline-light3 st">Cancel</button>
-                                            </div>
-                                            <div class="col-auto">
-                                                <button class="btn btn-secondary st" id="proceed_4">Submit</button>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
