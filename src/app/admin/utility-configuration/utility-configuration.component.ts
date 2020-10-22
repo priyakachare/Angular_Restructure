@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faChevronLeft, faChevronRight, faPen, faMapMarkerAlt, faPrint, faTimesCircle, faTrash, faCalendarAlt, faFileCsv, faFilePdf, faFileExcel, faEye, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UtilityConfigurationService } from './utility-configuration.service';
 
 @Component({
   selector: 'app-utility-configuration',
@@ -28,6 +29,12 @@ export class UtilityConfigurationComponent implements OnInit {
   faFileExcel = faFileExcel;
   faEye = faEye;
   faPlus = faPlus;
+
+  scrollOptions = { 
+    autoHide: true, 
+    scrollbarMinSize: 67,
+    scrollbarMaxSize: 180,
+  };
   
   selectedDepartment: any = "";
   department = [
@@ -282,54 +289,42 @@ export class UtilityConfigurationComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtOptions2 = {}
   collection = { count: 12, data: [] };
+  addRoleForm: FormGroup; 
+  addRoleFormSubmitted = false;
+  constructor( private router: Router, private fb: FormBuilder,private utilityConfigService:UtilityConfigurationService,
+    private formBuilder: FormBuilder){ 
 
-  constructor( private router: Router, private fb: FormBuilder ){ 
-    for (var i = 0; i < this.collection.count; i++) {
-      this.collection.data.push(
-        {
-          billId_start: i + 1000,
-          billId_current: i + 1020,
-          role_name:['Admin','CEO','Back Office','HOD'].sort((a, b) => .5 - Math.random())[0],
-          role_type:['Operator','Utility'].sort((a, b) => .5 - Math.random())[0],
-          role_subtype:['Employee','Vendor','Supplier'].sort((a, b) => .5 - Math.random())[0],
-          role_form:['Web','Mobile'].sort((a, b) => .5 - Math.random())[0],
-          role_dept:['Sales & Marketing','Finance'].sort((a, b) => .5 - Math.random())[0],
-          role_status:['Active', 'Inactive'].sort((a, b) => .5 - Math.random())[0],
-          region: ['America'],
-          country: ['USA','Mexico'].sort((a, b) => .5 - Math.random())[0],
-          state: ['Texas','Florida','Michigan'].sort((a, b) => .5 - Math.random())[0],
-          section: ['Queens','Brookyn','Staten Island','Manhatten'].sort((a, b) => .5 - Math.random())[0],
-          city: ['New York','Washington D.C.','Houston','Austin'].sort((a, b) => .5 - Math.random())[0],
-          area: ['Ridgewood','Queens villege','Brownsville','Rossville'].sort((a, b) => .5 - Math.random())[0],
-          subarea: ['Murdock','Hempstead Ave','93rd Ave','Jamaica Ave'].sort((a, b) => .5 - Math.random())[0],
-          status: ['active', 'inactive'].sort((a, b) => .5 - Math.random())[0],
-          utility: ['Infra mark'],
-          skill: ['Meter Reading','Installation'].sort((a, b) => .5 - Math.random())[0],
-          channel: ['PayTm','Phonpe','Google Pay','PayU'].sort((a, b) => .5 - Math.random())[0],
-          mode: ['Cash','Digital','Cheque','DD'].sort((a, b) => .5 - Math.random())[0],
-          billPeriod: "27 Nov 2019 to 03 Mar 2020",
-          created_by:'Admin',
-          module:['Registration'],
-          format:['INFRA,BEECH'].sort((a, b) => .5 - Math.random())[0],
-          prefix:['Yes'].sort((a, b) => .5 - Math.random())[0],
-          billAmount:500,
-          description:['Lorem ipsum'],
-          tender_name:'Tender Name ' + i,
-          contract_name:'Contract Name ' + i,
-          provider:'provider '+i,
-          services:'service '+i,
-          frequency:'frequency '+i,
-          date: new Date(),
-        }
-      );
-     
-    this.dtOptions2 = {
-      pageLength: 12,
-    };
-    }
+    this.addRoleForm = this.formBuilder.group({
+      roleControl: ['', [Validators.required]],
+      descriptionControl : ['', [Validators.required]],
+      roleTypeControl: [null,],
+      roleSubTypeControl: [null,],
+      formFactorControl: [null,],
+      departmentControl: [null,],
+      moduleControl: [null,]
 
-    
+    })
+  }
+  // Add Role details form control start
+  get ar() { return this.addRoleForm.controls; }
+  // Add Role details form control end
+
+
+  
+  roleDataSet;
+  roleTypeList:any[]=[];
+  roleSubType;
+  formFactorList;
+  departmentList;
+  utilityModule;
+
+  onAddRoleSubmit(){
+    this.addRoleFormSubmitted = true;
+    if (this.addRoleForm.invalid) {
+      return;
     }
+  }
+
 
   ngOnInit(): void {
     this.selectedStatus = this.status[0]
@@ -342,6 +337,36 @@ export class UtilityConfigurationComponent implements OnInit {
     this.selectedViewSurvey = this.survey[0]
     this.selectedViewUser = this.user[0]
 
+    this.utilityConfigService.getRoleList().subscribe(roles=>{
+      this.roleDataSet = roles.results
+    })
+
+    this.utilityConfigService.getRoleTypeList().subscribe(rolesType=>{
+      for(let item of rolesType.results){
+        this.roleTypeList.push(item)
+      }
+      // this.roleTypeList = rolesType.results
+    })
+
+    this.addRoleForm.get("roleTypeControl").valueChanges.subscribe(val=>{
+     this.utilityConfigService.getRoleSubTypeList(val.id_string).subscribe(rolesSubType=>{
+       this.roleSubType = rolesSubType.results
+     })
+    })
+
+    this.utilityConfigService.getFormFactorList().subscribe(formFactor=>{
+      this.formFactorList = formFactor.results
+    })
+
+    this.utilityConfigService.getDepartmentList().subscribe(department=>{
+      this.departmentList = department.results
+    })
+
+    this.utilityConfigService.getUtilityModuleList().subscribe(module=>{
+      this.utilityModule = module.results
+    })
+
+    
   }
 
 }
