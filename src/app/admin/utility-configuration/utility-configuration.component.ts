@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { faChevronLeft, faChevronRight, faPen, faMapMarkerAlt, faPrint, faTimesCircle, faTrash, faCalendarAlt, faFileCsv, faFilePdf, faFileExcel, faEye, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
+import { UtilityConfigurationService } from './utility-configuration.service';
+import * as _ from 'underscore'
 
 @Component({
   selector: 'app-utility-configuration',
@@ -28,6 +30,12 @@ export class UtilityConfigurationComponent implements OnInit {
   faFileExcel = faFileExcel;
   faEye = faEye;
   faPlus = faPlus;
+
+  scrollOptions = { 
+    autoHide: true, 
+    scrollbarMinSize: 67,
+    scrollbarMaxSize: 180,
+  };
   
   selectedDepartment: any = "";
   department = [
@@ -197,36 +205,6 @@ export class UtilityConfigurationComponent implements OnInit {
     {id: 3, name: 'Utility  3'},
   ];
  
-  selectedStatus1: 'View';
-  status1 = [
-    {id: 1, status1: 'View'},
-    {id: 2, status1: 'Edit'},
-  ];
-
-  selectedStatus2: 'View';
-  status2 = [
-    {id: 1, status2: 'View'},
-    {id: 2, status2: 'Edit'},
-  ];
-
-  selectedStatus3: 'View';
-  status3 = [
-    {id: 1, status3: 'View'},
-    {id: 2, status3: 'Edit'},
-  ];
-
-  selectedStatus4: 'View';
-  status4 = [
-    {id: 1, status4: 'View'},
-    {id: 2, status4: 'Edit'},
-  ];
-
-  selectedStatus5: 'View';
-  status5 = [
-    {id: 1, status5: 'View'},
-    {id: 2, status5: 'Edit'},
-  ];
-
   selectedViewRegister: any;
   register = [
     {id: 1, register: 'View'},
@@ -282,66 +260,108 @@ export class UtilityConfigurationComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtOptions2 = {}
   collection = { count: 12, data: [] };
+  addRoleForm: FormGroup; 
+  addRoleFormSubmitted = false;
+  constructor( private router: Router, private fb: FormBuilder,private utilityConfigService:UtilityConfigurationService,
+    private formBuilder: FormBuilder){ 
 
-  constructor( private router: Router, private fb: FormBuilder ){ 
-    for (var i = 0; i < this.collection.count; i++) {
-      this.collection.data.push(
-        {
-          billId_start: i + 1000,
-          billId_current: i + 1020,
-          role_name:['Admin','CEO','Back Office','HOD'].sort((a, b) => .5 - Math.random())[0],
-          role_type:['Operator','Utility'].sort((a, b) => .5 - Math.random())[0],
-          role_subtype:['Employee','Vendor','Supplier'].sort((a, b) => .5 - Math.random())[0],
-          role_form:['Web','Mobile'].sort((a, b) => .5 - Math.random())[0],
-          role_dept:['Sales & Marketing','Finance'].sort((a, b) => .5 - Math.random())[0],
-          role_status:['Active', 'Inactive'].sort((a, b) => .5 - Math.random())[0],
-          region: ['America'],
-          country: ['USA','Mexico'].sort((a, b) => .5 - Math.random())[0],
-          state: ['Texas','Florida','Michigan'].sort((a, b) => .5 - Math.random())[0],
-          section: ['Queens','Brookyn','Staten Island','Manhatten'].sort((a, b) => .5 - Math.random())[0],
-          city: ['New York','Washington D.C.','Houston','Austin'].sort((a, b) => .5 - Math.random())[0],
-          area: ['Ridgewood','Queens villege','Brownsville','Rossville'].sort((a, b) => .5 - Math.random())[0],
-          subarea: ['Murdock','Hempstead Ave','93rd Ave','Jamaica Ave'].sort((a, b) => .5 - Math.random())[0],
-          status: ['active', 'inactive'].sort((a, b) => .5 - Math.random())[0],
-          utility: ['Infra mark'],
-          skill: ['Meter Reading','Installation'].sort((a, b) => .5 - Math.random())[0],
-          channel: ['PayTm','Phonpe','Google Pay','PayU'].sort((a, b) => .5 - Math.random())[0],
-          mode: ['Cash','Digital','Cheque','DD'].sort((a, b) => .5 - Math.random())[0],
-          billPeriod: "27 Nov 2019 to 03 Mar 2020",
-          created_by:'Admin',
-          module:['Registration'],
-          format:['INFRA,BEECH'].sort((a, b) => .5 - Math.random())[0],
-          prefix:['Yes'].sort((a, b) => .5 - Math.random())[0],
-          billAmount:500,
-          description:['Lorem ipsum'],
-          tender_name:'Tender Name ' + i,
-          contract_name:'Contract Name ' + i,
-          provider:'provider '+i,
-          services:'service '+i,
-          frequency:'frequency '+i,
-          date: new Date(),
-        }
-      );
-     
-    this.dtOptions2 = {
-      pageLength: 12,
-    };
+    this.addRoleForm = this.formBuilder.group({
+      roleControl: ['', [Validators.required]],
+      descriptionControl : ['', [Validators.required]],
+      roleTypeControl: [null,],
+      roleSubTypeControl: [null,],
+      formFactorControl: [null,],
+      departmentControl: [null,],
+
+      utilityModuleDivControl: this.formBuilder.array(
+        [this.formBuilder.group({moduleControl:[null],moduleSubControl:[null],privilegeControl:[null]})],
+       
+        ),
+
+    })
+  }
+  // Add Role details form control start
+  get ar() { return this.addRoleForm.controls; }
+  // Add Role details form control end
+
+
+  
+  roleDataSet;
+  roleTypeList:any[]=[];
+  roleSubType;
+  formFactorList;
+  departmentList;
+  privilegeList;
+  utilityModule:any=[];
+  subModuleList:any=[];
+
+  get Modules() {
+    return this.addRoleForm.get('utilityModuleDivControl') as FormArray;
+  }  
+
+
+  onAddRoleSubmit(){
+    this.addRoleFormSubmitted = true;
+    if (this.addRoleForm.invalid) {
+      return;
     }
 
-    
+    let data = {
+      subModule:this.addRoleForm.value.utilityModuleDivControl,
+      product : this.addRoleForm.value.utilityModuleDivControl,
     }
+
+    console.log('-----------',data)
+  }
+
 
   ngOnInit(): void {
     this.selectedStatus = this.status[0]
     this.selectedDepartment = this.department[0]
     this.selectedDepartment1 = this.department1[0]
     this.selectedDepartment2 = this.department2[0]
-    this.selectedViewRegister = this.register[0]
-    this.selectedViewConsumer = this.consumer[0]
-    this.selectedViewCampaign = this.campaign[0]
-    this.selectedViewSurvey = this.survey[0]
-    this.selectedViewUser = this.user[0]
 
+    this.utilityConfigService.getRoleList().subscribe(roles=>{
+      this.roleDataSet = roles.results
+    })
+
+    this.utilityConfigService.getRoleTypeList().subscribe(rolesType=>{
+      for(let item of rolesType.results){
+        this.roleTypeList.push(item)
+      }
+    })
+
+    this.addRoleForm.get("roleTypeControl").valueChanges.subscribe(val=>{
+     this.utilityConfigService.getRoleSubTypeList(val.id_string).subscribe(rolesSubType=>{
+       this.roleSubType = rolesSubType.results
+     })
+    })
+
+    this.utilityConfigService.getFormFactorList().subscribe(formFactor=>{
+      this.formFactorList = formFactor.results
+    })
+
+    this.utilityConfigService.getDepartmentList().subscribe(department=>{
+      this.departmentList = department.results
+    })
+
+    this.utilityConfigService.getPrivilegesList().subscribe(privilege=>{
+      this.privilegeList = privilege.results
+    })
+
+    this.utilityConfigService.getUtilityModuleList().subscribe(module=>{
+      var that=this;
+    _.each(module.results,function(result){
+      that.utilityModule.push({"id_string":result.id_string})
+    })
+    _.each(this.utilityModule,function(module){
+      that.utilityConfigService.getUtilitySubModuleList(module.id_string).subscribe(subModule=>{
+        that.subModuleList.push(subModule.results)
+
+      })       
+    })  
+
+    })
   }
 
 }

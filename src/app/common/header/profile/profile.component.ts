@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
     this.id_string =  this.sessionService.getter("id_string")
 
     if(selectedVal === 'Logout'){
-      this.commonService.logOut(this.id_string).subscribe(data =>{
+      this.commonService.logOut(this.id_string).subscribe((data:any) =>{
         if(data.state === "success"){
           sessionStorage.removeItem("token")
           this.router.navigateByUrl('/login'); 

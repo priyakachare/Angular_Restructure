@@ -24,7 +24,7 @@ export class UtilityService {
    return this.http.get(baseUrl+'utility/'+utility_id_string, httpOptions)
  }
 
- // API for Taking Module list from commonapp
+ // API for Taking Module list from tenant wise
   getModuleListData(tenant_id_string):Observable<any>{
       const httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': this.token})

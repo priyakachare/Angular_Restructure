@@ -85,7 +85,7 @@ export class LoginLogoutComponent implements OnInit {
 
     // if form is valid then call the login API
     if(this.loginForm.valid){
-      this.commonService.login(this.loginForm.value).subscribe(result =>{
+      this.commonService.login(this.loginForm.value).subscribe((result:any) =>{
         if(result.state === 'success'){ 
            
           //set token and id string in sessionStorage
