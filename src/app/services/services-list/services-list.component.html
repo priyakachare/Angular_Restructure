@@ -10,12 +10,13 @@
 		            </tr>
 		        </thead>
 		        <tbody>
-		            <tr *ngFor="let item of dataSet">
-		            	<td class="showOnHover">{{item.registrationNo}}
+		            <tr *ngFor="let item of services.results">
+		            	<td class="showOnHover">{{item.service_request_no}}
 		            		<span class="show">
-		            			<span class="enqry-no-blk">{{item.registrationNo}}</span>
-                                <span class="enqry-name-blk">{{item.name}}</span>
-                                <div class="enqry-sts-blk" [ngSwitch]="item.status">
+		            			<span class="enqry-no-blk">{{item.service_request_no}}</span>
+								<span class="enqry-name-blk">{{item.consumer_no}}</span>
+								
+                                <!-- <div class="enqry-sts-blk" [ngSwitch]="item.state">
 				                    <div *ngSwitchCase="'Approved'">
 				                      <div class="badge badge-label-success">Approved</div>
 				                    </div>
@@ -25,7 +26,8 @@
 				                    <div *ngSwitchCase="'Rejected'">
 				                      <div class="badge badge-label-danger">Rejected</div>
 				                    </div>
-				                </div>
+								</div> -->
+								<div></div><br>
 				                <div class="list-blk">
 				                    <p><span>Old Alwal</span><span>Sub Area</span></p>
 				                    <p><span>Venkatesh</span><span>Vendor</span></p>
@@ -33,9 +35,9 @@
 			                    </div>
 				            </span>
 		            	</td>
-		            	<td>{{item.name}}</td>
-		            	<td>
-		            		<div class="enqry-sts-blk" [ngSwitch]="item.status">
+		            	<td>{{item.consumer_no}}</td>
+		            	<!-- <td>
+		            		<div class="enqry-sts-blk" [ngSwitch]="item.state">
 			                    <div *ngSwitchCase="'Approved'">
 			                      <div class="badge badge-label-success">Approved</div>
 			                    </div>
@@ -46,24 +48,19 @@
 			                      <div class="badge badge-label-danger">Rejected</div>
 			                    </div>
 			                </div>
-			            </td>
-			            <td>{{item.mobileNo}}</td>
-			            <td>{{item.category}}</td>
-			            <td>{{item.subCategory}}</td>
-			            <td>{{item.area}}</td>
-			            <td>{{item.source}}</td>
-			            <td>{{item.createdOn| date : 'dd MMM yy'}}</td>
-			            <td class="action">
+						</td> -->
+						<td>{{item.consumer_remark}}</td>
+						<td>{{item.admin_remark}}</td>
+			            <td>{{item.request_date | date : 'dd MMM yy'}}</td>
+			            <td>{{item.created_date| date : 'dd MMM yy'}}</td>
+						<td class="action">
 			            	<ul class="list-group list-group-horizontal action-list">
 			                    <li class="list-group-item st" (click)="testing(item.id)" ngbTooltip="Approve" [openDelay]="200" [closeDelay]="200">
-			                        <i class="icons8 icons8-eye"></i>
-			                    </li>
-			                    <li class="list-group-item st" (click)="testing(item.id)" ngbTooltip="Reject" [openDelay]="200" [closeDelay]="200">
-			                        <i class="icons8 icons8-eye"></i>
+			                        <i class="icons8 icons8-eye" style="align-self: start;"></i>
 			                    </li>
 		                    </ul>
-						</td>
-					</tr> 
+			            </td>
+		            </tr> 
 		        </tbody>
 		    </table>
     	</div>

@@ -6,6 +6,8 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http' ;
 import { Subject } from 'rxjs';
+import { ServicesService } from '../services.service';
+import { ApiService } from '../../common-services/api-service/api.service';
 
 
 @Component({
@@ -15,136 +17,33 @@ import { Subject } from 'rxjs';
 })
 export class ServicesListComponent implements OnInit {
 
+  services: any =[];
+  dtTrigger: Subject<any> = new Subject();
   dtOptions: DataTables.Settings = {};
+  utilityIdString = '145488b2-6edf-48cb-bcc4-fa597765b51f';
 
   dataSet = [
-      {
-        id: "ajkdaks-saidja-3242-sada",
-        name: "ABC",
-        registrationNo: "NSC1992425",
-        status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
-        mobileNo: "201-285-6456",
-        area: "Kothrud",
-        source: "Branch",
-        createdOn: "19-Sep-2020",
-        category:"PNG",
-        subCategory:"Domestic",
-      },
-      {
-        id: "6544-tres-3242-sada",
-        name: "XYZ",
-        registrationNo: "NSC1992430",
-        status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
-        mobileNo: "596-285-3781",
-        area: "Warje",
-        source: "Branch",
-        createdOn: "21-Sep-2020",
-        category:"PNG",
-        subCategory:"Domestic", 
-      },
-      {
-        id: "weq4-trtes-36362-78ad",
-        name: "LMN",
-        registrationNo: "NSC1992431",
-        status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
-        mobileNo: "89-255-9846",
-        area: "Pashan",
-        source: "Mobile app",
-        createdOn: "21-Sep-2020",
-        category:"PNG",
-        subCategory:"Individual", 
-      },
-      {
-        id: "23er-treh-5211-34yt",
-        name: "PQR",
-        registrationNo: "NSC1992432",
-        status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
-        mobileNo: "82-255-9846",
-        area: "Shivajinagar",
-        source: "Mobile app",
-        createdOn: "22-Sep-2020",
-        category:"PNG",
-        subCategory:"Individual", 
-      },
-      {
-        id: "jkgh-ewrwr-8733-sada",
-        name: "UVW",
-        registrationNo: "NSC1992419",
-        status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
-        mobileNo: "88-285-7666",
-        area: "Katraj",
-        source: "Branch",
-        createdOn: "19-Sep-2020",
-        category:"PNG",
-        subCategory:"Domestic",
-      },
-      {
-        id: "fsfs-tres-3242-7567",
-        name: "IJK",
-        registrationNo: "NSC1992488",
-        status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
-        mobileNo: "87-853-2555",
-        area: "Kothrud",
-        source: "Branch",
-        createdOn: "21-Sep-2020",
-        category:"PNG",
-        subCategory:"Domestic", 
-      },
-      {
-        id: "3455-trtes-36362-yuyu",
-        name: "BVC",
-        registrationNo: "NSC1992487",
-        status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
-        mobileNo: "892-255-4545",
-        area: "Warje",
-        source: "Mobile app",
-        createdOn: "21-Sep-2020",
-        category:"PNG",
-        subCategory:"Individual", 
-      },
-      {
-        id: "23er-treh-5211-34yt",
-        name: "OIJ",
-        registrationNo: "NSC1992433",
-        status: ['Approved', 'Pending', 'Rejected'].sort((a, b) => .5 - Math.random())[0],
-        mobileNo: "77-255-3431",
-        area: "Baner",
-        source: "Mobile app",
-        createdOn: "22-Sep-2020",
-        category:"PNG",
-        subCategory:"Individual", 
-      },
-      
-      
+    
   ]
 
   blocks = [
       {
-          name:       "ID.",
-      },
-      {
-          name:       "Type",
-      },
-      {
-          name:       "Sub Type",
+          name:       "Service Req No.",
       },
       {
           name:       "Consumer No.",
       },
       {
-          name:       "Mobile No.",
+          name:       "Consumer Remark",
       },
       {
-          name:       "Area",
+          name:       "Admin Remark",
       },
       {
-          name:       "Sub Area",
+          name:       "Request Date",
       },
       {
-          name:       "Date",
-      },
-      {
-          name:       "Status",
+          name:       "Request Due Date",
       },
       {
           name:       "Action"
@@ -154,13 +53,16 @@ export class ServicesListComponent implements OnInit {
   
 
 
-  constructor(private filterService : FilterService) {
+  constructor(private filterService : FilterService, private api:ServicesService,private apiService : ApiService) {
     this.filterService.getPagination().subscribe(data=>{
       $('#table1').DataTable().page.len(data.number).draw()
     })
 
     this.filterService.getSearchText().subscribe(data=>{
       $('#table1').DataTable().search(data.text).draw()
+    })
+    this.apiService.get('service/'+this.utilityIdString+'/list').subscribe(data=>{
+      this.services = data;
     })
   }
 
@@ -177,47 +79,9 @@ export class ServicesListComponent implements OnInit {
           
       //     return row;
       // }
+    
     }
-
-    // $('#table1').DataTable( {
-      
-     //    pagingType: 'full_numbers',
-     //    paging: true,
-     //    ordering: true,
-     //    data: this.dataSet,
-     //    // columns: [
-     //    //   { "title": "Registration no.", "data":"registrationNo", "className":"foo"},
-     //    //   { "title": "Name", "data":"name"},
-     //    //   { "title": "Status", "data":"status"},
-     //    //   { "title": "Mobile no.", "data":"mobileNo"},
-     //    //   { "title": "Category", "data":"category"},
-     //    //   { "title": "Sub Category", "data":"subCategory"},
-     //    //   { "title": "Area", "data":"area"},
-     //    //   { "title": "Source", "data":"source"},
-     //    //   { "title": "Created on", "data":"createdOn"},
-     //    // ],
-     //    lengthMenu: [ 10, 12, 25, 50, 75, 100 ],
-     //    pageLength: 12,
-     //  });
-
-      // var table = $('#table1').DataTable();
-
-      
-   //    $('#table1').on('click', 'tbody td', function (e) {
-   //    	var el = document.getElementById("rock");
-   //    	var row = $('#table1').DataTable().row(this)
-        
-   //    	console.log(e)     
-
-    // } );
-      
 }
-
-testing(id){
-  console.log(id)
-}
-
-
 }
 
 

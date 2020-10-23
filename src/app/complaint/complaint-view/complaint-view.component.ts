@@ -50,15 +50,7 @@ export class ComplaintViewComponent implements OnInit {
      
      
     });
-    this.complaintService.getComplaintList().subscribe(data=>{
-     
-      this.complaintDetails.static['complaint_type_id'] = data['result']['complaint_type_id']['complaint_name'];
-
-      this.complaintDetails.profile.push({
-        name : 'Type',
-        value : data['result']['complaint_type_id']['complaint_name']
-      })
-    });
+   
 
     
   }

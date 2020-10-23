@@ -102,12 +102,19 @@
                         <button class="btn btn-outline-light3 st" data-dismiss="modal" aria-label="Close">Cancel</button>
                     </div>
                     <div class="col-auto pl-1 pr-0">
-                        <button class="btn btn-secondary st" id="proceed_user_done" (click)="showtoast = true">Submit</button>
+                        <button class="btn btn-secondary st" id="proceed_user_done" (click)="showtoast = true" data-dismiss="modal" aria-label="Close">Submit</button>
                     </div>
                 </div>
             </div>
     
         </div> 
       </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ngb-toast *ngIf="showtoast" header="dwd" [delay]="3000" [autohide]="autohide" (mouseenter)="autohide = false" (mouseleave)="autohide = true" (hide)="showtoast = false; autohide = true">
+                <div *ngIf="autohide">Added Service <span class="text-primary">Successfully!!</span></div>
+            </ngb-toast>
+        </div>
     </div>
   </div>

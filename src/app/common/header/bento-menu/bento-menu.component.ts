@@ -101,49 +101,49 @@ export class BentoMenuComponent implements OnInit {
       })
     })
     // According to Role and Privilege display Bento menu options
-    this.getData.checkRolePrivilege().subscribe(result=>{
-      this.getData.moduleObj.emit(result)
-      for(let role of result.data.roles ){              
-        for(let module of role.modules.module){
-          this.modules.push({"name":module.name})
-        }
-        this.module_list = this.modulesList.data.filter(o1 => this.modules.some(o2 => o1.module === o2.name));           
-      }   
-    })
+    // this.getData.checkRolePrivilege().subscribe(result=>{
+    //   this.getData.moduleObj.emit(result)
+    //   for(let role of result.data.roles ){              
+    //     for(let module of role.modules.module){
+    //       this.modules.push({"name":module.name})
+    //     }
+    //     this.module_list = this.modulesList.data.filter(o1 => this.modules.some(o2 => o1.module === o2.name));           
+    //   }   
+    // })
 
     // Taking All Utilities of login user
-    this.getData.getUserUtility().subscribe(utility_obj=>{
-      for(let utility of utility_obj.data.utilities){
-        this.allUtilities.push({"id_string":utility.id_string,"name":utility.name})
-      }           
-      this.firstUtility = utility_obj.data.utilities[0].id_string
+    // this.getData.getUserUtility().subscribe(utility_obj=>{
+    //   for(let utility of utility_obj.data.utilities){
+    //     this.allUtilities.push({"id_string":utility.id_string,"name":utility.name})
+    //   }           
+    //   this.firstUtility = utility_obj.data.utilities[0].id_string
 
-      // set default utility value for display utility detail
-      // this.sessionService.setter("utility_id_string",this.firstUtility)
+    //   // set default utility value for display utility detail
+    //   // this.sessionService.setter("utility_id_string",this.firstUtility)
 
-      // for display utility list in dropdown
-      this.getData.utilityList.emit(this.allUtilities)   
+    //   // for display utility list in dropdown
+    //   this.getData.utilityList.emit(this.allUtilities)   
 
-      this.module = this.sessionService.getter('moduleName')
+    //   this.module = this.sessionService.getter('moduleName')
       
-      // Taking list of module according to firstUtility
-      this.getData.getUtilityModuleList(this.firstUtility).subscribe(modules =>{
-        this.utility_module_list = modules.results
-        if(this.utility_module_list != ""){
-          this.getData.moduleName.emit(this.utility_module_list[0].module_name)
-          this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
-          if(this.module){
-            // this.sessionService.remove('moduleName')
-              }else{
-                this.sessionService.setter('moduleName',this.finalModuleList[0].module)
-              }
-              // this.sessionService.setter('moduleName',this.finalModuleList[0].module)
-            }else{
-              this.finalModuleList = []
-            }
-            this.getData.checkBlankUtility.emit(this.utility_module_list)
-          })
-        })
+    //   // Taking list of module according to firstUtility
+    //   this.getData.getUtilityModuleList(this.firstUtility).subscribe(modules =>{
+    //     this.utility_module_list = modules.results
+    //     if(this.utility_module_list != ""){
+    //       this.getData.moduleName.emit(this.utility_module_list[0].module_name)
+    //       this.finalModuleList = this.utility_module_list.map((item, i) => Object.assign({}, item, this.modulesList.data[i]))
+    //       if(this.module){
+    //         // this.sessionService.remove('moduleName')
+    //           }else{
+    //             this.sessionService.setter('moduleName',this.finalModuleList[0].module)
+    //           }
+    //           // this.sessionService.setter('moduleName',this.finalModuleList[0].module)
+    //         }else{
+    //           this.finalModuleList = []
+    //         }
+    //         this.getData.checkBlankUtility.emit(this.utility_module_list)
+    //       })
+    //     })
  
     $(document).ready(function(){
       $(document).on('click', '.bento-dropdown .dropdown-menu', function(e){ 

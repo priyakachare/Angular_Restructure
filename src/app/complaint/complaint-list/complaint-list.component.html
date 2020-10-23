@@ -4,7 +4,7 @@
         <div class="listview-table-wrap">
         	<label class="p p-12">Showing Last 6 month records</label>
         	<br>
-        	<table datatable id="table1" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="pr-datatable table table-hover">
+        	<table datatable id="table1" [dtOptions]="dtOptions" class="pr-datatable table table-hover">
         		<thead>
 		            <tr>
 		                <th scope="col" *ngFor="let item of blocks"><span>{{item.name}}</span></th>

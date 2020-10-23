@@ -112,7 +112,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <ngb-toast *ngIf="showtoast" header="dwd" [delay]="5000" [autohide]="autohide" (mouseenter)="autohide = false" (mouseleave)="autohide = true" (hide)="showtoast = false; autohide = true">
+            <ngb-toast *ngIf="showtoast" header="dwd" [delay]="3000" [autohide]="autohide" (mouseenter)="autohide = false" (mouseleave)="autohide = true" (hide)="showtoast = false; autohide = true">
                 <div *ngIf="autohide">Submitted Complaint <span class="text-primary">Successfully!!</span></div>
             </ngb-toast>
         </div>
