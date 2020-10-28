@@ -6,6 +6,7 @@ import { RegistrationService } from '../registration.service';
 import { baseUrl } from 'src/environments/environment';
 import { NoteDetailsService } from '../../common/note-details/note-details.service';
 import { PaymentDetailsService } from '../../common/payment-details/payment-details.service';
+import { ApiService } from '../../common-services/api-service/api.service';
 
 @Component({
   selector: 'app-registration-detail-view',
@@ -72,38 +73,21 @@ export class RegistrationDetailViewComponent implements OnInit {
   // paymentData = []
   // Data for payment details end
 
-  // Data for payment details start
+  // Data for notes details start
   notes = []
-  // Data for payment details end
+  // Data for notes details end
 
-  // Data for timeline details start
-  timeLine = [
-    {
-      date : 'MAR 18',
-      title : 'Registration Approved',
-      time : '3:34pm',
-      text : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliter enim explicari, quod quaeritur'
-    },
-    {
-      date : 'MAR 20',
-      title : 'Registration Hold',
-      time : '3:36pm',
-      text : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliter enim explicari, quod quaeritur'
-    },
-    {
-      date : 'MAR 21',
-      title : 'Registration Approved',
-      time : '3:39pm',
-      text : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliter enim explicari, quod quaeritur'
-    },
-    {
-      date : 'MAR 23',
-      title : 'Registration Rejected',
-      time : '3:39pm',
-      text : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliter enim explicari, quod quaeritur'
-    },
-  ]
-  // Data for timeline details end
+  // Data for payments start
+  payments = []
+  // Data for payments end
+
+  // Data for transactions start
+  transactions = []
+  // Data for transactions end
+
+  // Data for lifeCycle details start
+  timeLine = []
+  // Data for lifeCycle details end
 
   // Data for tabs start
   tabList = [
@@ -162,16 +146,17 @@ export class RegistrationDetailViewComponent implements OnInit {
 
   constructor(private router : Router, private route : ActivatedRoute,
     private registrationService : RegistrationService, private noteService : NoteDetailsService,
-    private paymentDetailsService : PaymentDetailsService) {
+    private paymentDetailsService : PaymentDetailsService, private apiService : ApiService) {
     
     this.route.params.subscribe(params => {
       this.idString = params.id
-    });
+    }); 
 
-    const notesPromise = this.registrationService.getRegistrationNotes(this.idString).toPromise();
+    const notesPromise = this.apiService.get('registration/'+this.idString+'/notes').toPromise();
+    const lifeCyclesPromise = this.apiService.get('registration/'+this.idString+'/life-cycles').toPromise();
 
     // Registration details Api start
-    this.registrationService.getRegistrationDetails(this.idString).subscribe(data=>{
+    this.apiService.get('registration/'+this.idString).subscribe(data=>{
       this.regDetails.static['first_name'] = data['result']['first_name']
       this.regDetails.static['last_name'] = data['result']['last_name']
       this.regDetails.static['state'] = data['result']['state']
@@ -236,6 +221,7 @@ export class RegistrationDetailViewComponent implements OnInit {
           this.notes.push({
             id : note['id_string'],
             note_name : note['note_name'],
+            note_color : note['note_color'],
             note : note['note'],
             date : note['created_date'],
             time : note['created_date'],
@@ -245,12 +231,29 @@ export class RegistrationDetailViewComponent implements OnInit {
       })
       // Registration notes Api end
 
+      // Registration life-cycles Api start
+      lifeCyclesPromise.then(data=>{
+        for(let item of data){
+          this.timeLine.push({
+            date  : item.created_date,
+            title : item.title +' '+ item.state.toLowerCase(),
+            time  : item.created_date,
+            text  : item.lifecycle_text
+          })
+        }
+      })
+      // Registration life-cycles Api end
+
     })
     // Registration details Api end
 
     // Code for sending payments to component start
-    this.registrationService.getRegistrationPayments(this.idString).subscribe(data=>{
-      this.paymentDetailsService.sendPayments(data)
+    this.apiService.get('registration/'+this.idString+'/payments').subscribe(data=>{
+      console.log(data)
+      for(let item of data){
+        
+      }
+      // this.paymentDetailsService.sendPayments(data)
     })
     // Code for sending payments to component start
   }
@@ -258,8 +261,10 @@ export class RegistrationDetailViewComponent implements OnInit {
   ngOnInit(): void {
     // Code for receiving note data from note component start
     this.noteService.getNoteResponse().subscribe(data=>{
-      this.registrationService.addRegistrationNote(this.idString,data['data']).subscribe(resp=>{
-        
+      this.apiService.post('registration/'+this.idString+'/note',data['data']).subscribe(resp=>{
+        if(resp.state == 'success'){
+          window.location.reload();
+        }
       })
     })
     // Code for receiving note data from note component end

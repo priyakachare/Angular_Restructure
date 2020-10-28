@@ -11,7 +11,13 @@
                     <div class="col-12">
                         <ng-container *ngIf="show">
                             <div class="add-notes-wrap">
-                                <p class="p p-13">Notes</p>
+                                <div>
+                                    <label>Title</label>
+                                    <input class="form-control" type="text" name="noteName" (keyup)="onNoteTitleChange($event)">
+                                    <p class="p p-13" id="note-title-error" style="color:red; display: none;">Note title can't be empty!</p>
+                                    <br>
+                                </div>
+
                                 <div class="add-notes-card">
                                     <div class="txt-area">
                                         <textarea class="form-control add-notes-textarea" (keyup)="onNoteChange($event)" name="note" rows="10" placeholder="Write your note here.."></textarea>
@@ -53,10 +59,11 @@
                             </div>
                         </ng-container>
                         <ng-container *ngIf="!show">
+                            <p class="p p-13">Notes</p>
                             <div class="notes-card-wrap" *ngIf="notes.length != 0">
                                 <ul class="list-group list-group-horizontal notes-card-list">
                                     <li class="list-group-item" *ngFor="let item of notes">
-                                        <div class="notes-card colr1">
+                                        <div [class]="item.note_color">
                                             <div class="header">
                                                 <a class="print-doc"><fa-icon [icon]="faPrint"></fa-icon></a>
                                                 <div class="dropdown dot-option-dropdown">

@@ -27,6 +27,7 @@ const routes: Routes = [
 	{ path: 'registration/add-registration', component: AddRegistrationComponent },
 	{ path: 'registration/view', component: RegistrationDetailViewComponent },
 	{ path: 'registration/:id', component: RegistrationDetailViewComponent },
+	{ path: 'registration/:id/edit', component: AddRegistrationComponent },
 	{ path: 'login', component: LoginLogoutComponent },
 	{ path: 'tenant', component: TenantComponent },
 	{ path: 'complaint', component: ComplaintComponent },

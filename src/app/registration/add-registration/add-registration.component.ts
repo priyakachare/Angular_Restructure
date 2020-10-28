@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angu
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { RegistrationService } from '../registration.service';
 import { ApiService } from '../../common-services/api-service/api.service';
+import { Router, ActivatedRoute } from '@angular/router';
 declare var $ : any;
 
 
@@ -72,6 +73,7 @@ export class AddRegistrationComponent implements OnInit {
   // Forms build end
   
   utilityIdString = '57ed8a45-014a-4f72-826a-dcf6824c454e'
+  edit = false;
   chequeDemandDraft = true;
   showtoast = false; 
   autohide = true;
@@ -103,24 +105,30 @@ export class AddRegistrationComponent implements OnInit {
     {id: 'False', name: 'No'},
   ];
 
-  files: File[] = [];
-  onSelect(event) {
-    console.log(event);
-    this.files.push(...event.addedFiles);
-  }
-  onRemove(event) {
-    console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
-  }
+  // files: File[] = [];
+  // onSelect(event) {
+  //   console.log(event);
+  //   this.files.push(...event.addedFiles);
+  // }
+  // onRemove(event) {
+  //   console.log(event);
+  //   this.files.splice(this.files.indexOf(event), 1);
+  // }
 
-  close() {
-    this.autohide = false;
-    // setTimeout(() => this.autohide = true, 5000);
-  }
-  addCustomUser = (term) => ({id: term, name: term});
+  // close() {
+  //   this.autohide = false;
+  //   // setTimeout(() => this.autohide = true, 5000);
+  // }
+  // addCustomUser = (term) => ({id: term, name: term});
 
   constructor(private stepperFormService:StepperFormService, private formBuilder: FormBuilder, 
-    private registrationService : RegistrationService, private apiService : ApiService) {
+    private registrationService : RegistrationService, private apiService : ApiService, private route : ActivatedRoute) {
+
+    this.route.params.subscribe(params => {
+      if(params.id != null){
+        this.edit = true
+      }
+    });
 
     // Applicant details form code start
     this.applicantDetailsForm = this.formBuilder.group({

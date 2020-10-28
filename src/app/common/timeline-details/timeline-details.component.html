@@ -4,10 +4,10 @@
             <div class="applicant-data">
                 <div class="timeline-wrap">
                     <div class="media timeline-blk" *ngFor="let item of timeLine">
-                        <button class="btn bttn-sm bttn-grey rounded bttn-billing st">{{item.date}}</button>
+                        <button class="btn bttn-sm bttn-grey rounded bttn-billing st">{{item.date | date : 'MMM d'}}</button>
                         <div class="media-body">
                             <h4 class="ttl">{{item.title}}</h4> 
-                            <p class="p p-12 time">{{item.time}}</p>
+                            <p class="p p-12 time">{{item.time | date : 'h:mm a'}}</p>
                             <p class="p p-13 content">{{item.text}}</p>
                         </div>
                     </div>

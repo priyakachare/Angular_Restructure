@@ -8,8 +8,8 @@ export class PaymentDetailsService {
 
   private subject1 = new BehaviorSubject<any>({});
 
-  sendPayments(data: any) {
-    this.subject1.next({ payments : data });
+  sendPayments(payments: any, transactions : any) {
+    this.subject1.next({ payments : payments, transactions : transactions });
   }
 
   getPayments(): Observable<any> {

@@ -17,6 +17,7 @@ export class NoteDetailsComponent implements OnInit {
   faPrint = faPrint
   color : String = "notes-card colr1"
   note : any;
+  noteName : any;
   response : any;
 
   constructor(private noteService : NoteDetailsService) { }
@@ -40,13 +41,20 @@ export class NoteDetailsComponent implements OnInit {
     $("#note-error").hide()
   }
 
+  onNoteTitleChange(e){
+    this.noteName = e.target.value;
+    $("#note-title-error").hide()
+  }
+
   addNote(){
-    if(this.note == null || this.note == ""){
+    if((this.note == null || this.note == "") && (this.noteName == null || this.noteName == "")){
       $("#note-error").show()
+      $("#note-title-error").show()
     }else{
       this.response = {
         note : this.note,
-        note_color : this.color
+        note_color : this.color,
+        note_name : this.noteName
       }
       this.noteService.sendNoteResponse(this.response)
     }
