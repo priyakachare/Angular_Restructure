@@ -81,10 +81,6 @@ export class RegistrationDetailViewComponent implements OnInit {
   payments = []
   // Data for payments end
 
-  // Data for transactions start
-  transactions = []
-  // Data for transactions end
-
   // Data for lifeCycle details start
   timeLine = []
   // Data for lifeCycle details end
@@ -210,7 +206,7 @@ export class RegistrationDetailViewComponent implements OnInit {
           heading : 'Supply Address'
         },
         {
-          address: data['result']['address_line_1'],
+          address: data['result']['billing_address_line_1'],
           heading : 'Billing Address'
         },
       ]
@@ -249,10 +245,27 @@ export class RegistrationDetailViewComponent implements OnInit {
 
     // Code for sending payments to component start
     this.apiService.get('registration/'+this.idString+'/payments').subscribe(data=>{
-      console.log(data)
       for(let item of data){
-        
+        let transactions = []
+        this.apiService.get('registration/payment/'+item.id_string+'/transactions').subscribe(data=>{
+          for(let element of data){
+            transactions.push({
+              transactionSubType : element.transaction_sub_type.name,
+              transactionAmount : element.transaction_amount
+            })
+          }
+        })
+        this.payments.push({
+          paymentType : item.payment_type.name,
+          paymentDate : item.transaction_date,
+          paymentAmount : item.transaction_amount,
+          paymentMode : item.payment_mode.name,
+          paymentChannel : item.payment_channel.name,
+          transactionId : item.transaction_id,
+          transactions : transactions
+        })
       }
+      this.paymentDetailsService.sendPayments(this.payments)
       // this.paymentDetailsService.sendPayments(data)
     })
     // Code for sending payments to component start

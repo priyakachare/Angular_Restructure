@@ -193,7 +193,7 @@ import { PaymentTypePipe } from './registration/add-registration/payment-type.pi
     FontAwesomeModule,
     HttpClientModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
   ],

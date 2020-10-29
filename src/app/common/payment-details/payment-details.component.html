@@ -1,5 +1,5 @@
-<div class="block-body" *ngFor="let item of paymentData"> 
-    <div class="row" *ngIf="paymentData.length != 0">
+<div class="block-body" *ngFor="let item of payments">
+    <div class="row" *ngIf="payments.length != 0">
         <div class="col">
             <div class="applicant-data"> 
                 <div class="paymnt-blk">
@@ -8,8 +8,8 @@
                             <div class="paymnt-list type-1">
                                 <ul class="list-group list-group-horizontal justify-content-start">
                                     <li class="list-group-item">
-                                        <p class="p text-primary">{{item.payment_type.name}}</p>
-                                        <span>{{item.transaction_date | date : 'dd MMM yy' }}</span>              
+                                        <p class="p text-primary">{{item.paymentType}}</p>
+                                        <span>{{item.paymentDate | date : 'MMM d, y'}}</span>              
                                     </li>
                                 </ul>
                             </div>
@@ -18,7 +18,7 @@
                             <div class="paymnt-list type-2">
                                 <ul class="list-group list-group-horizontal justify-content-end">
                                     <li class="list-group-item">
-                                        <p class="p text-primary"><span class="icon"><img src="../../assets/images/icons/paid-icon.png" alt="img"></span>$ {{item.transaction_amount}}</p>
+                                        <p class="p text-primary"><span class="icon"><img src="../../assets/images/icons/paid-icon.png" alt="img"></span>$ {{item.paymentAmount}}</p>
                                         <span>Amount Paid</span>               
                                     </li>
                                 </ul>
@@ -30,29 +30,30 @@
                             <div class="paymnt-list type-3">
                                 <ul class="list-group list-group-horizontal justify-content-start">
                                     <li class="list-group-item">
-                                        <p class="p">{{item.payment_mode.name}}</p>
+                                        <p class="p">{{item.paymentMode}}</p>
                                         <span>Payment Mode</span>
                                     </li>
-                                    <li class="list-group-item">                  
+                                    <li class="list-group-item">
+                                        <p class="p">{{item.paymentChannel}}</p>
+                                        <span>Payment Channel</span>                  
                                     </li>
                                     <li class="list-group-item">
-                                        <p class="p">{{item.receipt_no}}</p>
-                                        <span>Transaction Number</span>                
+                                        <p class="p">{{item.transactionId}}</p>
+                                        <span>Transaction Id</span>                
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngFor="let element of item.transactions">
                         <div class="col">
                             <div class="paymnt-list type-4">
-                                <h4 class="h4 ttl">Payment Sub Type</h4>
                                 <ul class="list-group list-group-horizontal justify-content-start">
                                     <li class="list-group-item">
-                                        <p class="p">{{item.payment_sub_type.name}}</p>         
+                                        <p class="p">{{element.transactionSubType}}</p>         
                                     </li>
                                     <li class="list-group-item">
-                                        <p class="p">$ {{item.transaction_amount}}</p>            
+                                        <p class="p">$ {{element.transactionAmount}}</p>            
                                     </li>
                                 </ul>
                             </div>

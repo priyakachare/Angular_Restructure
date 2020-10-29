@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^3.0.0-beta.0",
     "@angular/animations": "~9.1.1",
     "@angular/cdk": "^9.2.4",
     "@angular/common": "~9.1.1",
@@ -28,6 +29,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@ng-bootstrap/ng-bootstrap": "^6.2.0",
+    "@types/google-maps": "^3.2.2",
     "bootstrap": "^4.5.2",
     "chokidar": "^3.4.1",
     "ngx-cookie-service": "^10.1.1",
@@ -46,6 +48,7 @@
     "@ng-select/ng-select": "^4.0.0",
     "@types/chart.js": "^2.9.21",
     "@types/datatables.net": "^1.10.19",
+    "@types/googlemaps": "^3.40.3",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/jquery": "^3.3.38",

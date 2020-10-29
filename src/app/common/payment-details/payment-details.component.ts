@@ -8,12 +8,11 @@ import { PaymentDetailsService } from './payment-details.service';
 })
 export class PaymentDetailsComponent implements OnInit {
 
-  paymentData = []
+  payments = []
 
   constructor(private paymentDetailsService : PaymentDetailsService) {
     this.paymentDetailsService.getPayments().subscribe(resp=>{
-      this.paymentData = resp['payments']
-      console.log(this.paymentData)
+      this.payments = resp['payments']
     })
   }
 
