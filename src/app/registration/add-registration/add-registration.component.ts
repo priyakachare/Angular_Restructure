@@ -258,6 +258,7 @@ export class AddRegistrationComponent implements OnInit {
       for(let item of data){
         this.paymentSubTypes.push(item)
       }
+      console.log(this.paymentSubTypes)
     })
     // Payment sub types dropdown api call end
 
@@ -354,8 +355,12 @@ export class AddRegistrationComponent implements OnInit {
   // KYC details form submit end
 
   ngOnInit(): void {
-    this.sendStepperFormData()
 
+    // Building stepper form start 
+    this.sendStepperFormData()
+    // Building stepper form end
+
+    // Set cheque or dd input start
     this.paymentDetailsForm.get("paymentModeControl").valueChanges.subscribe(val=>{
       if(val.name == "Cheque/DD"){
         this.chequeDemandDraft = !this.chequeDemandDraft
@@ -363,12 +368,16 @@ export class AddRegistrationComponent implements OnInit {
         this.chequeDemandDraft = true
       }
     })
+    // Set cheque or dd input end
   }
 
+  // Stepper form data service call start
   sendStepperFormData(){
     this.stepperFormService.stepperFormEvent.emit(this.blocks);
   }
+  // Stepper form data service call end
 
+  // Function for stepper form control start
   testing(){
       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         e.target // newly activated tab
@@ -421,10 +430,11 @@ export class AddRegistrationComponent implements OnInit {
         // $('#rvw-sbmt-tab').trigger( "click" );
       });
       $("#proceed_5").on('click', function(){
-        console.log("end-of-form");
       });
   }
+  // Function for stepper form control end
 
+  // Function for making both the address same start
   copyAddress(){
     this.isAddressSame = !this.isAddressSame
     if(this.isAddressSame == true){
@@ -447,7 +457,9 @@ export class AddRegistrationComponent implements OnInit {
       this.addressDetailsForm.controls.billingSubAreaControl.setValue(null)
     }
   }
+  // Function for making both the address same end
 
+  // Function for toggling the address in review and submit start
   toggleAddress(id){
     if(id == 'service'){
       this.address = this.addressDetailsForm.get('addressLineControl').value
@@ -455,9 +467,9 @@ export class AddRegistrationComponent implements OnInit {
       this.address = this.addressDetailsForm.get('billingAddressLineControl').value
     }
   }
+  // Function for toggling the address in review and submit end
 
   onRegistrationSubmit(){
-    console.log(this.paymentDetailsForm.value.transactionsControl)
     this.showtoast = true;
     let data = {
       utility_id : this.applicantDetailsForm.value.utilityControl.id_string,
@@ -534,6 +546,14 @@ export class AddRegistrationComponent implements OnInit {
     }
   }
 
-  
+  setPaymentAmount(){
+    let amount : number = 0
+    for (let item of this.paymentDetailsForm.value.transactionsControl){
+      if(item.transaction_amount != null && item.tax_amount != null){
+        amount = amount + Number(item.transaction_amount)
+      }
+    }
+    this.paymentDetailsForm.controls.paymentAmountControl.setValue(amount)
+  }
 
 }

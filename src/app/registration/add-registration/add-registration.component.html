@@ -124,7 +124,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
-                                                        
                                                         <div class="col-6">
                                                             <label>Connectivity</label>
                                                             <ng-select [items]="connectivity" bindLabel="name"  placeholder="Select Connectivity" formControlName="connectivityControl" [ngClass]="{ 'is-invalid': applicantDetailsFormSubmitted && ad.connectivityControl.errors }" name="connectivity" [clearable]="false">
@@ -162,8 +161,7 @@
                                     <div class="details-list">
                                         <ul class="list-group list-group-horizontal justify-content-end">
                                             <li class="list-group-item">
-                                                <!-- <span>Reg. Number</span> -->
-                                                <p>$ 3000.00</p>
+                                                <!-- <p>$ 3000.00</p> -->
                                             </li>
                                         </ul>
                                     </div>                                    
@@ -227,7 +225,7 @@
                                                     <div class="form-row">
                                                         <div class="col-3">
                                                             <label>Payment Amount</label>
-                                                            <input type="text" class="form-control" placeholder="Payment amount" value="3000" formControlName="paymentAmountControl"/>
+                                                            <input type="text" class="form-control" placeholder="Payment amount" value="3000" formControlName="paymentAmountControl" [readonly]="true" (click)="setPaymentAmount()"/>
                                                         </div>
                                                         <div class="col-3" [hidden]="chequeDemandDraft">
                                                             <label>Cheque/DD No.</label>
